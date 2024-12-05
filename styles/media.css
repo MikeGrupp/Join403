@@ -1,12 +1,16 @@
 /* TODO: decide max-width for mobile as a team  */
 @media (max-width: 600px) {
   .header {
-    height: 80px;
+    height: 40px;
     padding-left: 16px;
     padding-right: 16px;
   }
 
   .desktop_header_title {
     display: none;
+  }
+
+  .logo_mobile {
+    display: unset;
   }
 }

@@ -1,10 +1,16 @@
 .header {
   background-color: #FFFFFF;
-  height: 96px;
+  height: 56px;
   padding: 20px 40px 20px 348px;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1);
   color: #000000;
   font-size: 20px;
   display: flex;
   align-items: center;
+}
+
+.logo_mobile {
+  display: none;
+  width: 32px;
+  height: 39.02px;
 }
