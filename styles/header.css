@@ -37,6 +37,12 @@
   width: 20px;
 }
 
+.help_link:hover .help_img,
+.help_link:focus .help_img {
+  transition: 0.125s;
+  transform: scale(1.2);
+}
+
 .header_user_profile {
   border: 3px solid #2A3647;
   background-color: #FFFFFF;
@@ -58,5 +64,6 @@
 
 .header_user_profile:hover,
 .header_user_profile:focus {
+  transition: 0.125s;
   background-color: #E2E6EC;
 }
