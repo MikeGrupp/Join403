@@ -7,10 +7,35 @@
   font-size: 20px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 
 .logo_mobile {
   display: none;
   width: 32px;
   height: 39.02px;
+}
+
+.header_profile_container {
+  /* width: 104px; */
+  height: 56px;
+}
+
+.header_user_profile {
+  border: 3px solid #2A3647;
+  background-color: #FFFFFF;
+  border-radius: 50%;
+  width: 56px;
+  height: 56px;
+  padding: 1px;
+  color: #29ABE2;
+  font-weight: bold;
+}
+
+.registered_user {
+  font-size: 19px;
+}
+
+.guest {
+  font-size: 25px;
 }

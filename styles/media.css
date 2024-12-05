@@ -13,4 +13,23 @@
   .logo_mobile {
     display: unset;
   }
+
+  .header_profile_container {
+    width: 40px;
+    height: 40px;
+  }
+
+  .header_user_profile {
+    border-width: 2px;
+    width: 40px;
+    height: 40px;
+  }
+
+  .registered_user {
+    font-size: 14px;
+  }
+
+  .guest {
+    font-size: 18px;
+  }
 }
