@@ -5,4 +5,8 @@
     padding-left: 16px;
     padding-right: 16px;
   }
+
+  .desktop_header_title {
+    display: none;
+  }
 }
