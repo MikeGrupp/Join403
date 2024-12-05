@@ -39,3 +39,8 @@
 .guest {
   font-size: 25px;
 }
+
+.header_user_profile:hover,
+.header_user_profile:focus {
+  background-color: #E2E6EC;
+}
