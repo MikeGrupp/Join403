@@ -5,10 +5,8 @@
   z-index: 200;
   top: 0;
   left: 0;
-  height: 100vh;
+  height: 100%;
   width: 232px;
-  padding-top: 64px;
-  padding-bottom: 64px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -18,13 +16,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: 64px;
 }
 
 .sidebar_menu {
-  margin-top: 116px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  height: 100%;
 }
 
 .summary {
@@ -37,4 +36,12 @@
 .sidebar_subMenu p {
   color: grey;
   font-size: 12px;
+}
+
+.sidebar_subMenu {
+  margin-bottom: 64px;
+}
+
+.sidebar_links {
+  padding-top: 64px;
 }
