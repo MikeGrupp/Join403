@@ -1,4 +1,7 @@
 .header {
+  position: fixed;
+  top: 0;
+  width: calc(100% - 348px - 40px);
   background-color: #FFFFFF;
   height: 56px;
   padding: 20px 40px 20px 348px;
