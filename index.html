@@ -4,10 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Join</title>
+    
+    <script src="./scripts/submenu.js"></script>
 
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="styles/fonts.css" />
     <link rel="stylesheet" href="styles/header.css" />
+    <link rel="stylesheet" href="styles/submenu.css" />
     <link rel="stylesheet" href="styles/sidebar.css" />
     <link rel="stylesheet" href="styles/media.css" />
   </head>
@@ -21,13 +24,19 @@
         <a class="help_link" href="./help.html">
           <img class="help_img" src="./assets/img/help.svg" alt="go to help page">
         </a>
-        <button class="header_user_profile registered_user">
-        <!-- <button class="header_user_profile guest"> -->
+        <button class="header_user_profile registered_user" onclick="toggleSubmenu()">
+        <!-- <button class="header_user_profile guest" onclick="toggleSubmenu()"> -->
           <!-- G -->
           SM
         </button>
       </div>
     </header>
+    <ul id="submenu" class="submenu hidden_submenu">
+      <li class="submenu_entry toggle_help_entry"><a class="submenu_entry_link" href="./help.html">Help</a></li>
+      <li class="submenu_entry"><a class="submenu_entry_link" href="./legal_notice.html">Legal Notice</a></li>
+      <li class="submenu_entry"><a class="submenu_entry_link" href="./privacy.html">Privacy Policy</a></li>
+      <li class="submenu_entry"><a class="submenu_entry_link" href="#">Log out</a></li>
+    </ul>
     <div class="sidebar">
       <div class="logo">
         <img src="assets/img/Logo2.svg" alt="Logo" />
@@ -61,5 +70,7 @@
         </div>
       </div>
     </div>
+    <main>
+    </main>
   </body>
 </html>

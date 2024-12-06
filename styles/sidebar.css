@@ -2,6 +2,7 @@
   background-color: rgb(42, 54, 71);
   color: white;
   position: fixed;
+  z-index: 200;
   top: 0;
   left: 0;
   height: 100vh;

@@ -41,4 +41,12 @@
   .guest {
     font-size: 18px;
   }
+
+  .submenu {
+    top: 80px;
+  }
+
+  .toggle_help_entry {
+    display: flex;
+  }
 }
