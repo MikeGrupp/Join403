@@ -36,6 +36,12 @@
   color: #CDCDCD;
 }
 
+.submenu_entry_link:hover,
+.submenu_entry_link:focus {
+  transition: 0.125s;
+  color: #FFFFFF;
+}
+
 .toggle_help_entry {
   display: none;
 }
