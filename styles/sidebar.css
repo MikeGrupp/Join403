@@ -24,13 +24,19 @@
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
+  width: 100%;
+  align-items: center;
 }
 
-.summary {
+.bgSummary {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  gap: 8px;
+  justify-content: center;
+  width: 100%;
+}
+
+.sidebar_links :hover {
+  background-color: #2a3d59;
 }
 
 .sidebar_subMenu p {
@@ -44,4 +50,16 @@
 
 .sidebar_links {
   padding-top: 64px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.summary {
+  width: 109px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
