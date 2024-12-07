@@ -33,6 +33,7 @@
   align-items: center;
   justify-content: center;
   width: 100%;
+  margin-top: 16px;
 }
 
 .sidebar_links :hover {
@@ -41,7 +42,13 @@
 
 .sidebar_subMenu p {
   color: grey;
-  font-size: 12px;
+  font-size: 14px;
+}
+
+.sidebar_subMenu p:hover {
+  color: #29abe2;
+  font-size: 14px;
+  font-weight: bold;
 }
 
 .sidebar_subMenu {
@@ -62,5 +69,28 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  margin: 16px 0px;
+  height: 46px;
+  color: rgb(185, 186, 188);
+}
+
+.summary_focus {
+  width: 109px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 46px;
+  color: white;
+  background-color: rgb(9, 25, 49) !important;
+}
+
+.summary_focus img {
+  background-color: rgb(9, 25, 49) !important;
+}
+
+.summary_focus p {
+  background-color: rgb(9, 25, 49) !important;
+}
+
+.bgSummary_focus {
+  background-color: rgb(9, 25, 49) !important;
 }

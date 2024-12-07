@@ -1,43 +1,43 @@
 function templateRenderSidebar() {
   return `
-      <div class="logo">
-        <img src="assets/img/Logo2.svg" alt="Logo" />
-      </div>
-      <div class="sidebar_menu">
-        <div class="sidebar_links">
-        <div class="bgSummary">
-          <a class="summary" href="index.html">
+    <div class="logo">
+      <img src="assets/img/Logo2.svg" alt="Logo" />
+    </div>
+    <div class="sidebar_menu">
+      <div class="sidebar_links">
+        <a href="index.html" class="bgSummary" id="summary1">
+          <div class="summary">
             <img src="assets/img/summary.svg" alt="summary" />
             <p>Summary</p>
-          </a>
-        </div>
-        <div class="bgSummary">
-          <a class="summary" href="task.html">
+          </div>
+        </a>
+        <a href="task.html" class="bgSummary" id="summary2">
+          <div class="summary">
             <img src="assets/img/addTask.svg" alt="addTask" />
             <p>Add Task</p>
-          </a>
           </div>
-          <div class="bgSummary">
-          <a class="summary" href="board.html">
+        </a>
+        <a href="board.html" class="bgSummary" id="summary3">
+          <div class="summary">
             <img src="assets/img/board.svg" alt="board" />
             <p>Board</p>
-          </a>
           </div>
-          <div class="bgSummary">
-          <a class="summary" href="contact.html">
+        </a>
+        <a href="contact.html" class="bgSummary" id="summary4">
+          <div class="summary">
             <img src="assets/img/contact.svg" alt="contact" />
             <p>contacts</p>
-          </a>
           </div>
-        </div>
-        <div class="sidebar_subMenu">
-          <a class="summary" href="privacy.html">
-            <p>Privacy Policy</p>
-          </a>
-          <a class="summary" href="contact.html">
-            <p>Legal notice</p>
-          </a>
-        </div>
+        </a>
       </div>
-    `;
+      <div class="sidebar_subMenu">
+        <a class="summary" href="privacy.html">
+          <p>Privacy Policy</p>
+        </a>
+        <a class="summary" href="legal_notice.html">
+          <p>Legal notice</p>
+        </a>
+      </div>
+    </div>
+  `;
 }
