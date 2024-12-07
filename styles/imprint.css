@@ -1,0 +1,15 @@
+.textpage {
+    display: flex;
+    flex-direction: column;
+    padding: 96px;
+    gap: 24px;
+}
+
+.back_arrow {
+    position: fixed;
+    right: 96px;
+}
+
+.blue_word {
+    color: #29ABE2;
+}
