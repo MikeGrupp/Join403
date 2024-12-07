@@ -5,22 +5,30 @@ function templateRenderSidebar() {
       </div>
       <div class="sidebar_menu">
         <div class="sidebar_links">
+        <div class="bgSummary">
           <a class="summary" href="index.html">
             <img src="assets/img/summary.svg" alt="summary" />
             <p>Summary</p>
           </a>
+        </div>
+        <div class="bgSummary">
           <a class="summary" href="task.html">
             <img src="assets/img/addTask.svg" alt="addTask" />
             <p>Add Task</p>
           </a>
+          </div>
+          <div class="bgSummary">
           <a class="summary" href="board.html">
             <img src="assets/img/board.svg" alt="board" />
             <p>Board</p>
           </a>
+          </div>
+          <div class="bgSummary">
           <a class="summary" href="contact.html">
             <img src="assets/img/contact.svg" alt="contact" />
             <p>contacts</p>
           </a>
+          </div>
         </div>
         <div class="sidebar_subMenu">
           <a class="summary" href="privacy.html">
