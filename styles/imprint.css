@@ -10,6 +10,10 @@
     right: 96px;
 }
 
+.back_arrow:hover {
+    cursor: pointer;
+}
+
 .blue_word {
     color: #29ABE2;
 }
