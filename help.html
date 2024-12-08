@@ -25,30 +25,33 @@
       />
       <span class="desktop_header_title"> Kanban Project Management Tool </span>
       <button
+          id="header_user_profile"
         class="header_user_profile registered_user"
-        onclick="toggleSubmenu()"
+          onclick="openSubmenu()"
       >
         <!-- <button class="header_user_profile guest" onclick="toggleSubmenu()"> -->
         <!-- G -->
         SM
       </button>
     </header>
-    <ul id="submenu" class="submenu hidden_submenu">
-      <li class="submenu_entry">
-        <a class="submenu_entry_link" href="./help.html">Help</a>
-      </li>
-      <li class="submenu_entry">
-        <a class="submenu_entry_link" href="./legal_notice.html"
-          >Legal Notice</a
-        >
-      </li>
-      <li class="submenu_entry">
-        <a class="submenu_entry_link" href="./privacy.html">Privacy Policy</a>
-      </li>
-      <li class="submenu_entry">
-        <a class="submenu_entry_link" href="#">Log out</a>
-      </li>
-    </ul>
+    <dialog id="submenu_dialog" class="submenu_dialog">
+      <menu id="submenu" class="submenu">
+        <li class="submenu_entry toggle_help_entry">
+          <a class="submenu_entry_link" href="./help.html">Help</a>
+        </li>
+        <li class="submenu_entry">
+          <a class="submenu_entry_link" href="./legal_notice.html"
+            >Legal Notice</a
+          >
+        </li>
+        <li class="submenu_entry">
+          <a class="submenu_entry_link" href="./privacy.html">Privacy Policy</a>
+        </li>
+        <li class="submenu_entry">
+          <a class="submenu_entry_link" href="#">Log out</a>
+        </li>
+      </menu>
+    </dialog>
     <div class="sidebar" id="sidebar"></div>
     <main></main>
   </body>

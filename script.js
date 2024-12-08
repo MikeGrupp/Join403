@@ -1,5 +1,6 @@
 function load() {
   renderSidebar();
+  initSubmenu();
 }
 
 function renderSidebar() {

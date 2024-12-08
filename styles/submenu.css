@@ -1,24 +1,37 @@
-.submenu {
-  position: fixed;
-  top: 96px;
-  right: 0;
-  z-index: 90;
+.submenu_dialog {
   background-color: #2A3647;
-  list-style-type: none;
   padding: 10px;
-  margin: 0;
+  margin-top: 96px;
+  margin-right: 20px;
+  border-style: none;
   max-height: calc(204px - 10px - 10px);
   width: calc(150px - 10px - 10px);
   border-top-left-radius: 20px;
   border-bottom-right-radius: 20px;
   border-bottom-left-radius: 20px;
   box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
-  transition: 0.125s;
+  translate: 150px 0;
+  transition: translate 0.125s ease-out, display 0.125s ease-out allow-discrete;
 }
 
-.hidden_submenu {
-  visibility: hidden;
-  transform: translateX(150px);
+.submenu_dialog[open] {
+  translate: 0 0;
+}
+
+@starting-style {
+  .submenu_dialog[open] {
+    translate: 150px 0;
+  }
+}
+
+.submenu_dialog::backdrop {
+  background-color: transparent;
+}
+
+.submenu {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
 }
 
 .submenu_entry {
