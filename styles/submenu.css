@@ -52,7 +52,7 @@
 .submenu_entry_link:hover,
 .submenu_entry_link:focus {
   transition: 0.125s;
-  color: #FFFFFF;
+  background-color: #2a3d59;
 }
 
 .toggle_help_entry {

@@ -7,6 +7,7 @@ function initSubmenu() {
 function openSubmenu() {
   let submenu = document.getElementById("submenu_dialog");
   submenu.showModal();
+  submenu.focus();
 }
 
 function addOutsideClickClosingListener(element) {
