@@ -1,3 +1,37 @@
+function templateRenderBasicHeader() {
+  return `
+      <img class="logo_mobile" src="./assets/img/logo-mobile.svg" alt="Join logo" />
+      <span class="desktop_header_title">Kanban Project Management Tool</span>
+      `;
+}
+
+function templateRenderHeaderHelp() {
+  return `
+      <div class="header_profile_container">
+        <a class="help_link" href="./help.html">
+          <img class="help_img" src="./assets/img/help.svg" alt="go to help page" />
+        </a>
+        `;
+}
+
+function templateRenderHeaderUser(user) {
+  let templateString = ``;
+  if (user != null) {
+    templateString += `
+        <button id="header_user_profile" class="header_user_profile registered_user" onclick="openSubmenu()">
+          SM
+        </button>
+      `;
+  } else {
+    templateString += `
+        <button class="header_user_profile guest" onclick="openSubmenu()">
+          G
+        </button>
+      `;
+  }
+  return templateString;
+}
+
 function templateRenderSidebar() {
   return `
     <div class="logo">

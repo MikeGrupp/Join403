@@ -1,6 +1,34 @@
-function load() {
+function load(site, user) {
+  renderHeader(site, user);
   renderSidebar();
-  initSubmenu();
+}
+
+function renderHeader(site, user) {
+  let headerString = "";
+  switch (site) {
+    case "summary":
+    case "task":
+    case "board":
+    case "contacts":
+      headerString += templateRenderBasicHeader();
+      headerString += templateRenderHeaderHelp(user);
+      headerString += templateRenderHeaderUser(user);
+      headerString += `</div>`;
+      initSubmenu(); // TODO
+      break;
+    case "help":
+      headerString += templateRenderBasicHeader();
+      headerString += templateRenderHeaderUser(user);
+      break;
+    case "privacy":
+    case "legal":
+      headerString += templateRenderBasicHeader();
+      break;
+    default:
+      break;
+  }
+  let header = document.getElementById("header");
+  header.innerHTML = headerString;
 }
 
 function renderSidebar() {

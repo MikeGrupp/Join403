@@ -16,32 +16,8 @@
     <link rel="stylesheet" href="styles/sidebar.css" />
     <link rel="stylesheet" href="styles/media.css" />
   </head>
-  <body onload="load(), renderSidebarSummary(2)">
-    <header class="header">
-      <img
-        class="logo_mobile"
-        src="./assets/img/logo-mobile.svg"
-        alt="Join logo"
-      />
-      <span class="desktop_header_title"> Kanban Project Management Tool </span>
-      <div class="header_profile_container">
-        <a class="help_link" href="./help.html">
-          <img
-            class="help_img"
-            src="./assets/img/help.svg"
-            alt="go to help page"
-          />
-        </a>
-        <button
-          id="header_user_profile"
-          class="header_user_profile registered_user"
-          onclick="openSubmenu()"
-        >
-          <!-- <button class="header_user_profile guest" onclick="toggleSubmenu()"> -->
-          <!-- G -->
-          SM
-        </button>
-      </div>
+  <body onload="load('task', 'SM'), renderSidebarSummary(2)">
+    <header id="header" class="header">
     </header>
     <dialog id="submenu_dialog" class="submenu_dialog">
       <menu id="submenu" class="submenu">
