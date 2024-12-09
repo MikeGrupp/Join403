@@ -19,24 +19,43 @@ function templateRenderHeaderUser(user) {
   let templateString = ``;
   if (user != null) {
     templateString += `
-        <button id="header_user_profile" class="header_user_profile registered_user" onclick="openSubmenu()">
-          SM
-        </button>
-      `;
+    <button id="header_user_profile" class="header_user_profile registered_user" onclick="openSubmenu()">
+    SM
+    </button>
+    `;
   } else {
     templateString += `
         <button class="header_user_profile guest" onclick="openSubmenu()">
-          G
+        G
         </button>
-      `;
+        `;
   }
   return templateString;
 }
 
+function templateRenderSubmenu() {
+  return `
+      <menu id="submenu" class="submenu">
+        <li class="submenu_entry toggle_help_entry">
+          <a class="submenu_entry_link" href="./help.html">Help</a>
+        </li>
+        <li class="submenu_entry">
+          <a class="submenu_entry_link" href="./legal_notice.html">Legal Notice</a>
+        </li>
+        <li class="submenu_entry">
+          <a class="submenu_entry_link" href="./privacy.html">Privacy Policy</a>
+        </li>
+        <li class="submenu_entry">
+          <a class="submenu_entry_link" href="#">Log out</a>
+        </li>
+      </menu>
+        `;
+}
+
 function templateRenderSidebar() {
   return `
-    <div class="logo">
-      <img src="assets/img/Logo2.svg" alt="Logo" />
+  <div class="logo">
+  <img src="assets/img/Logo2.svg" alt="Logo" />
     </div>
     <div class="sidebar_menu">
       <div class="sidebar_links">

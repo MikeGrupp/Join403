@@ -10,11 +10,11 @@ function initPageSpecificLayout(pageName, user) {
     case "board":
     case "contacts":
       initDefaultHeader(user);
-      initSubmenuListeners();
+      initSubmenu();
       break;
     case "help":
       initHelpPageHeader(user);
-      initSubmenuListeners();
+      initSubmenu();
       break;
     case "privacy":
     case "legal":
@@ -45,6 +45,12 @@ function initHelpPageHeader(user) {
 function initNoUserHeader() {
   let header = document.getElementById("header");
   header.innerHTML = templateRenderBasicHeader();
+}
+
+function initSubmenu() {
+  let submenu = document.getElementById("submenu_dialog");
+  submenu.innerHTML = templateRenderSubmenu();
+  initSubmenuListeners();
 }
 
 function renderSidebar() {
