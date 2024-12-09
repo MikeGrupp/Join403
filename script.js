@@ -1,34 +1,50 @@
-function load(site, user) {
-  renderHeader(site, user);
+function load(pageName, user) {
+  initPageSpecificLayout(pageName, user);
   renderSidebar();
 }
 
-function renderHeader(site, user) {
-  let headerString = "";
-  switch (site) {
+function initPageSpecificLayout(pageName, user) {
+  switch (pageName) {
     case "summary":
     case "task":
     case "board":
     case "contacts":
-      headerString += templateRenderBasicHeader();
-      headerString += templateRenderHeaderHelp(user);
-      headerString += templateRenderHeaderUser(user);
-      headerString += `</div>`;
-      initSubmenu(); // TODO
+      initDefaultHeader(user);
+      initSubmenuListeners();
       break;
     case "help":
-      headerString += templateRenderBasicHeader();
-      headerString += templateRenderHeaderUser(user);
+      initHelpPageHeader(user);
+      initSubmenuListeners();
       break;
     case "privacy":
     case "legal":
-      headerString += templateRenderBasicHeader();
+      initNoUserHeader();
       break;
     default:
       break;
   }
+}
+
+function initDefaultHeader(user) {
+  let headerString = templateRenderBasicHeader();
+  headerString += templateRenderHeaderProfileContainer();
   let header = document.getElementById("header");
   header.innerHTML = headerString;
+
+  let headerProfileContainer = document.getElementById("header_profile_container");
+  headerProfileContainer.innerHTML += templateRenderHeaderUser(user);
+}
+
+function initHelpPageHeader(user) {
+  let headerString = templateRenderBasicHeader();
+  headerString += templateRenderHeaderUser(user);
+  let header = document.getElementById("header");
+  header.innerHTML = headerString;
+}
+
+function initNoUserHeader() {
+  let header = document.getElementById("header");
+  header.innerHTML = templateRenderBasicHeader();
 }
 
 function renderSidebar() {

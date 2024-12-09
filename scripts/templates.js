@@ -5,12 +5,13 @@ function templateRenderBasicHeader() {
       `;
 }
 
-function templateRenderHeaderHelp() {
+function templateRenderHeaderProfileContainer() {
   return `
-      <div class="header_profile_container">
+      <div id="header_profile_container" class="header_profile_container">
         <a class="help_link" href="./help.html">
           <img class="help_img" src="./assets/img/help.svg" alt="go to help page" />
         </a>
+      </div>
         `;
 }
 

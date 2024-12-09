@@ -1,4 +1,4 @@
-function initSubmenu() {
+function initSubmenuListeners() {
   let submenu = document.getElementById("submenu_dialog");
   addOutsideClickClosingListener(submenu);
   addEscapeListener(submenu);
