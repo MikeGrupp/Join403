@@ -16,48 +16,9 @@
     <link rel="stylesheet" href="styles/sidebar.css" />
     <link rel="stylesheet" href="styles/media.css" />
   </head>
-  <body onload="load(),   renderSidebarSummary(1)">
-    <header class="header">
-      <img
-        class="logo_mobile"
-        src="./assets/img/logo-mobile.svg"
-        alt="Join logo"
-      />
-      <span class="desktop_header_title"> Kanban Project Management Tool </span>
-      <div class="header_profile_container">
-        <a class="help_link" href="./help.html">
-          <img
-            class="help_img"
-            src="./assets/img/help.svg"
-            alt="go to help page"
-          />
-        </a>
-        <button
-          class="header_user_profile registered_user"
-          onclick="toggleSubmenu()"
-        >
-          <!-- <button class="header_user_profile guest" onclick="toggleSubmenu()"> -->
-          <!-- G -->
-          SM
-        </button>
-      </div>
-    </header>
-    <ul id="submenu" class="submenu hidden_submenu">
-      <li class="submenu_entry toggle_help_entry">
-        <a class="submenu_entry_link" href="./help.html">Help</a>
-      </li>
-      <li class="submenu_entry">
-        <a class="submenu_entry_link" href="./legal_notice.html"
-          >Legal Notice</a
-        >
-      </li>
-      <li class="submenu_entry">
-        <a class="submenu_entry_link" href="./privacy.html">Privacy Policy</a>
-      </li>
-      <li class="submenu_entry">
-        <a class="submenu_entry_link" href="#">Log out</a>
-      </li>
-    </ul>
+  <body onload="load('summary', 'SM'),   renderSidebarSummary(1)">
+    <header id="header" class="header"></header>
+    <dialog id="submenu_dialog" class="submenu_dialog"></dialog>
     <div class="sidebar" id="sidebar"></div>
     <main></main>
   </body>

@@ -42,8 +42,9 @@
     font-size: 18px;
   }
 
-  .submenu {
-    top: 80px;
+  .submenu_dialog {
+    margin-top: 80px;
+    margin-right: 7px;
   }
 
   .toggle_help_entry {
