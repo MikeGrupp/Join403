@@ -1,4 +1,5 @@
 function load(pageName, user) {
+  initDatabase();
   initPageSpecificLayout(pageName, user);
   renderSidebar();
   renderSidebarSummary(pageName);
