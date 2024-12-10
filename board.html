@@ -15,11 +15,30 @@
     <link rel="stylesheet" href="styles/submenu.css" />
     <link rel="stylesheet" href="styles/sidebar.css" />
     <link rel="stylesheet" href="styles/media.css" />
+    <link rel="stylesheet" href="styles/board.css" />
   </head>
   <body onload="load('board', 'SM')">
     <header id="header" class="header"></header>
     <dialog id="submenu_dialog" class="submenu_dialog"></dialog>
     <div class="sidebar" id="sidebar"></div>
-    <main></main>
+    <main>
+      <div class="wrapper">
+        <div class="taskbar">
+          <div class="board_headline">
+            <h1>Board</h1>
+          </div>
+          <div class="find_add_task">
+            <div class="board_searchbar">
+              <input type="text" />
+              <img src="assets/img/search.svg" alt="search" />
+            </div>
+            <button class="add_task_button">
+              Add task
+              <img src="assets/img/add.svg" alt="add" />
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
   </body>
 </html>

@@ -69,7 +69,3 @@ function renderSidebarSummary(i) {
 function sidebarFocus(id) {
   document.getElementById(id).classList.add("bgSummary_focus");
 }
-
-function ClassAdd(id) {
-  document.getElementById(id).classList.add("bgSummary_focus");
-}
