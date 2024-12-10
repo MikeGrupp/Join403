@@ -18,12 +18,12 @@
   padding: 17px 36px 17px 36px;
 }
 
-.contact_list hr {
+.contact_list .horizontal_line {
   border-style: solid;
+  border-color: #D1D1D180;
   border-radius: 3px;
-  color: #D1D1D180;
   margin: 7px 0 7px 0;
-  border-width: 0.5px;
+  border-width: 1px;
 }
 
 .contact_list dd {
