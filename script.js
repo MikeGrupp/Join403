@@ -1,6 +1,7 @@
 function load(pageName, user) {
   initPageSpecificLayout(pageName, user);
   renderSidebar();
+  renderSidebarSummary(pageName);
 }
 
 function initPageSpecificLayout(pageName, user) {
@@ -31,7 +32,9 @@ function initDefaultHeader(user) {
   let header = document.getElementById("header");
   header.innerHTML = headerString;
 
-  let headerProfileContainer = document.getElementById("header_profile_container");
+  let headerProfileContainer = document.getElementById(
+    "header_profile_container"
+  );
   headerProfileContainer.innerHTML += templateRenderHeaderUser(user);
 }
 
@@ -59,12 +62,14 @@ function renderSidebar() {
 }
 
 function renderSidebarSummary(i) {
-  let id = "summary" + i;
-  let container = document.getElementById(id);
-  container.innerHTML = `${templateRenderSidebarSummary(i)}`;
-  sidebarFocus(id);
+  document.getElementById(i).innerHTML = `${templateRenderSidebarSummary(i)}`;
+  sidebarFocus(i);
 }
 
 function sidebarFocus(id) {
+  document.getElementById(id).classList.add("bgSummary_focus");
+}
+
+function ClassAdd(id) {
   document.getElementById(id).classList.add("bgSummary_focus");
 }

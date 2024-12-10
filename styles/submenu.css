@@ -1,5 +1,5 @@
 .submenu_dialog {
-  background-color: #2A3647;
+  background-color: #2a3647;
   padding: 10px;
   margin-top: 96px;
   margin-right: 20px;
@@ -46,7 +46,7 @@
   padding: 8px 16px 8px 16px;
   width: auto;
   white-space: nowrap;
-  color: #CDCDCD;
+  color: #cdcdcd;
 }
 
 .submenu_entry_link:hover,

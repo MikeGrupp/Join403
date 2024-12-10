@@ -53,6 +53,7 @@
 
 .sidebar_subMenu {
   margin-bottom: 64px;
+  width: 100%;
 }
 
 .sidebar_links {
@@ -93,4 +94,11 @@
 
 .bgSummary_focus {
   background-color: rgb(9, 25, 49) !important;
+}
+
+.sidebar_submenu_background {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
