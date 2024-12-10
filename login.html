@@ -12,7 +12,12 @@
     <link rel="stylesheet" href="styles/fonts.css" />
     <link rel="stylesheet" href="styles/media.css" />
 </head>
-<body>
-    
+<body onload="msgRender()">
+    <form onsubmit="login(); return false;">
+        <input type="email" id="email" required>
+        <input type="password" id="password" required>
+        <button>Login</button>
+    </form>
+    <div class="msg_box" id="msgBox"></div>
 </body>
 </html>
