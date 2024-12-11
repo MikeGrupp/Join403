@@ -19,6 +19,10 @@
   padding: 17px 36px 17px 36px;
 }
 
+.contact_list dt:first-child {
+  padding-top: 4px;
+}
+
 .contact_list .horizontal_line {
   border-style: solid;
   border-color: #D1D1D180;
