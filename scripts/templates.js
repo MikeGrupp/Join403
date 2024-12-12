@@ -148,3 +148,24 @@ function templateRenderSidebarSummary(id) {
     `;
   }
 }
+
+function templateRenderContactListLetter(letter) {
+  return `
+        <dt>${letter}</dt>
+        <div class="horizontal_line"></div>
+  `;
+}
+
+function templateRenderContactListEntry(color, profileLetters, name, mail) {
+  return `
+          <dd>
+            <button class="contact">
+              <span class="profile_badge ${color}">${profileLetters}</span>
+              <span class="contact_name_mail">
+                <span>${name}</span>
+                <span class="mail">${mail}</span>
+              </span>
+            </button>
+          </dd>
+  `;
+}
