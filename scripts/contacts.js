@@ -47,7 +47,7 @@ function initContactList() {
 
 function initContactDetails() {
   let contactDetailsHtml = templateRenderContactDetailsDefault();
-  let contactDetails = document.getElementById("contact_details_container");
+  let contactDetails = document.getElementById("desktop_contact_details_container");
   contactDetails.innerHTML = contactDetailsHtml;
 }
 
