@@ -23,19 +23,94 @@
     <div class="sidebar" id="sidebar"></div>
     <main>
       <div class="wrapper">
-        <div class="taskbar">
-          <div class="board_headline">
-            <h1>Board</h1>
-          </div>
-          <div class="find_add_task">
-            <div class="board_searchbar">
-              <input type="text" />
-              <img src="assets/img/search.svg" alt="search" />
+        <div class="board">
+          <div class="taskbar">
+            <div class="board_headline">
+              <h1>Board</h1>
             </div>
-            <button class="add_task_button">
-              Add task
-              <img src="assets/img/add.svg" alt="add" />
-            </button>
+            <div class="find_add_task">
+              <div class="board_searchbar">
+                <input type="text" placeholder="Find Task" />
+                <div class="board_searchbar_img">
+                  <img src="assets/img/search.svg" alt="search" />
+                </div>
+              </div>
+              <button class="add_task_button">
+                Add task
+                <img src="assets/img/add.svg" alt="add" />
+              </button>
+            </div>
+          </div>
+          <div class="kanban_board">
+            <div class="board_todo">
+              <div class="board_subline">
+                To do
+                <img
+                  class="board_subline_img"
+                  src="assets/img/plus button.svg"
+                  alt="add Task"
+                />
+              </div>
+              <div class="board_tasks">
+                <div class="board_no_task">No task To do</div>
+                <div class="board_task">
+                  <div class="wrapper">
+                    <div class="board_category">User Story</div>
+                    <div class="task_headline">
+                      Kochwelt page & Recipe Recommender
+                    </div>
+                    <div class="task_description">
+                      Build start page with recipe recommendation...
+                    </div>
+                    <div class="task_subtasks">
+                      <div class="task_progress_bar"></div>
+                      <div class="task_subtask_number">1/2 Subtasks</div>
+                    </div>
+                    <div class="task_underline">
+                      <div class="task_accounts">
+                        <div class="task_account1">AM</div>
+                        <div class="task_account2">WW</div>
+                      </div>
+                      <div class="task_importent">
+                        <img src="assets/img/Prio media.svg" alt="" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="board_todo">
+              <div class="board_subline">
+                In progress
+                <img
+                  class="board_subline_img"
+                  src="assets/img/plus button.svg"
+                  alt="add Task"
+                />
+              </div>
+              <div class="board_tasks">
+                <div class="board_no_task">No task To do</div>
+              </div>
+            </div>
+            <div class="board_todo">
+              <div class="board_subline">
+                Await feedback
+                <img
+                  class="board_subline_img"
+                  src="assets/img/plus button.svg"
+                  alt="add Task"
+                />
+              </div>
+              <div class="board_tasks">
+                <div class="board_no_task">No task To do</div>
+              </div>
+            </div>
+            <div class="board_todo">
+              <div class="board_subline">Done</div>
+              <div class="board_tasks">
+                <div class="board_no_task">No task To do</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
