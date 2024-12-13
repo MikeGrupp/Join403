@@ -26,8 +26,15 @@ function initContacts(pageName) {
   if(pageName != "contacts") {
     return;
   }
+  initDesktopAddContactButton();
   initContactList();
   initContactDetails();
+}
+
+function initDesktopAddContactButton() {
+  let desktopAddContactContainerHtml = templateRenderDesktopAddContactButton();
+  let desktopAddContactContainer = document.getElementById("desktop_add_contact_container");
+  desktopAddContactContainer.innerHTML = desktopAddContactContainerHtml;
 }
 
 function initContactList() {

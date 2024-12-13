@@ -149,6 +149,12 @@ function templateRenderSidebarSummary(id) {
   }
 }
 
+function templateRenderDesktopAddContactButton() {
+  return `
+        <button class="add_contact">Add new contact <img src="./assets/img/person_add.svg" alt="add a new contact to the List"></button>
+  `;
+}
+
 function templateRenderContactListLetter(letter) {
   return `
         <dt>${letter}</dt>
