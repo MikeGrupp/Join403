@@ -158,14 +158,24 @@ function templateRenderContactListLetter(letter) {
 
 function templateRenderContactListEntry(color, profileLetters, name, mail) {
   return `
-          <dd>
-            <button class="contact">
-              <span class="profile_badge bg_${color}">${profileLetters}</span>
-              <span class="contact_name_mail">
-                <span>${name}</span>
-                <span class="mail">${mail}</span>
-              </span>
-            </button>
-          </dd>
+  <dd>
+  <button class="contact">
+  <span class="profile_badge bg_${color}">${profileLetters}</span>
+  <span class="contact_name_mail">
+  <span>${name}</span>
+  <span class="mail">${mail}</span>
+  </span>
+  </button>
+  </dd>
+  `;
+}
+
+function templateRenderContactDetailsDefault() {
+  return `
+        <div class="title_group">
+          <h1>Contacts</h1>
+          <div class="vertical_line"></div>
+          <p role="doc-subtitle">Better with a team</p>
+        </div>
   `;
 }

@@ -26,6 +26,11 @@ function initContacts(pageName) {
   if(pageName != "contacts") {
     return;
   }
+  initContactList();
+  initContactDetails();
+}
+
+function initContactList() {
   let sortedContacts = getStoredContacts().sort((a, b) => a.name.localeCompare(b.name));
   let contactListHtml = "";
   let currentLetter = "";
@@ -36,8 +41,14 @@ function initContacts(pageName) {
     }
     contactListHtml += templateRenderContactListEntry(contact.color, contact.initials, contact.name, contact.mail);
   });
-  let contacts = document.getElementById("contact_list");
-  contacts.innerHTML = contactListHtml;
+  let contactList = document.getElementById("contact_list");
+  contactList.innerHTML = contactListHtml;
+}
+
+function initContactDetails() {
+  let contactDetailsHtml = templateRenderContactDetailsDefault();
+  let contactDetails = document.getElementById("contact_details_container");
+  contactDetails.innerHTML = contactDetailsHtml;
 }
 
 function determineInitials(name) {
