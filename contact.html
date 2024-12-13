@@ -8,7 +8,6 @@
     <script src="./scripts/submenu.js"></script>
     <script src="./scripts/templates.js"></script>
     <script src="./scripts/database-controller.js"></script>
-    <script src="./scripts/storage.js"></script>
     <script src="./scripts/contacts.js"></script>
     <script src="./script.js"></script>
 
@@ -18,6 +17,7 @@
     <link rel="stylesheet" href="styles/submenu.css" />
     <link rel="stylesheet" href="styles/sidebar.css" />
     <link rel="stylesheet" href="styles/contact.css" />
+    <link rel="stylesheet" href="styles/user-colors.css" />
     <link rel="stylesheet" href="styles/media.css" />
   </head>
   <body onload="load('contacts', 'SM')">
@@ -30,50 +30,6 @@
           <button class="add_contact">Add new contact <img src="./assets/img/person_add.svg" alt="add a new contact to the List"></button>
         </div>
         <dl id="contact_list" class="contact_list">
-          <dt>A</dt>
-          <div class="horizontal_line"></div>
-          <dd>
-            <button class="contact">
-              <span class="profile_badge bg_orange">AM</span>
-              <span class="contact_name_mail">
-                <span>Anton Mayer</span>
-                <span class="mail">antom@gmail.com</span>
-              </span>
-            </button>
-          </dd>
-          <dd>
-            <button class="contact">
-              <span class="profile_badge bg_violet">AS</span>
-              <span class="contact_name_mail">
-                <span>Anja Schulz</span>
-                <span class="mail">schulz@hotmail.com</span>
-              </span>
-            </button>
-          </dd>
-          <dt>B</dt>
-          <div class="horizontal_line"></div>
-          <dd>
-            <button class="contact">
-              <span class="profile_badge bg_violet_blue ">BZ</span>
-              <span>Benedikt Ziegel</span>
-            </button>
-          </dd>
-          <dt>D</dt>
-          <div class="horizontal_line"></div>
-          <dd>
-            <button class="contact">
-              <span class="profile_badge bg_helitrope">DE</span>
-              <span>David Eisenberg</span>
-            </button>
-          </dd>
-          <dt>E</dt>
-          <div class="horizontal_line"></div>
-          <dd>
-            <button class="contact">
-              <span class="profile_badge bg_yellow">EF</span>
-              <span>Eva Fischer</span>
-            </button>
-          </dd>
         </dl>
       </div>
       <div class="contact_details_container">

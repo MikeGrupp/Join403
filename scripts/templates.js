@@ -15,12 +15,12 @@ function templateRenderHeaderProfileContainer() {
         `;
 }
 
-function templateRenderHeaderUser(user) {
+function templateRenderHeaderUser(profileLetters) {
   let templateString = ``;
-  if (user != null) {
+  if (profileLetters != null) {
     templateString += `
     <button id="header_user_profile" class="header_user_profile registered_user" onclick="openSubmenu()">
-    SM
+    ${profileLetters}
     </button>
     `;
   } else {
@@ -160,7 +160,7 @@ function templateRenderContactListEntry(color, profileLetters, name, mail) {
   return `
           <dd>
             <button class="contact">
-              <span class="profile_badge ${color}">${profileLetters}</span>
+              <span class="profile_badge bg_${color}">${profileLetters}</span>
               <span class="contact_name_mail">
                 <span>${name}</span>
                 <span class="mail">${mail}</span>

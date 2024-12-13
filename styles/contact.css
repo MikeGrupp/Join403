@@ -76,34 +76,6 @@
   align-items: center;
 }
 
-.bg_orange {
-  background-color: #FF7A00;
-}
-
-.bg_violet {
-  background-color: #9327FF;
-}
-
-.bg_violet_blue {
-  background-color: #6E52FF;
-}
-
-.bg_helitrope {
-  background-color: #FC71FF;
-}
-
-.bg_yellow {
-  background-color: #FFBB2B;
-}
-
-.bg_minsk {
-  background-color: #462F8A;
-}
-
-.bg_red {
-  background-color: #FF4646;
-}
-
 .contact_name_mail {
   display: flex;
   flex-direction: column;
