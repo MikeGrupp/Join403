@@ -1,4 +1,5 @@
-function load(pageName, user) {
+async function load(pageName, user) {
+  await initDatabase(pageName);
   initPageSpecificLayout(pageName, user);
   renderSidebar();
   renderSidebarSummary(pageName);
@@ -12,6 +13,7 @@ function initPageSpecificLayout(pageName, user) {
     case "contacts":
       initDefaultHeader(user);
       initSubmenu();
+      initContacts(pageName);
       break;
     case "help":
       initHelpPageHeader(user);

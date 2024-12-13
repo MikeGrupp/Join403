@@ -15,12 +15,12 @@ function templateRenderHeaderProfileContainer() {
         `;
 }
 
-function templateRenderHeaderUser(user) {
+function templateRenderHeaderUser(profileLetters) {
   let templateString = ``;
-  if (user != null) {
+  if (profileLetters != null) {
     templateString += `
     <button id="header_user_profile" class="header_user_profile registered_user" onclick="openSubmenu()">
-    SM
+    ${profileLetters}
     </button>
     `;
   } else {
@@ -77,9 +77,9 @@ function templateRenderSidebar() {
             <p>Board</p>
           </div>
         </a>
-        <a href="contact.html" class="bgSummary" id="contacts">
+        <a href="contacts.html" class="bgSummary" id="contacts">
           <div class="summary">
-            <img src="assets/img/contact.svg" alt="contact" />
+            <img src="assets/img/contacts.svg" alt="contacts" />
             <p>Contacts</p>
           </div>
         </a>
@@ -127,8 +127,8 @@ function templateRenderSidebarSummary(id) {
   }
   if (id === "contacts") {
     return `
-      <a class="summary_focus" href="contact.html">
-        <img src="assets/img/contact_focus.svg" alt="contact" />
+      <a class="summary_focus" href="contacts.html">
+        <img src="assets/img/contacts_focus.svg" alt="contacts" />
         <p>Contacts</p>
       </a>
     `;
@@ -147,4 +147,41 @@ function templateRenderSidebarSummary(id) {
           </a>
     `;
   }
+}
+
+function templateRenderDesktopAddContactButton() {
+  return `
+        <button class="add_contact">Add new contact <img src="./assets/img/person_add.svg" alt="add a new contact to the List"></button>
+  `;
+}
+
+function templateRenderContactListLetter(letter) {
+  return `
+        <dt>${letter}</dt>
+        <div class="horizontal_line"></div>
+  `;
+}
+
+function templateRenderContactListEntry(color, profileLetters, name, mail) {
+  return `
+  <dd>
+  <button class="contact">
+  <span class="profile_badge bg_${color}">${profileLetters}</span>
+  <span class="contact_name_mail">
+  <span>${name}</span>
+  <span class="mail">${mail}</span>
+  </span>
+  </button>
+  </dd>
+  `;
+}
+
+function templateRenderContactDetailsDefault() {
+  return `
+        <div class="title_group">
+          <h1>Contacts</h1>
+          <div class="vertical_line"></div>
+          <p role="doc-subtitle">Better with a team</p>
+        </div>
+  `;
 }

@@ -50,4 +50,29 @@
   .toggle_help_entry {
     display: flex;
   }
+  
+  .contacts_main {
+    margin-left: 0;
+  }
+
+  .contact_list_container {
+    max-height: calc(100vh - 40px - 80px);
+    padding-left: 14px;
+  }
+  
+  .desktop_add_contact_container {
+    display: none;
+  }
+
+  .contact_list {
+    padding: 24px;
+  }
+
+  .contact_list dt:first-child {
+    padding-top: 17px;
+  }
+
+  .desktop_contact_details_container {
+    display: none;
+  }
 }
