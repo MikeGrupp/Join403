@@ -77,9 +77,9 @@ function templateRenderSidebar() {
             <p>Board</p>
           </div>
         </a>
-        <a href="contact.html" class="bgSummary" id="contacts">
+        <a href="contacts.html" class="bgSummary" id="contacts">
           <div class="summary">
-            <img src="assets/img/contact.svg" alt="contact" />
+            <img src="assets/img/contacts.svg" alt="contacts" />
             <p>Contacts</p>
           </div>
         </a>
@@ -127,8 +127,8 @@ function templateRenderSidebarSummary(id) {
   }
   if (id === "contacts") {
     return `
-      <a class="summary_focus" href="contact.html">
-        <img src="assets/img/contact_focus.svg" alt="contact" />
+      <a class="summary_focus" href="contacts.html">
+        <img src="assets/img/contacts_focus.svg" alt="contacts" />
         <p>Contacts</p>
       </a>
     `;
