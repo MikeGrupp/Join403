@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Join Login</title>
 
+    <script src="./scripts/database-controller.js"></script>
     <script src="./script.js"></script>
     <script src="./scripts/login.js"></script>
 
@@ -15,13 +16,13 @@
     <link rel="stylesheet" href="styles/login.css" />
 </head>
 
-<body onload="msgRender()">
+<body onload="initLogin()">
     <main class="center">
         <img class="logo" src="./assets/img/Logo1.svg" alt="Join logo">
-        <div class="signup">
+        <div class="signup_btn">
             <h3>Not a Join user?</h3>
-            <a href="./signup.html"><button>Sign up</button></a>
-        </diV>
+            <a href="./signup.html"><button class="standard_btn">Sign up</button></a>
+        </div>
         <div class="login">
             <div class="card_header">
                 <div class="back_arrow">
@@ -34,16 +35,16 @@
             </div>
             <form class="login_form" onsubmit="login(); return false;">
                 <label>
-                    <input type="email" id="email" required placeholder="Email">
+                    <input class="standard_ipt" type="email" id="email" required placeholder="Email">
                     <img src="./assets/img/mail.svg" class="input_icon" alt="mail icon">
                 </label>
                 <label>
-                    <input type="password" id="password" required placeholder="Password">
+                    <input class="standard_ipt" type="password" id="password" required placeholder="Password">
                     <img src="./assets/img/lock.svg" class="input_icon" alt="lock icon">
                 </label>
                 <div class="login_buttons">
-                    <button>Log in</button>
-                    <button>Guest Log in</button>
+                    <button class="standard_btn">Log in</button>
+                    <button class="standard_btn">Guest Log in</button>
                 </div>
             </form>
         </div>

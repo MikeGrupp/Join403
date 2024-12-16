@@ -1,12 +1,14 @@
-let users = [
-    {'email': 'admin@join.de', 'password': 'adminpassword'}
-];
+const users = await loadData("users");
 
 function addUser() {
     let email = document.getElementById('email');
     let password = document.getElementById('password');
-    users.push({email: email.value, password: password.value});
-    window.location.href = 'login.html?msg=Du hast dich erfolgreich registriert';
+    let password_confirm = document.getElementById('passwordConfirm');
+
+    if (password.value === password_confirm.value) {
+        postData("users", { "email": email.value, "password": password.value });
+        window.location.href = 'login.html?msg=Du hast dich erfolgreich registriert';
+    }
 }
 
 function previousPage() {

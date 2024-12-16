@@ -1,6 +1,4 @@
-let users = [
-    {'email': 'admin@join.de', 'password': 'adminpassword'}
-];
+const users = loadData("users");
 
 function msgRender() {
     const urlParams = new URLSearchParams(window.location.search);
