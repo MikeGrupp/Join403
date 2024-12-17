@@ -23,6 +23,7 @@ a {
 }
 
 button {
+  font-family: "Inter", sans-serif;
   cursor: pointer;
 }
 
