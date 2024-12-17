@@ -162,10 +162,10 @@ function templateRenderContactListLetter(letter) {
   `;
 }
 
-function templateRenderContactListEntry(color, profileLetters, name, mail) {
+function templateRenderContactListEntry(id, color, profileLetters, name, mail) {
   return `
   <dd>
-  <button class="contact">
+  <button class="contact" onclick="openContactDetails('${id}')">
   <span class="profile_badge bg_${color}">${profileLetters}</span>
   <span class="contact_name_mail">
   <span>${name}</span>
@@ -182,6 +182,42 @@ function templateRenderContactDetailsDefault() {
           <h1>Contacts</h1>
           <div class="vertical_line"></div>
           <p role="doc-subtitle">Better with a team</p>
+        </div>
+  `;
+}
+
+function templateRenderContactDetailsForContact(color, profileLetters, name, mail, phone) {
+  return `
+        <div class="contact_details">
+          <div class="contact_head">
+            <span class="profile_badge_large bg_${color}">${profileLetters}</span>
+            <div class="contact_manage">
+              <span class="contact_name">${name}</span>
+              <menu class="contact_manage_menu">
+                <button class="contact_manage_button">
+                  <img class="menu_image" src="./assets/img/edit.svg" alt="edit the current contact">
+                  <img class="menu_image_hover" src="./assets/img/edit2.svg" alt="edit the current contact">
+                  Edit
+                </button>
+                <button class="contact_manage_button">
+                  <img class="menu_image" src="./assets/img/delete.svg" alt="delete the current contact from the List">
+                  <img class="menu_image_hover" src="./assets/img/delete2.svg" alt="delete the current contact from the List">
+                  Delete
+                </button>
+              </menu>
+            </div>
+          </div>
+          <div class="contact_information">
+            <h2>Contact Information</h2>
+          </div>
+          <div class="contact_section_container">
+            <label>Email</label>
+            <span class="mail">${mail}</span>
+          </div>
+          <div class="contact_section_container">
+            <label>Phone</label>
+            <span>${phone}</span>
+          </div>
         </div>
   `;
 }

@@ -129,32 +129,3 @@
   border-style: none;
   box-shadow: none;
 }
-
-.desktop_contact_details_container {
-  display: flex;
-  flex-direction: column;
-  padding-top: 110px;
-  padding-left: 56px;
-}
-
-.title_group {
-  display: flex;
-  align-items: center;
-  gap: 30px;
-}
-
-.title_group h1 {
-  font-size: 61px;
-}
-
-.title_group .vertical_line {
-  height: 61px;
-  width: 3px;
-  border-radius: 5px;
-  border-style: none;
-  background-color: #29ABE2;
-}
-
-.title_group p {
-  font-size: 27px;
-}
