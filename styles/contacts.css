@@ -53,11 +53,16 @@
   align-items: center;
 }
 
-.contact_list dd .contact:hover {
+.contact_list dd .contact:hover,
+.contact_list dd .contact:focus {
+  color: black;
   background: linear-gradient(180deg, #F9F9F9 0%, #F0F0F0 100%);
 }
 
-.contact_list dd .contact:focus {
+.contact_list dd .contact:active,
+.contact_list dd .selected_contact,
+.contact_list dd .selected_contact:hover,
+.contact_list dd .selected_contact:focus {
   color: #FFFFFF;
   background: #2A3647;
 }
@@ -118,13 +123,14 @@
   gap: 16px;
 }
 
-.add_contact:hover {
+.add_contact:hover,
+.add_contact:focus {
   background: #29ABE2;
   border-style: none;
   box-shadow: 0px 4px 4px 0px #00000040;
 }
 
-.add_contact:focus {
+.add_contact:active {
   background: #091931;
   border-style: none;
   box-shadow: none;

@@ -165,13 +165,13 @@ function templateRenderContactListLetter(letter) {
 function templateRenderContactListEntry(id, color, profileLetters, name, mail) {
   return `
   <dd>
-  <button class="contact" onclick="openContactDetails('${id}')">
-  <span class="profile_badge bg_${color}">${profileLetters}</span>
-  <span class="contact_name_mail">
-  <span>${name}</span>
-  <span class="mail">${mail}</span>
-  </span>
-  </button>
+    <button class="contact" onclick="openContactDetails(event,'${id}')">
+      <span class="profile_badge bg_${color}">${profileLetters}</span>
+      <span class="contact_name_mail">
+      <span>${name}</span>
+      <span class="mail">${mail}</span>
+      </span>
+    </button>
   </dd>
   `;
 }

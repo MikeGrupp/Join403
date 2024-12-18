@@ -77,7 +77,8 @@ function determineInitials(name) {
     .join("");
 }
 
-function openContactDetails(contactId) {
+function openContactDetails(event, contactId) {
+  markAsSelectedContact(event);
   let contact = getStoredContactById(contactId);
   let contactDetailsHtml = templateRenderContactDetailsDefault();
   if (contact != null) {
@@ -91,4 +92,12 @@ function openContactDetails(contactId) {
   }
   let contactDetails = document.getElementById("desktop_contact_details_container");
   contactDetails.innerHTML = contactDetailsHtml;
+}
+
+function markAsSelectedContact(event) {
+  let contacts = document.getElementsByClassName("contact");
+  for (let i = 0; i < contacts.length; i++) {
+    contacts[i].classList.remove("selected_contact");
+  }
+  event.currentTarget.classList.add("selected_contact");
 }
