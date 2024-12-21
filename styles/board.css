@@ -1,7 +1,7 @@
 .wrapper {
-  width: 80%;
-  margin-left: 10%;
-  margin-right: 10%;
+  width: 90%;
+  margin-left: 5%;
+  margin-right: 5%;
 }
 
 .board {
@@ -126,6 +126,10 @@
   width: 100%;
   gap: 5%;
   margin-top: 50px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 66vh;
+  gap: 16px;
 }
 
 .board_todo {
@@ -134,6 +138,7 @@
   align-items: center;
   justify-content: flex-start;
   flex-direction: column;
+  padding: 2px;
 }
 
 .board_subline {
@@ -144,7 +149,7 @@
   color: #42526e;
   font-size: 20px;
   font-weight: 700;
-  min-width: 200px;
+  max-width: 200px;
 }
 
 .board_subline_img:hover {
@@ -154,7 +159,7 @@
 
 .board_tasks {
   width: 100%;
-  min-width: 200px;
+  max-width: 200px;
 }
 
 .board_task {
@@ -168,7 +173,7 @@
   padding-top: 16px;
   padding-bottom: 16px;
   width: 100%;
-  min-width: 200px;
+  max-width: 200px;
 }
 
 .board_no_task {
@@ -184,7 +189,8 @@
   color: #a8a8a8;
   height: 48px;
   margin-top: 16px;
-  min-width: 200px;
+  max-width: 200px;
+  margin-right: -1px;
 }
 
 .board_category {

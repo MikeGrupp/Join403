@@ -186,7 +186,13 @@ function templateRenderContactDetailsDefault() {
   `;
 }
 
-function templateRenderContactDetailsForContact(color, profileLetters, name, mail, phone) {
+function templateRenderContactDetailsForContact(
+  color,
+  profileLetters,
+  name,
+  mail,
+  phone
+) {
   return `
         <div class="contact_details">
           <div class="contact_head">
@@ -219,5 +225,30 @@ function templateRenderContactDetailsForContact(color, profileLetters, name, mai
             <span>${phone}</span>
           </div>
         </div>
+  `;
+}
+
+function templateRenderTask(titel, description, kategory, id) {
+  return `
+    <div class="board_task" id="${id}">
+      <div class="wrapper">
+        <div class="board_category">${kategory}</div>
+        <div class="task_headline">${titel}</div>
+        <div class="task_description">${description}</div>
+        <div class="task_subtasks">
+          <div class="task_progress_bar"></div>
+          <div class="task_subtask_number">1/2 Subtasks</div>
+        </div>
+        <div class="task_underline">
+          <div class="task_accounts">
+            <div class="task_account1">AM</div>
+            <div class="task_account2">WW</div>
+          </div>
+          <div class="task_importent">
+            <img src="assets/img/Prio media.svg" alt="" />
+          </div>
+        </div>
+      </div>
+    </div>
   `;
 }

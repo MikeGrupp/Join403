@@ -10,6 +10,7 @@
     <script src="./scripts/contacts.js"></script>
     <script src="./scripts/database-controller.js"></script>
     <script src="./script.js"></script>
+    <script src="./scripts/board.js"></script>
 
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="styles/fonts.css" />
@@ -20,7 +21,7 @@
     <link rel="stylesheet" href="styles/media.css" />
     <link rel="stylesheet" href="styles/board.css" />
   </head>
-  <body onload="load('board', 'SM')">
+  <body onload="load('board', 'SM'), renderTasks()">
     <header id="header" class="header"></header>
     <dialog id="submenu_dialog" class="submenu_dialog"></dialog>
     <div class="sidebar" id="sidebar"></div>
@@ -54,32 +55,8 @@
                   alt="add Task"
                 />
               </div>
-              <div class="board_tasks">
+              <div class="board_tasks" id="boardTodo">
                 <div class="board_no_task">No task To do</div>
-                <div class="board_task">
-                  <div class="wrapper">
-                    <div class="board_category">User Story</div>
-                    <div class="task_headline">
-                      Kochwelt page & Recipe Recommender
-                    </div>
-                    <div class="task_description">
-                      Build start page with recipe recommendation...
-                    </div>
-                    <div class="task_subtasks">
-                      <div class="task_progress_bar"></div>
-                      <div class="task_subtask_number">1/2 Subtasks</div>
-                    </div>
-                    <div class="task_underline">
-                      <div class="task_accounts">
-                        <div class="task_account1">AM</div>
-                        <div class="task_account2">WW</div>
-                      </div>
-                      <div class="task_importent">
-                        <img src="assets/img/Prio media.svg" alt="" />
-                      </div>
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
             <div class="board_todo">
