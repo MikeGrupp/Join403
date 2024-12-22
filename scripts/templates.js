@@ -228,7 +228,14 @@ function templateRenderContactDetailsForContact(
   `;
 }
 
-function templateRenderTask(titel, description, kategory, id) {
+function templateRenderTask(
+  titel,
+  description,
+  kategory,
+  id,
+  amountsubtasks,
+  amountsubtasksFinished
+) {
   return `
     <div class="board_task" id="${id}">
       <div class="wrapper">
@@ -237,7 +244,7 @@ function templateRenderTask(titel, description, kategory, id) {
         <div class="task_description">${description}</div>
         <div class="task_subtasks">
           <div class="task_progress_bar"></div>
-          <div class="task_subtask_number">1/2 Subtasks</div>
+          <div class="task_subtask_number">${amountsubtasksFinished}/${amountsubtasks} Subtasks</div>
         </div>
         <div class="task_underline">
           <div class="task_accounts">

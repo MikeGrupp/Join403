@@ -1,8 +1,6 @@
 const BASE_URL =
   "https://join403-42006-default-rtdb.europe-west1.firebasedatabase.app/";
 
-const DbTasks = [];
-
 async function initDatabase(pageName) {
   switch (pageName) {
     case "summary":
