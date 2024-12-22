@@ -235,12 +235,13 @@ function templateRenderTask(
   id,
   amountsubtasks,
   amountsubtasksFinished,
-  subtasksInPercent
+  subtasksInPercent,
+  backgroundColorKategory
 ) {
   return `
     <div class="board_task" id="${id}">
       <div class="wrapper">
-        <div class="board_category">${kategory}</div>
+        <div class="board_category" style="--backgroundKategory: ${backgroundColorKategory}">${kategory}</div>
         <div class="task_headline">${titel}</div>
         <div class="task_description">${description}</div>
         <div class="task_subtasks">

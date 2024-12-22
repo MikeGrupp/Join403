@@ -17,6 +17,12 @@ async function renderTasks() {
     let amountsubtasks = subtasksIds.length;
     let amountsubtasksFinished = subtaskFinished.length;
     let subtasksInPercent = (100 / amountsubtasks) * amountsubtasksFinished;
+    let backgroundColorKategory = null;
+    if (kategory === "technical Task") {
+      backgroundColorKategory = "#1fd7c1";
+    } else {
+      backgroundColorKategory = "#0038ff";
+    }
     container.innerHTML += `${templateRenderTask(
       titel,
       description,
@@ -24,7 +30,8 @@ async function renderTasks() {
       taskId,
       amountsubtasks,
       amountsubtasksFinished,
-      subtasksInPercent
+      subtasksInPercent,
+      backgroundColorKategory
     )}`;
   }
 }

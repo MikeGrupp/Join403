@@ -194,7 +194,7 @@
 }
 
 .board_category {
-  background-color: rgb(0, 56, 255);
+  background-color: var(--backgroundKategory);
   color: #ffffff;
   display: flex;
   align-items: center;
