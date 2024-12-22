@@ -234,7 +234,8 @@ function templateRenderTask(
   kategory,
   id,
   amountsubtasks,
-  amountsubtasksFinished
+  amountsubtasksFinished,
+  subtasksInPercent
 ) {
   return `
     <div class="board_task" id="${id}">
@@ -243,8 +244,10 @@ function templateRenderTask(
         <div class="task_headline">${titel}</div>
         <div class="task_description">${description}</div>
         <div class="task_subtasks">
-          <div class="task_progress_bar"></div>
-          <div class="task_subtask_number">${amountsubtasksFinished}/${amountsubtasks} Subtasks</div>
+          <div class="task_progress_bar" style="--backgroundProgressbar: ${subtasksInPercent}%;"></div>
+          <div class="task_subtask_number">
+            ${amountsubtasksFinished}/${amountsubtasks} Subtasks
+          </div>
         </div>
         <div class="task_underline">
           <div class="task_accounts">

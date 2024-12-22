@@ -16,13 +16,15 @@ async function renderTasks() {
     let kategory = task.kategory;
     let amountsubtasks = subtasksIds.length;
     let amountsubtasksFinished = subtaskFinished.length;
+    let subtasksInPercent = (100 / amountsubtasks) * amountsubtasksFinished;
     container.innerHTML += `${templateRenderTask(
       titel,
       description,
       kategory,
       taskId,
       amountsubtasks,
-      amountsubtasksFinished
+      amountsubtasksFinished,
+      subtasksInPercent
     )}`;
   }
 }
