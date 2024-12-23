@@ -1,40 +1,87 @@
 const tasksIds = [];
 let subtasksIds = [];
 let subtaskFinished = [];
+let arrayTodo = 0;
+let arrayÎnProgresse = 0;
+let arrayAwaitFeedback = 0;
+let arrayDone = 0;
 
-async function renderTasks() {
+async function renderBoard() {
   await fetchTaskIds();
-  let container = document.getElementById("boardTodo");
-  container.innerHTML = ``;
   for (let i = 0; i < tasksIds.length; i++) {
     const taskId = tasksIds[i];
     await fetchSubTaskIds(taskId);
     await fetchSubTaskFinished(taskId);
     let task = await loadData("tasks/" + taskId);
-    let titel = task.titel;
-    let description = task.description;
-    let kategory = task.kategory;
-    let amountsubtasks = subtasksIds.length;
-    let amountsubtasksFinished = subtaskFinished.length;
-    let subtasksInPercent = (100 / amountsubtasks) * amountsubtasksFinished;
-    let backgroundColorKategory = null;
-    let prio = task.prio;
-    if (kategory === "technical Task") {
-      backgroundColorKategory = "#1fd7c1";
-    } else {
-      backgroundColorKategory = "#0038ff";
-    }
-    container.innerHTML += `${templateRenderTask(
-      titel,
-      description,
-      kategory,
-      taskId,
-      amountsubtasks,
-      amountsubtasksFinished,
-      subtasksInPercent,
-      backgroundColorKategory,
-      prio
-    )}`;
+    countNotTask(task);
+    RenderNotTask(task);
+    renderTasks(task, taskId);
+  }
+}
+
+async function renderTasks(task, taskId) {
+  let titel = task.titel;
+  let description = task.description;
+  let kategory = task.kategory;
+  let amountsubtasks = subtasksIds.length;
+  let amountsubtasksFinished = subtaskFinished.length;
+  let subtasksInPercent = (100 / amountsubtasks) * amountsubtasksFinished;
+  let backgroundColorKategory = null;
+  let prio = task.prio;
+  let step = "board" + task.step;
+  if (kategory === "technical Task") {
+    backgroundColorKategory = "#1fd7c1";
+  } else {
+    backgroundColorKategory = "#0038ff";
+  }
+  let container = document.getElementById(step);
+  container.innerHTML += `${templateRenderTask(
+    titel,
+    description,
+    kategory,
+    taskId,
+    amountsubtasks,
+    amountsubtasksFinished,
+    subtasksInPercent,
+    backgroundColorKategory,
+    prio
+  )}`;
+}
+
+function countNotTask(task) {
+  let step = task.step;
+
+  if (step == "Todo") {
+    arrayTodo++;
+  }
+  if (step == "InProgress") {
+    arrayÎnProgresse++;
+  }
+  if (step == "AwaitFeedback") {
+    arrayAwaitFeedback++;
+  }
+  if (step == "Done") {
+    arrayDone++;
+  }
+  console.log(arrayTodo, arrayÎnProgresse, arrayAwaitFeedback, arrayDone);
+}
+
+function RenderNotTask() {
+  if (arrayTodo == 1) {
+    document.getElementById("boardTodo").innerHTML = ``;
+    arrayTodo++;
+  }
+  if (arrayÎnProgresse == 1) {
+    document.getElementById("boardInProgress").innerHTML = ``;
+    arrayÎnProgresse++;
+  }
+  if (arrayAwaitFeedback == 1) {
+    document.getElementById("boardAwaitFeedback").innerHTML = ``;
+    arrayAwaitFeedback++;
+  }
+  if (arrayDone == 1) {
+    document.getElementById("boardDone").innerHTML = ``;
+    arrayDone++;
   }
 }
 
@@ -75,6 +122,7 @@ async function PostTask() {
     kategory: "user Story",
     titel: "Kochwelt page & Recipe Recommender",
     prio: "low",
+    step: "Done",
   });
 }
 

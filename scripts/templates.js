@@ -245,12 +245,11 @@ function templateRenderTask(
         <div class="board_category" style="--backgroundKategory: ${backgroundColorKategory}">${kategory}</div>
         <div class="task_headline">${titel}</div>
         <div class="task_description">${description}</div>
-        <div class="task_subtasks">
-          <div class="task_progress_bar" style="--backgroundProgressbar: ${subtasksInPercent}%;"></div>
-          <div class="task_subtask_number">
-            ${amountsubtasksFinished}/${amountsubtasks} Subtasks
-          </div>
-        </div>
+        ${renderSubtasks(
+          subtasksInPercent,
+          amountsubtasksFinished,
+          amountsubtasks
+        )}
         <div class="task_underline">
           <div class="task_accounts">
             <div class="task_account1">AM</div>
@@ -263,4 +262,25 @@ function templateRenderTask(
       </div>
     </div>
   `;
+}
+
+function renderSubtasks(
+  subtasksInPercent,
+  amountsubtasksFinished,
+  amountsubtasks
+) {
+  if (amountsubtasks === 0) {
+    return ``;
+  } else {
+    return ` 
+    <div class="task_subtasks">
+      <div
+        class="task_progress_bar"
+        style="--backgroundProgressbar: ${subtasksInPercent}%;"
+      ></div>
+      <div class="task_subtask_number">
+        ${amountsubtasksFinished}/${amountsubtasks} Subtasks
+      </div>
+    </div>`;
+  }
 }
