@@ -236,7 +236,8 @@ function templateRenderTask(
   amountsubtasks,
   amountsubtasksFinished,
   subtasksInPercent,
-  backgroundColorKategory
+  backgroundColorKategory,
+  prio
 ) {
   return `
     <div class="board_task" id="${id}">
@@ -256,7 +257,7 @@ function templateRenderTask(
             <div class="task_account2">WW</div>
           </div>
           <div class="task_importent">
-            <img src="assets/img/Prio media.svg" alt="" />
+            <img src="assets/img/Prio ${prio}.svg" alt="" />
           </div>
         </div>
       </div>

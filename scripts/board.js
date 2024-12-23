@@ -18,6 +18,7 @@ async function renderTasks() {
     let amountsubtasksFinished = subtaskFinished.length;
     let subtasksInPercent = (100 / amountsubtasks) * amountsubtasksFinished;
     let backgroundColorKategory = null;
+    let prio = task.prio;
     if (kategory === "technical Task") {
       backgroundColorKategory = "#1fd7c1";
     } else {
@@ -31,7 +32,8 @@ async function renderTasks() {
       amountsubtasks,
       amountsubtasksFinished,
       subtasksInPercent,
-      backgroundColorKategory
+      backgroundColorKategory,
+      prio
     )}`;
   }
 }
@@ -58,19 +60,21 @@ async function fetchSubTaskFinished(taskid) {
 
 async function fetchSubTaskIds(taskId) {
   let SubTaskResponse = await loadData("tasks/" + taskId + "/subtasks");
-  let SubTaskKeysArray = Object.keys(SubTaskResponse);
   subtasksIds = [];
-
-  for (let i = 0; i < SubTaskKeysArray.length; i++) {
-    subtasksIds.push(SubTaskKeysArray[i]);
+  if (SubTaskResponse !== null) {
+    let SubTaskKeysArray = Object.keys(SubTaskResponse);
+    for (let i = 0; i < SubTaskKeysArray.length; i++) {
+      subtasksIds.push(SubTaskKeysArray[i]);
+    }
   }
 }
 
 async function PostTask() {
   await postData("/tasks", {
-    description: "Test test test",
-    kategory: "Test test test",
-    titel: "Test test test",
+    description: "Build start page with recipe recommendation...",
+    kategory: "user Story",
+    titel: "Kochwelt page & Recipe Recommender",
+    prio: "low",
   });
 }
 
