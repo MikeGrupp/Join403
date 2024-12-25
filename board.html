@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="styles/media.css" />
     <link rel="stylesheet" href="styles/board.css" />
   </head>
-  <body onload="load('board', 'SM'), renderBoard()">
+  <body onload="load('board', 'SM'), initBoard()">
     <header id="header" class="header"></header>
     <dialog id="submenu_dialog" class="submenu_dialog"></dialog>
     <div class="sidebar" id="sidebar"></div>
@@ -55,7 +55,12 @@
                   alt="add Task"
                 />
               </div>
-              <div class="board_tasks" id="boardTodo">
+              <div
+                class="board_tasks"
+                ondrop="moveTo('Todo')"
+                ondragover="allowDrop(event)"
+                id="boardTodo"
+              >
                 <div class="board_no_task">No task To do</div>
               </div>
             </div>
@@ -68,7 +73,12 @@
                   alt="add Task"
                 />
               </div>
-              <div class="board_tasks" id="boardInProgress">
+              <div
+                class="board_tasks"
+                ondrop="moveTo('InProgress')"
+                ondragover="allowDrop(event)"
+                id="boardInProgress"
+              >
                 <div class="board_no_task">No task To do</div>
               </div>
             </div>
@@ -81,13 +91,23 @@
                   alt="add Task"
                 />
               </div>
-              <div class="board_tasks" id="boardAwaitFeedback">
+              <div
+                class="board_tasks"
+                ondrop="moveTo('AwaitFeedback')"
+                ondragover="allowDrop(event)"
+                id="boardAwaitFeedback"
+              >
                 <div class="board_no_task">No task To do</div>
               </div>
             </div>
             <div class="board_todo">
               <div class="board_subline">Done</div>
-              <div class="board_tasks" id="boardDone">
+              <div
+                class="board_tasks"
+                ondrop="moveTo('Done')"
+                ondragover="allowDrop(event)"
+                id="boardDone"
+              >
                 <div class="board_no_task">No task To do</div>
               </div>
             </div>

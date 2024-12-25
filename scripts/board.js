@@ -1,3 +1,5 @@
+let tasks = [];
+let subtasks = [];
 const tasksIds = [];
 let subtasksIds = [];
 let subtaskFinished = [];
@@ -5,16 +7,22 @@ let arrayTodo = 0;
 let arrayÎnProgresse = 0;
 let arrayAwaitFeedback = 0;
 let arrayDone = 0;
+let currentDraggedElement;
 
+async function initBoard() {
+  tasks = await loadData("tasks/");
+  fetchTaskIds();
+  renderBoard();
+}
 async function renderBoard() {
-  await fetchTaskIds();
+  countNotTask();
+  RenderNotTask();
   for (let i = 0; i < tasksIds.length; i++) {
-    const taskId = tasksIds[i];
-    await fetchSubTaskIds(taskId);
-    await fetchSubTaskFinished(taskId);
-    let task = await loadData("tasks/" + taskId);
-    countNotTask(task);
-    RenderNotTask(task);
+    let taskId = tasksIds[i];
+    let task = tasks[taskId];
+    subtasks = task.subtasks;
+    fetchSubTaskIds(taskId);
+    fetchSubTaskFinished(taskId);
     renderTasks(task, taskId);
   }
 }
@@ -29,6 +37,7 @@ async function renderTasks(task, taskId) {
   let backgroundColorKategory = null;
   let prio = task.prio;
   let step = "board" + task.step;
+
   if (kategory === "technical Task") {
     backgroundColorKategory = "#1fd7c1";
   } else {
@@ -48,45 +57,63 @@ async function renderTasks(task, taskId) {
   )}`;
 }
 
-function countNotTask(task) {
-  let step = task.step;
+function countNotTask() {
+  for (let i = 0; i < tasksIds.length; i++) {
+    let taskId = tasksIds[i];
+    let task = tasks[taskId];
+    let step = task.step;
 
-  if (step == "Todo") {
-    arrayTodo++;
-  }
-  if (step == "InProgress") {
-    arrayÎnProgresse++;
-  }
-  if (step == "AwaitFeedback") {
-    arrayAwaitFeedback++;
-  }
-  if (step == "Done") {
-    arrayDone++;
+    if (step == "Todo") {
+      arrayTodo++;
+    }
+    if (step == "InProgress") {
+      arrayÎnProgresse++;
+    }
+    if (step == "AwaitFeedback") {
+      arrayAwaitFeedback++;
+    }
+    if (step == "Done") {
+      arrayDone++;
+    }
   }
   console.log(arrayTodo, arrayÎnProgresse, arrayAwaitFeedback, arrayDone);
 }
 
 function RenderNotTask() {
-  if (arrayTodo == 1) {
+  if (arrayTodo > 0) {
     document.getElementById("boardTodo").innerHTML = ``;
-    arrayTodo++;
   }
-  if (arrayÎnProgresse == 1) {
+  if (arrayÎnProgresse > 0) {
     document.getElementById("boardInProgress").innerHTML = ``;
-    arrayÎnProgresse++;
   }
-  if (arrayAwaitFeedback == 1) {
+  if (arrayAwaitFeedback > 0) {
     document.getElementById("boardAwaitFeedback").innerHTML = ``;
-    arrayAwaitFeedback++;
   }
-  if (arrayDone == 1) {
+  if (arrayDone > 0) {
     document.getElementById("boardDone").innerHTML = ``;
-    arrayDone++;
+  }
+
+  //
+  if (arrayTodo == 0) {
+    document.getElementById("boardTodo").innerHTML = `                
+    <div class="board_no_task">No task To do</div>`;
+  }
+  if (arrayÎnProgresse == 0) {
+    document.getElementById("boardInProgress").innerHTML = `                
+    <div class="board_no_task">No task To do</div>`;
+  }
+  if (arrayAwaitFeedback == 0) {
+    document.getElementById("boardAwaitFeedback").innerHTML = `                
+    <div class="board_no_task">No task To do</div>`;
+  }
+  if (arrayDone == 0) {
+    document.getElementById("boardDone").innerHTML = `                
+    <div class="board_no_task">No task To do</div></div>`;
   }
 }
 
 async function fetchTaskIds() {
-  let taskResponse = await loadData("tasks");
+  let taskResponse = tasks;
   let taskKeysArray = Object.keys(taskResponse);
 
   for (let i = 0; i < taskKeysArray.length; i++) {
@@ -94,25 +121,21 @@ async function fetchTaskIds() {
   }
 }
 
-async function fetchSubTaskFinished(taskid) {
+async function fetchSubTaskFinished() {
   subtaskFinished = [];
-  for (let z = 0; z < subtasksIds.length; z++) {
-    let subtaskId = subtasksIds[z];
-    let subtask = await loadData("tasks/" + taskid + "/subtasks/" + subtaskId);
+  for (let i = 0; i < subtasksIds.length; i++) {
+    subtaskId = subtasksIds[i];
+    let subtask = subtasks[subtaskId];
     if (subtask.status === "finished") {
-      subtaskFinished.push(subtaskId);
+      subtaskFinished.push(subtask);
     }
   }
 }
 
-async function fetchSubTaskIds(taskId) {
-  let SubTaskResponse = await loadData("tasks/" + taskId + "/subtasks");
+async function fetchSubTaskIds() {
   subtasksIds = [];
-  if (SubTaskResponse !== null) {
-    let SubTaskKeysArray = Object.keys(SubTaskResponse);
-    for (let i = 0; i < SubTaskKeysArray.length; i++) {
-      subtasksIds.push(SubTaskKeysArray[i]);
-    }
+  if (subtasks !== null) {
+    subtasksIds = Object.keys(subtasks);
   }
 }
 
@@ -131,4 +154,29 @@ async function PostSubTask(TaskId) {
     titel: "Test test test",
     status: "finished",
   });
+}
+
+function startDragging(id) {
+  currentDraggedElement = id;
+}
+
+function allowDrop(ev) {
+  ev.preventDefault();
+}
+
+function moveTo(category) {
+  tasks[currentDraggedElement]["step"] = category;
+  reRenderBoard();
+}
+
+function reRenderBoard() {
+  document.getElementById("boardTodo").innerHTML = ``;
+  document.getElementById("boardInProgress").innerHTML = ``;
+  document.getElementById("boardAwaitFeedback").innerHTML = ``;
+  document.getElementById("boardDone").innerHTML = ``;
+  arrayTodo = 0;
+  arrayÎnProgresse = 0;
+  arrayAwaitFeedback = 0;
+  arrayDone = 0;
+  renderBoard();
 }

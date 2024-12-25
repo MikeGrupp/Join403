@@ -160,6 +160,7 @@
 .board_tasks {
   width: 100%;
   max-width: 200px;
+  min-height: 59vh;
 }
 
 .board_task {

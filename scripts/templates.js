@@ -240,9 +240,19 @@ function templateRenderTask(
   prio
 ) {
   return `
-    <div class="board_task" id="${id}">
+    <div
+      class="board_task"
+      draggable="true"
+      ondragstart="startDragging('${id}')"
+      id="${id}"
+    >
       <div class="wrapper">
-        <div class="board_category" style="--backgroundKategory: ${backgroundColorKategory}">${kategory}</div>
+        <div
+          class="board_category"
+          style="--backgroundKategory: ${backgroundColorKategory}"
+        >
+          ${kategory}
+        </div>
         <div class="task_headline">${titel}</div>
         <div class="task_description">${description}</div>
         ${renderSubtasks(
