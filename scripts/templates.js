@@ -232,10 +232,7 @@ function templateRenderTask(
   titel,
   description,
   kategory,
-  id,
-  amountsubtasks,
-  amountsubtasksFinished,
-  subtasksInPercent,
+  taskId,
   backgroundColorKategory,
   prio
 ) {
@@ -243,8 +240,8 @@ function templateRenderTask(
     <div
       class="board_task"
       draggable="true"
-      ondragstart="startDragging('${id}')"
-      id="${id}"
+      ondragstart="startDragging('${taskId}')"
+      id="${taskId}"
     >
       <div class="wrapper">
         <div
@@ -255,15 +252,9 @@ function templateRenderTask(
         </div>
         <div class="task_headline">${titel}</div>
         <div class="task_description">${description}</div>
-        ${renderSubtasks(
-          subtasksInPercent,
-          amountsubtasksFinished,
-          amountsubtasks
-        )}
+        <div class="task_subtasks" id="subtasks${taskId}"></div>
         <div class="task_underline">
-          <div class="task_accounts">
-            <div class="task_account1">AM</div>
-            <div class="task_account2">WW</div>
+          <div class="task_accounts" id="accounts${taskId}">
           </div>
           <div class="task_importent">
             <img src="assets/img/Prio ${prio}.svg" alt="" />
@@ -274,23 +265,25 @@ function templateRenderTask(
   `;
 }
 
-function renderSubtasks(
+function templateRenderSubtasks(
   subtasksInPercent,
   amountsubtasksFinished,
   amountsubtasks
 ) {
-  if (amountsubtasks === 0) {
-    return ``;
-  } else {
-    return ` 
-    <div class="task_subtasks">
-      <div
-        class="task_progress_bar"
-        style="--backgroundProgressbar: ${subtasksInPercent}%;"
-      ></div>
-      <div class="task_subtask_number">
-        ${amountsubtasksFinished}/${amountsubtasks} Subtasks
-      </div>
-    </div>`;
-  }
+  return `
+    <div
+      class="task_progress_bar"
+      style="--backgroundProgressbar: ${subtasksInPercent}%;"
+    ></div>
+    <div class="task_subtask_number">
+      ${amountsubtasksFinished}/${amountsubtasks} Subtasks
+    </div>
+  `;
+}
+
+function templateRenderAssignedAccounts(initials, accountnr, color) {
+  return `
+            <div class="task_account${accountnr} bg_${color}">${initials}</div>
+
+`;
 }

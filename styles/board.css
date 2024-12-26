@@ -260,7 +260,6 @@
 
 .task_account1 {
   border-radius: 50px;
-  background-color: orange;
   font-size: 12px;
   height: 34px;
   width: 34px;
@@ -272,7 +271,6 @@
 
 .task_account2 {
   border-radius: 50px;
-  background-color: rgb(0, 0, 0);
   font-size: 12px;
   height: 34px;
   width: 34px;
@@ -282,4 +280,7 @@
   color: white;
   position: relative;
   left: -8px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #ffffff;
 }

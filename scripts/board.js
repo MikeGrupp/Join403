@@ -1,8 +1,10 @@
 let tasks = [];
+let tasksIds = [];
 let subtasks = [];
-const tasksIds = [];
 let subtasksIds = [];
 let subtaskFinished = [];
+let assignedAccounts = [];
+let assignedAccountsIds = [];
 let arrayTodo = 0;
 let arrayÎnProgresse = 0;
 let arrayAwaitFeedback = 0;
@@ -21,9 +23,13 @@ async function renderBoard() {
     let taskId = tasksIds[i];
     let task = tasks[taskId];
     subtasks = task.subtasks;
-    fetchSubTaskIds(taskId);
-    fetchSubTaskFinished(taskId);
+    assignedAccounts = task.assignedAccounts;
+    fetchSubTaskIds();
+    fetchSubTaskFinished();
+    fetchAssignedAccountsIds();
     renderTasks(task, taskId);
+    renderSubtasks(taskId);
+    renderAssignedAccounts(taskId);
   }
 }
 
@@ -31,9 +37,6 @@ async function renderTasks(task, taskId) {
   let titel = task.titel;
   let description = task.description;
   let kategory = task.kategory;
-  let amountsubtasks = subtasksIds.length;
-  let amountsubtasksFinished = subtaskFinished.length;
-  let subtasksInPercent = (100 / amountsubtasks) * amountsubtasksFinished;
   let backgroundColorKategory = null;
   let prio = task.prio;
   let step = "board" + task.step;
@@ -49,12 +52,51 @@ async function renderTasks(task, taskId) {
     description,
     kategory,
     taskId,
-    amountsubtasks,
-    amountsubtasksFinished,
-    subtasksInPercent,
     backgroundColorKategory,
     prio
   )}`;
+}
+
+function renderSubtasks(taskId) {
+  let amountsubtasks = subtasksIds.length;
+  let amountsubtasksFinished = subtaskFinished.length;
+  let subtasksInPercent = (100 / amountsubtasks) * amountsubtasksFinished;
+  let container = document.getElementById("subtasks" + taskId);
+  if (amountsubtasks === 0) {
+    container.innerHTML = ``;
+  } else {
+    container.innerHTML += `${templateRenderSubtasks(
+      subtasksInPercent,
+      amountsubtasksFinished,
+      amountsubtasks
+    )}`;
+  }
+}
+
+function renderAssignedAccounts(taskId) {
+  let amountAssignedAccounts = assignedAccountsIds.length;
+  let container = document.getElementById("accounts" + taskId);
+  let accountnr;
+  if (amountAssignedAccounts === 0) {
+    container.innerHTML = ``;
+  } else {
+    for (let i = 0; i < amountAssignedAccounts; i++) {
+      let accountId = assignedAccountsIds[i];
+      let account = assignedAccounts[accountId];
+      let initials = account.initials;
+      let color = account.color;
+      if (i == 0) {
+        accountnr = 1;
+      } else {
+        accountnr = 2;
+      }
+      container.innerHTML += `${templateRenderAssignedAccounts(
+        initials,
+        accountnr,
+        color
+      )}`;
+    }
+  }
 }
 
 function countNotTask() {
@@ -76,7 +118,6 @@ function countNotTask() {
       arrayDone++;
     }
   }
-  console.log(arrayTodo, arrayÎnProgresse, arrayAwaitFeedback, arrayDone);
 }
 
 function RenderNotTask() {
@@ -139,6 +180,13 @@ async function fetchSubTaskIds() {
   }
 }
 
+async function fetchAssignedAccountsIds() {
+  assignedAccountsIds = [];
+  if (assignedAccounts !== null) {
+    assignedAccountsIds = Object.keys(assignedAccounts);
+  }
+}
+
 async function PostTask() {
   await postData("/tasks", {
     description: "Build start page with recipe recommendation...",
@@ -153,6 +201,14 @@ async function PostSubTask(TaskId) {
   await postData("/tasks/" + TaskId + "/subtasks", {
     titel: "Test test test",
     status: "finished",
+  });
+}
+
+async function PostassignedAccounts(TaskId, accountId) {
+  await postData("/tasks/" + TaskId + "/assignedAccounts", {
+    initials: "EM",
+    id: accountId,
+    color: "pink_helitrope",
   });
 }
 
