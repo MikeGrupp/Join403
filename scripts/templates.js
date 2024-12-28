@@ -58,7 +58,7 @@ function templateRenderSidebar() {
       <img src="assets/img/Logo2.svg" alt="Logo" />
     </div>
     <div class="sidebar_menu">
-      <div class="sidebar_links">
+      <nav class="sidebar_links">
         <a href="index.html" class="bgSummary" id="summary">
           <div class="summary">
             <img src="assets/img/summary.svg" alt="summary" />
@@ -83,7 +83,7 @@ function templateRenderSidebar() {
             <p>Contacts</p>
           </div>
         </a>
-      </div>
+      </nav>
       <div class="sidebar_subMenu">
         <div class="sidebar_submenu_background" id="privacy">
           <a class="summary" href="privacy.html">
@@ -100,51 +100,51 @@ function templateRenderSidebar() {
   `;
 }
 
-function templateRenderSidebarSummary(id) {
-  if (id === "summary") {
+function templateRenderSidebarSummary(pageName) {
+  if (pageName === "summary") {
     return `
-      <a class="summary_focus" href="index.html">
+      <div class="summary_focus" href="index.html">
         <img src="assets/img/summary_focus.svg" alt="summary" />
         <p>Summary</p>
-      </a>
+      </div>
     `;
   }
-  if (id === "task") {
+  if (pageName === "task") {
     return `
-      <a class="summary_focus" href="task.html">
+      <div class="summary_focus" href="task.html">
         <img src="assets/img/addTask_focus.svg" alt="addTask" />
         <p>Add Task</p>
-      </a>
+      </div>
     `;
   }
-  if (id === "board") {
+  if (pageName === "board") {
     return `
-      <a class="summary_focus" href="board.html">
+      <div class="summary_focus" href="board.html">
         <img src="assets/img/board_focus.svg" alt="board" />
         <p>Board</p>
-      </a>
+      </div>
     `;
   }
-  if (id === "contacts") {
+  if (pageName === "contacts") {
     return `
-      <a class="summary_focus" href="contacts.html">
+      <div class="summary_focus" href="contacts.html">
         <img src="assets/img/contacts_focus.svg" alt="contacts" />
         <p>Contacts</p>
-      </a>
+      </div>
     `;
   }
-  if (id === "privacy") {
+  if (pageName === "privacy") {
     return `
-          <a class="summary" href="privacy.html">
-            <p>Privacy Policy</p>
-          </a>
+      <div class="summary" href="privacy.html">
+        <p>Privacy Policy</p>
+      </div>
     `;
   }
-  if (id === "legal") {
+  if (pageName === "legal") {
     return `
-          <a class="summary" href="legal_notice.html">
-            <p>Legal notice</p>
-          </a>
+      <div class="summary" href="legal_notice.html">
+        <p>Legal notice</p>
+      </div>
     `;
   }
 }

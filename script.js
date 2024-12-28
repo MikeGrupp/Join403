@@ -63,11 +63,15 @@ function renderSidebar() {
   container.innerHTML = `${templateRenderSidebar()}`;
 }
 
-function renderSidebarSummary(i) {
-  document.getElementById(i).innerHTML = `${templateRenderSidebarSummary(i)}`;
-  sidebarFocus(i);
+function renderSidebarSummary(pageName) {
+  try {
+    document.getElementById(
+      pageName
+    ).innerHTML = `${templateRenderSidebarSummary(pageName)}`;
+    sidebarFocus(pageName);
+  } catch (error) {}
 }
 
-function sidebarFocus(id) {
-  document.getElementById(id).classList.add("bgSummary_focus");
+function sidebarFocus(pageName) {
+  document.getElementById(pageName).classList.add("bgSummary_focus");
 }
