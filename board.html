@@ -25,6 +25,17 @@
     <header id="header" class="header"></header>
     <dialog id="submenu_dialog" class="submenu_dialog"></dialog>
     <div class="sidebar" id="sidebar"></div>
+    <div
+      class="taskdetail_bg d-none"
+      id="taskdetailBg"
+      onclick="taskMoveBack()"
+    >
+      <div
+        class="taskdetail"
+        id="taskdetail"
+        onclick="event.stopPropagation()"
+      ></div>
+    </div>
     <main>
       <div class="wrapper">
         <div class="board">

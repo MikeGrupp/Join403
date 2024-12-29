@@ -236,3 +236,40 @@ function reRenderBoard() {
   arrayDone = 0;
   renderBoard();
 }
+
+function dNone(id) {
+  document.getElementById(id).classList.toggle("d-none");
+}
+
+function taskMoveForward() {
+  let id = null;
+  let container = document.getElementById("taskdetail");
+  let pos = 0;
+  clearInterval(id);
+  id = setInterval(frame, 1);
+  function frame() {
+    if (pos == 35) {
+      clearInterval(id);
+    } else {
+      pos++;
+      container.style.right = pos + "vw";
+    }
+  }
+}
+
+function taskMoveBack() {
+  let id = null;
+  let container = document.getElementById("taskdetail");
+  let pos = 0;
+  clearInterval(id);
+  id = setInterval(frame, 1);
+  function frame() {
+    if (pos == 35) {
+      clearInterval(id);
+      dNone("taskdetailBg");
+    } else {
+      pos++;
+      container.style.right = "-" + pos + "vw";
+    }
+  }
+}

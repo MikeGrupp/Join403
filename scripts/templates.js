@@ -242,6 +242,8 @@ function templateRenderTask(
       draggable="true"
       ondragstart="startDragging('${taskId}')"
       id="${taskId}"
+      onclick="dNone('taskdetailBg'), taskMoveForward();"
+      ;
     >
       <div class="wrapper">
         <div
@@ -254,8 +256,7 @@ function templateRenderTask(
         <div class="task_description">${description}</div>
         <div class="task_subtasks" id="subtasks${taskId}"></div>
         <div class="task_underline">
-          <div class="task_accounts" id="accounts${taskId}">
-          </div>
+          <div class="task_accounts" id="accounts${taskId}"></div>
           <div class="task_importent">
             <img src="assets/img/Prio ${prio}.svg" alt="" />
           </div>
