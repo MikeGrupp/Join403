@@ -266,7 +266,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
+  color: black;
 }
 
 .task_account2 {
@@ -306,4 +306,124 @@
   position: fixed;
   right: -600vw;
   top: 5vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.task_detail_kategory {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.detail_task_close_button {
+  cursor: pointer;
+  width: 32px;
+}
+
+.task_detail_headline {
+  font-size: 40px;
+  font-weight: 700;
+  margin-top: 20px;
+}
+
+.detail_task_information {
+  margin-top: 20px;
+}
+
+.detail_task_due_date {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: 20px;
+  gap: 20px;
+}
+
+.detail_task_due_date_key {
+  width: 73px;
+  color: #2a3647;
+}
+
+.detail_task_due_date_content {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+}
+
+.task_detail_assigned_accounts {
+  margin-top: 20px;
+}
+
+.task_detail_assigned_accounts_key {
+  color: #2a3647;
+}
+
+.task_detail_assigned_account_content {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 15px;
+  margin-top: 10px;
+  margin-left: 20px;
+}
+
+.task_detail_subtasks {
+  margin-top: 15px;
+}
+
+.detail_subtasks_headline {
+  color: #2a3647;
+}
+
+.task_detail_subtasks_container {
+  margin-top: 15px;
+  margin-left: 20px;
+}
+
+.task_detail_subtask {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.detail_task_edit_delete {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+  margin-top: 15px;
+}
+
+.detail_task_edit_delete img {
+  width: 24px;
+}
+
+.detail_task_delete {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-right: 10px;
+  border-right: solid;
+  border-width: 1px;
+  border-color: #d1d1d1;
+  gap: 5px;
+}
+
+.detail_task_edit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding-left: 10px;
+}
+
+.task_detail {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
