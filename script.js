@@ -64,12 +64,10 @@ function renderSidebar() {
 }
 
 function renderSidebarSummary(pageName) {
-  try {
-    document.getElementById(
-      pageName
-    ).innerHTML = `${templateRenderSidebarSummary(pageName)}`;
+  if (pageName != "help") {
+    document.getElementById(pageName).innerHTML = templateRenderSidebarSummary(pageName);
     sidebarFocus(pageName);
-  } catch (error) {}
+  }
 }
 
 function sidebarFocus(pageName) {
