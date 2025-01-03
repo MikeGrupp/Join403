@@ -8,6 +8,10 @@ function setStoredContacts(contacts) {
   storedContacts = contacts;
 }
 
+function addStoredContact(contact) {
+  storedContacts.push(contact);
+}
+
 function getStoredContactById(id) {
   return storedContacts.find((element) => element["id"] === id) || null;
 }
@@ -77,8 +81,8 @@ function determineInitials(name) {
     .join("");
 }
 
-function openContactDetails(event, contactId) {
-  markAsSelectedContact(event);
+function openContactDetails(contactId) {
+  markAsSelectedContact(contactId);
   let contact = getStoredContactById(contactId);
   let contactDetailsHtml = templateRenderContactDetailsDefault();
   if (contact != null) {
@@ -94,10 +98,114 @@ function openContactDetails(event, contactId) {
   contactDetails.innerHTML = contactDetailsHtml;
 }
 
-function markAsSelectedContact(event) {
+function markAsSelectedContact(contactId) {
   let contacts = document.getElementsByClassName("contact");
   for (let i = 0; i < contacts.length; i++) {
     contacts[i].classList.remove("selected_contact");
   }
-  event.currentTarget.classList.add("selected_contact");
+  let contactById = document.getElementById("desktop_contact_details_container");
+  contactById.classList.add("selected_contact");
+}
+
+function openContactManage() {
+  document.activeElement?.blur();
+  document.documentElement.style.overflow = "hidden";
+  document.body.scroll = "no";
+  let modal = document.getElementById("contact_manage_dialog");
+  addContactManageOutsideClickClosingListener(modal);
+  addContactManageEscapeListener(modal);
+  modal.showModal();
+}
+
+
+function closeContactManage() {
+  let modal = document.getElementById("contact_manage_dialog");
+  modal.close();
+}
+
+function resetForm() {
+  document.getElementById("contact_form").reset();
+}
+
+function addContactManageOutsideClickClosingListener(element) {
+  element.addEventListener("click", (e) => {
+    const elementDimensions = element.getBoundingClientRect();
+    if (
+      e.clientX < elementDimensions.left ||
+      e.clientX > elementDimensions.right ||
+      e.clientY < elementDimensions.top ||
+      e.clientY > elementDimensions.bottom
+    ) {
+      document.documentElement.style.overflow = "auto";
+      document.body.scroll = "yes";
+      element.close();
+      document.getElementById("contact_manage_dialog").blur();
+    }
+  });
+}
+
+function addContactManageEscapeListener(element) {
+  element.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      document.documentElement.style.overflow = "auto";
+      document.body.scroll = "yes";
+      element.close();
+      document.getElementById("contact_manage_dialog").blur();
+    }
+  });
+}
+
+async function addNewContact(event) {
+  event.preventDefault();
+  let name = document.getElementById("contact_manage_name");
+  let mail = document.getElementById("contact_manage_mail");
+  let phone = document.getElementById("contact_manage_phone");
+
+  let initials = determineInitials(name.value);
+  let color = selectRandomColor();
+  let newUserId = await postData("/contacts", {
+    name: name.value,
+    initials: initials,
+    mail: mail.value,
+    phone: phone.value,
+    color: color,
+  });
+
+  if (newUserId) {
+    console.log(newUserId);
+    addStoredContact({
+      id: newUserId,
+      name: name.value,
+      initials: initials,
+      mail: mail.value,
+      phone: phone.value,
+      color: color,
+    });
+    initContactList();
+    closeContactManage();
+    openContactDetails(newUserId);
+  }
+}
+
+function selectRandomColor() {
+  const COLORS = [
+    "orange",
+    "pink",
+    "violet_blue",
+    "violet",
+    "blue_cerulean ",
+    "green_java ",
+    "red_bittersweet ",
+    "orange_tangerine ",
+    "pink_helitrope ",
+    "yellow_supernova ",
+    "blue_ribbon ",
+    "green_yellow ",
+    "yellow_sun ",
+    "red_coral ",
+    "yellow_sin ",
+    "purple_minsk",
+  ];
+  let randomNumber = Math.floor(Math.random() * COLORS.length);
+  return COLORS[randomNumber];
 }
