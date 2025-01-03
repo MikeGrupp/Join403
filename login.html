@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="styles/login.css" />
 </head>
 
-<body onload="initLogin()">
+<body>
     <main class="center">
         <img class="logo" src="./assets/img/Logo1.svg" alt="Join logo">
         <div class="signup_btn">
@@ -42,9 +42,13 @@
                     <input class="standard_ipt" type="password" id="password" required placeholder="Password">
                     <img src="./assets/img/lock.svg" class="input_icon" alt="lock icon">
                 </label>
+                <label class="remember_login">
+                    <input class="checkbox" type="checkbox" id="rememberLogin" oninput="rememberLogin()">
+                    <p>Remember me</p>
+                </label>
                 <div class="login_buttons">
-                    <button class="standard_btn">Log in</button>
-                    <button class="standard_btn">Guest Log in</button>
+                    <button class="standard_btn" type="submit">Log in</button>
+                    <span class="white_btn pointer" onclick="guestLogin()">Guest Log in</span>
                 </div>
             </form>
         </div>

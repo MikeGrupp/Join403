@@ -33,6 +33,17 @@ async function createLoadContacts() {
   return contacts;
 }
 
+async function createLoadUsers() {
+  let = null;
+  try {
+      let usersJson = await loadData("/users");
+      contacts = mapUsersJson(usersJson);
+  } catch (error) {
+      console.error(error);
+  }
+  return contacts;
+}
+
 async function loadData(path = "") {
   let response = await fetch(BASE_URL + path + ".json");
   return await response.json();

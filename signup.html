@@ -31,29 +31,29 @@
             </div>
             <form class="signup_form" onsubmit="addUser(); return false;">
                 <label>
-                    <input class="standard_ipt" type="text" id="name" required placeholder="Name">
+                    <input class="standard_ipt" type="text" id="name" oninput="checkFormInputs()" required placeholder="Name">
                     <img src="./assets/img/person.svg" class="input_icon" alt="person icon">
                 </label>
                 <label>
-                    <input class="standard_ipt" type="email" id="email" required placeholder="Email">
+                    <input class="standard_ipt" type="email" id="email" oninput="checkFormInputs()" required placeholder="Email">
                     <img src="./assets/img/mail.svg" class="input_icon" alt="mail icon">
 
                 </label>
                 <label>
-                    <input class="standard_ipt" type="password" id="password" required placeholder="Password">
+                    <input class="standard_ipt" type="password" id="password" oninput="checkFormInputs()" required placeholder="Password">
                     <img src="./assets/img/lock.svg" class="input_icon" alt="lock icon">
 
                 </label>
                 <label>
-                    <input class="standard_ipt" type="password" id="passwordConfirm" required placeholder="Confirm Password">
+                    <input class="standard_ipt" type="password" id="passwordConfirm" oninput="checkFormInputs()" required placeholder="Confirm Password">
                     <img src="./assets/img/lock.svg" class="input_icon" alt="lock icon">
                 </label>
                 <label class="check_policy">
-                    <input class="checkbox" type="checkbox" id="privacy_policy" required>
+                    <input class="checkbox" type="checkbox" id="privacyPolicy" oninput="checkFormInputs()" required>
                     <p>I accept the <a class="blue_word" href="privacy.html"><span class="blue_word">Privacy
                                 policy</span></a></p>
                 </label>
-                <button class="standard_btn">Sign up</button>
+                <button class="standard_btn" type="submit" id="submitButton" disabled>Sign up</button>
             </form>
         </div>
         <div class="linkbox">
