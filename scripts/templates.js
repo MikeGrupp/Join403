@@ -151,7 +151,7 @@ function templateRenderSidebarSummary(pageName) {
 
 function templateRenderDesktopAddContactButton() {
   return `
-        <button class="add_contact">Add new contact <img src="./assets/img/person_add.svg" alt="add a new contact to the List"></button>
+        <button onclick="openContactManage()" class="add_contact">Add new contact <img src="./assets/img/person_add.svg" alt="add a new contact to the List"></button>
   `;
 }
 
@@ -165,7 +165,7 @@ function templateRenderContactListLetter(letter) {
 function templateRenderContactListEntry(id, color, profileLetters, name, mail) {
   return `
   <dd>
-    <button class="contact" onclick="openContactDetails(event,'${id}')">
+    <button id="${id}" class="contact" onclick="openContactDetails('${id}')">
       <span class="profile_badge bg_${color}">${profileLetters}</span>
       <span class="contact_name_mail">
       <span>${name}</span>

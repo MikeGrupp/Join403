@@ -47,7 +47,8 @@ async function postData(path = "", data = {}) {
     },
     body: JSON.stringify(data),
   });
-  return (responseToJson = await response.json());
+  const responseData = await response.json();
+  return responseData.name;
 }
 
 async function initContactsTable() {
