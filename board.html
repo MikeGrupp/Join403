@@ -10,6 +10,7 @@
     <script src="./scripts/contacts.js"></script>
     <script src="./scripts/database-controller.js"></script>
     <script src="./script.js"></script>
+    <script src="./scripts/board.js"></script>
 
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="styles/fonts.css" />
@@ -20,10 +21,83 @@
     <link rel="stylesheet" href="styles/media.css" />
     <link rel="stylesheet" href="styles/board.css" />
   </head>
-  <body onload="load('board', 'SM')">
+  <body onload="load('board', 'SM'), initBoard()">
     <header id="header" class="header"></header>
     <dialog id="submenu_dialog" class="submenu_dialog"></dialog>
     <div class="sidebar" id="sidebar"></div>
+    <div
+      class="taskdetail_bg d-none"
+      id="taskdetailBg"
+      onclick="taskMoveBack()"
+    >
+      <div class="taskdetail" id="taskdetail" onclick="event.stopPropagation()">
+        <div class="wrapper">
+          <div class="task_detail_kategory">
+            <div class="board_category" style="--backgroundKategory: #1fd7c1">
+              technical Task
+            </div>
+            <div class="detail_task_close_button">
+              <img src="assets/img/Close.svg" alt="close task" />
+            </div>
+          </div>
+          <div class="task_detail_headline">
+            Kochwelt page & Recipe Recommender
+          </div>
+          <div class="detail_task_information">
+            <div class="detail_task_description">
+              Build start page with recipe recommendation...2
+            </div>
+            <div class="detail_task_due_date">
+              <div class="detail_task_due_date_key">Due date:</div>
+              <div class="detail_task_due_date_content">15/01/2025</div>
+            </div>
+            <div class="detail_task_due_date">
+              <div class="detail_task_due_date_key">Priority:</div>
+              <div class="detail_task_due_date_content">
+                Medium
+                <img src="assets/img/Prio media.svg" alt="medium" />
+              </div>
+            </div>
+          </div>
+          <div class="task_detail_assigned_accounts">
+            <div class="task_detail_assigned_accounts_key">Assigned To:</div>
+            <div class="task_detail_assigned_accounts_content">
+              <div class="task_detail_assigned_account_content">
+                <div class="task_account1">VW</div>
+                <div class="task_account_name">Volks Wagen</div>
+              </div>
+              <div class="task_detail_assigned_account_content">
+                <div class="task_account1">VW</div>
+                <div class="task_account_name">Volks Wagen</div>
+              </div>
+            </div>
+          </div>
+          <div class="task_detail_subtasks">
+            <div class="detail_subtasks_headline">Subtasks</div>
+            <div class="task_detail_subtasks_container">
+              <div class="task_detail_subtask">
+                <input type="checkbox" />
+                <div class="subtask_text">subtask_text</div>
+              </div>
+              <div class="task_detail_subtask">
+                <input type="checkbox" />
+                <div class="subtask_text">subtask_text</div>
+              </div>
+            </div>
+          </div>
+          <div class="detail_task_edit_delete">
+            <div class="detail_task_delete">
+              <img src="assets/img/delete.svg" alt="delete" />
+              Delete
+            </div>
+            <div class="detail_task_edit">
+              <img src="assets/img/edit.svg" alt="edit" />
+              Edit
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <main>
       <div class="wrapper">
         <div class="board">
@@ -54,32 +128,13 @@
                   alt="add Task"
                 />
               </div>
-              <div class="board_tasks">
+              <div
+                class="board_tasks"
+                ondrop="moveTo('Todo')"
+                ondragover="allowDrop(event)"
+                id="boardTodo"
+              >
                 <div class="board_no_task">No task To do</div>
-                <div class="board_task">
-                  <div class="wrapper">
-                    <div class="board_category">User Story</div>
-                    <div class="task_headline">
-                      Kochwelt page & Recipe Recommender
-                    </div>
-                    <div class="task_description">
-                      Build start page with recipe recommendation...
-                    </div>
-                    <div class="task_subtasks">
-                      <div class="task_progress_bar"></div>
-                      <div class="task_subtask_number">1/2 Subtasks</div>
-                    </div>
-                    <div class="task_underline">
-                      <div class="task_accounts">
-                        <div class="task_account1">AM</div>
-                        <div class="task_account2">WW</div>
-                      </div>
-                      <div class="task_importent">
-                        <img src="assets/img/Prio media.svg" alt="" />
-                      </div>
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
             <div class="board_todo">
@@ -91,7 +146,12 @@
                   alt="add Task"
                 />
               </div>
-              <div class="board_tasks">
+              <div
+                class="board_tasks"
+                ondrop="moveTo('InProgress')"
+                ondragover="allowDrop(event)"
+                id="boardInProgress"
+              >
                 <div class="board_no_task">No task To do</div>
               </div>
             </div>
@@ -104,13 +164,23 @@
                   alt="add Task"
                 />
               </div>
-              <div class="board_tasks">
+              <div
+                class="board_tasks"
+                ondrop="moveTo('AwaitFeedback')"
+                ondragover="allowDrop(event)"
+                id="boardAwaitFeedback"
+              >
                 <div class="board_no_task">No task To do</div>
               </div>
             </div>
             <div class="board_todo">
               <div class="board_subline">Done</div>
-              <div class="board_tasks">
+              <div
+                class="board_tasks"
+                ondrop="moveTo('Done')"
+                ondragover="allowDrop(event)"
+                id="boardDone"
+              >
                 <div class="board_no_task">No task To do</div>
               </div>
             </div>

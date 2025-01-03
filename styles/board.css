@@ -1,7 +1,7 @@
 .wrapper {
-  width: 80%;
-  margin-left: 10%;
-  margin-right: 10%;
+  width: 90%;
+  margin-left: 5%;
+  margin-right: 5%;
 }
 
 .board {
@@ -126,6 +126,10 @@
   width: 100%;
   gap: 5%;
   margin-top: 50px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 66vh;
+  gap: 16px;
 }
 
 .board_todo {
@@ -134,6 +138,7 @@
   align-items: center;
   justify-content: flex-start;
   flex-direction: column;
+  padding: 2px;
 }
 
 .board_subline {
@@ -144,7 +149,7 @@
   color: #42526e;
   font-size: 20px;
   font-weight: 700;
-  min-width: 200px;
+  max-width: 200px;
 }
 
 .board_subline_img:hover {
@@ -154,7 +159,8 @@
 
 .board_tasks {
   width: 100%;
-  min-width: 200px;
+  max-width: 200px;
+  min-height: 59vh;
 }
 
 .board_task {
@@ -168,7 +174,8 @@
   padding-top: 16px;
   padding-bottom: 16px;
   width: 100%;
-  min-width: 200px;
+  max-width: 200px;
+  cursor: grab;
 }
 
 .board_no_task {
@@ -184,11 +191,12 @@
   color: #a8a8a8;
   height: 48px;
   margin-top: 16px;
-  min-width: 200px;
+  max-width: 200px;
+  margin-right: -1px;
 }
 
 .board_category {
-  background-color: rgb(0, 56, 255);
+  background-color: var(--backgroundKategory);
   color: #ffffff;
   display: flex;
   align-items: center;
@@ -214,7 +222,12 @@
 .task_progress_bar {
   width: 80px;
   height: 8px;
-  background-color: #29b1e5;
+  border-radius: 25px;
+  background-image: linear-gradient(
+    to right,
+    #29b1e5 var(--backgroundProgressbar),
+    #e9ecef 0%
+  );
 }
 
 .task_subtasks {
@@ -228,7 +241,7 @@
 }
 
 .task_subtask_number {
-  width: 74px;
+  min-width: 75px;
 }
 
 .task_underline {
@@ -247,19 +260,17 @@
 
 .task_account1 {
   border-radius: 50px;
-  background-color: orange;
   font-size: 12px;
   height: 34px;
   width: 34px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
+  color: black;
 }
 
 .task_account2 {
   border-radius: 50px;
-  background-color: rgb(0, 0, 0);
   font-size: 12px;
   height: 34px;
   width: 34px;
@@ -269,4 +280,150 @@
   color: white;
   position: relative;
   left: -8px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #ffffff;
+}
+
+.taskdetail_bg {
+  background-color: rgb(0, 0, 0, 0.5);
+  z-index: 300;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.taskdetail {
+  height: 90vh;
+  width: 30vw;
+  border-radius: 25px;
+  background-color: white;
+  position: fixed;
+  right: -600vw;
+  top: 5vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.task_detail_kategory {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.detail_task_close_button {
+  cursor: pointer;
+  width: 32px;
+}
+
+.task_detail_headline {
+  font-size: 40px;
+  font-weight: 700;
+  margin-top: 20px;
+}
+
+.detail_task_information {
+  margin-top: 20px;
+}
+
+.detail_task_due_date {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: 20px;
+  gap: 20px;
+}
+
+.detail_task_due_date_key {
+  width: 73px;
+  color: #2a3647;
+}
+
+.detail_task_due_date_content {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+}
+
+.task_detail_assigned_accounts {
+  margin-top: 20px;
+}
+
+.task_detail_assigned_accounts_key {
+  color: #2a3647;
+}
+
+.task_detail_assigned_account_content {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 15px;
+  margin-top: 10px;
+  margin-left: 20px;
+}
+
+.task_detail_subtasks {
+  margin-top: 15px;
+}
+
+.detail_subtasks_headline {
+  color: #2a3647;
+}
+
+.task_detail_subtasks_container {
+  margin-top: 15px;
+  margin-left: 20px;
+}
+
+.task_detail_subtask {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.detail_task_edit_delete {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+  margin-top: 15px;
+}
+
+.detail_task_edit_delete img {
+  width: 24px;
+}
+
+.detail_task_delete {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-right: 10px;
+  border-right: solid;
+  border-width: 1px;
+  border-color: #d1d1d1;
+  gap: 5px;
+}
+
+.detail_task_edit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding-left: 10px;
+}
+
+.task_detail {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

@@ -50,7 +50,7 @@
   .toggle_help_entry {
     display: flex;
   }
-  
+
   .contacts_main {
     margin-left: 0;
   }
@@ -59,7 +59,7 @@
     max-height: calc(100vh - 40px - 80px);
     padding-left: 14px;
   }
-  
+
   .desktop_add_contact_container {
     display: none;
   }
@@ -74,5 +74,11 @@
 
   .desktop_contact_details_container {
     display: none;
+  }
+}
+
+@media (max-width: 1170) {
+  .kanban_board {
+    flex-wrap: wrap;
   }
 }
