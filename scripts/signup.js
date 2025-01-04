@@ -10,10 +10,10 @@ function addUser() {
 }
 
 function checkFormInputs() {
-    const name = document.getElementById('name').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const password = document.getElementById('password').value.trim();
-    const confirmPassword = document.getElementById('passwordConfirm').value.trim();
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const confirmPassword = document.getElementById('passwordConfirm').value;
     const policy = document.getElementById('privacyPolicy').checked
 
     const submitButton = document.getElementById('submitButton');
@@ -29,6 +29,6 @@ function previousPage() {
     if (window.history.length > 1) {
         window.history.back();
     } else {
-        window.location.href = 'index.html';
+        window.location.href = 'login.html';
     }
 }

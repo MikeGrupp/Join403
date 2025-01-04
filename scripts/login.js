@@ -29,7 +29,7 @@ async function checkLogin(login) {
     if (login == true) {
         window.location.href = 'index.html?msg=successfully logged in!';
     } else {
-        msgBox.innerHTML = 'Username or password wrong'
+        msgBox.innerHTML = 'Username or password wrong, please try again'
         msgBox.classList.remove('d-none');
     }
 }
@@ -51,4 +51,35 @@ function mapUsersJson(json) {
         email: users.email,
         password: users.password
     }));
+}
+
+function togglePassword() {
+    let iptPassword = document.getElementById('password');
+
+    if (password) {
+        if (iptPassword.type === 'password') {
+            iptPassword.type = 'text';
+            changeImgToClosedEye();
+        } else {
+            iptPassword.type = 'password';
+            changeImgToOpenEye();
+        }
+    } else {
+        changeImgToLock();
+    }
+}
+
+function changeImgToLock(); {
+    let content = document.getElementById('toggle_password')
+    content.src = './assets/img/lock.svg'
+}
+
+function changeImgToClosedEye(); {
+    let content = document.getElementById('toggle_password')
+    content.src = './assets/img/visibility_off.svg'
+}
+
+function changeImgToOpenEye(); {
+    let content = document.getElementById('toggle_password')
+    content.src = './assets/img/visibility.svg'
 }
