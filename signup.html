@@ -9,6 +9,7 @@
 
     <script src="./scripts/database-controller.js"></script>
     <script src="./scripts/signup.js"></script>
+    <script src="./scripts/login.js"></script>
     <script src="./script.js"></script>
     <script src="./scripts/board.js"></script>
 
@@ -33,21 +34,25 @@
             </div>
             <form class="signup_form" onsubmit="addUser(); return false;">
                 <label>
-                    <input class="standard_ipt" type="text" id="name" oninput="checkFormInputs()" required placeholder="Name">
+                    <input class="standard_ipt" type="text" id="name" oninput="checkFormInputs()" required
+                        placeholder="Name">
                     <img src="./assets/img/person.svg" class="input_icon" alt="person icon">
                 </label>
                 <label>
-                    <input class="standard_ipt" type="email" id="email" oninput="checkFormInputs()" required placeholder="Email">
+                    <input class="standard_ipt" type="email" id="email" oninput="checkFormInputs()" required
+                        placeholder="Email">
                     <img src="./assets/img/mail.svg" class="input_icon" alt="mail icon">
 
                 </label>
                 <label>
-                    <input class="standard_ipt" type="password" id="password" oninput="checkFormInputs()" required placeholder="Password">
+                    <input class="standard_ipt" type="password" id="password" oninput="checkFormInputs()" required
+                        placeholder="Password">
                     <img src="./assets/img/lock.svg" class="input_icon" alt="lock icon">
 
                 </label>
                 <label>
-                    <input class="standard_ipt" type="password" id="passwordConfirm" oninput="checkFormInputs()" required placeholder="Confirm Password">
+                    <input class="standard_ipt" type="password" id="passwordConfirm" oninput="checkFormInputs()"
+                        required placeholder="Confirm Password">
                     <img src="./assets/img/lock.svg" class="input_icon" alt="lock icon">
                 </label>
                 <label class="check_policy">
@@ -66,6 +71,7 @@
                 <p class="link">Legal notice</p>
             </a>
     </main>
+    <div class="msg_box" id="msgBox"></div>
 </body>
 
 </html>

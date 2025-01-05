@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="styles/login.css" />
 </head>
 
-<body>
+<body onload="initLogin()">
     <main class="center">
         <img class="logo" src="./assets/img/Logo1.svg" alt="Join logo">
         <div class="signup_btn">
@@ -46,7 +46,7 @@
                         class="input_icon pointer" alt="lock icon">
                 </label>
                 <label class="remember_login">
-                    <input class="checkbox" type="checkbox" id="rememberLogin" oninput="rememberLogin()">
+                    <input class="checkbox" type="checkbox" id="rememberLogin">
                     <p>Remember me</p>
                 </label>
                 <div class="login_buttons">
