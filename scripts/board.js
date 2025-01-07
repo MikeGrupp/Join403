@@ -243,7 +243,7 @@ function dNone(id) {
 
 function taskMoveForward() {
   let id = null;
-  let container = document.getElementById("taskdetail");
+  let container = document.getElementById("taskDetail");
   let pos = 0;
   clearInterval(id);
   id = setInterval(frame, 1);
@@ -259,7 +259,7 @@ function taskMoveForward() {
 
 function taskMoveBack() {
   let id = null;
-  let container = document.getElementById("taskdetail");
+  let container = document.getElementById("taskDetail");
   let pos = 0;
   clearInterval(id);
   id = setInterval(frame, 1);
@@ -269,7 +269,13 @@ function taskMoveBack() {
       dNone("taskdetailBg");
     } else {
       pos++;
-      container.style.right = "-" + pos + "vw";
+      container.style.right = "-" + pos + "vh";
     }
   }
+}
+
+function renderDetailTask() {
+  let container = document.getElementById("taskDetail");
+  container.innerHTML = `${templateRenderDetailTask()}`;
+  taskMoveForward();
 }

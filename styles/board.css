@@ -299,16 +299,15 @@
 }
 
 .taskdetail {
-  height: 90vh;
   width: 30vw;
   border-radius: 25px;
   background-color: white;
   position: fixed;
-  right: -600vw;
-  top: 5vh;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 .task_detail_kategory {
@@ -402,6 +401,26 @@
   width: 24px;
 }
 
+#detailTaskDeleteImg {
+  width: 24px;
+  height: 24px;
+  background-image: url(../assets/img/delete.svg);
+}
+
+.detail_task_delete:hover #detailTaskDeleteImg {
+  background-image: url(../assets/img/delete2.svg);
+}
+
+#detailTaskEditImg {
+  width: 24px;
+  height: 24px;
+  background-image: url(../assets/img/edit.svg);
+}
+
+.detail_task_edit:hover #detailTaskEditImg {
+  background-image: url(../assets/img/edit2.svg);
+}
+
 .detail_task_delete {
   display: flex;
   align-items: center;
@@ -411,6 +430,12 @@
   border-width: 1px;
   border-color: #d1d1d1;
   gap: 5px;
+  cursor: pointer;
+}
+
+.detail_task_delete:hover {
+  color: #29b1e5;
+  font-weight: 700;
 }
 
 .detail_task_edit {
@@ -419,6 +444,12 @@
   justify-content: center;
   gap: 5px;
   padding-left: 10px;
+  cursor: pointer;
+}
+
+.detail_task_edit:hover {
+  color: #29b1e5;
+  font-weight: 700;
 }
 
 .task_detail {

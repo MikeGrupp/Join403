@@ -242,7 +242,7 @@ function templateRenderTask(
       draggable="true"
       ondragstart="startDragging('${taskId}')"
       id="${taskId}"
-      onclick="dNone('taskdetailBg'), taskMoveForward();"
+      onclick="dNone('taskdetailBg'), renderDetailTask();"
       ;
     >
       <div class="wrapper">
@@ -287,4 +287,75 @@ function templateRenderAssignedAccounts(initials, accountnr, color) {
             <div class="task_account${accountnr} bg_${color}">${initials}</div>
 
 `;
+}
+
+function templateRenderDetailTask() {
+  return ` 
+  <div class="wrapper">
+    <div class="task_detail_kategory">
+      <div class="board_category" style="--backgroundKategory: #1fd7c1">
+        technical Task
+      </div>
+      <div class="detail_task_close_button">
+        <img
+          src="assets/img/Close.svg"
+          alt="close task"
+          onclick="taskMoveBack()"
+        />
+      </div>
+    </div>
+    <div class="task_detail_headline">Kochwelt page & Recipe Recommender</div>
+    <div class="detail_task_information">
+      <div class="detail_task_description">
+        Build start page with recipe recommendation...2
+      </div>
+      <div class="detail_task_due_date">
+        <div class="detail_task_due_date_key">Due date:</div>
+        <div class="detail_task_due_date_content">15/01/2025</div>
+      </div>
+      <div class="detail_task_due_date">
+        <div class="detail_task_due_date_key">Priority:</div>
+        <div class="detail_task_due_date_content">
+          Medium
+          <img src="assets/img/Prio media.svg" alt="medium" />
+        </div>
+      </div>
+    </div>
+    <div class="task_detail_assigned_accounts">
+      <div class="task_detail_assigned_accounts_key">Assigned To:</div>
+      <div class="task_detail_assigned_accounts_content">
+        <div class="task_detail_assigned_account_content">
+          <div class="task_account1">VW</div>
+          <div class="task_account_name">Volks Wagen</div>
+        </div>
+        <div class="task_detail_assigned_account_content">
+          <div class="task_account1">VW</div>
+          <div class="task_account_name">Volks Wagen</div>
+        </div>
+      </div>
+    </div>
+    <div class="task_detail_subtasks">
+      <div class="detail_subtasks_headline">Subtasks</div>
+      <div class="task_detail_subtasks_container">
+        <div class="task_detail_subtask">
+          <input type="checkbox" />
+          <div class="subtask_text">subtask_text</div>
+        </div>
+        <div class="task_detail_subtask">
+          <input type="checkbox" />
+          <div class="subtask_text">subtask_text</div>
+        </div>
+      </div>
+    </div>
+    <div class="detail_task_edit_delete">
+      <div class="detail_task_delete">
+        <div class="detail_task_delete_img" id="detailTaskDeleteImg"></div>
+        Delete
+      </div>
+      <div class="detail_task_edit">
+        <div class="detail_task_edit_img" id="detailTaskEditImg"></div>
+        Edit
+      </div>
+    </div>
+  </div>`;
 }
