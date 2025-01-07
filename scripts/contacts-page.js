@@ -5,6 +5,7 @@ function initContacts(pageName) {
   initDesktopAddContactButton();
   initContactList();
   initContactDetails();
+  initContactManageDialog();
 }
 
 function initDesktopAddContactButton() {
@@ -38,6 +39,12 @@ function initContactDetails() {
   let contactDetailsHtml = templateRenderContactDetailsDefault();
   let contactDetails = document.getElementById("desktop_contact_details_container");
   contactDetails.innerHTML = contactDetailsHtml;
+}
+
+function initContactManageDialog() {
+  let contactManageDialogHtml = templateRenderContactManageDialog();
+  let contactManageDialog = document.getElementById("contact_manage_dialog");
+  contactManageDialog.innerHTML = contactManageDialogHtml;
 }
 
 function openContactDetails(contactId) {
