@@ -8,6 +8,17 @@ function setStoredContacts(contacts) {
   storedContacts = contacts;
 }
 
+function addStoredContact(userId, name, initials, mail, phone, color) {
+  storedContacts.push({
+    id: userId,
+    name: name,
+    initials: initials,
+    mail: mail,
+    phone: phone,
+    color: color,
+  });
+}
+
 function getStoredContactById(id) {
   return storedContacts.find((element) => element["id"] === id) || null;
 }
@@ -26,78 +37,31 @@ function mapContactsJson(json) {
   }));
 }
 
-function initContacts(pageName) {
-  if (pageName != "contacts") {
-    return;
+async function createNewContact(name, mail, phone) {
+  let initials = determineInitials(name);
+  let color = selectRandomColor();
+  let newUserId = await postContact(name, initials, mail, phone, color);
+  if (newUserId) {
+    console.log(newUserId);
+    addStoredContact(newUserId, name, initials, mail, phone, color);
   }
-  initDesktopAddContactButton();
-  initContactList();
-  initContactDetails();
+  return newUserId;
 }
 
-function initDesktopAddContactButton() {
-  let desktopAddContactContainerHtml = templateRenderDesktopAddContactButton();
-  let desktopAddContactContainer = document.getElementById("desktop_add_contact_container");
-  desktopAddContactContainer.innerHTML = desktopAddContactContainerHtml;
+async function reloadContactsFromDatabase() {
+  setStoredContacts(await createLoadContacts());
 }
 
-function initContactList() {
-  let sortedContacts = getStoredContacts().sort((a, b) => a.name.localeCompare(b.name));
-  let contactListHtml = "";
-  let currentLetter = "";
-  sortedContacts.forEach((contact) => {
-    if (currentLetter != contact.name[0]) {
-      currentLetter = contact.name[0];
-      contactListHtml += templateRenderContactListLetter(currentLetter);
-    }
-    contactListHtml += templateRenderContactListEntry(
-      contact.id,
-      contact.color,
-      contact.initials,
-      contact.name,
-      contact.mail
-    );
-  });
-  let contactList = document.getElementById("contact_list");
-  contactList.innerHTML = contactListHtml;
+async function postContact(name, initials, mail, phone, color) {
+  return await postData("/contacts", {
+    name: name,
+    initials: initials,
+    mail: mail,
+    phone: phone,
+    color: color,
+  });;
 }
 
-function initContactDetails() {
-  let contactDetailsHtml = templateRenderContactDetailsDefault();
-  let contactDetails = document.getElementById("desktop_contact_details_container");
-  contactDetails.innerHTML = contactDetailsHtml;
-}
-
-function determineInitials(name) {
-  return name
-    .split(" ")
-    .map((char) => {
-      return char[0];
-    })
-    .join("");
-}
-
-function openContactDetails(event, contactId) {
-  markAsSelectedContact(event);
-  let contact = getStoredContactById(contactId);
-  let contactDetailsHtml = templateRenderContactDetailsDefault();
-  if (contact != null) {
-    contactDetailsHtml += templateRenderContactDetailsForContact(
-      contact.color,
-      contact.initials,
-      contact.name,
-      contact.mail,
-      contact.phone
-    );
-  }
-  let contactDetails = document.getElementById("desktop_contact_details_container");
-  contactDetails.innerHTML = contactDetailsHtml;
-}
-
-function markAsSelectedContact(event) {
-  let contacts = document.getElementsByClassName("contact");
-  for (let i = 0; i < contacts.length; i++) {
-    contacts[i].classList.remove("selected_contact");
-  }
-  event.currentTarget.classList.add("selected_contact");
+function isContactValid() {
+  return true; //TODO: implement validation
 }

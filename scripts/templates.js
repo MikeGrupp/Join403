@@ -151,7 +151,7 @@ function templateRenderSidebarSummary(pageName) {
 
 function templateRenderDesktopAddContactButton() {
   return `
-        <button class="add_contact">Add new contact <img src="./assets/img/person_add.svg" alt="add a new contact to the List"></button>
+        <button onclick="openContactManage()" class="add_contact">Add new contact <img src="./assets/img/person_add.svg" alt="add a new contact to the List"></button>
   `;
 }
 
@@ -165,7 +165,7 @@ function templateRenderContactListLetter(letter) {
 function templateRenderContactListEntry(id, color, profileLetters, name, mail) {
   return `
   <dd>
-    <button class="contact" onclick="openContactDetails(event,'${id}')">
+    <button id="${id}" class="contact" onclick="openContactDetails('${id}')">
       <span class="profile_badge bg_${color}">${profileLetters}</span>
       <span class="contact_name_mail">
       <span>${name}</span>
@@ -223,6 +223,46 @@ function templateRenderContactDetailsForContact(
           <div class="contact_section_container">
             <label>Phone</label>
             <span>${phone}</span>
+          </div>
+        </div>
+  `;
+}
+
+function templateRenderContactManageDialog() {
+  return `
+        <div class="contact_manage_dialog_container">
+          <div class="contact_manage_dialog_title_container">
+            <img class="contact_manage_dialog_logo" src="./assets/img/Logo2.svg" alt="">
+            <h1  class="contact_manage_dialog_title">Add contact</h1>
+            <p class="contact_manage_dialog_subtitle" role="doc-subtitle">Tasks are better with a team!</p>
+            <div class="horizontal_blue_line"></div>
+          </div>
+          <div class="contact_manage_dialog_input_container">
+            <button onclick="closeContactManage()" class="contact_manage_close_button">
+              <img src="./assets/img/Close.svg" class="contact_manage_close_icon" alt="close icon">
+            </button>
+            <div class="contact_form_profile_container">
+              <span class="profile_badge_large bg_grey contact_form_profile_badge_position">
+                <img src="./assets/img/person_white.svg" alt="person icon">
+              </span>
+              <form class="contact_form_profile" id="contact_form" onsubmit="addNewContact(event)">
+                  <div class="contact_form_profile_inputs">
+                    <input id="contact_manage_name" class="input_field input_icon_person" type="text" required placeholder="Name" aria-label="Name">
+                    <input id="contact_manage_mail" class="input_field input_icon_mail" type="email" required placeholder="Email" aria-label="Email">
+                    <input  id="contact_manage_phone" class="input_field input_icon_call" type="tel" placeholder="Phone" aria-label="Phone">
+                  </div>
+                  <div class="contact_form_profile_buttons">
+                    <button class="button button_close" type="reset" onclick="resetForm(), closeContactManage()" form="contact_form">
+                      Cancel
+                      <img class="button_icon" src="./assets/img/button_cancel.svg" alt="">
+                    </button>
+                    <button class="button button_create" type="submit" form="contact_form">
+                      Create contact
+                      <img class="button_icon" src="./assets/img/check.svg" alt="">
+                    </button>
+                  </div>
+              </form>
+            </div>
           </div>
         </div>
   `;

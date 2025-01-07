@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Join Login</title>
+    <link rel="icon" type="image/x-icon" href="./assets/img/Logo1.svg">
 
     <script src="./scripts/database-controller.js"></script>
     <script src="./script.js"></script>
@@ -17,7 +18,7 @@
     <link rel="stylesheet" href="styles/login.css" />
 </head>
 
-<body>
+<body onload="initLogin()">
     <main class="center">
         <img class="logo" src="./assets/img/Logo1.svg" alt="Join logo">
         <div class="signup_btn">
@@ -41,10 +42,11 @@
                 </label>
                 <label>
                     <input class="standard_ipt" type="password" id="password" required placeholder="Password">
-                    <img src="./assets/img/lock.svg" class="input_icon" alt="lock icon">
+                    <img src="./assets/img/lock.svg" onclick="togglePassword()" id="toggle_password"
+                        class="input_icon pointer" alt="lock icon">
                 </label>
                 <label class="remember_login">
-                    <input class="checkbox" type="checkbox" id="rememberLogin" oninput="rememberLogin()">
+                    <input class="checkbox" type="checkbox" id="rememberLogin">
                     <p>Remember me</p>
                 </label>
                 <div class="login_buttons">
