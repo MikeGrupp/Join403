@@ -41,7 +41,7 @@ async function renderTasks(task, taskId) {
   let prio = task.prio;
   let step = "board" + task.step;
 
-  if (kategory === "technical Task") {
+  if (kategory === "Technical Task") {
     backgroundColorKategory = "#1fd7c1";
   } else {
     backgroundColorKategory = "#0038ff";
@@ -212,6 +212,65 @@ async function PostassignedAccounts(TaskId, accountId) {
   });
 }
 
+async function PutTask(TaskId) {
+  let task = tasks[TaskId];
+  contentDescription = task.description;
+  contentKategory = task.kategory;
+  contentTitel = task.titel;
+  contentPrio = task.prio;
+  contentStep = task.step;
+
+  await patchData("/tasks/" + TaskId, {
+    description: contentDescription,
+    kategory: contentKategory,
+    titel: contentTitel,
+    prio: contentPrio,
+    step: contentStep,
+  });
+}
+
+async function PatchSubTask(TaskId) {
+  let task = tasks[currentDraggedElement];
+  subtasks = task.subtasks;
+  fetchSubTaskIds();
+  fetchSubTaskFinished();
+  for (let i = 0; i < subtasksIds.length; i++) {
+    subtaskId = subtasksIds[i];
+    let subtask = subtasks[subtaskId];
+    let contentTitel = subtask.titel;
+    let contentStatus = subtask.status;
+    await patchData("/tasks/" + TaskId + "/subtasks/" + subtaskId, {
+      titel: contentTitel,
+      status: contentStatus,
+    });
+  }
+}
+
+async function PatchAssignedAccounts(TaskId) {
+  let task = tasks[currentDraggedElement];
+  assignedAccounts = task.assignedAccounts;
+  fetchAssignedAccountsIds();
+  for (let i = 0; i < assignedAccountsIds.length; i++) {
+    let accountId = assignedAccountsIds[i];
+    let account = assignedAccounts[accountId];
+    let contentInitials = account.initials;
+    let contentColor = account.color;
+    await patchData("/tasks/" + TaskId + "/assignedAccounts/" + accountId, {
+      initials: contentInitials,
+      id: accountId,
+      color: contentColor,
+    });
+  }
+}
+
+async function PatchStep(TaskId) {
+  let task = tasks[TaskId];
+  contentStep = task.step;
+  await patchData("/tasks/" + TaskId, {
+    step: contentStep,
+  });
+}
+
 function startDragging(id) {
   currentDraggedElement = id;
 }
@@ -220,8 +279,9 @@ function allowDrop(ev) {
   ev.preventDefault();
 }
 
-function moveTo(category) {
+async function moveTo(category) {
   tasks[currentDraggedElement]["step"] = category;
+  await PatchStep(currentDraggedElement);
   reRenderBoard();
 }
 

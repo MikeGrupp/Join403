@@ -37,10 +37,10 @@ async function createLoadContacts() {
 async function createLoadUsers() {
   let = null;
   try {
-      let usersJson = await loadData("/users");
-      contacts = mapUsersJson(usersJson);
+    let usersJson = await loadData("/users");
+    contacts = mapUsersJson(usersJson);
   } catch (error) {
-      console.error(error);
+    console.error(error);
   }
   return contacts;
 }
@@ -53,6 +53,18 @@ async function loadData(path = "") {
 async function postData(path = "", data = {}) {
   let response = await fetch(BASE_URL + path + ".json", {
     method: "POST",
+    header: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+  const responseData = await response.json();
+  return responseData.name;
+}
+
+async function patchData(path = "", data = {}) {
+  let response = await fetch(BASE_URL + path + ".json", {
+    method: "PATCH",
     header: {
       "Content-Type": "application/json",
     },
