@@ -252,7 +252,7 @@ function templateRenderContactManageDialog() {
                     <input  id="contact_manage_phone" class="input_field input_icon_call" type="tel" placeholder="Phone" aria-label="Phone">
                   </div>
                   <div class="contact_form_profile_buttons">
-                    <button class="button button_close" type="reset" onclick="resetForm("contact_form"), closeContactManage()" form="contact_form">
+                    <button class="button button_close" type="reset" onclick="resetForm('contact_form'), closeContactManage()" form="contact_form">
                       Cancel
                       <img class="button_icon" src="./assets/img/button_cancel.svg" alt="">
                     </button>
