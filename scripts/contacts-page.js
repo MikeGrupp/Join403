@@ -89,10 +89,6 @@ function closeContactManage() {
   modal.close();
 }
 
-function resetForm() {
-  document.getElementById("contact_form").reset();
-}
-
 function addContactManageOutsideClickClosingListener(element) {
   element.addEventListener("click", (e) => {
     const elementDimensions = element.getBoundingClientRect();

@@ -42,8 +42,8 @@ async function createNewContact(name, mail, phone) {
   let color = selectRandomColor();
   let newUserId = await postContact(name, initials, mail, phone, color);
   if (newUserId) {
-    console.log(newUserId);
     addStoredContact(newUserId, name, initials, mail, phone, color);
+    createToast("successNewContact");
   }
   return newUserId;
 }
