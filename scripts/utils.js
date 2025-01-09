@@ -29,3 +29,7 @@ function determineInitials(name) {
     })
     .join("");
 }
+
+function resetForm(formId) {
+  document.getElementById(formId).reset();
+}
