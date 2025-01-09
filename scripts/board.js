@@ -40,7 +40,6 @@ async function renderTasks(task, taskId) {
   let backgroundColorKategory = null;
   let prio = task.prio;
   let step = "board" + task.step;
-
   if (kategory === "Technical Task") {
     backgroundColorKategory = "#1fd7c1";
   } else {
@@ -85,6 +84,7 @@ function renderAssignedAccounts(taskId) {
       let account = assignedAccounts[accountId];
       let initials = account.initials;
       let color = account.color;
+      let position = i * 8;
       if (i == 0) {
         accountnr = 1;
       } else {
@@ -93,7 +93,8 @@ function renderAssignedAccounts(taskId) {
       container.innerHTML += `${templateRenderAssignedAccounts(
         initials,
         accountnr,
-        color
+        color,
+        position
       )}`;
     }
   }
@@ -175,9 +176,11 @@ async function fetchSubTaskFinished() {
 
 async function fetchSubTaskIds() {
   subtasksIds = [];
-  if (subtasks !== null) {
-    subtasksIds = Object.keys(subtasks);
-  }
+  try {
+    if (subtasks !== null) {
+      subtasksIds = Object.keys(subtasks);
+    }
+  } catch (err) {}
 }
 
 async function fetchAssignedAccountsIds() {
@@ -194,6 +197,7 @@ async function PostTask() {
     titel: "Kochwelt page & Recipe Recommender",
     prio: "low",
     step: "Done",
+    dueDate: "15/1/2025",
   });
 }
 
@@ -204,10 +208,10 @@ async function PostSubTask(TaskId) {
   });
 }
 
-async function PostassignedAccounts(TaskId, accountId) {
+async function PostassignedAccounts(TaskId) {
   await postData("/tasks/" + TaskId + "/assignedAccounts", {
+    name: "Eliot Mannheim",
     initials: "EM",
-    id: accountId,
     color: "pink_helitrope",
   });
 }
@@ -219,6 +223,7 @@ async function PutTask(TaskId) {
   contentTitel = task.titel;
   contentPrio = task.prio;
   contentStep = task.step;
+  contentDueDate = task.dueDate;
 
   await patchData("/tasks/" + TaskId, {
     description: contentDescription,
@@ -226,6 +231,7 @@ async function PutTask(TaskId) {
     titel: contentTitel,
     prio: contentPrio,
     step: contentStep,
+    dueDate: contentDueDate,
   });
 }
 
@@ -255,10 +261,11 @@ async function PatchAssignedAccounts(TaskId) {
     let account = assignedAccounts[accountId];
     let contentInitials = account.initials;
     let contentColor = account.color;
+    let contentName = account.name;
     await patchData("/tasks/" + TaskId + "/assignedAccounts/" + accountId, {
       initials: contentInitials,
-      id: accountId,
       color: contentColor,
+      name: contentName,
     });
   }
 }
@@ -334,8 +341,102 @@ function taskMoveBack() {
   }
 }
 
-function renderDetailTask() {
+function renderDetailTask(taskId) {
+  let task = tasks[taskId];
+  let titel = task.titel;
+  let description = task.description;
+  let kategory = task.kategory;
+  let backgroundColorKategory = null;
+  let prio = task.prio;
+  let dueDate = task.dueDate;
+  if (kategory === "Technical Task") {
+    backgroundColorKategory = "#1fd7c1";
+  } else {
+    backgroundColorKategory = "#0038ff";
+  }
   let container = document.getElementById("taskDetail");
-  container.innerHTML = `${templateRenderDetailTask()}`;
+  container.innerHTML = `${templateRenderDetailTask(
+    titel,
+    description,
+    kategory,
+    backgroundColorKategory,
+    prio,
+    dueDate
+  )}`;
+  renderDetailAccounts(task);
+  renderDetailSubtasks(taskId);
   taskMoveForward();
+}
+
+function renderDetailAccounts(task) {
+  assignedAccounts = task.assignedAccounts;
+  fetchAssignedAccountsIds();
+  let amountAssignedAccounts = assignedAccountsIds.length;
+
+  for (let i = 0; i < amountAssignedAccounts; i++) {
+    let accountId = assignedAccountsIds[i];
+    let account = assignedAccounts[accountId];
+    let name = account.name;
+    let initials = account.initials;
+    let backgroundcolor = account.color;
+    let container = document.getElementById("detailAssignedAccounts");
+    container.innerHTML += `${templateRenderDetailAccounts(
+      name,
+      initials,
+      backgroundcolor
+    )}`;
+  }
+}
+
+function renderDetailSubtasks(taskId) {
+  task = tasks[taskId];
+  subtasks = task.subtasks;
+  fetchSubTaskIds();
+  let amountSubtasks = subtasksIds.length;
+
+  if (amountSubtasks > 0) {
+    let container = document.getElementById("detailSubtasks");
+    container.innerHTML = `
+      <div class="detail_subtasks_headline">Subtasks</div>
+      <div class="task_detail_subtasks_container" id="detailSubtasksContainer"></div>
+    `;
+  }
+
+  for (let i = 0; i < amountSubtasks; i++) {
+    let subtaskId = subtasksIds[i];
+    let subtask = subtasks[subtaskId];
+    let titel = subtask.titel;
+    let status = subtask.status;
+    let checked;
+    if (status === "finished") {
+      checked = "checked";
+    }
+    let container = document.getElementById("detailSubtasksContainer");
+    container.innerHTML += `${templateRenderDetailSubtasks(
+      titel,
+      status,
+      checked,
+      taskId,
+      subtaskId
+    )}`;
+  }
+}
+
+function checkSubtask(taskId, subtaskId) {
+  let status = tasks[taskId].subtasks[subtaskId].status;
+  if (status !== "finished") {
+    tasks[taskId].subtasks[subtaskId].status = "finished";
+  } else {
+    tasks[taskId].subtasks[subtaskId].status = "open";
+  }
+  reRenderBoard();
+  PatchStatusSubtask(taskId, subtaskId);
+}
+
+async function PatchStatusSubtask(taskId, subtaskId) {
+  let subtask = tasks[taskId].subtasks[subtaskId];
+  contentSubtaskStatus = subtask.status;
+  await patchData("/tasks/" + taskId + "/subtasks/" + subtaskId, {
+    status: contentSubtaskStatus,
+  });
 }

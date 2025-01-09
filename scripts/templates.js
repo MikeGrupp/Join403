@@ -282,7 +282,7 @@ function templateRenderTask(
       draggable="true"
       ondragstart="startDragging('${taskId}')"
       id="${taskId}"
-      onclick="dNone('taskdetailBg'), renderDetailTask();"
+      onclick="dNone('taskdetailBg'), renderDetailTask('${taskId}');"
       ;
     >
       <div class="wrapper">
@@ -298,7 +298,7 @@ function templateRenderTask(
         <div class="task_underline">
           <div class="task_accounts" id="accounts${taskId}"></div>
           <div class="task_importent">
-            <img src="assets/img/Prio ${prio}.svg" alt="" />
+            <img src="assets/img/Prio ${prio}.svg" alt="${prio}" />
           </div>
         </div>
       </div>
@@ -322,19 +322,29 @@ function templateRenderSubtasks(
   `;
 }
 
-function templateRenderAssignedAccounts(initials, accountnr, color) {
+function templateRenderAssignedAccounts(initials, accountnr, color, position) {
   return `
-            <div class="task_account${accountnr} bg_${color}">${initials}</div>
+            <div class="task_account${accountnr} bg_${color}" style="--position: -${position}px">${initials}</div>
 
 `;
 }
 
-function templateRenderDetailTask() {
+function templateRenderDetailTask(
+  titel,
+  description,
+  kategory,
+  backgroundColorKategory,
+  prio,
+  dueDate
+) {
   return ` 
   <div class="wrapper">
     <div class="task_detail_kategory">
-      <div class="board_category" style="--backgroundKategory: #1fd7c1">
-        technical Task
+      <div
+        class="board_category"
+        style="--backgroundKategory: ${backgroundColorKategory}"
+      >
+        ${kategory}
       </div>
       <div class="detail_task_close_button">
         <img
@@ -344,49 +354,29 @@ function templateRenderDetailTask() {
         />
       </div>
     </div>
-    <div class="task_detail_headline">Kochwelt page & Recipe Recommender</div>
+    <div class="task_detail_headline">${titel}</div>
     <div class="detail_task_information">
-      <div class="detail_task_description">
-        Build start page with recipe recommendation...2
-      </div>
+      <div class="detail_task_description">${description}</div>
       <div class="detail_task_due_date">
         <div class="detail_task_due_date_key">Due date:</div>
-        <div class="detail_task_due_date_content">15/01/2025</div>
+        <div class="detail_task_due_date_content">${dueDate}</div>
       </div>
       <div class="detail_task_due_date">
         <div class="detail_task_due_date_key">Priority:</div>
         <div class="detail_task_due_date_content">
-          Medium
-          <img src="assets/img/Prio media.svg" alt="medium" />
+          ${prio}
+          <img src="assets/img/Prio ${prio}.svg" alt="medium" />
         </div>
       </div>
     </div>
     <div class="task_detail_assigned_accounts">
       <div class="task_detail_assigned_accounts_key">Assigned To:</div>
-      <div class="task_detail_assigned_accounts_content">
-        <div class="task_detail_assigned_account_content">
-          <div class="task_account1">VW</div>
-          <div class="task_account_name">Volks Wagen</div>
-        </div>
-        <div class="task_detail_assigned_account_content">
-          <div class="task_account1">VW</div>
-          <div class="task_account_name">Volks Wagen</div>
-        </div>
-      </div>
+      <div
+        class="task_detail_assigned_accounts_content"
+        id="detailAssignedAccounts"
+      ></div>
     </div>
-    <div class="task_detail_subtasks">
-      <div class="detail_subtasks_headline">Subtasks</div>
-      <div class="task_detail_subtasks_container">
-        <div class="task_detail_subtask">
-          <input type="checkbox" />
-          <div class="subtask_text">subtask_text</div>
-        </div>
-        <div class="task_detail_subtask">
-          <input type="checkbox" />
-          <div class="subtask_text">subtask_text</div>
-        </div>
-      </div>
-    </div>
+    <div class="task_detail_subtasks" id="detailSubtasks"></div>
     <div class="detail_task_edit_delete">
       <div class="detail_task_delete">
         <div class="detail_task_delete_img" id="detailTaskDeleteImg"></div>
@@ -398,4 +388,27 @@ function templateRenderDetailTask() {
       </div>
     </div>
   </div>`;
+}
+
+function templateRenderDetailAccounts(name, initials, backgroundcolor) {
+  return ` 
+    <div class="task_detail_assigned_account_content">
+      <div class="task_account1 bg_${backgroundcolor}">${initials}</div>
+      <div class="task_account_name">${name}</div>
+    </div>`;
+}
+
+function templateRenderDetailSubtasks(
+  titel,
+  status,
+  checked,
+  taskId,
+  subtaskId
+) {
+  return `
+    <div class="task_detail_subtask">
+      <input onclick="checkSubtask('${taskId}', '${subtaskId}')" type="checkbox" ${checked}/>
+      <div class="subtask_text">${titel}</div>
+    </div>
+  `;
 }

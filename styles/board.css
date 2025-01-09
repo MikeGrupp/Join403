@@ -266,7 +266,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: black;
+  color: white;
 }
 
 .task_account2 {
@@ -279,7 +279,7 @@
   justify-content: center;
   color: white;
   position: relative;
-  left: -8px;
+  left: var(--position);
   border-style: solid;
   border-width: 1px;
   border-color: #ffffff;
