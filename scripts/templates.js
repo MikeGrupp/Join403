@@ -151,7 +151,7 @@ function templateRenderSidebarSummary(pageName) {
 
 function templateRenderDesktopAddContactButton() {
   return `
-        <button onclick="openContactManage()" class="add_contact">Add new contact <img src="./assets/img/person_add.svg" alt="add a new contact to the List"></button>
+        <button onclick="openCreateContact()" class="add_contact">Add new contact <img src="./assets/img/person_add.svg" alt="add a new contact to the List"></button>
   `;
 }
 
@@ -187,6 +187,7 @@ function templateRenderContactDetailsDefault() {
 }
 
 function templateRenderContactDetailsForContact(
+  contactId,
   color,
   profileLetters,
   name,
@@ -200,7 +201,7 @@ function templateRenderContactDetailsForContact(
             <div class="contact_manage">
               <span class="contact_name">${name}</span>
               <menu class="contact_manage_menu">
-                <button class="contact_manage_button">
+                <button onclick="openEditContact('${contactId}')" class="contact_manage_button">
                   <img class="menu_image" src="./assets/img/edit.svg" alt="edit the current contact">
                   <img class="menu_image_hover" src="./assets/img/edit2.svg" alt="edit the current contact">
                   Edit
@@ -228,8 +229,9 @@ function templateRenderContactDetailsForContact(
   `;
 }
 
-function templateRenderContactManageDialog() {
-  return `
+function templateRenderContactManageDialog(mode, initials, color) {
+  if(mode === "create") {
+    return `
         <div class="contact_manage_dialog_container">
           <div class="contact_manage_dialog_title_container">
             <img class="contact_manage_dialog_logo" src="./assets/img/Logo2.svg" alt="">
@@ -266,6 +268,45 @@ function templateRenderContactManageDialog() {
           </div>
         </div>
   `;
+  } else if(mode === "edit") {
+    return `
+        <div class="contact_manage_dialog_container">
+          <div class="contact_manage_dialog_title_container">
+            <img class="contact_manage_dialog_logo" src="./assets/img/Logo2.svg" alt="">
+            <h1  class="contact_manage_dialog_title">Edit contact</h1>
+            <div class="horizontal_blue_line"></div>
+          </div>
+          <div class="contact_manage_dialog_input_container">
+            <button onclick="closeContactManage()" class="contact_manage_close_button">
+              <img src="./assets/img/Close.svg" class="contact_manage_close_icon" alt="close icon">
+            </button>
+            <div class="contact_form_profile_container">
+              <span class="profile_badge_large bg_${color} contact_form_profile_badge_position">
+                ${initials}
+              </span>
+              <form class="contact_form_profile" id="contact_form" onsubmit="addNewContact(event)">
+                  <div class="contact_form_profile_inputs">
+                    <input id="contact_manage_name" class="input_field input_icon_person" type="text" required placeholder="Name" aria-label="Name">
+                    <input id="contact_manage_mail" class="input_field input_icon_mail" type="email" required placeholder="Email" aria-label="Email">
+                    <input  id="contact_manage_phone" class="input_field input_icon_call" type="tel" placeholder="Phone" aria-label="Phone">
+                  </div>
+                  <div class="contact_form_profile_buttons">
+                    <button class="button button_close" type="reset" onclick="resetForm('contact_form'), closeContactManage()" form="contact_form">
+                      Delete
+                      <img class="button_icon" src="./assets/img/button_cancel.svg" alt="">
+                    </button>
+                    <button class="button button_create" type="submit" form="contact_form">
+                      Save
+                      <img class="button_icon" src="./assets/img/check.svg" alt="">
+                    </button>
+                  </div>
+              </form>
+            </div>
+          </div>
+        </div>
+  `;
+  }
+  return;
 }
 
 function templateRenderTask(
