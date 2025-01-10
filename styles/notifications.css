@@ -28,7 +28,7 @@
 
 @keyframes show_toast {
   0% {
-    transform: translateX(100vw);
+    transform: translateX(calc(100vw / 2 + 326px / 2));
   }
 
   100% {
@@ -46,6 +46,6 @@
   }
 
   100% {
-    transform: translateX(100vw);
+    transform: translateX(calc(100vw / 2 + 326px / 2));
   }
 }
