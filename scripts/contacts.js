@@ -43,6 +43,7 @@ async function createNewContact(name, mail, phone) {
   let newUserId = await postContact(name, initials, mail, phone, color);
   if (newUserId) {
     addStoredContact(newUserId, name, initials, mail, phone, color);
+    resetForm("contact_form");
     createToast("successNewContact");
   }
   return newUserId;
