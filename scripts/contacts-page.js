@@ -126,8 +126,10 @@ async function addNewContact(event) {
   await reloadContactsFromDatabase();
   if (isContactValid()) {
     let newUserId = await createNewContact(nameInput.value, mailInput.value, phoneInput.value);
-    initContactList();
-    closeContactManage();
-    openContactDetails(newUserId);
+    if (newUserId) {
+      initContactList();
+      closeContactManage();
+      openContactDetails(newUserId);
+    }
   }
 }
