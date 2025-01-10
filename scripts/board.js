@@ -5,6 +5,7 @@ let subtasksIds = [];
 let subtaskFinished = [];
 let assignedAccounts = [];
 let assignedAccountsIds = [];
+let searchTasks = [];
 let arrayTodo = 0;
 let arrayÎnProgresse = 0;
 let arrayAwaitFeedback = 0;
@@ -439,4 +440,28 @@ async function PatchStatusSubtask(taskId, subtaskId) {
   await patchData("/tasks/" + taskId + "/subtasks/" + subtaskId, {
     status: contentSubtaskStatus,
   });
+}
+
+function search() {
+  let filterword = document.getElementById("taskSearch").value;
+  let length = filterword.length;
+  searchTasks = [];
+  tasksIds = [];
+  fetchTaskIds();
+  if (length === 0) {
+    document.getElementById("taskSearch").value = "";
+    reRenderBoard();
+  } else if (length > 2) {
+    for (let i = 0; i < tasksIds.length; i++) {
+      let taskId = tasksIds[i];
+      titel = tasks[taskId].titel;
+      if (titel.includes(filterword)) {
+        searchTasks.push(taskId);
+        tasksIds = searchTasks;
+        reRenderBoard();
+      }
+    }
+  } else {
+    alert("It must include at least 3 letter.");
+  }
 }
