@@ -1,5 +1,5 @@
 const notificationDetails = {
-  timer: 800,
+  timer: 925,
   successSignup: {
     text: "You Signed Up successfully",
   },
@@ -30,5 +30,5 @@ function createToast(notificationId) {
 
 function removeToast(toast) {
   toast.classList.add("hide");
-  setTimeout(() => toast.remove(), 800);
+  setTimeout(() => toast.remove(), 125);
 }
