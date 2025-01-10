@@ -40,8 +40,8 @@ function initContactDetails() {
   contactDetails.innerHTML = contactDetailsHtml;
 }
 
-function initContactManageDialog(mode, initials, color) {
-  let contactManageDialogHtml = templateRenderContactManageDialog(mode, initials, color);
+function initContactManageDialog(mode, contactId, initials, color) {
+  let contactManageDialogHtml = templateRenderContactManageDialog(mode, contactId, initials, color);
   let contactManageDialog = document.getElementById("contact_manage_dialog");
   contactManageDialog.innerHTML = contactManageDialogHtml;
 }
@@ -93,7 +93,7 @@ function openCreateContact() {
 function openEditContact(contactId) {
   reloadContactsFromDatabase();
   let contact = getStoredContactById(contactId);
-  initContactManageDialog("edit", contact.initials, contact.color);
+  initContactManageDialog("edit", contactId, contact.initials, contact.color);
   openContactManage();
   fillContactFields(contact);
 }
@@ -139,11 +139,28 @@ async function addNewContact(event) {
 
   await reloadContactsFromDatabase();
   if (isContactValid()) {
-    let newUserId = await createNewContact(nameInput.value, mailInput.value, phoneInput.value);
-    if (newUserId) {
+    let newContactId = await createNewContact(nameInput.value, mailInput.value, phoneInput.value);
+    if (newContactId) {
       initContactList();
       closeContactManage();
-      openContactDetails(newUserId);
+      openContactDetails(newContactId);
+    }
+  }
+}
+
+async function editContact(event, contactId) {
+  event.preventDefault();
+  let nameInput = document.getElementById("contact_manage_name");
+  let mailInput = document.getElementById("contact_manage_mail");
+  let phoneInput = document.getElementById("contact_manage_phone");
+
+  await reloadContactsFromDatabase();
+  if (isContactValid()) {
+    await editExistingContact(contactId, nameInput.value, mailInput.value, phoneInput.value);
+    if (contactId) {
+      initContactList();
+      closeContactManage();
+      openContactDetails(contactId);
     }
   }
 }

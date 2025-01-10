@@ -229,7 +229,7 @@ function templateRenderContactDetailsForContact(
   `;
 }
 
-function templateRenderContactManageDialog(mode, initials, color) {
+function templateRenderContactManageDialog(mode, contactId, initials, color) {
   if(mode === "create") {
     return `
         <div class="contact_manage_dialog_container">
@@ -284,7 +284,7 @@ function templateRenderContactManageDialog(mode, initials, color) {
               <span class="profile_badge_large bg_${color} contact_form_profile_badge_position">
                 ${initials}
               </span>
-              <form class="contact_form_profile" id="contact_form" onsubmit="addNewContact(event)">
+              <form class="contact_form_profile" id="contact_form" onsubmit="editContact(event, '${contactId}')">
                   <div class="contact_form_profile_inputs">
                     <input id="contact_manage_name" class="input_field input_icon_person" type="text" required placeholder="Name" aria-label="Name">
                     <input id="contact_manage_mail" class="input_field input_icon_mail" type="email" required placeholder="Email" aria-label="Email">
