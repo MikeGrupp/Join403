@@ -455,7 +455,8 @@ function search() {
     for (let i = 0; i < tasksIds.length; i++) {
       let taskId = tasksIds[i];
       titel = tasks[taskId].titel;
-      if (titel.includes(filterword)) {
+      description = tasks[taskId].description;
+      if (titel.includes(filterword) || description.includes(filterword)) {
         searchTasks.push(taskId);
         tasksIds = searchTasks;
         reRenderBoard();
