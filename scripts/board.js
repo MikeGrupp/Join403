@@ -7,7 +7,7 @@ let assignedAccounts = [];
 let assignedAccountsIds = [];
 let searchTasks = [];
 let arrayTodo = 0;
-let arrayÎnProgresse = 0;
+let arrayInProgresse = 0;
 let arrayAwaitFeedback = 0;
 let arrayDone = 0;
 let currentDraggedElement;
@@ -35,40 +35,40 @@ async function renderBoard() {
 }
 
 async function renderTasks(task, taskId) {
-  let titel = task.titel;
+  let title = task.titel;
   let description = task.description;
-  let kategory = task.kategory;
-  let backgroundColorKategory = null;
+  let category = task.kategory;
+  let backgroundColorCategory = null;
   let prio = task.prio;
   let step = "board" + task.step;
-  if (kategory === "Technical Task") {
-    backgroundColorKategory = "#1fd7c1";
+  if (category === "Technical Task") {
+    backgroundColorCategory = "#1fd7c1";
   } else {
-    backgroundColorKategory = "#0038ff";
+    backgroundColorCategory = "#0038ff";
   }
   let container = document.getElementById(step);
   container.innerHTML += `${templateRenderTask(
-    titel,
+    title,
     description,
-    kategory,
+    category,
     taskId,
-    backgroundColorKategory,
+    backgroundColorCategory,
     prio
   )}`;
 }
 
 function renderSubtasks(taskId) {
-  let amountsubtasks = subtasksIds.length;
-  let amountsubtasksFinished = subtaskFinished.length;
-  let subtasksInPercent = (100 / amountsubtasks) * amountsubtasksFinished;
+  let amountSubtasks = subtasksIds.length;
+  let amountSubtasksFinished = subtaskFinished.length;
+  let subtasksInPercent = (100 / amountSubtasks) * amountSubtasksFinished;
   let container = document.getElementById("subtasks" + taskId);
-  if (amountsubtasks === 0) {
+  if (amountSubtasks === 0) {
     container.innerHTML = ``;
   } else {
     container.innerHTML += `${templateRenderSubtasks(
       subtasksInPercent,
-      amountsubtasksFinished,
-      amountsubtasks
+      amountSubtasksFinished,
+      amountSubtasks
     )}`;
   }
 }
@@ -76,7 +76,7 @@ function renderSubtasks(taskId) {
 function renderAssignedAccounts(taskId) {
   let amountAssignedAccounts = assignedAccountsIds.length;
   let container = document.getElementById("accounts" + taskId);
-  let accountnr;
+  let accountNr;
   if (amountAssignedAccounts === 0) {
     container.innerHTML = ``;
   } else {
@@ -87,13 +87,13 @@ function renderAssignedAccounts(taskId) {
       let color = account.color;
       let position = i * 8;
       if (i == 0) {
-        accountnr = 1;
+        accountNr = 1;
       } else {
-        accountnr = 2;
+        accountNr = 2;
       }
       container.innerHTML += `${templateRenderAssignedAccounts(
         initials,
-        accountnr,
+        accountNr,
         color,
         position
       )}`;
@@ -111,7 +111,7 @@ function countNotTask() {
       arrayTodo++;
     }
     if (step == "InProgress") {
-      arrayÎnProgresse++;
+      arrayInProgresse++;
     }
     if (step == "AwaitFeedback") {
       arrayAwaitFeedback++;
@@ -126,7 +126,7 @@ function renderNotTask() {
   if (arrayTodo > 0) {
     document.getElementById("boardTodo").innerHTML = ``;
   }
-  if (arrayÎnProgresse > 0) {
+  if (arrayInProgresse > 0) {
     document.getElementById("boardInProgress").innerHTML = ``;
   }
   if (arrayAwaitFeedback > 0) {
@@ -140,7 +140,7 @@ function renderNotTask() {
     document.getElementById("boardTodo").innerHTML = `                
     <div class="board_no_task">No task To do</div>`;
   }
-  if (arrayÎnProgresse == 0) {
+  if (arrayInProgresse == 0) {
     document.getElementById("boardInProgress").innerHTML = `                
     <div class="board_no_task">No task To do</div>`;
   }
@@ -166,7 +166,7 @@ async function fetchTaskIds() {
 async function fetchSubTaskFinished() {
   subtaskFinished = [];
   for (let i = 0; i < subtasksIds.length; i++) {
-    subtaskId = subtasksIds[i];
+    let subtaskId = subtasksIds[i];
     let subtask = subtasks[subtaskId];
     if (subtask.status === "finished") {
       subtaskFinished.push(subtask);
@@ -201,58 +201,58 @@ async function postTask() {
   });
 }
 
-async function postSubTask(TaskId) {
-  await postData("/tasks/" + TaskId + "/subtasks", {
+async function postSubTask(taskId) {
+  await postData("/tasks/" + taskId + "/subtasks", {
     titel: "Test test test",
     status: "finished",
   });
 }
 
-async function postAssignedAccounts(TaskId) {
-  await postData("/tasks/" + TaskId + "/assignedAccounts", {
+async function postAssignedAccounts(taskId) {
+  await postData("/tasks/" + taskId + "/assignedAccounts", {
     name: "Eliot Mannheim",
     initials: "EM",
     color: "pink_helitrope",
   });
 }
 
-async function putTask(TaskId) {
-  let task = tasks[TaskId];
-  contentDescription = task.description;
-  contentKategory = task.kategory;
-  contentTitel = task.titel;
-  contentPrio = task.prio;
-  contentStep = task.step;
-  contentDueDate = task.dueDate;
+async function putTask(taskId) {
+  let task = tasks[taskId];
+  let contentDescription = task.description;
+  let contentCategory = task.kategory;
+  let contentTitle = task.titel;
+  let contentPrio = task.prio;
+  let contentStep = task.step;
+  let contentDueDate = task.dueDate;
 
-  await patchData("/tasks/" + TaskId, {
+  await patchData("/tasks/" + taskId, {
     description: contentDescription,
-    kategory: contentKategory,
-    titel: contentTitel,
+    kategory: contentCategory,
+    titel: contentTitle,
     prio: contentPrio,
     step: contentStep,
     dueDate: contentDueDate,
   });
 }
 
-async function patchSubTask(TaskId) {
+async function patchSubTask(taskId) {
   let task = tasks[currentDraggedElement];
   subtasks = task.subtasks;
   fetchSubTaskIds();
   fetchSubTaskFinished();
   for (let i = 0; i < subtasksIds.length; i++) {
-    subtaskId = subtasksIds[i];
+    let subtaskId = subtasksIds[i];
     let subtask = subtasks[subtaskId];
-    let contentTitel = subtask.titel;
+    let contentTitle = subtask.titel;
     let contentStatus = subtask.status;
-    await patchData("/tasks/" + TaskId + "/subtasks/" + subtaskId, {
-      titel: contentTitel,
+    await patchData("/tasks/" + taskId + "/subtasks/" + subtaskId, {
+      titel: contentTitle,
       status: contentStatus,
     });
   }
 }
 
-async function patchAssignedAccounts(TaskId) {
+async function patchAssignedAccounts(taskId) {
   let task = tasks[currentDraggedElement];
   assignedAccounts = task.assignedAccounts;
   fetchAssignedAccountsIds();
@@ -262,7 +262,7 @@ async function patchAssignedAccounts(TaskId) {
     let contentInitials = account.initials;
     let contentColor = account.color;
     let contentName = account.name;
-    await patchData("/tasks/" + TaskId + "/assignedAccounts/" + accountId, {
+    await patchData("/tasks/" + taskId + "/assignedAccounts/" + accountId, {
       initials: contentInitials,
       color: contentColor,
       name: contentName,
@@ -270,10 +270,10 @@ async function patchAssignedAccounts(TaskId) {
   }
 }
 
-async function patchStep(TaskId) {
-  let task = tasks[TaskId];
+async function patchStep(taskId) {
+  let task = tasks[taskId];
   contentStep = task.step;
-  await patchData("/tasks/" + TaskId, {
+  await patchData("/tasks/" + taskId, {
     step: contentStep,
   });
 }
@@ -298,7 +298,7 @@ function reRenderBoard() {
   document.getElementById("boardAwaitFeedback").innerHTML = ``;
   document.getElementById("boardDone").innerHTML = ``;
   arrayTodo = 0;
-  arrayÎnProgresse = 0;
+  arrayInProgresse = 0;
   arrayAwaitFeedback = 0;
   arrayDone = 0;
   renderBoard();
@@ -333,7 +333,7 @@ function taskMoveBack() {
   function frame() {
     if (pos == 35) {
       clearInterval(id);
-      dNone("taskdetailBg");
+      dNone("taskDetailBg");
     } else {
       pos++;
       container.style.right = "-" + pos + "vh";
@@ -343,23 +343,23 @@ function taskMoveBack() {
 
 function renderDetailTask(taskId) {
   let task = tasks[taskId];
-  let titel = task.titel;
+  let title = task.titel;
   let description = task.description;
-  let kategory = task.kategory;
-  let backgroundColorKategory = null;
+  let category = task.kategory;
+  let backgroundColorCategory = null;
   let prio = task.prio;
   let dueDate = task.dueDate;
-  if (kategory === "Technical Task") {
-    backgroundColorKategory = "#1fd7c1";
+  if (category === "Technical Task") {
+    backgroundColorCategory = "#1fd7c1";
   } else {
-    backgroundColorKategory = "#0038ff";
+    backgroundColorCategory = "#0038ff";
   }
   let container = document.getElementById("taskDetail");
   container.innerHTML = `${templateRenderDetailTask(
-    titel,
+    title,
     description,
-    kategory,
-    backgroundColorKategory,
+    category,
+    backgroundColorCategory,
     prio,
     dueDate
   )}`;
@@ -378,12 +378,12 @@ function renderDetailAccounts(task) {
     let account = assignedAccounts[accountId];
     let name = account.name;
     let initials = account.initials;
-    let backgroundcolor = account.color;
+    let backgroundColor = account.color;
     let container = document.getElementById("detailAssignedAccounts");
     container.innerHTML += `${templateRenderDetailAccounts(
       name,
       initials,
-      backgroundcolor
+      backgroundColor
     )}`;
   }
 }
@@ -405,7 +405,7 @@ function renderDetailSubtasks(taskId) {
   for (let i = 0; i < amountSubtasks; i++) {
     let subtaskId = subtasksIds[i];
     let subtask = subtasks[subtaskId];
-    let titel = subtask.titel;
+    let title = subtask.titel;
     let status = subtask.status;
     let checked;
     if (status === "finished") {
@@ -413,7 +413,7 @@ function renderDetailSubtasks(taskId) {
     }
     let container = document.getElementById("detailSubtasksContainer");
     container.innerHTML += `${templateRenderDetailSubtasks(
-      titel,
+      title,
       status,
       checked,
       taskId,
@@ -453,15 +453,15 @@ function search() {
   } else if (length > 2) {
     for (let i = 0; i < tasksIds.length; i++) {
       let taskId = tasksIds[i];
-      titel = tasks[taskId].titel;
-      description = tasks[taskId].description;
-      if (titel.includes(filterword) || description.includes(filterword)) {
+      let title = tasks[taskId].titel;
+      let description = tasks[taskId].description;
+      if (title.includes(filterword) || description.includes(filterword)) {
         searchTasks.push(taskId);
         tasksIds = searchTasks;
         reRenderBoard();
       }
     }
   } else {
-    alert("It must include at least 3 letter.");
+    alert("It must include at least 3 letters.");
   }
 }
