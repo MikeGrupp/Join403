@@ -297,7 +297,7 @@ function templateRenderTask(
         <div class="task_underline">
           <div class="task_accounts" id="accounts${taskId}"></div>
           <div class="task_importent">
-            <img src="assets/img/Prio ${prio}.svg" alt="${prio}" />
+            <img src="assets/img/prio_${prio}.svg" alt="${prio}" />
           </div>
         </div>
       </div>
@@ -364,7 +364,7 @@ function templateRenderDetailTask(
         <div class="detail_task_due_date_key">Priority:</div>
         <div class="detail_task_due_date_content">
           ${prio}
-          <img src="assets/img/Prio ${prio}.svg" alt="medium" />
+          <img src="assets/img/prio_${prio}.svg" alt="medium" />
         </div>
       </div>
     </div>
