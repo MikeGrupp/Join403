@@ -19,7 +19,7 @@ async function initBoard() {
 }
 async function renderBoard() {
   countNotTask();
-  RenderNotTask();
+  renderNotTask();
   for (let i = 0; i < tasksIds.length; i++) {
     let taskId = tasksIds[i];
     let task = tasks[taskId];
@@ -122,7 +122,7 @@ function countNotTask() {
   }
 }
 
-function RenderNotTask() {
+function renderNotTask() {
   if (arrayTodo > 0) {
     document.getElementById("boardTodo").innerHTML = ``;
   }
@@ -136,7 +136,6 @@ function RenderNotTask() {
     document.getElementById("boardDone").innerHTML = ``;
   }
 
-  //
   if (arrayTodo == 0) {
     document.getElementById("boardTodo").innerHTML = `                
     <div class="board_no_task">No task To do</div>`;
@@ -191,7 +190,7 @@ async function fetchAssignedAccountsIds() {
   }
 }
 
-async function PostTask() {
+async function postTask() {
   await postData("/tasks", {
     description: "Build start page with recipe recommendation...",
     kategory: "user Story",
@@ -202,14 +201,14 @@ async function PostTask() {
   });
 }
 
-async function PostSubTask(TaskId) {
+async function postSubTask(TaskId) {
   await postData("/tasks/" + TaskId + "/subtasks", {
     titel: "Test test test",
     status: "finished",
   });
 }
 
-async function PostassignedAccounts(TaskId) {
+async function postAssignedAccounts(TaskId) {
   await postData("/tasks/" + TaskId + "/assignedAccounts", {
     name: "Eliot Mannheim",
     initials: "EM",
@@ -217,7 +216,7 @@ async function PostassignedAccounts(TaskId) {
   });
 }
 
-async function PutTask(TaskId) {
+async function putTask(TaskId) {
   let task = tasks[TaskId];
   contentDescription = task.description;
   contentKategory = task.kategory;
@@ -236,7 +235,7 @@ async function PutTask(TaskId) {
   });
 }
 
-async function PatchSubTask(TaskId) {
+async function patchSubTask(TaskId) {
   let task = tasks[currentDraggedElement];
   subtasks = task.subtasks;
   fetchSubTaskIds();
@@ -253,7 +252,7 @@ async function PatchSubTask(TaskId) {
   }
 }
 
-async function PatchAssignedAccounts(TaskId) {
+async function patchAssignedAccounts(TaskId) {
   let task = tasks[currentDraggedElement];
   assignedAccounts = task.assignedAccounts;
   fetchAssignedAccountsIds();
@@ -271,7 +270,7 @@ async function PatchAssignedAccounts(TaskId) {
   }
 }
 
-async function PatchStep(TaskId) {
+async function patchStep(TaskId) {
   let task = tasks[TaskId];
   contentStep = task.step;
   await patchData("/tasks/" + TaskId, {
@@ -289,7 +288,7 @@ function allowDrop(ev) {
 
 async function moveTo(category) {
   tasks[currentDraggedElement]["step"] = category;
-  await PatchStep(currentDraggedElement);
+  await patchStep(currentDraggedElement);
   reRenderBoard();
 }
 
@@ -431,10 +430,10 @@ function checkSubtask(taskId, subtaskId) {
     tasks[taskId].subtasks[subtaskId].status = "open";
   }
   reRenderBoard();
-  PatchStatusSubtask(taskId, subtaskId);
+  patchStatusSubtask(taskId, subtaskId);
 }
 
-async function PatchStatusSubtask(taskId, subtaskId) {
+async function patchStatusSubtask(taskId, subtaskId) {
   let subtask = tasks[taskId].subtasks[subtaskId];
   contentSubtaskStatus = subtask.status;
   await patchData("/tasks/" + taskId + "/subtasks/" + subtaskId, {
