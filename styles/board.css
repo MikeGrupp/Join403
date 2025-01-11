@@ -161,6 +161,7 @@
   width: 100%;
   max-width: 200px;
   min-height: 59vh;
+  border-radius: 15px;
 }
 
 .board_task {
@@ -457,4 +458,30 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.drag-area-highlight {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.drag_area_higlight_border {
+  border: dashed;
+  border-width: 1px;
+  border-color: #a8a8a8;
+}
+
+.animationt_task_drag_and_drop {
+  animation: wiggleAnimation 0.5s normal;
+}
+
+@keyframes wiggleAnimation {
+  37% {
+    transform: rotate(5deg);
+  }
+  75% {
+    transform: rotate(-5deg);
+  }
+  100% {
+    transform: rotate(0);
+  }
 }

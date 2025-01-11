@@ -70,7 +70,9 @@
               <div
                 class="board_tasks"
                 ondrop="moveTo('Todo')"
-                ondragover="allowDrop(event)"
+                ondragover="allowDrop(event); highlight('boardTodo')"
+                ondragleave="removeHighlight('boardTodo')"
+                ondragstart="highlightBorder()"
                 id="boardTodo"
               >
                 <div class="board_no_task">No tasks To do</div>
@@ -88,7 +90,9 @@
               <div
                 class="board_tasks"
                 ondrop="moveTo('InProgress')"
-                ondragover="allowDrop(event)"
+                ondragover="allowDrop(event); highlight('boardInProgress')"
+                ondragleave="removeHighlight('boardInProgress')"
+                ondragstart="highlightBorder()"
                 id="boardInProgress"
               >
                 <div class="board_no_task">No tasks In progress</div>
@@ -106,7 +110,9 @@
               <div
                 class="board_tasks"
                 ondrop="moveTo('AwaitFeedback')"
-                ondragover="allowDrop(event)"
+                ondragover="allowDrop(event); highlight('boardAwaitFeedback')"
+                ondragleave="removeHighlight('boardAwaitFeedback')"
+                ondragstart="highlightBorder()"
                 id="boardAwaitFeedback"
               >
                 <div class="board_no_task">No tasks Await feedback</div>
@@ -117,7 +123,9 @@
               <div
                 class="board_tasks"
                 ondrop="moveTo('Done')"
-                ondragover="allowDrop(event)"
+                ondragover="allowDrop(event); highlight('boardDone')"
+                ondragleave="removeHighlight('boardDone')"
+                ondragstart="highlightBorder()"
                 id="boardDone"
               >
                 <div class="board_no_task">No tasks Done</div>
