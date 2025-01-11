@@ -282,8 +282,7 @@ function templateRenderTask(
       draggable="true"
       ondragstart="startDragging('${taskId}')"
       id="${taskId}"
-      onclick="dNone('taskdetailBg'), renderDetailTask('${taskId}');"
-      ;
+      onclick="dNone('taskdetailBg'), renderDetailTask('${taskId}')"
     >
       <div class="wrapper">
         <div
