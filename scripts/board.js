@@ -213,6 +213,7 @@ async function postAssignedAccounts(taskId) {
     name: "Eliot Mannheim",
     initials: "EM",
     color: "pink_helitrope",
+    id: "-1",
   });
 }
 
