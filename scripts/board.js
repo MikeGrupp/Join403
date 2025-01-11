@@ -138,19 +138,19 @@ function renderNotTask() {
 
   if (arrayTodo == 0) {
     document.getElementById("boardTodo").innerHTML = `                
-    <div class="board_no_task">No task To do</div>`;
+    <div class="board_no_task">No tasks To do</div>`;
   }
   if (arrayInProgresse == 0) {
     document.getElementById("boardInProgress").innerHTML = `                
-    <div class="board_no_task">No task To do</div>`;
+    <div class="board_no_task">No tasks In progress</div>`;
   }
   if (arrayAwaitFeedback == 0) {
     document.getElementById("boardAwaitFeedback").innerHTML = `                
-    <div class="board_no_task">No task To do</div>`;
+    <div class="board_no_task">No tasks Await feedback</div>`;
   }
   if (arrayDone == 0) {
     document.getElementById("boardDone").innerHTML = `                
-    <div class="board_no_task">No task To do</div></div>`;
+    <div class="board_no_task">No tasks Done</div></div>`;
   }
 }
 
