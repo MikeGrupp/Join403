@@ -18,8 +18,8 @@ async function initBoard() {
   renderBoard();
 }
 async function renderBoard() {
-  countNotTask();
-  renderNotTask();
+  countNoTask();
+  renderNoTask();
   for (let i = 0; i < tasksIds.length; i++) {
     let taskId = tasksIds[i];
     let task = tasks[taskId];
@@ -101,7 +101,7 @@ function renderAssignedAccounts(taskId) {
   }
 }
 
-function countNotTask() {
+function countNoTask() {
   for (let i = 0; i < tasksIds.length; i++) {
     let taskId = tasksIds[i];
     let task = tasks[taskId];
@@ -122,7 +122,7 @@ function countNotTask() {
   }
 }
 
-function renderNotTask() {
+function renderNoTask() {
   if (arrayTodo > 0) {
     document.getElementById("boardTodo").innerHTML = ``;
   }
