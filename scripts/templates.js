@@ -103,7 +103,7 @@ function templateRenderSidebar() {
 function templateRenderSidebarSummary(pageName) {
   if (pageName === "summary") {
     return `
-      <div class="summary_focus" href="index.html">
+      <div class="summary_focus">
         <img src="assets/img/summary_focus.svg" alt="summary" />
         <p>Summary</p>
       </div>
@@ -111,7 +111,7 @@ function templateRenderSidebarSummary(pageName) {
   }
   if (pageName === "task") {
     return `
-      <div class="summary_focus" href="task.html">
+      <div class="summary_focus">
         <img src="assets/img/addTask_focus.svg" alt="addTask" />
         <p>Add Task</p>
       </div>
@@ -119,7 +119,7 @@ function templateRenderSidebarSummary(pageName) {
   }
   if (pageName === "board") {
     return `
-      <div class="summary_focus" href="board.html">
+      <div class="summary_focus">
         <img src="assets/img/board_focus.svg" alt="board" />
         <p>Board</p>
       </div>
@@ -127,7 +127,7 @@ function templateRenderSidebarSummary(pageName) {
   }
   if (pageName === "contacts") {
     return `
-      <div class="summary_focus" href="contacts.html">
+      <div class="summary_focus">
         <img src="assets/img/contacts_focus.svg" alt="contacts" />
         <p>Contacts</p>
       </div>
@@ -135,14 +135,14 @@ function templateRenderSidebarSummary(pageName) {
   }
   if (pageName === "privacy") {
     return `
-      <div class="summary" href="privacy.html">
+      <div class="summary">
         <p>Privacy Policy</p>
       </div>
     `;
   }
   if (pageName === "legal") {
     return `
-      <div class="summary" href="legal_notice.html">
+      <div class="summary">
         <p>Legal notice</p>
       </div>
     `;
@@ -269,11 +269,11 @@ function templateRenderContactManageDialog() {
 }
 
 function templateRenderTask(
-  titel,
+  title,
   description,
-  kategory,
+  category,
   taskId,
-  backgroundColorKategory,
+  backgroundColorCategory,
   prio
 ) {
   return `
@@ -282,23 +282,22 @@ function templateRenderTask(
       draggable="true"
       ondragstart="startDragging('${taskId}')"
       id="${taskId}"
-      onclick="dNone('taskdetailBg'), renderDetailTask('${taskId}');"
-      ;
+      onclick="dNone('taskDetailBg'), renderDetailTask('${taskId}')"
     >
       <div class="wrapper">
         <div
           class="board_category"
-          style="--backgroundKategory: ${backgroundColorKategory}"
+          style="--backgroundCategory: ${backgroundColorCategory}"
         >
-          ${kategory}
+          ${category}
         </div>
-        <div class="task_headline">${titel}</div>
+        <div class="task_headline">${title}</div>
         <div class="task_description">${description}</div>
         <div class="task_subtasks" id="subtasks${taskId}"></div>
         <div class="task_underline">
           <div class="task_accounts" id="accounts${taskId}"></div>
-          <div class="task_importent">
-            <img src="assets/img/Prio ${prio}.svg" alt="${prio}" />
+          <div class="task_important">
+            <img src="assets/img/prio_${prio}.svg" alt="${prio}" />
           </div>
         </div>
       </div>
@@ -308,8 +307,8 @@ function templateRenderTask(
 
 function templateRenderSubtasks(
   subtasksInPercent,
-  amountsubtasksFinished,
-  amountsubtasks
+  amountSubtasksFinished,
+  amountSubtasks
 ) {
   return `
     <div
@@ -317,34 +316,34 @@ function templateRenderSubtasks(
       style="--backgroundProgressbar: ${subtasksInPercent}%;"
     ></div>
     <div class="task_subtask_number">
-      ${amountsubtasksFinished}/${amountsubtasks} Subtasks
+      ${amountSubtasksFinished}/${amountSubtasks} Subtasks
     </div>
   `;
 }
 
-function templateRenderAssignedAccounts(initials, accountnr, color, position) {
+function templateRenderAssignedAccounts(initials, accountNr, color, position) {
   return `
-            <div class="task_account${accountnr} bg_${color}" style="--position: -${position}px">${initials}</div>
+            <div class="task_account${accountNr} bg_${color}" style="--position: -${position}px">${initials}</div>
 
 `;
 }
 
 function templateRenderDetailTask(
-  titel,
+  title,
   description,
-  kategory,
-  backgroundColorKategory,
+  category,
+  backgroundColorCategory,
   prio,
   dueDate
 ) {
   return ` 
   <div class="wrapper">
-    <div class="task_detail_kategory">
+    <div class="task_detail_category">
       <div
         class="board_category"
-        style="--backgroundKategory: ${backgroundColorKategory}"
+        style="--backgroundCategory: ${backgroundColorCategory}"
       >
-        ${kategory}
+        ${category}
       </div>
       <div class="detail_task_close_button">
         <img
@@ -354,7 +353,7 @@ function templateRenderDetailTask(
         />
       </div>
     </div>
-    <div class="task_detail_headline">${titel}</div>
+    <div class="task_detail_headline">${title}</div>
     <div class="detail_task_information">
       <div class="detail_task_description">${description}</div>
       <div class="detail_task_due_date">
@@ -365,7 +364,7 @@ function templateRenderDetailTask(
         <div class="detail_task_due_date_key">Priority:</div>
         <div class="detail_task_due_date_content">
           ${prio}
-          <img src="assets/img/Prio ${prio}.svg" alt="medium" />
+          <img src="assets/img/prio_${prio}.svg" alt="medium" />
         </div>
       </div>
     </div>
@@ -390,16 +389,16 @@ function templateRenderDetailTask(
   </div>`;
 }
 
-function templateRenderDetailAccounts(name, initials, backgroundcolor) {
+function templateRenderDetailAccounts(name, initials, backgroundColor) {
   return ` 
     <div class="task_detail_assigned_account_content">
-      <div class="task_account1 bg_${backgroundcolor}">${initials}</div>
+      <div class="task_account1 bg_${backgroundColor}">${initials}</div>
       <div class="task_account_name">${name}</div>
     </div>`;
 }
 
 function templateRenderDetailSubtasks(
-  titel,
+  title,
   status,
   checked,
   taskId,
@@ -408,7 +407,7 @@ function templateRenderDetailSubtasks(
   return `
     <div class="task_detail_subtask">
       <input onclick="checkSubtask('${taskId}', '${subtaskId}')" type="checkbox" ${checked}/>
-      <div class="subtask_text">${titel}</div>
+      <div class="subtask_text">${title}</div>
     </div>
   `;
 }

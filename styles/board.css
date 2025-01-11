@@ -153,7 +153,7 @@
 }
 
 .board_subline_img:hover {
-  content: url("../assets/img/plus\ button\ v2.0.svg");
+  content: url("../assets/img/plus_button_v2.0.svg");
   cursor: pointer;
 }
 
@@ -196,7 +196,7 @@
 }
 
 .board_category {
-  background-color: var(--backgroundKategory);
+  background-color: var(--backgroundCategory);
   color: #ffffff;
   display: flex;
   align-items: center;
@@ -310,7 +310,7 @@
   padding-bottom: 20px;
 }
 
-.task_detail_kategory {
+.task_detail_category {
   display: flex;
   align-items: center;
   justify-content: space-between;
