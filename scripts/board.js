@@ -11,6 +11,7 @@ let arrayInProgresse = 0;
 let arrayAwaitFeedback = 0;
 let arrayDone = 0;
 let currentDraggedElement;
+let latestSearch = "";
 
 async function initBoard() {
   tasks = await loadData("tasks/");
@@ -464,13 +465,28 @@ function search() {
       if (title.includes(filterword) || description.includes(filterword)) {
         searchTasks.push(taskId);
         tasksIds = searchTasks;
-        reRenderBoard();
+      reRenderBoard();
       }
     }
+    if (searchTasks.length === 0) {
+      document.getElementById("taskSearch").value = latestSearch;
+      alert("No task found");
+    } else {
+      latestSearch = filterword;
+    }
   } else {
+    document.getElementById("taskSearch").value = latestSearch;
     alert("It must include at least 3 letters.");
   }
 }
+
+document.addEventListener("keydown", function(event) {
+  try {
+    if (event.key === "Enter") {
+      search();
+    }
+  } catch (error) {}
+});
 
 function highlight(id) {
   document.getElementById(id).classList.add('drag-area-highlight');
