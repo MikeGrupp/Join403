@@ -1,28 +1,32 @@
-function addUser() {
+async function addUser() {
     let name = document.getElementById('name');
     let email = document.getElementById('email');
     let password = document.getElementById('password');
     let password_confirm = document.getElementById('passwordConfirm');
+    let initials = determineInitials(name.value);
 
     if (password.value === password_confirm.value) {
-        let check = checkUserEmail();
+        let check = await checkUserEmail();
         if (check === true) {
-            postData("users", { "name": name.value, "email": email.value, "password": password.value });
-            window.location.href = 'login.html?msg=Du hast dich erfolgreich registriert';
+            postData("users", { "name": name.value, "email": email.value, "password": password.value, "initials": initials });
+            window.location.href = 'login.html?msg=successSignup';
         } else {
-            msgBox.classList.remove('d-none');
-            msgBox.innerHTML = `This Email is already in use, please use another`;
+            postMsg(`This Email is already in use, please use another`);
         }
     } else {
-        msgBox.classList.remove('d-none');
-        msgBox.innerHTML = `Your passwords don't match, please try again.`;
+        postMsg(`Your passwords don't match, please try again.`)
     }
+}
+
+function postMsg(msg) {
+    msgBox.classList.remove('d-none');
+    msgBox.innerHTML = msg
 }
 
 async function checkUserEmail() {
     let email = document.getElementById('email');
     let signUp = true;
-    setStoredUsers(await createLoadUsers());
+    setStoredUsers(await loadUsers());
     let user = storedUsers.find(u => u.email === email.value);
     if (user) {
         signUp = false;
@@ -53,3 +57,8 @@ function previousPage() {
         window.location.href = 'login.html';
     }
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+    let iptPassword = document.getElementById('passwordConfirm');
+    iptPassword.addEventListener('input', () => checkPasswordImg('passwordConfirm', 'toggle_confirmPassword'));
+});

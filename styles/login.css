@@ -158,6 +158,8 @@ input[type='checkbox']:hover {
     position: absolute;
     top: 64px;
     left: 64px;
+    width: 100px;
+    height: 120px;
 }
 
 .login_buttons {

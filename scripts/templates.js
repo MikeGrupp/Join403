@@ -46,7 +46,7 @@ function templateRenderSubmenu() {
           <a class="submenu_entry_link" href="./privacy.html">Privacy Policy</a>
         </li>
         <li class="submenu_entry">
-          <a class="submenu_entry_link" href="#">Log out</a>
+          <a class="submenu_entry_link" href="#" onclick="userLogout()">Log out</a>
         </li>
       </menu>
         `;

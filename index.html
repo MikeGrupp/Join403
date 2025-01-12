@@ -12,6 +12,8 @@
     <script src="./scripts/database-controller.js"></script>
     <script src="./script.js"></script>
     <script src="./scripts/board.js"></script>
+    <script src="./scripts/summary.js"></script>
+    <script src="./scripts/notifications.js"></script>
 
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="styles/fonts.css" />
@@ -20,11 +22,13 @@
     <link rel="stylesheet" href="styles/sidebar.css" />
     <link rel="stylesheet" href="styles/user-colors.css" />
     <link rel="stylesheet" href="styles/media.css" />
+    <link rel="stylesheet" href="styles/notifications.css" />
   </head>
-  <body onload="load('summary', 'SM')">
+  <body onload="load('summary'); msgRender()">
     <header id="header" class="header"></header>
     <dialog id="submenu_dialog" class="submenu_dialog"></dialog>
     <div class="sidebar" id="sidebar"></div>
     <main></main>
+    <ul id="notifications" class="notifications"></ul>
   </body>
 </html>

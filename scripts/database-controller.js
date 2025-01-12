@@ -34,15 +34,15 @@ async function createLoadContacts() {
   return contacts;
 }
 
-async function createLoadUsers() {
-  let = null;
+async function loadUsers() {
+  let users = null;
   try {
     let usersJson = await loadData("/users");
-    contacts = mapUsersJson(usersJson);
+    users = mapUsersJson(usersJson);
   } catch (error) {
     console.error(error);
   }
-  return contacts;
+  return users;
 }
 
 async function loadData(path = "") {

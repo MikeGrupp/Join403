@@ -12,11 +12,14 @@
     <script src="./scripts/login.js"></script>
     <script src="./script.js"></script>
     <script src="./scripts/board.js"></script>
+    <script src="./scripts/notifications.js"></script>
+    <script src="./scripts/utils.js"></script>
 
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="styles/fonts.css" />
     <link rel="stylesheet" href="styles/media.css" />
     <link rel="stylesheet" href="styles/login.css" />
+    <link rel="stylesheet" href="styles/notifications.css" />
 </head>
 
 <body>
@@ -47,18 +50,18 @@
                 <label>
                     <input class="standard_ipt" type="password" id="password" oninput="checkFormInputs()" required
                         placeholder="Password">
-                    <img src="./assets/img/lock.svg" class="input_icon" alt="lock icon">
+                    <img src="./assets/img/lock.svg" onclick="togglePassword('password', 'toggle_password')" id="toggle_password" class="input_icon" alt="lock icon">
 
                 </label>
                 <label>
                     <input class="standard_ipt" type="password" id="passwordConfirm" oninput="checkFormInputs()"
                         required placeholder="Confirm Password">
-                    <img src="./assets/img/lock.svg" class="input_icon" alt="lock icon">
+                    <img src="./assets/img/lock.svg" onclick="togglePassword('passwordConfirm', 'toggle_confirmPassword')" id="toggle_confirmPassword" class="input_icon" alt="lock icon">
                 </label>
                 <label class="check_policy">
                     <input class="checkbox" type="checkbox" id="privacyPolicy" oninput="checkFormInputs()" required>
-                    <p>I accept the <a class="blue_word" href="privacy.html"><span class="blue_word">Privacy
-                                policy</span></a></p>
+                    <span>I accept the <a class="blue_word" href="privacy.html"><span class="blue_word">Privacy
+                                policy</span></a></span>
                 </label>
                 <button class="standard_btn" type="submit" id="submitButton" disabled>Sign up</button>
             </form>
@@ -70,8 +73,10 @@
             <a class="summary" href="legal_notice.html">
                 <p class="link">Legal notice</p>
             </a>
+        </div>
     </main>
     <div class="msg_box" id="msgBox"></div>
+    <ul id="notifications" class="notifications"></ul>
 </body>
 
 </html>

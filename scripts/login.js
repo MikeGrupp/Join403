@@ -3,16 +3,14 @@ let storedLogin = [];
 
 function initLogin() {
     getLoginLocalStorage();
+    msgRender();
 }
 
 function msgRender() {
     const urlParams = new URLSearchParams(window.location.search);
     const msg = urlParams.get('msg');
     if (msg) {
-        msgBox.classList.remove('d-none');
-        msgBox.innerHTML = msg;
-    } else {
-        msgBox.classList.add('d-none');
+        createToast(msg);
     }
 }
 
@@ -21,7 +19,7 @@ async function login() {
     let password = document.getElementById('password');
     let rememberMe = document.getElementById('rememberLogin');
     let login = false;
-    setStoredUsers(await createLoadUsers());
+    setStoredUsers(await loadUsers());
     let user = storedUsers.find(u => u.email === email.value && u.password === password.value);
     if (user) {
         login = true;
@@ -35,18 +33,32 @@ async function login() {
     checkLogin(login);
 }
 
-
 async function checkLogin(login) {
     if (login == true) {
-        window.location.href = 'index.html?msg=successfully logged in!';
+        setCurrentUser(saveCurrentUser());
+        window.location.href = 'index.html?msg=successLogin';
     } else {
         msgBox.innerHTML = 'Username or password wrong, please try again'
         msgBox.classList.remove('d-none');
     }
 }
 
+function saveCurrentUser() {
+    let userJson = storedUsers.find(u => u.email === email.value && u.password === password.value);
+    return userJson;
+}
+
+function setCurrentUser(user) {
+    currentUser = user;
+    saveCurrentUserLocalStorage();
+}
+
 function guestLogin() {
-    window.location.href = 'index.html?msg=successfully logged in as guest!';
+    let email = document.getElementById('email');
+    let password = document.getElementById('password');
+    email.value = 'guest@join.de';
+    password.value = 'join123';
+    login();
 }
 
 function rememberMyLogin(email, password) {
@@ -63,7 +75,6 @@ function rememberMyLogin(email, password) {
 function removeMyLogin() {
     if (localStorage.getItem('savedLogin')) {
         localStorage.removeItem('savedLogin');
-        console.log('savedLogin successfully deleted');
     } else {
         console.log('No savedLogin found in localStorage');
     }
@@ -86,6 +97,10 @@ function getLoginLocalStorage() {
     }
 }
 
+function saveCurrentUserLocalStorage() {
+    localStorage.setItem('savedUser', JSON.stringify(currentUser));
+}
+
 function setStoredUsers(users) {
     storedUsers = users;
 }
@@ -97,55 +112,59 @@ function mapUsersJson(json) {
     return Object.entries(json).map(([firebaseId, users]) => ({
         id: firebaseId,
         email: users.email,
-        password: users.password
+        password: users.password,
+        initials: users.initials
     }));
 }
 
-function togglePassword() {
-    let iptPassword = document.getElementById('password');
+function togglePassword(inputId, imgId) {
+    let iptPassword = document.getElementById(inputId);
 
     if (iptPassword.value !== "") {
         if (iptPassword.type === 'password') {
             iptPassword.type = 'text';
-            changeImgToOpenEye();
+            changeImgToOpenEye(imgId);
         } else {
             iptPassword.type = 'password';
-            changeImgToClosedEye();
+            changeImgToClosedEye(imgId);
         }
     } else {
-        changeImgToLock();
+        changeImgToLock(imgId);
     }
 }
 
-function checkPasswordImg() {
-    let iptPassword = document.getElementById('password');
+function checkPasswordImg(inputId, imgId) {
+    let iptPassword = document.getElementById(inputId);
+
     if (iptPassword.value === "") {
-        changeImgToLock();
+        changeImgToLock(imgId);
     } else {
         if (iptPassword.type === 'password') {
-            changeImgToClosedEye();
+            changeImgToClosedEye(imgId);
         } else {
-            changeImgToOpenEye();
+            changeImgToOpenEye(imgId);
         }
     }
 }
 
-function changeImgToLock() {
-    let content = document.getElementById('toggle_password')
+function changeImgToLock(imgId) {
+    let content = document.getElementById(imgId)
     content.src = './assets/img/lock.svg'
 }
 
-function changeImgToClosedEye() {
-    let content = document.getElementById('toggle_password')
+function changeImgToClosedEye(imgId) {
+    let content = document.getElementById(imgId)
     content.src = './assets/img/visibility_off.svg'
 }
 
-function changeImgToOpenEye() {
-    let content = document.getElementById('toggle_password')
+function changeImgToOpenEye(imgId) {
+    let content = document.getElementById(imgId)
     content.src = './assets/img/visibility.svg'
 }
 
 document.addEventListener('DOMContentLoaded', () => {
     let iptPassword = document.getElementById('password');
-    iptPassword.addEventListener('input', checkPasswordImg);
+    iptPassword.addEventListener('input', () => checkPasswordImg('password', 'toggle_password'));
 });
+
+//startanimation
