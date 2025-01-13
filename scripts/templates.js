@@ -229,84 +229,65 @@ function templateRenderContactDetailsForContact(
   `;
 }
 
-function templateRenderContactManageDialog(mode, contactId, initials, color) {
-  if(mode === "create") {
-    return `
-        <div class="contact_manage_dialog_container">
-          <div class="contact_manage_dialog_title_container">
-            <img class="contact_manage_dialog_logo" src="./assets/img/Logo2.svg" alt="">
-            <h1  class="contact_manage_dialog_title">Add contact</h1>
-            <p class="contact_manage_dialog_subtitle" role="doc-subtitle">Tasks are better with a team!</p>
-            <div class="horizontal_blue_line"></div>
-          </div>
-          <div class="contact_manage_dialog_input_container">
-            <button onclick="closeContactManage()" class="contact_manage_close_button">
-              <img src="./assets/img/Close.svg" class="contact_manage_close_icon" alt="close icon">
-            </button>
-            <div class="contact_form_profile_container">
-              <span class="profile_badge_large bg_grey contact_form_profile_badge_position">
-                <img src="./assets/img/person_white.svg" alt="person icon">
-              </span>
-              <form class="contact_form_profile" id="contact_form" onsubmit="addNewContact(event)">
-                  <div class="contact_form_profile_inputs">
-                    <input id="contact_manage_name" class="input_field input_icon_person" type="text" required placeholder="Name" aria-label="Name">
-                    <input id="contact_manage_mail" class="input_field input_icon_mail" type="email" required placeholder="Email" aria-label="Email">
-                    <input  id="contact_manage_phone" class="input_field input_icon_call" type="tel" placeholder="Phone" aria-label="Phone">
-                  </div>
-                  <div class="contact_form_profile_buttons">
-                    <button class="button button_close" type="reset" onclick="resetForm('contact_form'), closeContactManage()" form="contact_form">
-                      Cancel
-                      <img class="button_icon" src="./assets/img/button_cancel.svg" alt="">
-                    </button>
-                    <button class="button button_create" type="submit" form="contact_form">
-                      Create contact
-                      <img class="button_icon" src="./assets/img/check.svg" alt="">
-                    </button>
-                  </div>
-              </form>
-            </div>
-          </div>
-        </div>
-  `;
-  } else if(mode === "edit") {
-    return `
-        <div class="contact_manage_dialog_container">
-          <div class="contact_manage_dialog_title_container">
-            <img class="contact_manage_dialog_logo" src="./assets/img/Logo2.svg" alt="">
-            <h1  class="contact_manage_dialog_title">Edit contact</h1>
-            <div class="horizontal_blue_line"></div>
-          </div>
-          <div class="contact_manage_dialog_input_container">
-            <button onclick="closeContactManage()" class="contact_manage_close_button">
-              <img src="./assets/img/Close.svg" class="contact_manage_close_icon" alt="close icon">
-            </button>
-            <div class="contact_form_profile_container">
-              <span class="profile_badge_large bg_${color} contact_form_profile_badge_position">
-                ${initials}
-              </span>
-              <form class="contact_form_profile" id="contact_form" onsubmit="editContact(event, '${contactId}')">
-                  <div class="contact_form_profile_inputs">
-                    <input id="contact_manage_name" class="input_field input_icon_person" type="text" required placeholder="Name" aria-label="Name">
-                    <input id="contact_manage_mail" class="input_field input_icon_mail" type="email" required placeholder="Email" aria-label="Email">
-                    <input  id="contact_manage_phone" class="input_field input_icon_call" type="tel" placeholder="Phone" aria-label="Phone">
-                  </div>
-                  <div class="contact_form_profile_buttons">
-                    <button class="button button_close" type="reset" onclick="resetForm('contact_form'), closeContactManage()" form="contact_form">
-                      Delete
-                      <img class="button_icon" src="./assets/img/button_cancel.svg" alt="">
-                    </button>
-                    <button class="button button_create" type="submit" form="contact_form">
-                      Save
-                      <img class="button_icon" src="./assets/img/check.svg" alt="">
-                    </button>
-                  </div>
-              </form>
-            </div>
-          </div>
-        </div>
-  `;
+function templateRenderContactManageDialog(mode, contactId = '', initials = '', color = 'grey') {
+  const config = {
+    create: {
+      title: 'Add contact',
+      subtitle: '<p class="contact_manage_dialog_subtitle" role="doc-subtitle">Tasks are better with a team!</p>',
+      buttonText: 'Create contact',
+      onSubmit: 'addNewContact(event)',
+      profileBadge: `<img src="./assets/img/person_white.svg" alt="person icon">`
+    },
+    edit: {
+      title: 'Edit contact',
+      subtitle: '',
+      buttonText: 'Save',
+      onSubmit: `editContact(event, '${contactId}')`,
+      profileBadge: initials
+    }
+  };
+
+  const modeConfig = config[mode];
+  if (!modeConfig) {
+    return;
   }
-  return;
+  return `
+    <div class="contact_manage_dialog_container">
+      <div class="contact_manage_dialog_title_container">
+        <img class="contact_manage_dialog_logo" src="./assets/img/Logo2.svg" alt="">
+        <h1 class="contact_manage_dialog_title">${modeConfig.title}</h1>
+        ${modeConfig.subtitle}
+        <div class="horizontal_blue_line"></div>
+      </div>
+      <div class="contact_manage_dialog_input_container">
+        <button onclick="closeContactManage()" class="contact_manage_close_button">
+          <img src="./assets/img/Close.svg" class="contact_manage_close_icon" alt="close icon">
+        </button>
+        <div class="contact_form_profile_container">
+          <span class="profile_badge_large bg_${color} contact_form_profile_badge_position">
+            ${modeConfig.profileBadge}
+          </span>
+          <form class="contact_form_profile" id="contact_form" onsubmit="${modeConfig.onSubmit}">
+            <div class="contact_form_profile_inputs">
+              <input id="contact_manage_name" class="input_field input_icon_person" type="text" required placeholder="Name" aria-label="Name">
+              <input id="contact_manage_mail" class="input_field input_icon_mail" type="email" required placeholder="Email" aria-label="Email">
+              <input id="contact_manage_phone" class="input_field input_icon_call" type="tel" placeholder="Phone" aria-label="Phone">
+            </div>
+            <div class="contact_form_profile_buttons">
+              <button class="button button_close" type="reset" onclick="resetForm('contact_form'), closeContactManage()" form="contact_form">
+                ${mode === 'create' ? 'Cancel' : 'Delete'}
+                <img class="button_icon" src="./assets/img/button_cancel.svg" alt="">
+              </button>
+              <button class="button button_create" type="submit" form="contact_form">
+                ${modeConfig.buttonText}
+                <img class="button_icon" src="./assets/img/check.svg" alt="">
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  `;
 }
 
 function templateRenderTask(
