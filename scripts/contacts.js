@@ -1,26 +1,39 @@
 let storedContacts = {};
 
 function getStoredContacts() {
-  return storedContacts;
+  return Object.values(storedContacts);
 }
 
 function setStoredContacts(contacts) {
-  storedContacts = contacts;
+  storedContacts = contacts.reduce((contactsObject, contact) => {
+    contactsObject[contact.id] = contact;
+    return contactsObject;
+  }, {});
 }
 
-function addStoredContact(userId, name, initials, mail, phone, color) {
-  storedContacts.push({
-    id: userId,
+function addStoredContact(contactId, name, initials, mail, phone, color) {
+  storedContacts[contactId] = {
+    id: contactId,
     name: name,
     initials: initials,
     mail: mail,
     phone: phone,
     color: color,
-  });
+  };
 }
 
-function getStoredContactById(id) {
-  return storedContacts.find((element) => element["id"] === id) || null;
+function editStoredContact(contactId, name, initials, mail, phone) {
+  storedContacts[contactId] = {
+    ...storedContacts[contactId],
+    name: name,
+    initials: initials,
+    mail: mail,
+    phone: phone,
+  };
+}
+
+function getStoredContactById(contactId) {
+  return storedContacts[contactId] || null;
 }
 
 function mapContactsJson(json) {
@@ -40,13 +53,22 @@ function mapContactsJson(json) {
 async function createNewContact(name, mail, phone) {
   let initials = determineInitials(name);
   let color = selectRandomColor();
-  let newUserId = await postContact(name, initials, mail, phone, color);
-  if (newUserId) {
-    addStoredContact(newUserId, name, initials, mail, phone, color);
+  let newContactId = await postContact(name, initials, mail, phone, color);
+  if (newContactId) {
+    addStoredContact(newContactId, name, initials, mail, phone, color);
     resetForm("contact_form");
     createToast("successNewContact");
   }
-  return newUserId;
+  return newContactId;
+}
+
+async function editExistingContact(contactId, name, mail, phone) {
+  let initials = determineInitials(name);
+  await patchContact(contactId, name, initials, mail, phone);
+  editStoredContact(contactId, name, initials, mail, phone);
+  resetForm("contact_form");
+  createToast("successNewContact");
+  return contactId;
 }
 
 async function reloadContactsFromDatabase() {
@@ -60,7 +82,16 @@ async function postContact(name, initials, mail, phone, color) {
     mail: mail,
     phone: phone,
     color: color,
-  });;
+  });
+}
+
+async function patchContact(contactId, name, initials, mail, phone) {
+  return await patchData("/contacts/" + contactId, {
+    name: name,
+    initials: initials,
+    mail: mail,
+    phone: phone,
+  });
 }
 
 function isContactValid() {
