@@ -206,7 +206,7 @@ function templateRenderContactDetailsForContact(
                   <img class="menu_image_hover" src="./assets/img/edit2.svg" alt="edit the current contact">
                   Edit
                 </button>
-                <button class="contact_manage_button">
+                <button onclick="deleteContactFromContacts('${contactId}')" class="contact_manage_button">
                   <img class="menu_image" src="./assets/img/delete.svg" alt="delete the current contact from the List">
                   <img class="menu_image_hover" src="./assets/img/delete2.svg" alt="delete the current contact from the List">
                   Delete
@@ -234,14 +234,16 @@ function templateRenderContactManageDialog(mode, contactId = '', initials = '', 
     create: {
       title: 'Add contact',
       subtitle: '<p class="contact_manage_dialog_subtitle" role="doc-subtitle">Tasks are better with a team!</p>',
-      buttonText: 'Create contact',
+      buttonTextLeft: 'Cancel',
+      buttonTextRight: 'Create contact',
       onSubmit: 'addNewContact(event)',
       profileBadge: `<img src="./assets/img/person_white.svg" alt="person icon">`
     },
     edit: {
       title: 'Edit contact',
       subtitle: '',
-      buttonText: 'Save',
+      buttonTextLeft: 'Delete',
+      buttonTextRight: 'Save',
       onSubmit: `editContact(event, '${contactId}')`,
       profileBadge: initials
     }
@@ -274,12 +276,11 @@ function templateRenderContactManageDialog(mode, contactId = '', initials = '', 
               <input id="contact_manage_phone" class="input_field input_icon_call" type="tel" placeholder="Phone" aria-label="Phone">
             </div>
             <div class="contact_form_profile_buttons">
-              <button class="button button_close" type="reset" onclick="resetForm('contact_form'), closeContactManage()" form="contact_form">
-                ${mode === 'create' ? 'Cancel' : 'Delete'}
-                <img class="button_icon" src="./assets/img/button_cancel.svg" alt="">
+              <button class="button button_close" type="reset" onclick="resetForm('contact_form'), closeContactManage(), deleteContactFromContacts('${contactId}')" form="contact_form">
+                ${modeConfig.buttonTextLeft}
               </button>
               <button class="button button_create" type="submit" form="contact_form">
-                ${modeConfig.buttonText}
+                ${modeConfig.buttonTextRight}
                 <img class="button_icon" src="./assets/img/check.svg" alt="">
               </button>
             </div>

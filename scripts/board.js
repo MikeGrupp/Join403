@@ -272,6 +272,23 @@ async function patchAssignedAccounts(taskId) {
   }
 }
 
+async function removeExistingContactFromTasks(contactId) {
+  tasks = await loadData("tasks/");
+  for (const taskId in tasks) {
+    if (tasks.hasOwnProperty(taskId)) {
+      const task = tasks[taskId];
+      if (task.assignedAccounts && task.assignedAccounts.hasOwnProperty(contactId)) {
+        deleteContactFromTasks(taskId, contactId);
+      }
+    }
+  }
+  return contactId;
+}
+
+async function deleteContactFromTasks(taskId, contactId) {
+  return await deleteData("/tasks/" + taskId + "/assignedAccounts/" + contactId);
+}
+
 async function patchStep(taskId) {
   let task = tasks[taskId];
   contentStep = task.step;
