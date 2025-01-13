@@ -149,7 +149,6 @@
   color: #42526e;
   font-size: 20px;
   font-weight: 700;
-  max-width: 200px;
 }
 
 .board_subline_img:hover {
@@ -158,8 +157,6 @@
 }
 
 .board_tasks {
-  width: 100%;
-  max-width: 200px;
   min-height: 59vh;
   border-radius: 15px;
 }
@@ -175,7 +172,6 @@
   padding-top: 16px;
   padding-bottom: 16px;
   width: 100%;
-  max-width: 200px;
   cursor: grab;
 }
 
