@@ -32,6 +32,12 @@ function editStoredContact(contactId, name, initials, mail, phone) {
   };
 }
 
+function deleteStoredContact(contactId) {
+  if (storedContacts.hasOwnProperty(contactId)) {
+    delete storedContacts[contactId];
+  }
+}
+
 function getStoredContactById(contactId) {
   return storedContacts[contactId] || null;
 }
@@ -66,8 +72,12 @@ async function editExistingContact(contactId, name, mail, phone) {
   let initials = determineInitials(name);
   await patchContact(contactId, name, initials, mail, phone);
   editStoredContact(contactId, name, initials, mail, phone);
-  resetForm("contact_form");
-  createToast("successNewContact");
+  return contactId;
+}
+
+async function deleteExistingContact(contactId) {
+  await deleteContact(contactId);
+  deleteStoredContact(contactId);
   return contactId;
 }
 
@@ -92,6 +102,10 @@ async function patchContact(contactId, name, initials, mail, phone) {
     mail: mail,
     phone: phone,
   });
+}
+
+async function deleteContact(contactId) {
+  return await deleteData("/contacts/" + contactId);
 }
 
 function isContactValid() {

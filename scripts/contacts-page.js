@@ -173,11 +173,22 @@ async function editContact(event, contactId) {
   if (isContactValid()) {
     await editExistingContact(contactId, nameInput.value, mailInput.value, phoneInput.value);
     if (contactId) {
+      resetForm("contact_form");
+      createToast("successEditContact");
       initContactList();
       closeContactManage();
       openContactDetails(contactId);
     }
   }
+}
+
+async function deleteContactFromContacts(contactId) {
+  await reloadContactsFromDatabase();
+  await deleteExistingContact(contactId);
+  createToast("successDeleteContact");
+  resetForm("contact_form");
+  initContactList();
+  initContactDetails();
 }
 
 function fillContactFields(contact) {

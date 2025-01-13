@@ -74,6 +74,16 @@ async function patchData(path = "", data = {}) {
   return responseData.name;
 }
 
+async function deleteData(path = "") {
+  let response = await fetch(BASE_URL + path + ".json", {
+    method: "DELETE",
+    header: {
+      "Content-Type": "application/json",
+    },
+  });
+  return await response.json();
+}
+
 async function initContactsTable() {
   await postData("/contacts", {
     name: "Sofia Müller",
