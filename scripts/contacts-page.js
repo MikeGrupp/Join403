@@ -1,3 +1,19 @@
+const CONSTANTS = {
+  SELECTORS: {
+    CONTACT_LIST: "contact_list",
+    CONTACT_ADD_CONTAINER: "desktop_add_contact_container",
+    CONTACT_DETAILS: "desktop_contact_details_container",
+    CONTACT_DIALOG: "contact_manage_dialog",
+    CONTACT_NAME: "contact_manage_name",
+    CONTACT_MAIL: "contact_manage_mail",
+    CONTACT_PHONE: "contact_manage_phone",
+  },
+  CLASSES: {
+    CONTACT: "contact",
+    SELECTED_CONTACT: "selected_contact",
+  },
+};
+
 function initContacts(pageName) {
   if (pageName != "contacts") {
     return;
@@ -9,7 +25,7 @@ function initContacts(pageName) {
 
 function initDesktopAddContactButton() {
   let desktopAddContactContainerHtml = templateRenderDesktopAddContactButton();
-  let desktopAddContactContainer = document.getElementById("desktop_add_contact_container");
+  let desktopAddContactContainer = document.getElementById(CONSTANTS.SELECTORS.CONTACT_ADD_CONTAINER);
   desktopAddContactContainer.innerHTML = desktopAddContactContainerHtml;
 }
 
@@ -30,19 +46,19 @@ function initContactList() {
       contact.mail
     );
   });
-  let contactList = document.getElementById("contact_list");
+  let contactList = document.getElementById(CONSTANTS.SELECTORS.CONTACT_LIST);
   contactList.innerHTML = contactListHtml;
 }
 
 function initContactDetails() {
   let contactDetailsHtml = templateRenderContactDetailsDefault();
-  let contactDetails = document.getElementById("desktop_contact_details_container");
+  let contactDetails = document.getElementById(CONSTANTS.SELECTORS.CONTACT_DETAILS);
   contactDetails.innerHTML = contactDetailsHtml;
 }
 
 function initContactManageDialog(mode, contactId, initials, color) {
   let contactManageDialogHtml = templateRenderContactManageDialog(mode, contactId, initials, color);
-  let contactManageDialog = document.getElementById("contact_manage_dialog");
+  let contactManageDialog = document.getElementById(CONSTANTS.SELECTORS.CONTACT_DIALOG);
   contactManageDialog.innerHTML = contactManageDialogHtml;
 }
 
@@ -60,17 +76,17 @@ function openContactDetails(contactId) {
       contact.phone
     );
   }
-  let contactDetails = document.getElementById("desktop_contact_details_container");
+  let contactDetails = document.getElementById(CONSTANTS.SELECTORS.CONTACT_DETAILS);
   contactDetails.innerHTML = contactDetailsHtml;
 }
 
 function markAsSelectedContact(contactId) {
-  let contacts = document.getElementsByClassName("contact");
+  let contacts = document.getElementsByClassName(CONSTANTS.CLASSES.CONTACT);
   for (let i = 0; i < contacts.length; i++) {
-    contacts[i].classList.remove("selected_contact");
+    contacts[i].classList.remove(CONSTANTS.CLASSES.SELECTED_CONTACT);
   }
   let contactById = document.getElementById(contactId);
-  contactById.classList.add("selected_contact");
+  contactById.classList.add(CONSTANTS.CLASSES.SELECTED_CONTACT);
   contactById.focus();
 }
 
@@ -78,7 +94,7 @@ function openContactManage() {
   document.activeElement?.blur();
   document.documentElement.style.overflow = "hidden";
   document.body.scroll = "no";
-  let modal = document.getElementById("contact_manage_dialog");
+  let modal = document.getElementById(CONSTANTS.SELECTORS.CONTACT_DIALOG);
   addContactManageOutsideClickClosingListener(modal);
   addContactManageEscapeListener(modal);
   modal.showModal();
@@ -89,7 +105,6 @@ function openCreateContact() {
   openContactManage();
 }
 
-
 function openEditContact(contactId) {
   reloadContactsFromDatabase();
   let contact = getStoredContactById(contactId);
@@ -99,7 +114,7 @@ function openEditContact(contactId) {
 }
 
 function closeContactManage() {
-  let modal = document.getElementById("contact_manage_dialog");
+  let modal = document.getElementById(CONSTANTS.SELECTORS.CONTACT_DIALOG);
   modal.close();
 }
 
@@ -115,7 +130,7 @@ function addContactManageOutsideClickClosingListener(element) {
       document.documentElement.style.overflow = "auto";
       document.body.scroll = "yes";
       element.close();
-      document.getElementById("contact_manage_dialog").blur();
+      document.getElementById(CONSTANTS.SELECTORS.CONTACT_DIALOG).blur();
     }
   });
 }
@@ -126,16 +141,16 @@ function addContactManageEscapeListener(element) {
       document.documentElement.style.overflow = "auto";
       document.body.scroll = "yes";
       element.close();
-      document.getElementById("contact_manage_dialog").blur();
+      document.getElementById(CONSTANTS.SELECTORS.CONTACT_DIALOG).blur();
     }
   });
 }
 
 async function addNewContact(event) {
   event.preventDefault();
-  let nameInput = document.getElementById("contact_manage_name");
-  let mailInput = document.getElementById("contact_manage_mail");
-  let phoneInput = document.getElementById("contact_manage_phone");
+  let nameInput = document.getElementById(CONSTANTS.SELECTORS.CONTACT_NAME);
+  let mailInput = document.getElementById(CONSTANTS.SELECTORS.CONTACT_MAIL);
+  let phoneInput = document.getElementById(CONSTANTS.SELECTORS.CONTACT_PHONE);
 
   await reloadContactsFromDatabase();
   if (isContactValid()) {
@@ -150,9 +165,9 @@ async function addNewContact(event) {
 
 async function editContact(event, contactId) {
   event.preventDefault();
-  let nameInput = document.getElementById("contact_manage_name");
-  let mailInput = document.getElementById("contact_manage_mail");
-  let phoneInput = document.getElementById("contact_manage_phone");
+  let nameInput = document.getElementById(CONSTANTS.SELECTORS.CONTACT_NAME);
+  let mailInput = document.getElementById(CONSTANTS.SELECTORS.CONTACT_MAIL);
+  let phoneInput = document.getElementById(CONSTANTS.SELECTORS.CONTACT_PHONE);
 
   await reloadContactsFromDatabase();
   if (isContactValid()) {
@@ -166,7 +181,7 @@ async function editContact(event, contactId) {
 }
 
 function fillContactFields(contact) {
-  document.getElementById("contact_manage_name").value = contact.name;
-  document.getElementById("contact_manage_mail").value = contact.mail;
-  document.getElementById("contact_manage_phone").value = contact.phone;
+  document.getElementById(CONSTANTS.SELECTORS.CONTACT_NAME).value = contact.name;
+  document.getElementById(CONSTANTS.SELECTORS.CONTACT_MAIL).value = contact.mail;
+  document.getElementById(CONSTANTS.SELECTORS.CONTACT_PHONE).value = contact.phone;
 }
