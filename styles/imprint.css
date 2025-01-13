@@ -23,3 +23,13 @@
 .blue_word {
     color: #29ABE2;
 }
+
+td {
+    padding-top: 16px;
+}
+
+.number {
+    width: 64px;
+    overflow: hidden;
+    display: flex;
+}

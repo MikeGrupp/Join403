@@ -166,5 +166,3 @@ document.addEventListener('DOMContentLoaded', () => {
     let iptPassword = document.getElementById('password');
     iptPassword.addEventListener('input', () => checkPasswordImg('password', 'toggle_password'));
 });
-
-//startanimation
