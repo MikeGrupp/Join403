@@ -1,39 +1,39 @@
 let storedContacts = {};
 
 function getStoredContacts() {
-  return storedContacts;
+  return Object.values(storedContacts);
 }
 
 function setStoredContacts(contacts) {
-  storedContacts = contacts;
+  storedContacts = contacts.reduce((contactsObject, contact) => {
+    contactsObject[contact.id] = contact;
+    return contactsObject;
+  }, {});
 }
 
 function addStoredContact(contactId, name, initials, mail, phone, color) {
-  storedContacts.push({
+  storedContacts[contactId] = {
     id: contactId,
     name: name,
     initials: initials,
     mail: mail,
     phone: phone,
     color: color,
-  });
+  };
 }
 
 function editStoredContact(contactId, name, initials, mail, phone) {
-  let index = storedContacts.findIndex(contact => contact.id === contactId);
-  if (index !== -1) {
-    storedContacts[index] = {
-      ...storedContacts[index],
-      name: name,
-      initials: initials,
-      mail: mail,
-      phone: phone,
-    };
-  }
+  storedContacts[contactId] = {
+    ...storedContacts[contactId],
+    name: name,
+    initials: initials,
+    mail: mail,
+    phone: phone,
+  };
 }
 
-function getStoredContactById(id) {
-  return storedContacts.find((element) => element["id"] === id) || null;
+function getStoredContactById(contactId) {
+  return storedContacts[contactId] || null;
 }
 
 function mapContactsJson(json) {
