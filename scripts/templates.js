@@ -15,12 +15,12 @@ function templateRenderHeaderProfileContainer() {
         `;
 }
 
-function templateRenderHeaderUser(profileLetters) {
+function templateRenderHeaderUser(initials) {
   let templateString = ``;
-  if (profileLetters != null) {
+  if (initials != null) {
     templateString += `
     <button id="header_user_profile" class="header_user_profile registered_user" onclick="openSubmenu()">
-    ${profileLetters}
+    ${initials}
     </button>
     `;
   } else {
@@ -162,11 +162,11 @@ function templateRenderContactListLetter(letter) {
   `;
 }
 
-function templateRenderContactListEntry(id, color, profileLetters, name, mail) {
+function templateRenderContactListEntry(id, color, initials, name, mail) {
   return `
   <dd>
     <button id="${id}" class="contact" onclick="openContactDetails('${id}')">
-      <span class="profile_badge bg_${color}">${profileLetters}</span>
+      <span class="profile_badge bg_${color}">${initials}</span>
       <span class="contact_name_mail">
       <span>${name}</span>
       <span class="mail">${mail}</span>
@@ -189,7 +189,7 @@ function templateRenderContactDetailsDefault() {
 function templateRenderContactDetailsForContact(
   contactId,
   color,
-  profileLetters,
+  initials,
   name,
   mail,
   phone
@@ -197,7 +197,7 @@ function templateRenderContactDetailsForContact(
   return `
         <div class="contact_details">
           <div class="contact_head">
-            <span class="profile_badge_large bg_${color}">${profileLetters}</span>
+            <span class="profile_badge_large bg_${color}">${initials}</span>
             <div class="contact_manage">
               <span class="contact_name">${name}</span>
               <menu class="contact_manage_menu">

@@ -32,11 +32,11 @@ function initDesktopAddContactButton() {
 function initContactList() {
   let sortedContacts = getStoredContacts().sort((a, b) => a.name.localeCompare(b.name));
   let contactListHtml = "";
-  let currentLetter = "";
+  let currentFirstLetter = "";
   sortedContacts.forEach((contact) => {
-    if (currentLetter != contact.name[0]) {
-      currentLetter = contact.name[0];
-      contactListHtml += templateRenderContactListLetter(currentLetter);
+    if (currentFirstLetter != contact.name[0].toUpperCase()) {
+      currentFirstLetter = contact.name[0].toUpperCase();
+      contactListHtml += templateRenderContactListLetter(currentFirstLetter);
     }
     contactListHtml += templateRenderContactListEntry(
       contact.id,
