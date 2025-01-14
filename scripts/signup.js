@@ -9,6 +9,7 @@ async function addUser() {
         let check = await checkUserEmail();
         if (check === true) {
             postData("users", { "name": name.value, "email": email.value, "password": password.value, "initials": initials });
+            postData("/contacts", {name: name.value, initials: initials, mail: email.value, phone: '', color: selectRandomColor()});
             window.location.href = 'login.html?msg=successSignup';
         } else {
             postMsg(`This Email is already in use, please use another`);
