@@ -423,7 +423,7 @@ function templateRenderDetailAccounts(name, initials, backgroundColor) {
 function templateRenderDetailSubtasks(
   title,
   status,
-  checked,
+  checked = '',
   taskId,
   subtaskId
 ) {

@@ -2,6 +2,31 @@
   border-style: none;
   background-color: transparent;
   padding: 0;
+  transition: display 0.125s allow-discrete, overlay 0.125s allow-discrete, translate 0.125s;
+  animation: show_contact_manage_dialog_close 0.125s ease forwards;
+  &[open] {
+    animation: show_contact_manage_dialog 0.125s ease forwards;
+  }
+}
+
+@keyframes show_contact_manage_dialog {
+  0% {
+    transform: translateX(130%);
+  }
+  
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+@keyframes show_contact_manage_dialog_close {
+  0% {
+    transform: translateX(0%);
+  }
+  
+  100% {
+    transform: translateX(130%);
+  }
 }
 
 .contact_manage_dialog::backdrop {

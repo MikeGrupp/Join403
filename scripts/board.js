@@ -11,7 +11,6 @@ let arrayInProgresse = 0;
 let arrayAwaitFeedback = 0;
 let arrayDone = 0;
 let currentDraggedElement;
-let latestSearch = "";
 
 async function initBoard() {
   tasks = await loadData("tasks/");
@@ -277,7 +276,10 @@ async function removeExistingContactFromTasks(contactId) {
   for (const taskId in tasks) {
     if (tasks.hasOwnProperty(taskId)) {
       const task = tasks[taskId];
-      if (task.assignedAccounts && task.assignedAccounts.hasOwnProperty(contactId)) {
+      if (
+        task.assignedAccounts &&
+        task.assignedAccounts.hasOwnProperty(contactId)
+      ) {
         deleteContactFromTasks(taskId, contactId);
       }
     }
@@ -286,7 +288,9 @@ async function removeExistingContactFromTasks(contactId) {
 }
 
 async function deleteContactFromTasks(taskId, contactId) {
-  return await deleteData("/tasks/" + taskId + "/assignedAccounts/" + contactId);
+  return await deleteData(
+    "/tasks/" + taskId + "/assignedAccounts/" + contactId
+  );
 }
 
 async function patchStep(taskId) {
@@ -306,11 +310,11 @@ function allowDrop(ev) {
 }
 
 async function moveTo(category) {
-  removeHighlight('boardTodo');
-  removeHighlight('boardInProgress');
-  removeHighlight('boardAwaitFeedback');
-  removeHighlight('boardDone');
-  removehighlightBorder();
+  removeHighlight("boardTodo");
+  removeHighlight("boardInProgress");
+  removeHighlight("boardAwaitFeedback");
+  removeHighlight("boardDone");
+  removeHighlightBorder();
   tasks[currentDraggedElement]["step"] = category;
   await patchStep(currentDraggedElement);
   reRenderBoard();
@@ -466,7 +470,7 @@ async function patchStatusSubtask(taskId, subtaskId) {
 }
 
 function search() {
-  let filterword = document.getElementById("taskSearch").value;
+  let filterword = document.getElementById("taskSearch").value.toLowerCase();
   let length = filterword.length;
   searchTasks = [];
   tasksIds = [];
@@ -477,27 +481,21 @@ function search() {
   } else if (length > 2) {
     for (let i = 0; i < tasksIds.length; i++) {
       let taskId = tasksIds[i];
-      let title = tasks[taskId].titel;
-      let description = tasks[taskId].description;
+      let title = tasks[taskId].titel.toLowerCase();
+      let description = tasks[taskId].description.toLowerCase();
       if (title.includes(filterword) || description.includes(filterword)) {
         searchTasks.push(taskId);
         tasksIds = searchTasks;
-      reRenderBoard();
+        reRenderBoard();
       }
     }
     if (searchTasks.length === 0) {
-      document.getElementById("taskSearch").value = latestSearch;
       alert("No task found");
-    } else {
-      latestSearch = filterword;
     }
-  } else {
-    document.getElementById("taskSearch").value = latestSearch;
-    alert("It must include at least 3 letters.");
   }
 }
 
-document.addEventListener("keydown", function(event) {
+document.addEventListener("keydown", function (event) {
   try {
     if (event.key === "Enter") {
       search();
@@ -506,25 +504,45 @@ document.addEventListener("keydown", function(event) {
 });
 
 function highlight(id) {
-  document.getElementById(id).classList.add('drag-area-highlight');
+  document.getElementById(id).classList.add("drag-area-highlight");
 }
 
 function removeHighlight(id) {
-  document.getElementById(id).classList.remove('drag-area-highlight');
+  document.getElementById(id).classList.remove("drag-area-highlight");
 }
 
-function removehighlightBorder() {
-  document.getElementById('boardTodo').classList.remove('drag_area_higlight_border');
-  document.getElementById('boardInProgress').classList.remove('drag_area_higlight_border');
-  document.getElementById('boardAwaitFeedback').classList.remove('drag_area_higlight_border');
-  document.getElementById('boardDone').classList.remove('drag_area_higlight_border'); 
-  document.getElementById(currentDraggedElement).classList.remove('animationt_task_drag_and_drop'); 
+function removeHighlightBorder() {
+  document
+    .getElementById("boardTodo")
+    .classList.remove("drag_area_highlight_border");
+  document
+    .getElementById("boardInProgress")
+    .classList.remove("drag_area_highlight_border");
+  document
+    .getElementById("boardAwaitFeedback")
+    .classList.remove("drag_area_highlight_border");
+  document
+    .getElementById("boardDone")
+    .classList.remove("drag_area_highlight_border");
+  document
+    .getElementById(currentDraggedElement)
+    .classList.remove("animation_task_drag_and_drop");
 }
 
 function highlightBorder() {
-  document.getElementById('boardTodo').classList.add('drag_area_higlight_border');
-  document.getElementById('boardInProgress').classList.add('drag_area_higlight_border');
-  document.getElementById('boardAwaitFeedback').classList.add('drag_area_higlight_border');
-  document.getElementById('boardDone').classList.add('drag_area_higlight_border'); 
-  document.getElementById(currentDraggedElement).classList.add('animationt_task_drag_and_drop'); 
+  document
+    .getElementById("boardTodo")
+    .classList.add("drag_area_highlight_border");
+  document
+    .getElementById("boardInProgress")
+    .classList.add("drag_area_highlight_border");
+  document
+    .getElementById("boardAwaitFeedback")
+    .classList.add("drag_area_highlight_border");
+  document
+    .getElementById("boardDone")
+    .classList.add("drag_area_highlight_border");
+  document
+    .getElementById(currentDraggedElement)
+    .classList.add("animation_task_drag_and_drop");
 }
