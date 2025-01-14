@@ -470,7 +470,7 @@ async function patchStatusSubtask(taskId, subtaskId) {
 }
 
 function search() {
-  let filterword = document.getElementById("taskSearch").value;
+  let filterword = document.getElementById("taskSearch").value.toLowerCase();
   let length = filterword.length;
   searchTasks = [];
   tasksIds = [];
@@ -481,8 +481,8 @@ function search() {
   } else if (length > 2) {
     for (let i = 0; i < tasksIds.length; i++) {
       let taskId = tasksIds[i];
-      let title = tasks[taskId].titel;
-      let description = tasks[taskId].description;
+      let title = tasks[taskId].titel.toLowerCase();
+      let description = tasks[taskId].description.toLowerCase();
       if (title.includes(filterword) || description.includes(filterword)) {
         searchTasks.push(taskId);
         tasksIds = searchTasks;
