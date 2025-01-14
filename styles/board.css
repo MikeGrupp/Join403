@@ -460,13 +460,13 @@
   background-color: rgba(0, 0, 0, 0.1);
 }
 
-.drag_area_higlight_border {
+.drag_area_highlight_border {
   border: dashed;
   border-width: 1px;
   border-color: #a8a8a8;
 }
 
-.animationt_task_drag_and_drop {
+.animation_task_drag_and_drop {
   animation: wiggleAnimation 0.5s normal;
 }
 
