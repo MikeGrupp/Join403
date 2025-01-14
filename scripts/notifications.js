@@ -16,7 +16,7 @@ const notificationDetails = {
     text: "Contact successfully deleted",
   },
   successNewTask: {
-    text: "Task successfully created",
+    text: "Task added to board",
   },
 };
 
