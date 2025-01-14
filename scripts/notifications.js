@@ -4,7 +4,7 @@ const notificationDetails = {
     text: "You Signed Up successfully",
   },
   successLogin: {
-    text: "You Signed Up successfully",
+    text: "You successfully Logged In",
   },
   successNewContact: {
     text: "Contact successfully created",
