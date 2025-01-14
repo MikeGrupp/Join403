@@ -20,11 +20,122 @@
     <link rel="stylesheet" href="styles/sidebar.css" />
     <link rel="stylesheet" href="styles/user-colors.css" />
     <link rel="stylesheet" href="styles/media.css" />
+    <link rel="stylesheet" href="styles/task.css" />
   </head>
   <body onload="load('task', 'SM')">
     <header id="header" class="header"></header>
     <dialog id="submenu_dialog" class="submenu_dialog"></dialog>
     <div class="sidebar" id="sidebar"></div>
-    <main></main>
+    <main>
+      <div class="addTask_container">
+        <div class="addTask_content">
+          <div class="addTask_headline">
+            <h1>Add Task</h1>
+          </div>
+          <form class="addTask_formular" action="">
+            <div class="addTask_formular_left">
+              <div class="addTask_formular_first">
+                <label class="addTask_formular_headline" for="AddTaskTitle">
+                  Title
+                  <p style="color: red">*</p>
+                </label>
+                <input
+                  placeholder="Enter a title"
+                  id="AddTaskTitle"
+                  name="title"
+                  type="text"
+                />
+              </div>
+              <div class="addTask_formular_second">
+                <label
+                  class="addTask_formular_headline"
+                  for="AddTaskDescription"
+                >
+                  Description
+                </label>
+                <textarea
+                  placeholder="Enter a Description"
+                  id="AddTaskDescription"
+                  name="Description"
+                  type="text"
+                ></textarea>
+              </div>
+              <div class="addTask_formular_second">
+                <label
+                  class="addTask_formular_headline"
+                  for="AddTaskAssignedTo"
+                >
+                  Assigned to
+                </label>
+                <select
+                  placeholder="Enter a Description"
+                  id="AddTaskAssignedTo"
+                  name="AssignedTo"
+                  type="text"
+                >
+                  <option value="australia">Australia</option>
+                  <option value="canada">Canada</option>
+                  <option value="usa">USA</option>
+                </select>
+              </div>
+            </div>
+            <div class="addTask_formular_right">
+              <div class="addTask_formular_first">
+                <label class="addTask_formular_headline" for="AddTaskDate">
+                  Due Date
+                  <p style="color: red">*</p>
+                </label>
+                <input id="AddTaskDate" name="Date" type="date" />
+              </div>
+              <div class="addTask_formular_second">
+                <div class="addTask_formular_headline">
+                  Prio
+                  <p style="color: red">*</p>
+                </div>
+                <div class="addTask_prio">
+                  Urgent
+                  <img src="assets/img/prio_urgent.svg" alt="Urgent" />
+                </div>
+                <div class="addTask_prio">
+                  Medium
+                  <img src="assets/img/prio_medium.svg" alt="Medium" />
+                </div>
+                <div class="addTask_prio">
+                  Low
+                  <img src="assets/img/prio_low.svg" alt="Low" />
+                </div>
+              </div>
+              <div class="addTask_formular_second">
+                <label class="addTask_formular_headline" for="AddTaskCategory">
+                  Category
+                  <p style="color: red">*</p>
+                </label>
+                <select
+                  placeholder="Select task category"
+                  id="AddTaskCategory"
+                  name="Category"
+                  type="text"
+                >
+                  <option value="australia">Australia</option>
+                  <option value="canada">Canada</option>
+                  <option value="usa">USA</option>
+                </select>
+              </div>
+              <div class="addTask_formular_second">
+                <label class="addTask_formular_headline" for="AddTaskSubtask">
+                  Subtask
+                </label>
+                <input
+                  placeholder="Add new subtask"
+                  id="AddTaskSubtask"
+                  name="subtask"
+                  type="text"
+                />
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </main>
   </body>
 </html>

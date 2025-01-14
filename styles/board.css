@@ -159,6 +159,7 @@
 .board_tasks {
   min-height: 59vh;
   border-radius: 15px;
+  width: 100%;
 }
 
 .board_task {
@@ -188,7 +189,6 @@
   color: #a8a8a8;
   height: 48px;
   margin-top: 16px;
-  max-width: 200px;
   margin-right: -1px;
 }
 

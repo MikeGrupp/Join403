@@ -1,0 +1,63 @@
+.addTask_container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.addTask_content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 80%;
+}
+
+.addTask_headline {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+.addTask_formular {
+  margin-top: 121px;
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.addTask_formular_left {
+  width: 50%;
+  border-right: solid;
+  border-width: 1px;
+  border-color: #d1d1d1;
+  padding-right: 5%;
+}
+
+.addTask_formular_first {
+  display: flex;
+  align-items: start;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.addTask_formular_headline {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.addTask_formular_second {
+  display: flex;
+  align-items: start;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+.addTask_formular_right {
+  width: 50%;
+  padding-left: 5%;
+}
