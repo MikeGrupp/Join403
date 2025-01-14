@@ -75,8 +75,6 @@ function rememberMyLogin(email, password) {
 function removeMyLogin() {
     if (localStorage.getItem('savedLogin')) {
         localStorage.removeItem('savedLogin');
-    } else {
-        console.log('No savedLogin found in localStorage');
     }
 }
 
