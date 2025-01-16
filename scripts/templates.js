@@ -234,16 +234,18 @@ function templateRenderContactManageDialog(mode, contactId = '', initials = '', 
     create: {
       title: 'Add contact',
       subtitle: '<p class="contact_manage_dialog_subtitle" role="doc-subtitle">Tasks are better with a team!</p>',
-      buttonTextLeft: 'Cancel',
-      buttonTextRight: 'Create contact',
+      buttonLeftText: 'Cancel',
+      buttonLeftOnClick: `resetForm('contact_form'), closeContactManage()`,
+      buttonRightText: 'Create contact',
       onSubmit: 'addNewContact(event)',
       profileBadge: `<img src="./assets/img/person_white.svg" alt="person icon">`
     },
     edit: {
       title: 'Edit contact',
       subtitle: '',
-      buttonTextLeft: 'Delete',
-      buttonTextRight: 'Save',
+      buttonLeftText: 'Delete',
+      buttonLeftOnClick: `resetForm('contact_form'), closeContactManage(), deleteContactFromContacts('${contactId}')`,
+      buttonRightText: 'Save',
       onSubmit: `editContact(event, '${contactId}')`,
       profileBadge: initials
     }
@@ -276,11 +278,11 @@ function templateRenderContactManageDialog(mode, contactId = '', initials = '', 
               <input id="contact_manage_phone" class="input_field input_icon_call" type="tel" placeholder="Phone" aria-label="Phone">
             </div>
             <div class="contact_form_profile_buttons">
-              <button class="button button_close" type="reset" onclick="resetForm('contact_form'), closeContactManage(), deleteContactFromContacts('${contactId}')" form="contact_form">
-                ${modeConfig.buttonTextLeft}
+              <button class="button button_close" type="reset" onclick="${modeConfig.buttonLeftOnClick}" form="contact_form">
+                ${modeConfig.buttonLeftText}
               </button>
               <button class="button button_create" type="submit" form="contact_form">
-                ${modeConfig.buttonTextRight}
+                ${modeConfig.buttonRightText}
                 <img class="button_icon" src="./assets/img/check.svg" alt="">
               </button>
             </div>
