@@ -33,3 +33,11 @@ function determineInitials(name) {
 function resetForm(formId) {
   document.getElementById(formId).reset();
 }
+
+function previousPage() {
+  if (window.history.length > 1) {
+      window.history.back();
+  } else {
+      window.location.href = 'index.html';
+  }
+}
