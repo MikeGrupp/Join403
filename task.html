@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Join</title>
-    <link rel="icon" type="image/x-icon" href="./assets/img/Logo1.svg">
+    <link rel="icon" type="image/x-icon" href="./assets/img/Logo1.svg" />
 
     <script src="./scripts/submenu.js"></script>
     <script src="./scripts/templates.js"></script>
@@ -68,13 +68,10 @@
                 >
                   Assigned to
                 </label>
-                <select
-                  placeholder="Enter a Description"
-                  id="AddTaskAssignedTo"
-                  name="AssignedTo"
-                  type="text"
-                >
-                  <option value="australia">Australia</option>
+                <select id="AddTaskAssignedTo" name="AssignedTo" type="text">
+                  <option value="" disabled selected hidden>
+                    Select your option
+                  </option>
                   <option value="canada">Canada</option>
                   <option value="usa">USA</option>
                 </select>
@@ -117,7 +114,9 @@
                   name="Category"
                   type="text"
                 >
-                  <option value="australia">Australia</option>
+                  <option value="" disabled selected hidden>
+                    Select your option
+                  </option>
                   <option value="canada">Canada</option>
                   <option value="usa">USA</option>
                 </select>
@@ -135,6 +134,23 @@
               </div>
             </div>
           </form>
+        </div>
+        <div class="wrapper">
+          <div class="addTask_button_container">
+            <div class="addTask_button_info">
+              <p style="color: red">*</p>
+              This field is required
+            </div>
+            <div class="addTask_button_content">
+              <button class="white_btn pointer">
+                Clear <img src="assets/img/button_cancel.svg" alt="cancel" />
+              </button>
+              <button class="standard_btn">
+                Create Task
+                <img src="assets/img/check.svg" alt="Create Task" />
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </main>
