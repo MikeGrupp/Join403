@@ -64,7 +64,7 @@ main {
     color: white;
     cursor: pointer;
     transform: scale(1.1);
-    transition-delay: 100ms;
+    transition: 100ms;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, .25);
 
     .description {
@@ -85,6 +85,8 @@ main {
 .card:active {
     color: black;
     background-color: white;
+    transform: scale(1.0);
+    transition: 100ms;
 
     .description {
         color: black;
@@ -120,11 +122,22 @@ main {
     color: white;
     cursor: pointer;
     transform: scale(1.1);
-    transition-delay: 100ms;
+    transition: 100ms;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, .25);
 
     .description {
         color: white;
+    }
+}
+
+.small_card:active {
+    color: black;
+    background-color: white;
+    transform: scale(1.0);
+    transition: 100ms;
+
+    .description {
+        color: black;
     }
 }
 
@@ -154,7 +167,7 @@ main {
     color: white;
     cursor: pointer;
     transform: scale(1.1);
-    transition-delay: 100ms;
+    transition: 100ms;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, .25);
 
     .right_card {
@@ -163,6 +176,21 @@ main {
 
     .description {
         color: white;
+    }
+}
+
+.big_card:active {
+    color: black;
+    background-color: white;
+    transform: scale(1.0);
+    transition: 100ms;
+
+    .description {
+        color: black;
+    }
+
+    .right_card {
+        color: #2A3647;
     }
 }
 
