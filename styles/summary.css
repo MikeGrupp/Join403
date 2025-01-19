@@ -1,0 +1,238 @@
+main {
+    display: flex;
+    flex-direction: column;
+    padding: 64px;
+    gap: 64px;
+}
+
+.split {
+    display: flex;
+    align-items: center;
+    gap: 64px;
+}
+
+.title {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+}
+
+.greeting_box {
+    display: flex;
+    flex-direction: column;
+}
+
+.greeting {
+    font-size: 48px;
+    font-weight: 500;
+}
+
+.username {
+    font-size: 64px;
+    font-weight: 700;
+    color: #29ABE2;
+}
+
+.blue_line {
+    background-color: #29ABE2;
+    height: 64px;
+    width: 4px;
+}
+
+.progress_cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px;
+    width: 560px;
+}
+
+.card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    padding: 16px 32px;
+    border-radius: 32px;
+    gap: 16px;
+    width: inherit;
+    height: 136px;
+    box-shadow: 0px 0px 4px #0000001A;
+}
+
+.card:hover {
+    background-color: #2A3647;
+    color: white;
+    cursor: pointer;
+    transform: scale(1.1);
+    transition-delay: 100ms;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, .25);
+
+    .description {
+        color: white;
+    }
+
+    .icon-pen {
+        background-image: url(../assets/img/edit3-blue.svg);
+        background-color: white;
+    }
+
+    .icon-check {
+        background-image: url(../assets/img/check2-blue.svg);
+        background-color: white;
+    }
+}
+
+.card:active {
+    color: black;
+    background-color: white;
+
+    .description {
+        color: black;
+    }
+
+    .icon-pen {
+        background-image: url(../assets/img/edit3-white.svg);
+        background-color: #2A3647;
+    }
+
+    .icon-check {
+        background-image: url(../assets/img/check2-white.svg);
+        background-color: #2A3647;
+    }
+}
+
+.small_card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    background-color: white;
+    padding: 16px 32px;
+    border-radius: 32px;
+    width: 100px;
+    height: 136px;
+    box-shadow: 0px 0px 4px #0000001A;
+}
+
+.small_card:hover {
+    background-color: #2A3647;
+    color: white;
+    cursor: pointer;
+    transform: scale(1.1);
+    transition-delay: 100ms;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, .25);
+
+    .description {
+        color: white;
+    }
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    width: 100%;
+    gap: 32px;
+}
+
+.big_card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    padding: 16px 32px;
+    width: 100%;
+    border-radius: 32px;
+    gap: 64px;
+    height: 136px;
+    box-shadow: 0px 0px 4px #0000001A;
+}
+
+.big_card:hover {
+    background-color: #2A3647;
+    color: white;
+    cursor: pointer;
+    transform: scale(1.1);
+    transition-delay: 100ms;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, .25);
+
+    .right_card {
+        color: white;
+    }
+
+    .description {
+        color: white;
+    }
+}
+
+.coloumn {
+    display: flex;
+    flex-direction: column;
+}
+
+.right_card {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    color: #2A3647;
+}
+
+.grey_line {
+    background-color: #D1D1D1;
+    width: 2px;
+    height: 80%;
+}
+
+.left_card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.number {
+    font-size: 64px;
+    font-weight: 600;
+}
+
+.description {
+    color: #2A3647;
+}
+
+.icon-pen {
+    background-image: url(../assets/img/edit3-white.svg);
+    background-size: 24px;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #2A3647;
+    width: 64px;
+    height: 64px;
+    border-radius: 64px;
+}
+
+.icon-check {
+    background-image: url(../assets/img/check2-white.svg);
+    background-size: 24px;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #2A3647;
+    width: 64px;
+    height: 64px;
+    border-radius: 64px;
+}
+
+.icon_orange {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #FF3D00;
+    width: 64px;
+    height: 64px;
+    border-radius: 64px;
+}

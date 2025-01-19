@@ -5,3 +5,7 @@ function msgRender() {
         createToast(msg);
     }
   }
+
+  function goToBoard() {
+    window.location.href = 'board.html';
+  }

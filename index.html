@@ -1,35 +1,101 @@
 <!DOCTYPE html>
 <html lang="de">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Join</title>
-    <link rel="icon" type="image/x-icon" href="./assets/img/Logo1.svg">
 
-    <script src="./scripts/submenu.js"></script>
-    <script src="./scripts/templates.js"></script>
-    <script src="./scripts/contacts.js"></script>
-    <script src="./scripts/contacts-page.js"></script>
-    <script src="./scripts/database-controller.js"></script>
-    <script src="./script.js"></script>
-    <script src="./scripts/board.js"></script>
-    <script src="./scripts/summary.js"></script>
-    <script src="./scripts/notifications.js"></script>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Join</title>
+  <link rel="icon" type="image/x-icon" href="./assets/img/Logo1.svg">
 
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="styles/fonts.css" />
-    <link rel="stylesheet" href="styles/header.css" />
-    <link rel="stylesheet" href="styles/submenu.css" />
-    <link rel="stylesheet" href="styles/sidebar.css" />
-    <link rel="stylesheet" href="styles/user-colors.css" />
-    <link rel="stylesheet" href="styles/media.css" />
-    <link rel="stylesheet" href="styles/notifications.css" />
-  </head>
-  <body onload="load('summary'); msgRender()">
-    <header id="header" class="header"></header>
-    <dialog id="submenu_dialog" class="submenu_dialog"></dialog>
-    <div class="sidebar" id="sidebar"></div>
-    <main></main>
-    <ul id="notifications" class="notifications"></ul>
-  </body>
+  <script src="./scripts/submenu.js"></script>
+  <script src="./scripts/templates.js"></script>
+  <script src="./scripts/contacts.js"></script>
+  <script src="./scripts/contacts-page.js"></script>
+  <script src="./scripts/database-controller.js"></script>
+  <script src="./script.js"></script>
+  <script src="./scripts/board.js"></script>
+  <script src="./scripts/summary.js"></script>
+  <script src="./scripts/notifications.js"></script>
+
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="styles/fonts.css" />
+  <link rel="stylesheet" href="styles/header.css" />
+  <link rel="stylesheet" href="styles/submenu.css" />
+  <link rel="stylesheet" href="styles/sidebar.css" />
+  <link rel="stylesheet" href="styles/user-colors.css" />
+  <link rel="stylesheet" href="styles/media.css" />
+  <link rel="stylesheet" href="styles/notifications.css" />
+  <link rel="stylesheet" href="styles/summary.css" />
+</head>
+
+<body onload="load('summary'); msgRender()">
+  <header id="header" class="header"></header>
+  <dialog id="submenu_dialog" class="submenu_dialog"></dialog>
+  <div class="sidebar" id="sidebar"></div>
+  <main>
+    <div class="title">
+      <h1>Join 360</h1>
+      <div class="blue_line"></div>
+      <p>Key Metrics a a Glance</p>
+    </div>
+    <div class="split">
+      <div class="progress_cards">
+        <div class="row">
+          <div class="card" onclick="goToBoard()">
+            <div class="icon-pen"></div>
+            <div class="coloumn">
+              <span id="todo" class="number">1</span>
+              <span class="description">To-do</span>
+            </div>
+          </div>
+          <div class="card" onclick="goToBoard()">
+            <div class="icon-check"></div>
+            <div class="coloumn ">
+              <span id="done" class="number">1</span>
+              <span class="description">Done</span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="big_card" onclick="goToBoard()">
+            <div class="left_card">
+              <div class="icon_orange">
+                <img src="assets/img/urgent.svg" alt="task_icon">
+              </div>
+              <div class="coloumn ">
+                <span id="urgent" class="number">1</span>
+                <span class="description">Urgent</span>
+              </div>
+            </div>
+            <div class="grey_line"></div>
+            <div class="right_card">
+              <span id="deadline"><b>October 16, 2022</b></span>
+              <span>Upcoming Deadline</span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="small_card" onclick="goToBoard()">
+            <span id="taskAmount" class="number">5</span>
+            <span class="description">Tasks in Board</span>
+          </div>
+          <div class="small_card" onclick="goToBoard()">
+            <span id="taskInProgress" class="number">2</span>
+            <span class="description">Tasks in Progress</span>
+          </div>
+          <div class="small_card" onclick="goToBoard()">
+            <span id="taskFeedback" class="number">2</span>
+            <span class="description">Awaiting Feedback</span>
+          </div>
+        </div>
+      </div>
+      <div class="greeting_box">
+        <span id="greeting" class="greeting">Good Morning,</span>
+        <span id="username" class="username">Sofia Müller</span>
+      </div>
+    </div>
+  </main>
+  <ul id="notifications" class="notifications"></ul>
+</body>
+
 </html>
