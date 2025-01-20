@@ -184,7 +184,8 @@ async function editContact(event, contactId) {
 
 async function deleteContactFromContacts(contactId) {
   await reloadContactsFromDatabase();
-  await removeExistingContactFromTasks(contactId);
+  removeExistingContactFromTasks(contactId);
+  removeExistingContactFromUsers(contactId);
   await deleteExistingContact(contactId);
   createToast("successDeleteContact");
   initContactList();

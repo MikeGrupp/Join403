@@ -108,6 +108,26 @@ async function deleteContact(contactId) {
   return await deleteData("/contacts/" + contactId);
 }
 
+async function removeExistingContactFromUsers(contactId) {
+  let users = await loadData("users/");
+  for (const userId in users) {
+    if (users.hasOwnProperty(userId)) {
+      const user = users[userId];
+      if (
+        user.assignedContact &&
+        user.assignedContact === contactId
+      ) {
+        deleteContactFromUsers(userId);
+      }
+    }
+  }
+  return contactId;
+}
+
+async function deleteContactFromUsers(userId) {
+  return await deleteData("/users/" + userId + "/assignedContact/");
+}
+
 function isContactValid() {
   return true; //TODO: implement validation
 }
