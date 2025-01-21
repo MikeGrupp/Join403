@@ -273,10 +273,11 @@ function templateRenderContactManageDialog(mode, contactId = '', initials = '', 
           </span>
           <form class="contact_form_profile" id="contact_form" onsubmit="${modeConfig.onSubmit}">
             <div class="contact_form_profile_inputs">
-              <input id="contact_manage_name" class="input_field input_icon_person" type="text" required placeholder="Name" aria-label="Name">
-              <input id="contact_manage_mail" class="input_field input_icon_mail" type="email" required placeholder="Email" aria-label="Email">
-              <input id="contact_manage_phone" class="input_field input_icon_call" type="tel" placeholder="Phone" aria-label="Phone">
+              <input id="contact_manage_name" class="input_field input_icon_person" type="text" required maxlength="30" placeholder="Name" aria-label="Name">
+              <input id="contact_manage_mail" class="input_field input_icon_mail" type="email" required maxlength="30" placeholder="Email" aria-label="Email">
+              <input id="contact_manage_phone" class="input_field input_icon_call" type="tel" maxlength="30" placeholder="Phone" aria-label="Phone">
             </div>
+            <pre id="log"></pre>
             <div class="contact_form_profile_buttons">
               <button class="button button_close" type="reset" onclick="${modeConfig.buttonLeftOnClick}" form="contact_form">
                 ${modeConfig.buttonLeftText}

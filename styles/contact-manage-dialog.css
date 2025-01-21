@@ -127,7 +127,6 @@
 .contact_form_profile {
   display: flex;
   flex-direction: column;
-  gap: 48px;
 }
 
 .contact_form_profile_inputs {
@@ -142,6 +141,10 @@
   border-radius: 10px;
   border: 1px solid #D1D1D1;
   font-size: 20px;
+}
+
+.input_field:invalid {
+  border: 1px solid #FF001F;
 }
 
 .input_field::placeholder {
@@ -169,6 +172,7 @@
 .contact_form_profile_buttons {
   display: flex;
   gap: 24px;
+  margin-top: 28px;
 }
 
 .button {
