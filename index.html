@@ -28,7 +28,7 @@
   <link rel="stylesheet" href="styles/summary.css" />
 </head>
 
-<body onload="load('summary'); msgRender()">
+<body onload="load('summary'); msgRender(); renderGreeting();">
   <header id="header" class="header"></header>
   <dialog id="submenu_dialog" class="submenu_dialog"></dialog>
   <div class="sidebar" id="sidebar"></div>
@@ -89,10 +89,7 @@
           </div>
         </div>
       </div>
-      <div class="greeting_box">
-        <span id="greeting" class="greeting">Good Morning,</span>
-        <span id="username" class="username">Sofia Müller</span>
-      </div>
+      <div class="greeting_box" id="greetingBox"></div>
     </div>
   </main>
   <ul id="notifications" class="notifications"></ul>

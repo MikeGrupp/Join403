@@ -436,3 +436,11 @@ function templateRenderDetailSubtasks(
     </div>
   `;
 }
+
+
+function templateRenderSummaryGreeting(greetingMessage, username) {
+  return `
+        <span class="greeting">${greetingMessage}</span>
+        <span class="username">${username}</span>
+`;
+}
