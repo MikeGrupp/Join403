@@ -5,10 +5,7 @@ function getStoredContacts() {
 }
 
 function setStoredContacts(contacts) {
-  storedContacts = contacts.reduce((contactsObject, contact) => {
-    contactsObject[contact.id] = contact;
-    return contactsObject;
-  }, {});
+  storedContacts = contacts;
 }
 
 function addStoredContact(contactId, name, initials, mail, phone, color) {
@@ -46,14 +43,17 @@ function mapContactsJson(json) {
   if (json == null) {
     return null;
   }
-  return Object.entries(json).map(([firebaseId, contact]) => ({
-    id: firebaseId,
-    name: contact.name,
-    initials: contact.initials,
-    mail: contact.mail,
-    phone: contact.phone,
-    color: contact.color,
-  }));
+  return Object.entries(json).reduce((contactsObject, [firebaseId, contact]) => {
+    contactsObject[firebaseId] = {
+      id: firebaseId,
+      name: contact.name,
+      initials: contact.initials,
+      mail: contact.mail,
+      phone: contact.phone,
+      color: contact.color,
+    };
+    return contactsObject;
+  }, {});
 }
 
 async function createNewContact(name, mail, phone) {
