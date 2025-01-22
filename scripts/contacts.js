@@ -127,7 +127,3 @@ async function removeExistingContactFromUsers(contactId) {
 async function deleteContactFromUsers(userId) {
   return await deleteData("/users/" + userId + "/assignedContact/");
 }
-
-function isContactValid() {
-  return true; //TODO: implement validation
-}

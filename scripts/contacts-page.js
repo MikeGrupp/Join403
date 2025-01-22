@@ -153,7 +153,7 @@ async function addNewContact(event) {
   let phoneInput = document.getElementById(CONSTANTS.SELECTORS.CONTACT_PHONE);
 
   await reloadContactsFromDatabase();
-  if (isContactValid()) {
+  if (isContactValid(nameInput, mailInput, phoneInput)) {
     let newContactId = await createNewContact(nameInput.value, mailInput.value, phoneInput.value);
     if (newContactId) {
       initContactList();
@@ -170,7 +170,7 @@ async function editContact(event, contactId) {
   let phoneInput = document.getElementById(CONSTANTS.SELECTORS.CONTACT_PHONE);
 
   await reloadContactsFromDatabase();
-  if (isContactValid()) {
+  if (isContactValid(nameInput, mailInput, phoneInput)) {
     await editExistingContact(contactId, nameInput.value, mailInput.value, phoneInput.value);
     if (contactId) {
       resetForm("contact_form");

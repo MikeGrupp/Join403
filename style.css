@@ -60,3 +60,14 @@ h4 {
 .d-none {
   display: none !important;
 }
+
+pre {
+  height: 14px;
+  font-family: Poppins;
+  font-size: 12px;
+  font-weight: 400;
+  text-align: left;
+  color: #FF8190;
+  margin-top: 6px;
+  margin-bottom: 0px;
+}

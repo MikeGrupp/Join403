@@ -237,6 +237,7 @@ function templateRenderContactManageDialog(mode, contactId = '', initials = '', 
       buttonLeftText: 'Cancel',
       buttonLeftOnClick: `resetForm('contact_form'), closeContactManage()`,
       buttonRightText: 'Create contact',
+      buttonRightEnabled: 'disabled',
       onSubmit: 'addNewContact(event)',
       profileBadge: `<img src="./assets/img/person_white.svg" alt="person icon">`
     },
@@ -246,6 +247,7 @@ function templateRenderContactManageDialog(mode, contactId = '', initials = '', 
       buttonLeftText: 'Delete',
       buttonLeftOnClick: `resetForm('contact_form'), closeContactManage(), deleteContactFromContacts('${contactId}')`,
       buttonRightText: 'Save',
+      buttonRightEnabled: '',
       onSubmit: `editContact(event, '${contactId}')`,
       profileBadge: initials
     }
@@ -271,17 +273,18 @@ function templateRenderContactManageDialog(mode, contactId = '', initials = '', 
           <span class="profile_badge_large bg_${color} contact_form_profile_badge_position">
             ${modeConfig.profileBadge}
           </span>
-          <form class="contact_form_profile" id="contact_form" onsubmit="${modeConfig.onSubmit}">
+          <form class="contact_form_profile" id="contact_form">
             <div class="contact_form_profile_inputs">
-              <input id="contact_manage_name" class="input_field input_icon_person" type="text" required placeholder="Name" aria-label="Name">
-              <input id="contact_manage_mail" class="input_field input_icon_mail" type="email" required placeholder="Email" aria-label="Email">
-              <input id="contact_manage_phone" class="input_field input_icon_call" type="tel" placeholder="Phone" aria-label="Phone">
+              <input id="contact_manage_name" class="input_field input_icon_person" type="text" required maxlength="30" placeholder="Name" aria-label="Name" oninput="isContactValid(contact_manage_name, contact_manage_mail, contact_manage_phone)">
+              <input id="contact_manage_mail" class="input_field input_icon_mail" type="email" required maxlength="30" placeholder="Email" aria-label="Email" oninput="isContactValid(contact_manage_name, contact_manage_mail, contact_manage_phone)">
+              <input id="contact_manage_phone" class="input_field input_icon_call" type="tel" maxlength="30" placeholder="Phone" aria-label="Phone" oninput="isContactValid(contact_manage_name, contact_manage_mail, contact_manage_phone)">
             </div>
+            <pre id="log"></pre>
             <div class="contact_form_profile_buttons">
               <button class="button button_close" type="reset" onclick="${modeConfig.buttonLeftOnClick}" form="contact_form">
                 ${modeConfig.buttonLeftText}
               </button>
-              <button class="button button_create" type="submit" form="contact_form">
+              <button id="submitButton" class="button button_create" type="submit" form="contact_form" onclick="${modeConfig.onSubmit}" ${modeConfig.buttonRightEnabled}>
                 ${modeConfig.buttonRightText}
                 <img class="button_icon" src="./assets/img/check.svg" alt="">
               </button>
