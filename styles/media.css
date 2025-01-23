@@ -221,13 +221,6 @@
     display: none;
   }
 
-
-
-
-
-
-
-
   .contacts_main {
     margin-left: 0;
   }
@@ -238,6 +231,23 @@
   }
 
   .desktop_add_contact_container {
+    height: 0;
+  }
+
+  .add_contact {
+    position: absolute;
+    width: 56px;
+    height: 56px;
+    top: calc(100vh - 248px);
+    right: 15px;
+    padding: 12px;
+    gap: 10px;
+    border-radius: 46px;
+    border: 1px;
+    box-shadow: 0px 4px 4px 0px #00000040;
+  }
+
+  .add_contact span {
     display: none;
   }
 

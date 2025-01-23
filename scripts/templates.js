@@ -170,7 +170,7 @@ function templateRenderSidebarLogin() {
 
 function templateRenderDesktopAddContactButton() {
   return `
-        <button onclick="openCreateContact()" class="add_contact">Add new contact <img src="./assets/img/person_add.svg" alt="add a new contact to the List"></button>
+        <button onclick="openCreateContact()" class="add_contact"><span>Add new contact</span> <img src="./assets/img/person_add.svg" alt="add a new contact to the List"></button>
   `;
 }
 
