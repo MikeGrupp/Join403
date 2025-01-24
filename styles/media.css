@@ -262,6 +262,26 @@
   .desktop_contact_details_container {
     display: none;
   }
+
+  @keyframes show_contact_manage_dialog {
+    0% {
+      transform: translateY(130%);
+    }
+    
+    100% {
+      transform: translateY(0%);
+    }
+  }
+  
+  @keyframes show_contact_manage_dialog_close {
+    0% {
+      transform: translateY(0%);
+    }
+    
+    100% {
+      transform: translateY(130%);
+    }
+  }
 }
 
 @media (max-width: 1170) {
