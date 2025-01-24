@@ -263,6 +263,62 @@
     display: none;
   }
 
+  .mobile_contact_details_container {
+    display: flex;
+  }
+
+  .title_group {
+    flex-direction: column;
+    align-items: start;
+    gap: 15px;
+  }
+
+  .title_group .vertical_line {
+    display: none;
+  }
+
+  .title_group .horizontal_blue_line {
+    display: initial;
+  }
+
+  .title_group h1 {
+    font-size: 47px;
+  }
+
+  .title_group p {
+    font-size: 20px;
+  }
+  
+  .contact_details {
+    animation: none;
+    gap: 15px;
+  }
+
+  .contact_head {
+    gap: 20px;
+  }
+
+  .profile_badge_large {
+    height: 80px;
+    width: 80px;
+    min-width: 80px;
+    border-radius: 50%;
+    font-size: 27px;
+  }
+
+  .contact_name {
+    font-size: 36px;
+    font-weight: 700;
+  }
+
+  .contact_manage_menu {
+    display: none;
+  }
+
+  .contact_information {
+    height: 20px;
+  }
+
   @keyframes show_contact_manage_dialog {
     0% {
       transform: translateY(130%);

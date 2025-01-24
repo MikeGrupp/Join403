@@ -2,7 +2,8 @@ const CONSTANTS = {
   SELECTORS: {
     CONTACT_LIST: "contact_list",
     CONTACT_ADD_CONTAINER: "add_contact_container",
-    CONTACT_DETAILS: "desktop_contact_details_container",
+    CONTACT_DETAILS_D: "desktop_contact_details_container",
+    CONTACT_DETAILS_M: "mobile_contact_details_container",
     CONTACT_DIALOG: "contact_manage_dialog",
     CONTACT_NAME: "contact_manage_name",
     CONTACT_MAIL: "contact_manage_mail",
@@ -52,8 +53,10 @@ function initContactList() {
 
 function initContactDetails() {
   let contactDetailsHtml = templateRenderContactDetailsDefault();
-  let contactDetails = document.getElementById(CONSTANTS.SELECTORS.CONTACT_DETAILS);
+  let contactDetails = document.getElementById(CONSTANTS.SELECTORS.CONTACT_DETAILS_D);
   contactDetails.innerHTML = contactDetailsHtml;
+  let contactDetailsMobile = document.getElementById(CONSTANTS.SELECTORS.CONTACT_DETAILS_M);
+  contactDetailsMobile.innerHTML = contactDetailsHtml;
 }
 
 function initContactManageDialog(mode, contactId, initials, color) {
@@ -76,8 +79,10 @@ function openContactDetails(contactId) {
       contact.phone
     );
   }
-  let contactDetails = document.getElementById(CONSTANTS.SELECTORS.CONTACT_DETAILS);
+  let contactDetails = document.getElementById(CONSTANTS.SELECTORS.CONTACT_DETAILS_D);
   contactDetails.innerHTML = contactDetailsHtml;
+  let contactDetailsMobile = document.getElementById(CONSTANTS.SELECTORS.CONTACT_DETAILS_M);
+  contactDetailsMobile.innerHTML = contactDetailsHtml;
 }
 
 function markAsSelectedContact(contactId) {

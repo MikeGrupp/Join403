@@ -201,6 +201,7 @@ function templateRenderContactDetailsDefault() {
           <h1>Contacts</h1>
           <div class="vertical_line"></div>
           <p role="doc-subtitle">Better with a team</p>
+          <div class="horizontal_blue_line"></div>
         </div>
   `;
 }
