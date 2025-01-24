@@ -267,7 +267,6 @@
     0% {
       transform: translateY(130%);
     }
-    
     100% {
       transform: translateY(0%);
     }
@@ -277,9 +276,37 @@
     0% {
       transform: translateY(0%);
     }
-    
     100% {
       transform: translateY(130%);
+    }
+  }
+
+  .notifications {
+    transform: translateY(-50%);
+    bottom: 20%;
+    left: 0;
+  }
+
+  .notifications .toast {
+    position: relative;
+    border-radius: 16px;
+  }
+
+  @keyframes show_toast {
+    0% {
+      transform: translateY(calc(100vh));
+    }
+    100% {
+      transform: translateY(0%);
+    }
+  }
+  
+  @keyframes hide_toast {
+    0% {
+      transform: translateY(0%);
+    }
+    100% {
+      transform: translateY(calc(100vh));
     }
   }
 }
