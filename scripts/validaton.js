@@ -27,11 +27,11 @@ function isContactValid(nameField, mailField, phoneField) {
     isFieldValid(mailField, "invalidContactMail") &&
     isFieldValid(phoneField, "invalidContactPhone")
   ) {
-    enableSubmitButton(false);
-    return false;
+    enableSubmitButton(true);
+    return true;
   }
-  enableSubmitButton(true);
-  return true;
+  enableSubmitButton(false);
+  return false;
 }
 
 function isFieldValid(field, validationDetailsId) {
@@ -62,5 +62,5 @@ function removeValidationMessage() {
 
 function enableSubmitButton(isEnabled) {
   const submitButton = document.getElementById("submitButton");
-  submitButton.disabled = isEnabled;
+  submitButton.disabled = !isEnabled;
 }
