@@ -447,3 +447,63 @@ function templateRenderSummaryGreeting(greetingMessage, username) {
         <span class="username">${username}</span>
 `;
 }
+
+function templateRenderSummary(
+  amountTasks,
+  amountTodo,
+  amountInProgress,
+  amountFeedback,
+  amountDone,
+  deadline
+) {
+  return `
+        <div class="row">
+          <div class="card" onclick="goToBoard()">
+            <div class="icon-pen"></div>
+            <div class="coloumn">
+              <span id="todo" class="number">${amountTodo}</span>
+              <span class="description">To-do</span>
+            </div>
+          </div>
+          <div class="card" onclick="goToBoard()">
+            <div class="icon-check"></div>
+            <div class="coloumn ">
+              <span id="done" class="number">${amountDone}</span>
+              <span class="description">Done</span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="big_card" onclick="goToBoard()">
+            <div class="left_card">
+              <div class="icon_orange">
+                <img src="assets/img/urgent.svg" alt="task_icon">
+              </div>
+              <div class="coloumn ">
+                <span id="urgent" class="number">1</span>
+                <span class="description">Urgent</span>
+              </div>
+            </div>
+            <div class="grey_line"></div>
+            <div class="right_card">
+              <span id="deadline"><b>${deadline}</b></span>
+              <span>Upcoming Deadline</span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="small_card" onclick="goToBoard()">
+            <span id="taskAmount" class="number">${amountTasks}</span>
+            <span class="description">Tasks in Board</span>
+          </div>
+          <div class="small_card" onclick="goToBoard()">
+            <span id="taskInProgress" class="number">${amountInProgress}</span>
+            <span class="description">Tasks in Progress</span>
+          </div>
+          <div class="small_card" onclick="goToBoard()">
+            <span id="taskFeedback" class="number">${amountFeedback}</span>
+            <span class="description">Awaiting Feedback</span>
+          </div>
+        </div>
+`;
+}

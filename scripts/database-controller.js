@@ -45,6 +45,17 @@ async function loadUsers() {
   return users;
 }
 
+async function loadTasks() {
+  let tasks = null;
+  try {
+    let tasksJson = await loadData("/tasks");
+    tasks = mapTasksJson(tasksJson);
+  } catch (error) {
+    console.error(error);
+  }
+  return tasks;
+}
+
 async function loadData(path = "") {
   let response = await fetch(BASE_URL + path + ".json");
   return await response.json();

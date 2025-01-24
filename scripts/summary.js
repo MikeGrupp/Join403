@@ -1,4 +1,9 @@
 let storedUser = [];
+let storedTasks = [];
+let todoTasks = [];
+let inProgressTasks = [];
+let feedbackTasks = [];
+let doneTasks = [];
 
 function msgRender() {
   const urlParams = new URLSearchParams(window.location.search);
@@ -39,8 +44,59 @@ async function renderGreeting() {
   let username = await getUserName();
   let greetingId = document.getElementById('greetingBox');
 
-  console.log(greetingMessage);
-  console.log(username);
-
   greetingId.innerHTML = templateRenderSummaryGreeting(greetingMessage, username);
+}
+
+function mapTasksJson(json) {
+  if (json == null) {
+    return null;
+  }
+  return Object.entries(json).map(([firebaseId, tasks]) => ({
+    id: firebaseId,
+    step: tasks.step,
+    dueDate: tasks.dueDate,
+  }));
+}
+
+function setStoredTasks(tasks) {
+  storedTasks = tasks;
+}
+
+function renderSummary() {
+  let progressCards = document.getElementById('progressCards');
+  let amountTasks = storedTasks.length;
+  let amountTodo = todoTasks.length;
+  let amountInProgress = inProgressTasks.length;
+  let amountFeedback = feedbackTasks.length;
+  let amountDone = doneTasks.length;
+  let deadline = todoTasks[0].dueDate;
+
+  progressCards.innerHTML = templateRenderSummary(
+    amountTasks,
+    amountTodo,
+    amountInProgress,
+    amountFeedback,
+    amountDone,
+    deadline
+  )
+}
+
+function filterTasks() {
+  todoTasks = storedTasks.filter(task => task.step === "Todo");
+  inProgressTasks = storedTasks.filter(task => task.step === "InProgress");
+  feedbackTasks = storedTasks.filter(task => task.step === "AwaitFeedback");
+  doneTasks = storedTasks.filter(task => task.step === "Done");
+
+
+  todoTasks.sort((a, b) => {
+    let dateA = new Date(a.dueDate.split('/').reverse().join('-'));
+    let dateB = new Date(b.dueDate.split('/').reverse().join('-'));
+    return dateA - dateB;
+  });
+}
+
+async function createSummary() {
+  setStoredTasks(await loadTasks());
+  filterTasks();
+  renderSummary();
 }
