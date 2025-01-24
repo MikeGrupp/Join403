@@ -1,7 +1,7 @@
 const CONSTANTS = {
   SELECTORS: {
     CONTACT_LIST: "contact_list",
-    CONTACT_ADD_CONTAINER: "desktop_add_contact_container",
+    CONTACT_ADD_CONTAINER: "add_contact_container",
     CONTACT_DETAILS: "desktop_contact_details_container",
     CONTACT_DIALOG: "contact_manage_dialog",
     CONTACT_NAME: "contact_manage_name",
