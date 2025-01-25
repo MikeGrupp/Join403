@@ -13,6 +13,7 @@
     <script src="./scripts/database-controller.js"></script>
     <script src="./script.js"></script>
     <script src="./scripts/board.js"></script>
+    <script src="scripts/task.js"></script>
 
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="styles/fonts.css" />
@@ -41,10 +42,12 @@
                   <p style="color: red">*</p>
                 </label>
                 <input
+                  class="input"
                   placeholder="Enter a title"
                   id="AddTaskTitle"
                   name="title"
                   type="text"
+                  required
                 />
               </div>
               <div class="addTask_formular_second">
@@ -73,34 +76,43 @@
                     Select your option
                   </option>
                   <option value="canada">Canada</option>
-                  <option value="usa">USA</option>
+                  <option value="usa">USALER</option>
                 </select>
               </div>
             </div>
+            <div class="addTask_border"></div>
             <div class="addTask_formular_right">
               <div class="addTask_formular_first">
                 <label class="addTask_formular_headline" for="AddTaskDate">
                   Due Date
                   <p style="color: red">*</p>
                 </label>
-                <input id="AddTaskDate" name="Date" type="date" />
+                <input
+                  id="AddTaskDate"
+                  class="input"
+                  required
+                  name="Date"
+                  type="date"
+                />
               </div>
               <div class="addTask_formular_second">
                 <div class="addTask_formular_headline">
                   Prio
                   <p style="color: red">*</p>
                 </div>
-                <div class="addTask_prio">
-                  Urgent
-                  <img src="assets/img/prio_urgent.svg" alt="Urgent" />
-                </div>
-                <div class="addTask_prio">
-                  Medium
-                  <img src="assets/img/prio_medium.svg" alt="Medium" />
-                </div>
-                <div class="addTask_prio">
-                  Low
-                  <img src="assets/img/prio_low.svg" alt="Low" />
+                <div class="addTask_prio_container">
+                  <div class="addTask_prio">
+                    Urgent
+                    <img src="assets/img/prio_urgent.svg" alt="Urgent" />
+                  </div>
+                  <div class="addTask_prio">
+                    Medium
+                    <img src="assets/img/prio_medium.svg" alt="Medium" />
+                  </div>
+                  <div class="addTask_prio">
+                    Low
+                    <img src="assets/img/prio_low.svg" alt="Low" />
+                  </div>
                 </div>
               </div>
               <div class="addTask_formular_second">
@@ -109,6 +121,7 @@
                   <p style="color: red">*</p>
                 </label>
                 <select
+                  required
                   placeholder="Select task category"
                   id="AddTaskCategory"
                   name="Category"
@@ -125,12 +138,24 @@
                 <label class="addTask_formular_headline" for="AddTaskSubtask">
                   Subtask
                 </label>
-                <input
-                  placeholder="Add new subtask"
-                  id="AddTaskSubtask"
-                  name="subtask"
-                  type="text"
-                />
+                <div
+                  class="addTask_subtask_container"
+                  id="AddTaskSubtaskContainer"
+                >
+                  <input
+                    class="input_with_button"
+                    placeholder="Add new subtask"
+                    id="AddTaskSubtask"
+                    name="subtask"
+                    type="text"
+                    oninput="addTaskRenderAddButton();"
+                  />
+                  <div class="delete_button" id="AddTaskSubtaskDeleteButton">
+                    <button class="add_button">
+                      <img src="assets/img/Property 1=add.svg" alt="add" />
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
           </form>
@@ -142,7 +167,12 @@
               This field is required
             </div>
             <div class="addTask_button_content">
-              <button class="white_btn pointer">
+              <button
+                id="addTaskButtonCancel"
+                onmouseover="addTaskRenderCancelButton();"
+                class="white_btn pointer"
+                onmouseout="addTaskResetCancelButton();"
+              >
                 Clear <img src="assets/img/button_cancel.svg" alt="cancel" />
               </button>
               <button class="standard_btn">

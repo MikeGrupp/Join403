@@ -4,6 +4,12 @@
   margin-right: 5%;
 }
 
+.addTask_border {
+  background-color: #d1d1d1;
+  height: 100%;
+  width: 1px;
+}
+
 .addTask_container {
   display: flex;
   align-items: center;
@@ -18,7 +24,7 @@
   justify-content: center;
   flex-direction: column;
   width: 90%;
-  margin-top: calc(25vh - 96px);
+  margin-top: calc(22vh - 96px);
 }
 
 .addTask_headline {
@@ -38,10 +44,7 @@
 
 .addTask_formular_left {
   width: 50%;
-  border-right: solid;
-  border-width: 1px;
-  border-color: #d1d1d1;
-  padding-right: 5%;
+  margin-right: 20px;
 }
 
 .addTask_formular_first {
@@ -49,6 +52,7 @@
   align-items: start;
   justify-content: center;
   flex-direction: column;
+  width: 100%;
 }
 
 .addTask_formular_headline {
@@ -63,11 +67,12 @@
   justify-content: center;
   flex-direction: column;
   margin-top: 20px;
+  width: 100%;
 }
 
 .addTask_formular_right {
   width: 50%;
-  padding-left: 5%;
+  margin-left: 20px;
 }
 
 .addTask_button_container {
@@ -103,17 +108,23 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  height: 56px;
+  gap: 4px;
 }
 
 .standard_btn:hover:enabled {
   background-color: #29abe2;
   transition-delay: 100ms;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  height: 56px;
+  gap: 4px;
 }
 
 .standard_btn:active:enabled {
   background-color: #091931;
   transition-delay: 100ms;
+  height: 56px;
+  gap: 4px;
 }
 
 .standard_btn:disabled {
@@ -125,6 +136,8 @@
   font-weight: 700;
   font-size: 21px;
   cursor: auto;
+  height: 56px;
+  gap: 4px;
 }
 
 .white_btn {
@@ -138,23 +151,32 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  height: 56px;
+  gap: 4px;
 }
 
 .white_btn:hover {
   color: #29abe2;
   border: 2px solid #29abe2;
-  transition-delay: 100ms;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  height: 56px;
+  gap: 4px;
+}
+
+.white_btn img {
+  position: relative;
+  top: 1px;
 }
 
 .white_btn:active {
   color: #091931;
   border: 2px solid #091931;
   transition-delay: 100ms;
+  height: 56px;
 }
 
-input {
-  width: 100%;
+.input {
+  width: calc(100% - 30px);
   border: 1px solid #d1d1d1;
   border-radius: 10px;
   font-size: 18px;
@@ -164,8 +186,19 @@ input {
 }
 
 textarea {
+  width: calc(100% - 30px);
+  height: 110px;
+  border: 1px solid #d1d1d1;
+  border-radius: 10px;
+  font-size: 18px;
+  padding: 8px 15px;
+  font-family: "Inter", sans-serif;
+  margin-top: 5px;
+  resize: none;
+}
+
+select {
   width: 100%;
-  height: 122px;
   border: 1px solid #d1d1d1;
   border-radius: 10px;
   font-size: 18px;
@@ -174,12 +207,119 @@ textarea {
   margin-top: 5px;
 }
 
-select {
-  width: 108%;
+.addTask_subtask_container {
+  width: 100%;
   border: 1px solid #d1d1d1;
   border-radius: 10px;
   font-size: 18px;
-  padding: 8px 15px;
-  font-family: "Inter", sans-serif;
+  cursor: pointer;
   margin-top: 5px;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.input_with_button {
+  padding: 8px 15px;
+  outline: none;
+  border: none;
+  width: calc(100% - 30px);
+  font-size: 18px;
+  border-radius: 14px;
+}
+
+.add_button:hover {
+  background-color: #d1d1d1;
+}
+
+.add_button2 img:hover {
+  background-color: #d1d1d1;
+}
+
+.add_button2 {
+  border-left: solid 1px #d1d1d1;
+  border-top: none;
+  border-right: none;
+  border-bottom: none;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 5px;
+}
+
+.add_button2 img {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+}
+
+.add_button {
+  border: none;
+  border-radius: 50%;
+  background-color: white;
+  width: 25px;
+  height: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 5px;
+}
+
+.add_button img {
+  width: 24px;
+  height: 24px;
+}
+
+.addTask_subtask_container:focus-within {
+  border-color: #29b1e5;
+}
+
+textarea:focus {
+  border-color: #29b1e5;
+  outline: none;
+}
+
+input:focus {
+  border-color: #29b1e5;
+  outline: none;
+}
+
+select:focus {
+  border-color: #29b1e5;
+  outline: none;
+}
+
+.addTask_prio_container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 5px;
+}
+
+.addTask_prio {
+  width: 25%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 5px;
+  border-radius: 8px;
+  border: solid #d1d1d1;
+  border-width: 1px;
+  background-color: white;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.addTask_prio:hover {
+  transition-delay: 100ms;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1);
+}
+
+.delete_button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
