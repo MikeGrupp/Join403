@@ -4,6 +4,7 @@ let todoTasks = [];
 let inProgressTasks = [];
 let feedbackTasks = [];
 let doneTasks = [];
+let urgentTask = [];
 
 function msgRender() {
   const urlParams = new URLSearchParams(window.location.search);
@@ -23,9 +24,9 @@ function createGreeting() {
   let greeting = "";
   if (hour >= 12 && hour < 18) {
     greeting = "Good afternoon,";
-  } else if (hour > 18 && hour < 24) {
+  } else if (hour >= 18 && hour < 24) {
     greeting = "Good evening,";
-  } else if (hour > 0 && hour < 4) {
+  } else if (hour >= 0 && hour < 4) {
     greeting = "Good evening,";
   } else if (hour >= 4 && hour < 12) {
     greeting = "Good morning,";
@@ -55,6 +56,7 @@ function mapTasksJson(json) {
     id: firebaseId,
     step: tasks.step,
     dueDate: tasks.dueDate,
+    prio: tasks.prio
   }));
 }
 
@@ -69,7 +71,8 @@ function renderSummary() {
   let amountInProgress = inProgressTasks.length;
   let amountFeedback = feedbackTasks.length;
   let amountDone = doneTasks.length;
-  let deadline = todoTasks[0].dueDate;
+  let amountUrgent = urgentTask.length;
+  let deadline = findDeadline();
 
   progressCards.innerHTML = templateRenderSummary(
     amountTasks,
@@ -77,8 +80,30 @@ function renderSummary() {
     amountInProgress,
     amountFeedback,
     amountDone,
+    amountUrgent,
     deadline
   )
+}
+
+function findDeadline() {
+  let deadlineTask = storedTasks.find(task => task.step !== "Done");
+
+  if (!deadlineTask) {
+    return "No coming Deadlines!";
+  }
+
+  return formatDate(deadlineTask.dueDate);
+}
+
+function formatDate(dueDate) {
+  const months = [
+    "January", "February", "March", "April", "May", "June", 
+    "July", "August", "September", "October", "November", "December"
+  ];
+
+  let [day, month, year] = dueDate.split('/');
+  month = parseInt(month, 10) - 1;
+  return `${day} ${months[month]} ${year}`;
 }
 
 function filterTasks() {
@@ -86,9 +111,10 @@ function filterTasks() {
   inProgressTasks = storedTasks.filter(task => task.step === "InProgress");
   feedbackTasks = storedTasks.filter(task => task.step === "AwaitFeedback");
   doneTasks = storedTasks.filter(task => task.step === "Done");
+  urgentTask = storedTasks.filter(task => task.prio === "Urgent")
 
 
-  todoTasks.sort((a, b) => {
+  storedTasks.sort((a, b) => {
     let dateA = new Date(a.dueDate.split('/').reverse().join('-'));
     let dateB = new Date(b.dueDate.split('/').reverse().join('-'));
     return dateA - dateB;

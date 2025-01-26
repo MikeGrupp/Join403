@@ -15,11 +15,11 @@ function templateRenderHeaderProfileContainer() {
         `;
 }
 
-function templateRenderHeaderUser(initials) {
+function templateRenderHeaderUser(initials, fontSize) {
   let templateString = ``;
   if (initials != null) {
     templateString += `
-    <button id="header_user_profile" class="header_user_profile registered_user" onclick="openSubmenu()">
+    <button id="header_user_profile" class="header_user_profile ${fontSize}" onclick="openSubmenu()">
     ${initials}
     </button>
     `;
@@ -454,6 +454,7 @@ function templateRenderSummary(
   amountInProgress,
   amountFeedback,
   amountDone,
+  amountUrgent,
   deadline
 ) {
   return `
@@ -480,7 +481,7 @@ function templateRenderSummary(
                 <img src="assets/img/urgent.svg" alt="task_icon">
               </div>
               <div class="coloumn ">
-                <span id="urgent" class="number">1</span>
+                <span id="urgent" class="number">${amountUrgent}</span>
                 <span class="description">Urgent</span>
               </div>
             </div>

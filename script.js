@@ -41,8 +41,26 @@ function initDefaultHeader(userInitials) {
   let headerProfileContainer = document.getElementById(
     "header_profile_container"
   );
-  headerProfileContainer.innerHTML += templateRenderHeaderUser(userInitials);
+  let fontSize = checkUserInitialsLength();
+  headerProfileContainer.innerHTML += templateRenderHeaderUser(userInitials, fontSize);
 }
+
+function checkUserInitialsLength() {
+  let length = userInitials.length;
+
+  if (length === 1) {
+    return "registered_user_28";
+  } else if (length === 2) {
+    return "registered_user_20";
+  } else if (length === 3) {
+    return "registered_user_14";
+  } else if (length === 4) {
+    return "registered_user_10";
+  } else {
+    return "registered_user_0";
+  }
+}
+
 
 function initHelpPageHeader(userInitials) {
   let headerString = templateRenderBasicHeader();
@@ -81,9 +99,9 @@ function sidebarFocus(pageName) {
 function checkUserLogin() {
   let getSavedUser = localStorage.getItem('savedUser');
   if (getSavedUser) {
-      let savedUser = JSON.parse(getSavedUser);
-      currentUser = savedUser;
-      userInitials = currentUser.initials;
+    let savedUser = JSON.parse(getSavedUser);
+    currentUser = savedUser;
+    userInitials = currentUser.initials;
   } else {
     window.location.href = 'login.html';
   }
@@ -91,9 +109,9 @@ function checkUserLogin() {
 
 function userLogout() {
   if (localStorage.getItem('savedUser')) {
-      localStorage.removeItem('savedUser');
-      checkUserLogin();
+    localStorage.removeItem('savedUser');
+    checkUserLogin();
   } else {
     checkUserLogin();
-}
+  }
 }
