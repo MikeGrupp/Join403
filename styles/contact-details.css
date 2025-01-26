@@ -154,3 +154,24 @@
 .contact_section_container label {
   font-weight: 700;
 }
+
+.contact_burger_menu {
+  display: none;
+  position: absolute;
+  width: 56px;
+  height: 56px;
+  top: calc(100vh - 168px);
+  right: 15px;
+  padding: 12px;
+  gap: 10px;
+  border-radius: 46px;
+  border: 1px;
+  box-shadow: 0px 4px 4px 0px #00000040;
+  background: #2A3647;
+}
+
+.contact_burger_menu:hover,
+.contact_burger_menu:focus {
+  background: #29ABE2;
+  border-style: none;
+}

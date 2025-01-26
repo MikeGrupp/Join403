@@ -235,6 +235,9 @@ function templateRenderContactDetailsForContact(
                   Delete
                 </button>
               </menu>
+              <button class="contact_burger_menu">
+                <img class="menu_image" src="./assets/img/more_vert.svg" alt="open options to manage the contact">
+              </button>
             </div>
           </div>
           <div class="contact_information">
