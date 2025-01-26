@@ -198,6 +198,9 @@ function templateRenderContactListEntry(id, color, initials, name, mail) {
 function templateRenderContactDetailsDefault() {
   return `
         <div class="title_group">
+          <div class="back_arrow">
+            <img class="" src="./assets/img/arrow-left.svg" onclick="window.location.href='./contacts.html'" alt="back to contacts page" />
+          </div>
           <h1>Contacts</h1>
           <div class="vertical_line"></div>
           <p role="doc-subtitle">Better with a team</p>

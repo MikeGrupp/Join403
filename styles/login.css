@@ -129,18 +129,6 @@ input[type='checkbox']:hover {
     font-weight: bold;
 }
 
-.back_arrow {
-    width: 32px;
-    height: 32px;
-}
-
-.back_arrow:hover {
-    cursor: pointer;
-    transform: scale(1.2);
-    background-color: rgb(240, 240, 240);
-    border-radius: 24px;
-}
-
 .card_header {
     display: flex;
     justify-content: space-between;

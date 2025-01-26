@@ -263,14 +263,14 @@
     display: none;
   }
 
-  .mobile_contact_details_container {
-    display: flex;
-  }
-
   .title_group {
     flex-direction: column;
     align-items: start;
     gap: 15px;
+  }
+  
+  .title_group .back_arrow {
+    display: initial;
   }
 
   .title_group .vertical_line {

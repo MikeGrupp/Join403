@@ -7,7 +7,7 @@
 }
 
 .mobile_contact_details_container {
-  display: none;
+  display: flex;
   flex-direction: column;
   padding-top: 24px;
   padding-left: 16px;
@@ -18,6 +18,12 @@
   display: flex;
   align-items: center;
   gap: 30px;
+}
+
+.title_group .back_arrow {
+  display: none;
+  position: absolute;
+  right: 16px;
 }
 
 .title_group h1 {

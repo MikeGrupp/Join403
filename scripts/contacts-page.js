@@ -1,10 +1,12 @@
 const CONSTANTS = {
   SELECTORS: {
+    CONTACT_LIST_CONTAINER: "contact_list_container",
     CONTACT_LIST: "contact_list",
     CONTACT_ADD_CONTAINER: "add_contact_container",
     CONTACT_DETAILS_D: "desktop_contact_details_container",
     CONTACT_DETAILS_M: "mobile_contact_details_container",
     CONTACT_DIALOG: "contact_manage_dialog",
+    CONTACT_FORM: "contact_form",
     CONTACT_NAME: "contact_manage_name",
     CONTACT_MAIL: "contact_manage_mail",
     CONTACT_PHONE: "contact_manage_phone",
@@ -66,6 +68,10 @@ function initContactManageDialog(mode, contactId, initials, color) {
 }
 
 function openContactDetails(contactId) {
+  if (window.screen.width < 600) {
+    dNone(CONSTANTS.SELECTORS.CONTACT_LIST_CONTAINER);
+    dNone(CONSTANTS.SELECTORS.CONTACT_DETAILS_M);
+  }
   markAsSelectedContact(contactId);
   let contact = getStoredContactById(contactId);
   let contactDetailsHtml = templateRenderContactDetailsDefault();
@@ -178,7 +184,7 @@ async function editContact(event, contactId) {
   if (isContactValid(nameInput, mailInput, phoneInput)) {
     await editExistingContact(contactId, nameInput.value, mailInput.value, phoneInput.value);
     if (contactId) {
-      resetForm("contact_form");
+      resetForm(CONSTANTS.SELECTORS.CONTACT_FORM);
       createToast("successEditContact");
       initContactList();
       closeContactManage();
