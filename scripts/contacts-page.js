@@ -68,7 +68,7 @@ function initContactManageDialog(mode, contactId, initials, color) {
 }
 
 function openContactDetails(contactId) {
-  if (window.screen.width < 600) {
+  if (window.screen.width < 768) {
     dNone(CONSTANTS.SELECTORS.CONTACT_LIST_CONTAINER);
     dNone(CONSTANTS.SELECTORS.CONTACT_DETAILS_M);
   }
