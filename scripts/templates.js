@@ -149,6 +149,25 @@ function templateRenderSidebarSummary(pageName) {
   }
 }
 
+function templateRenderSidebarLogin() {
+  return `
+    <div class="logo">
+      <img src="assets/img/Logo2.svg" alt="Logo" />
+    </div>
+    <div class="sidebar_menu">
+      <nav class="sidebar_links">
+        <a href="login.html" class="bgSummary" id="login">
+          <div class="summary">
+            <img src="assets/img/login.svg" alt="summary" />
+            <p>Log In</p>
+          </div>
+        </a>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
 function templateRenderDesktopAddContactButton() {
   return `
         <button onclick="openCreateContact()" class="add_contact">Add new contact <img src="./assets/img/person_add.svg" alt="add a new contact to the List"></button>

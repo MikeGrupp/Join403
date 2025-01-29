@@ -15,10 +15,10 @@
 
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="styles/fonts.css" />
-    <link rel="stylesheet" href="styles/media.css" />
     <link rel="stylesheet" href="styles/login.css" />
     <link rel="stylesheet" href="styles/notifications.css" />
     <link rel="stylesheet" href="styles/logo_animation.css" />
+    <link rel="stylesheet" href="styles/media.css" />
 </head>
 
 <body onload="initLogin()">
@@ -30,21 +30,16 @@
             <button class="standard_btn" onclick="window.location.href='./signup.html'">Sign up</button>
         </div>
         <div class="login">
-            <div class="card_header">
-                <div class="back_arrow">
-                    <img class="" src="./assets/img/arrow-left.svg" onclick="previousPage()" alt="previous page" />
-                </div>
-                <div class="headline">
-                    <h1>Log in</h1>
-                    <div class="blue_line"></div>
-                </div>
+            <div class="headline">
+                <h1>Log in</h1>
+                <div class="blue_line"></div>
             </div>
             <form class="login_form" onsubmit="login(); return false;">
-                <label>
+                <label class="vcenter">
                     <input class="standard_ipt" type="email" id="email" required placeholder="Email" maxlength="30">
                     <img src="./assets/img/mail.svg" class="input_icon" alt="mail icon">
                 </label>
-                <label>
+                <label class="vcenter">
                     <input class="standard_ipt" type="password" id="password" required placeholder="Password">
                     <img src="./assets/img/lock.svg" onclick="togglePassword('password', 'toggle_password')"
                         id="toggle_password" class="input_icon pointer" alt="lock icon">

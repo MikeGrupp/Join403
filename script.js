@@ -2,11 +2,10 @@ let currentUser = "";
 let userInitials = "";
 
 async function load(pageName) {
-  checkUserLogin();
+  checkUserLogin(pageName);
   await initDatabase(pageName);
   initPageSpecificLayout(pageName, userInitials);
-  renderSidebar();
-  renderSidebarSummary(pageName);
+  chheckLoginForPageDesign(pageName);
 }
 
 function initPageSpecificLayout(pageName, userInitials) {
@@ -29,6 +28,16 @@ function initPageSpecificLayout(pageName, userInitials) {
       break;
     default:
       break;
+  }
+}
+
+function chheckLoginForPageDesign(pageName) {
+  let getSavedUser = localStorage.getItem('savedUser');
+  if (getSavedUser) {
+    renderSidebar();
+    renderSidebarSummary(pageName);
+  } else {
+    renderSidebarLogin();
   }
 }
 
@@ -61,10 +70,10 @@ function checkUserInitialsLength() {
   }
 }
 
-
 function initHelpPageHeader(userInitials) {
   let headerString = templateRenderBasicHeader();
-  headerString += templateRenderHeaderUser(userInitials);
+  let fontSize = checkUserInitialsLength();
+  headerString += templateRenderHeaderUser(userInitials, fontSize);
   let header = document.getElementById("header");
   header.innerHTML = headerString;
 }
@@ -85,6 +94,11 @@ function renderSidebar() {
   container.innerHTML = `${templateRenderSidebar()}`;
 }
 
+function renderSidebarLogin() {
+  let container = document.getElementById("sidebar");
+  container.innerHTML = `${templateRenderSidebarLogin()}`;
+}
+
 function renderSidebarSummary(pageName) {
   if (pageName != "help") {
     document.getElementById(pageName).innerHTML = templateRenderSidebarSummary(pageName);
@@ -96,14 +110,16 @@ function sidebarFocus(pageName) {
   document.getElementById(pageName).classList.add("bgSummary_focus");
 }
 
-function checkUserLogin() {
-  let getSavedUser = localStorage.getItem('savedUser');
-  if (getSavedUser) {
-    let savedUser = JSON.parse(getSavedUser);
-    currentUser = savedUser;
-    userInitials = currentUser.initials;
-  } else {
-    window.location.href = 'login.html';
+function checkUserLogin(pageName) {
+  if (pageName !== 'privacy' && pageName !== 'legal') {
+    let getSavedUser = localStorage.getItem('savedUser');
+    if (getSavedUser) {
+      let savedUser = JSON.parse(getSavedUser);
+      currentUser = savedUser;
+      userInitials = currentUser.initials;
+    } else {
+      window.location.href = 'login.html';
+    }
   }
 }
 
