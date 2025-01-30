@@ -13,7 +13,6 @@
   0% {
     transform: translateX(130%);
   }
-  
   100% {
     transform: translateX(0%);
   }
@@ -23,7 +22,6 @@
   0% {
     transform: translateX(0%);
   }
-  
   100% {
     transform: translateX(130%);
   }
@@ -70,7 +68,6 @@
   font-size: 27px;
   font-weight: 400;
   text-align: left;
-  
 }
 
 .horizontal_blue_line {

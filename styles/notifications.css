@@ -30,7 +30,6 @@
   0% {
     transform: translateX(calc(100vw / 2 + 326px / 2));
   }
-
   100% {
     transform: translateX(0%);
   }
@@ -44,7 +43,6 @@
   0% {
     transform: translateX(0%);
   }
-
   100% {
     transform: translateX(calc(100vw / 2 + 326px / 2));
   }
