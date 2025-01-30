@@ -5,6 +5,7 @@ const CONSTANTS = {
     CONTACT_ADD_CONTAINER: "add_contact_container",
     CONTACT_DETAILS_D: "desktop_contact_details_container",
     CONTACT_DETAILS_M: "mobile_contact_details_container",
+    CONTACT_DETAILS_SUBMENU: "contact_manage_submenu",
     CONTACT_DIALOG: "contact_manage_dialog",
     CONTACT_FORM: "contact_form",
     CONTACT_NAME: "contact_manage_name",
@@ -89,6 +90,13 @@ function openContactDetails(contactId) {
   contactDetails.innerHTML = contactDetailsHtml;
   let contactDetailsMobile = document.getElementById(CONSTANTS.SELECTORS.CONTACT_DETAILS_M);
   contactDetailsMobile.innerHTML = contactDetailsHtml;
+  initContactManageSubmenu(contactId);
+}
+
+function initContactManageSubmenu(contactId) {
+  let contactManageSubmenu = document.getElementById(CONSTANTS.SELECTORS.CONTACT_DETAILS_SUBMENU);
+  contactManageSubmenu.innerHTML = templateRenderContactDetailsMenuForContact(contactId);
+  initContactManageSubmenuListeners();
 }
 
 function markAsSelectedContact(contactId) {
@@ -141,7 +149,6 @@ function addContactManageOutsideClickClosingListener(element) {
       document.documentElement.style.overflow = "auto";
       document.body.scroll = "yes";
       element.close();
-      document.getElementById(CONSTANTS.SELECTORS.CONTACT_DIALOG).blur();
     }
   });
 }
@@ -152,7 +159,6 @@ function addContactManageEscapeListener(element) {
       document.documentElement.style.overflow = "auto";
       document.body.scroll = "yes";
       element.close();
-      document.getElementById(CONSTANTS.SELECTORS.CONTACT_DIALOG).blur();
     }
   });
 }

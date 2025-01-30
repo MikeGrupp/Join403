@@ -58,3 +58,33 @@
 .toggle_help_entry {
   display: none;
 }
+
+.contact_manage_submenu {
+  background-color: #ffffff;
+  padding: 10px;
+  margin-top: 0;
+  top: calc(100vh - 176px);
+  margin-right: 10px;
+  border-style: none;
+  width: calc(116px - 10px - 10px);
+  border-top-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+  box-shadow: 0px 4px 4px 0px #00000040;
+  translate: 116px 0;
+  transition: translate 0.125s ease-out, display 0.125s ease-out allow-discrete;
+}
+
+.contact_manage_submenu[open] {
+  translate: 0 0;
+}
+
+@starting-style {
+  .contact_manage_submenu[open] {
+    translate: 116px 0;
+  }
+}
+
+.contact_manage_submenu::backdrop {
+  background-color: transparent;
+}

@@ -1,4 +1,3 @@
-/* TODO: decide max-width for mobile as a team  */
 @media screen and (max-width: 427px) and (min-width: 320px) {
   .login {
     width: 254px;
@@ -99,7 +98,7 @@
 
 @media (min-width: 1921px) {}
 
-@media (max-width: 600px) {
+@media (max-width: 767px) {
   .header {
     width: calc(100% - 16px - 16px);
     height: 40px;
@@ -311,8 +310,16 @@
     font-weight: 700;
   }
 
-  .contact_manage_menu {
+  .contact_manage .contact_manage_menu {
     display: none;
+  }
+
+  .contact_manage_menu {
+    flex-direction: column;
+  }
+
+  .contact_manage_button {
+    gap: 8px;
   }
 
   .contact_information {
