@@ -268,6 +268,7 @@ function templateRenderContactManageDialog(mode, contactId = '', initials = '', 
       subtitle: '<p class="contact_manage_dialog_subtitle" role="doc-subtitle">Tasks are better with a team!</p>',
       buttonLeftText: 'Cancel',
       buttonLeftOnClick: `resetForm('contact_form'), closeContactManage()`,
+      buttonLeftOnMobile: 'd-none',
       buttonRightText: 'Create contact',
       buttonRightEnabled: 'disabled',
       onSubmit: 'addNewContact(event)',
@@ -278,6 +279,7 @@ function templateRenderContactManageDialog(mode, contactId = '', initials = '', 
       subtitle: '',
       buttonLeftText: 'Delete',
       buttonLeftOnClick: `resetForm('contact_form'), closeContactManage(), deleteContactFromContacts('${contactId}')`,
+      buttonLeftOnMobile: '',
       buttonRightText: 'Save',
       buttonRightEnabled: '',
       onSubmit: `editContact(event, '${contactId}')`,
@@ -313,7 +315,7 @@ function templateRenderContactManageDialog(mode, contactId = '', initials = '', 
             </div>
             <pre id="log"></pre>
             <div class="contact_form_profile_buttons">
-              <button class="button button_close" type="reset" onclick="${modeConfig.buttonLeftOnClick}" form="contact_form">
+              <button class="button button_close ${modeConfig.buttonLeftOnMobile}" type="reset" onclick="${modeConfig.buttonLeftOnClick}" form="contact_form">
                 ${modeConfig.buttonLeftText}
               </button>
               <button id="submitButton" class="button button_create" type="submit" form="contact_form" onclick="${modeConfig.onSubmit}" ${modeConfig.buttonRightEnabled}>
