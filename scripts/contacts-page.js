@@ -205,8 +205,12 @@ async function deleteContactFromContacts(contactId) {
   removeExistingContactFromUsers(contactId);
   await deleteExistingContact(contactId);
   createToast("successDeleteContact");
-  initContactList();
-  initContactDetails();
+  if (window.screen.width >= 768) {
+    initContactList();
+    initContactDetails();
+  } else {
+    window.location.href='./contacts.html';
+  }
 }
 
 function fillContactFields(contact) {
