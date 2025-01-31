@@ -207,7 +207,9 @@ async function deleteContactFromContacts(contactId) {
     initContactList();
     initContactDetails();
   } else {
-    window.location.href='./contacts.html';
+    setTimeout(function () {
+      window.location.href = "./contacts.html";
+   }, 800);
   }
 }
 
