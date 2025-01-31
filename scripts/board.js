@@ -333,7 +333,9 @@ function reRenderBoard() {
 }
 
 function dNone(id) {
-  document.getElementById(id).classList.toggle("d-none");
+  try {
+    document.getElementById(id).classList.toggle("d-none");
+  } catch (error) {}
 }
 
 function taskMoveForward() {
@@ -478,17 +480,17 @@ function search() {
   if (length === 0) {
     document.getElementById("taskSearch").value = "";
     reRenderBoard();
-  } else if (length > 2) {
+  } else if (length > 0) {
     for (let i = 0; i < tasksIds.length; i++) {
       let taskId = tasksIds[i];
       let title = tasks[taskId].titel.toLowerCase();
       let description = tasks[taskId].description.toLowerCase();
       if (title.includes(filterword) || description.includes(filterword)) {
         searchTasks.push(taskId);
-        tasksIds = searchTasks;
-        reRenderBoard();
       }
     }
+    tasksIds = searchTasks;
+    reRenderBoard();
     if (searchTasks.length === 0) {
       alert("No task found");
     }

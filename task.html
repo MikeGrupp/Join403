@@ -23,8 +23,9 @@
     <link rel="stylesheet" href="styles/user-colors.css" />
     <link rel="stylesheet" href="styles/media.css" />
     <link rel="stylesheet" href="styles/task.css" />
+    <link rel="stylesheet" href="styles/board.css" />
   </head>
-  <body onload="load('task')">
+  <body onload="initAddTask()">
     <header id="header" class="header"></header>
     <dialog id="submenu_dialog" class="submenu_dialog"></dialog>
     <div class="sidebar" id="sidebar"></div>
@@ -34,7 +35,7 @@
           <div class="addTask_headline">
             <h1>Add Task</h1>
           </div>
-          <form class="addTask_formular" action="">
+          <div class="addTask_formular">
             <div class="addTask_formular_left">
               <div class="addTask_formular_first">
                 <label class="addTask_formular_headline" for="AddTaskTitle">
@@ -71,13 +72,29 @@
                 >
                   Assigned to
                 </label>
-                <select id="AddTaskAssignedTo" name="AssignedTo" type="text">
-                  <option value="" disabled selected hidden>
-                    Select your option
-                  </option>
-                  <option value="canada">Canada</option>
-                  <option value="usa">USALER</option>
-                </select>
+                <div class="addTask_subtask_container" id="addTaskContactContainer">
+                  <input
+                    class="input_with_button"
+                    id="AddTaskAssignedTo"
+                    name="AssignedTo"
+                    type="text"
+                    placeholder="Select contacts to assign"
+                    onfocus="inputDropdownMenuFocus()"
+                    oninput="searchContacts()"
+                  >
+                  </input>
+                  <div class="delete_button">
+                    <button class="add_button" onclick="arrowDropdownMenu()">
+                      <img id="dropdownButton" style="width: 14px; height: 14px;"  src="assets/img/pfeil_nach_unten.png" alt="">
+                    </button>
+                  </div>
+                </div>
+                <div class="dropdown_wrapper">
+                  <div class="dropdown_container d-none" id="dropdownContainer">
+                  </div>
+                </div>
+                <div class="AddTask_assigned_contacts" id="AssignedContactsContainer">
+                </div>
               </div>
             </div>
             <div class="addTask_border"></div>
@@ -95,21 +112,21 @@
                   type="date"
                 />
               </div>
-              <div class="addTask_formular_second">
+              <div class="addTask_formular_second" >
                 <div class="addTask_formular_headline">
                   Prio
                   <p style="color: red">*</p>
                 </div>
-                <div class="addTask_prio_container">
-                  <div class="addTask_prio">
+                <div class="addTask_prio_container" id="prioContainer">
+                  <div class="addTask_prio" id="prioUrgent" onclick="renderPrio('urgent')">
                     Urgent
                     <img src="assets/img/prio_urgent.svg" alt="Urgent" />
                   </div>
-                  <div class="addTask_prio">
+                  <div class="addTask_prio addTask_prio_focus_medium" id="prioMedium" onclick="renderPrio('medium')" >
                     Medium
-                    <img src="assets/img/prio_medium.svg" alt="Medium" />
+                    <img src="assets/img/Prio media.svg" alt="Medium" />
                   </div>
-                  <div class="addTask_prio">
+                  <div class="addTask_prio" id="prioLow" onclick="renderPrio('low')">
                     Low
                     <img src="assets/img/prio_low.svg" alt="Low" />
                   </div>
@@ -120,28 +137,36 @@
                   Category
                   <p style="color: red">*</p>
                 </label>
-                <select
-                  required
-                  placeholder="Select task category"
-                  id="AddTaskCategory"
-                  name="Category"
-                  type="text"
-                >
-                  <option value="" disabled selected hidden>
-                    Select your option
-                  </option>
-                  <option value="canada">Canada</option>
-                  <option value="usa">USA</option>
-                </select>
+                <div class="div_with_button" onclick="dNone('dropdownContainerCategory'), rotate90('dropdownButtonCategory')">
+                  <div id="AddTaskCategoryHeadline">
+                    Select Task Category
+                  </div>
+                  <div class="delete_button">
+                    <button class="add_button">
+                      <img id="dropdownButtonCategory" style="width: 14px; height: 14px;"  src="assets/img/pfeil_nach_unten.png" alt="">
+                    </button>
+                  </div>
+                </div>
+                <div class="dropdown_wrapper">
+                  <div class="dropdown_container d-none" id="dropdownContainerCategory">
+                    <div class="dropdown_option" onclick="renderCategory('Technical Task'), dNone('dropdownContainerCategory'), rotate90('dropdownButtonCategory')">
+                      <div class="dropdown_name_category" >
+                          Technical Task
+                      </div>
+                    </div>
+                    <div class="dropdown_option" onclick="renderCategory('User Story'), dNone('dropdownContainerCategory'), rotate90('dropdownButtonCategory')">
+                      <div class="dropdown_name_category">
+                          User Story
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
               <div class="addTask_formular_second">
                 <label class="addTask_formular_headline" for="AddTaskSubtask">
                   Subtask
                 </label>
-                <div
-                  class="addTask_subtask_container"
-                  id="AddTaskSubtaskContainer"
-                >
+                <div class="addTask_subtask_container" id="AddTaskSubtaskContainer">
                   <input
                     class="input_with_button"
                     placeholder="Add new subtask"
@@ -151,15 +176,19 @@
                     oninput="addTaskRenderAddButton();"
                   />
                   <div class="delete_button" id="AddTaskSubtaskDeleteButton">
-                    <button class="add_button">
+                    <button class="add_button" onclick="addTaskRenderAddButtonPlusButton()">
                       <img src="assets/img/Property 1=add.svg" alt="add" />
                     </button>
                   </div>
                 </div>
+                  <div class="dropdown_wrapper">
+                    <div class="subtask_container" id="subtaskContainer">
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
-          </form>
-        </div>
+          </div>
         <div class="wrapper">
           <div class="addTask_button_container">
             <div class="addTask_button_info">

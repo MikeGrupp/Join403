@@ -1,4 +1,4 @@
-let storedContacts = {};
+let storedContacts = [];
 
 function getStoredContacts() {
   return Object.values(storedContacts);
@@ -43,17 +43,20 @@ function mapContactsJson(json) {
   if (json == null) {
     return null;
   }
-  return Object.entries(json).reduce((contactsObject, [firebaseId, contact]) => {
-    contactsObject[firebaseId] = {
-      id: firebaseId,
-      name: contact.name,
-      initials: contact.initials,
-      mail: contact.mail,
-      phone: contact.phone,
-      color: contact.color,
-    };
-    return contactsObject;
-  }, {});
+  return Object.entries(json).reduce(
+    (contactsObject, [firebaseId, contact]) => {
+      contactsObject[firebaseId] = {
+        id: firebaseId,
+        name: contact.name,
+        initials: contact.initials,
+        mail: contact.mail,
+        phone: contact.phone,
+        color: contact.color,
+      };
+      return contactsObject;
+    },
+    {}
+  );
 }
 
 async function createNewContact(name, mail, phone) {
@@ -113,10 +116,7 @@ async function removeExistingContactFromUsers(contactId) {
   for (const userId in users) {
     if (users.hasOwnProperty(userId)) {
       const user = users[userId];
-      if (
-        user.assignedContact &&
-        user.assignedContact === contactId
-      ) {
+      if (user.assignedContact && user.assignedContact === contactId) {
         deleteContactFromUsers(userId);
       }
     }

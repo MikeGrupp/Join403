@@ -6,7 +6,7 @@
 
 .addTask_border {
   background-color: #d1d1d1;
-  height: 100%;
+  height: 326px;
   width: 1px;
 }
 
@@ -14,7 +14,6 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  height: calc(100vh - 96px);
   flex-direction: column;
 }
 
@@ -187,7 +186,7 @@
 
 textarea {
   width: calc(100% - 30px);
-  height: 110px;
+  height: 75px;
   border: 1px solid #d1d1d1;
   border-radius: 10px;
   font-size: 18px;
@@ -195,16 +194,6 @@ textarea {
   font-family: "Inter", sans-serif;
   margin-top: 5px;
   resize: none;
-}
-
-select {
-  width: 100%;
-  border: 1px solid #d1d1d1;
-  border-radius: 10px;
-  font-size: 18px;
-  padding: 8px 15px;
-  font-family: "Inter", sans-serif;
-  margin-top: 5px;
 }
 
 .addTask_subtask_container {
@@ -227,6 +216,22 @@ select {
   width: calc(100% - 30px);
   font-size: 18px;
   border-radius: 14px;
+}
+
+.div_with_button {
+  width: calc(100% - 15px);
+  border: 1px solid #d1d1d1;
+  border-radius: 10px;
+  font-size: 18px;
+  cursor: pointer;
+  margin-top: 5px;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 15px;
 }
 
 .add_button:hover {
@@ -259,8 +264,8 @@ select {
   border: none;
   border-radius: 50%;
   background-color: white;
-  width: 25px;
-  height: 25px;
+  width: 26px;
+  height: 26px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -314,12 +319,193 @@ select:focus {
 }
 
 .addTask_prio:hover {
-  transition-delay: 100ms;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1);
+}
+
+.addTask_prio_focus_low {
+  background-color: #7ae229;
+  color: white;
+  font-weight: 700;
+  border: none;
+}
+
+.addTask_prio_focus_low:hover {
+  box-shadow: none;
+}
+
+.addTask_prio_focus_medium {
+  background-color: #ffa800;
+  color: white;
+  font-weight: 700;
+  border: none;
+}
+
+.addTask_prio_focus_medium:hover {
+  box-shadow: none;
+}
+
+.addTask_prio_focus_urgent {
+  background-color: #ff3d00;
+  color: white;
+  font-weight: 700;
+  border: none;
+}
+
+.addTask_prio_focus_urgent:hover {
+  box-shadow: none;
 }
 
 .delete_button {
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-right: 5px;
+}
+
+.dropdown_container {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background-color: white;
+  max-height: 130px;
+  overflow-y: auto;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  z-index: 999;
+}
+
+.dropdown_option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.dropdown_option:hover {
+  background-color: #d1d1d1;
+}
+
+.dropdown_name {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+  margin-left: 5px;
+}
+
+.dropdown_wrapper {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.dropdown_option input {
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+.AddTask_assigned_contacts {
+  display: flex;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.rotate90 {
+  rotate: 180deg;
+}
+
+option:hover {
+  background-color: #d1d1d1;
+}
+
+.dropdown_name_category {
+  padding-left: 5px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.subtask_container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  z-index: 999;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 10px;
+  flex-direction: column;
+  background-color: #f6f7f8;
+  max-height: 110px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.addtask_subtask {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  width: calc(100% - 5px);
+  cursor: pointer;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.addtask_subtask:hover {
+  background-color: #d1d1d1;
+}
+
+.subtask_container img {
+  height: 5px;
+}
+
+.subtask_d_flex {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.subtask_button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 5px;
+}
+
+.subtask_edit_button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: solid #a8a8a8;
+  border-width: 1px;
+}
+
+.subtask_delete_button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.subtask_button img:hover {
+  zoom: 1.1;
+}
+
+.subtask_button img {
+  height: 20px;
+}
+
+.without_hover_background:hover {
+  background-color: #f6f7f8;
 }

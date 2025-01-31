@@ -229,28 +229,34 @@ function templateRenderContactDetailsForContact(
   `;
 }
 
-function templateRenderContactManageDialog(mode, contactId = '', initials = '', color = 'grey') {
+function templateRenderContactManageDialog(
+  mode,
+  contactId = "",
+  initials = "",
+  color = "grey"
+) {
   const config = {
     create: {
-      title: 'Add contact',
-      subtitle: '<p class="contact_manage_dialog_subtitle" role="doc-subtitle">Tasks are better with a team!</p>',
-      buttonLeftText: 'Cancel',
+      title: "Add contact",
+      subtitle:
+        '<p class="contact_manage_dialog_subtitle" role="doc-subtitle">Tasks are better with a team!</p>',
+      buttonLeftText: "Cancel",
       buttonLeftOnClick: `resetForm('contact_form'), closeContactManage()`,
-      buttonRightText: 'Create contact',
-      buttonRightEnabled: 'disabled',
-      onSubmit: 'addNewContact(event)',
-      profileBadge: `<img src="./assets/img/person_white.svg" alt="person icon">`
+      buttonRightText: "Create contact",
+      buttonRightEnabled: "disabled",
+      onSubmit: "addNewContact(event)",
+      profileBadge: `<img src="./assets/img/person_white.svg" alt="person icon">`,
     },
     edit: {
-      title: 'Edit contact',
-      subtitle: '',
-      buttonLeftText: 'Delete',
+      title: "Edit contact",
+      subtitle: "",
+      buttonLeftText: "Delete",
       buttonLeftOnClick: `resetForm('contact_form'), closeContactManage(), deleteContactFromContacts('${contactId}')`,
-      buttonRightText: 'Save',
-      buttonRightEnabled: '',
+      buttonRightText: "Save",
+      buttonRightEnabled: "",
       onSubmit: `editContact(event, '${contactId}')`,
-      profileBadge: initials
-    }
+      profileBadge: initials,
+    },
   };
 
   const modeConfig = config[mode];
@@ -428,7 +434,7 @@ function templateRenderDetailAccounts(name, initials, backgroundColor) {
 function templateRenderDetailSubtasks(
   title,
   status,
-  checked = '',
+  checked = "",
   taskId,
   subtaskId
 ) {
@@ -439,7 +445,6 @@ function templateRenderDetailSubtasks(
     </div>
   `;
 }
-
 
 function templateRenderSummaryGreeting(greetingMessage, username) {
   return `
@@ -507,4 +512,21 @@ function templateRenderSummary(
           </div>
         </div>
 `;
+}
+
+function templateRenderSubtaskContainer(i, subtaskText) {
+  return `
+      <div class="subtask_d_flex">
+        <img src="assets/img/point.png" />
+        ${subtaskText}
+      </div>
+      <div class="subtask_button d-none" id="subtaskImg${i}">
+        <div class="subtask_edit_button">
+          <img src="assets/img/edit.svg" alt="edit"onclick="subtaskRenderEdit(${i})" >
+        </div>
+        <div class="subtask_delete_button" onclick="deleteSubtask(${i})">
+          <img src="assets/img/delete.svg" alt="delete" />
+        </div>
+      </div>
+  `;
 }
