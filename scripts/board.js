@@ -332,12 +332,6 @@ function reRenderBoard() {
   renderBoard();
 }
 
-function dNone(id) {
-  try {
-    document.getElementById(id).classList.toggle("d-none");
-  } catch (error) {}
-}
-
 function taskMoveForward() {
   let id = null;
   let container = document.getElementById("taskDetail");

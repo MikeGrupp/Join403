@@ -41,3 +41,7 @@ function previousPage() {
       window.location.href = 'index.html';
   }
 }
+
+function dNone(id) {
+  document.getElementById(id).classList.toggle("d-none");
+}

@@ -129,18 +129,6 @@ input[type='checkbox']:hover {
     font-weight: bold;
 }
 
-.back_arrow {
-    width: 32px;
-    height: 32px;
-}
-
-.back_arrow:hover {
-    cursor: pointer;
-    transform: scale(1.2);
-    background-color: rgb(240, 240, 240);
-    border-radius: 24px;
-}
-
 .card_header {
     display: flex;
     justify-content: space-between;
@@ -152,6 +140,11 @@ input[type='checkbox']:hover {
     margin-left: -32px;
     padding-right: 4px;
     width: 20px;
+}
+
+.vcenter {
+    display: flex;
+    align-items: center;
 }
 
 .logo {
@@ -191,6 +184,7 @@ input[type='checkbox']:hover {
 }
 
 .white_btn {
+    text-align: center;
     padding: 16px 24px;
     background-color: white;
     border: 2px solid #2A3647;
@@ -214,6 +208,7 @@ input[type='checkbox']:hover {
 }
 
 .standard_btn:enabled {
+    text-align: center;
     padding: 16px 24px;
     background-color: #2A3647;
     border: 0;

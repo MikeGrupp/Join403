@@ -1,9 +1,13 @@
 const CONSTANTS = {
   SELECTORS: {
+    CONTACT_LIST_CONTAINER: "contact_list_container",
     CONTACT_LIST: "contact_list",
-    CONTACT_ADD_CONTAINER: "desktop_add_contact_container",
-    CONTACT_DETAILS: "desktop_contact_details_container",
+    CONTACT_ADD_CONTAINER: "add_contact_container",
+    CONTACT_DETAILS_D: "desktop_contact_details_container",
+    CONTACT_DETAILS_M: "mobile_contact_details_container",
+    CONTACT_DETAILS_SUBMENU: "contact_manage_submenu",
     CONTACT_DIALOG: "contact_manage_dialog",
+    CONTACT_FORM: "contact_form",
     CONTACT_NAME: "contact_manage_name",
     CONTACT_MAIL: "contact_manage_mail",
     CONTACT_PHONE: "contact_manage_phone",
@@ -52,8 +56,10 @@ function initContactList() {
 
 function initContactDetails() {
   let contactDetailsHtml = templateRenderContactDetailsDefault();
-  let contactDetails = document.getElementById(CONSTANTS.SELECTORS.CONTACT_DETAILS);
+  let contactDetails = document.getElementById(CONSTANTS.SELECTORS.CONTACT_DETAILS_D);
   contactDetails.innerHTML = contactDetailsHtml;
+  let contactDetailsMobile = document.getElementById(CONSTANTS.SELECTORS.CONTACT_DETAILS_M);
+  contactDetailsMobile.innerHTML = contactDetailsHtml;
 }
 
 function initContactManageDialog(mode, contactId, initials, color) {
@@ -63,6 +69,10 @@ function initContactManageDialog(mode, contactId, initials, color) {
 }
 
 function openContactDetails(contactId) {
+  if (window.screen.width < 768) {
+    dNone(CONSTANTS.SELECTORS.CONTACT_LIST_CONTAINER);
+    dNone(CONSTANTS.SELECTORS.CONTACT_DETAILS_M);
+  }
   markAsSelectedContact(contactId);
   let contact = getStoredContactById(contactId);
   let contactDetailsHtml = templateRenderContactDetailsDefault();
@@ -76,8 +86,17 @@ function openContactDetails(contactId) {
       contact.phone
     );
   }
-  let contactDetails = document.getElementById(CONSTANTS.SELECTORS.CONTACT_DETAILS);
+  let contactDetails = document.getElementById(CONSTANTS.SELECTORS.CONTACT_DETAILS_D);
   contactDetails.innerHTML = contactDetailsHtml;
+  let contactDetailsMobile = document.getElementById(CONSTANTS.SELECTORS.CONTACT_DETAILS_M);
+  contactDetailsMobile.innerHTML = contactDetailsHtml;
+  initContactManageSubmenu(contactId);
+}
+
+function initContactManageSubmenu(contactId) {
+  let contactManageSubmenu = document.getElementById(CONSTANTS.SELECTORS.CONTACT_DETAILS_SUBMENU);
+  contactManageSubmenu.innerHTML = templateRenderContactDetailsMenuForContact(contactId);
+  initContactManageSubmenuListeners();
 }
 
 function markAsSelectedContact(contactId) {
@@ -130,7 +149,6 @@ function addContactManageOutsideClickClosingListener(element) {
       document.documentElement.style.overflow = "auto";
       document.body.scroll = "yes";
       element.close();
-      document.getElementById(CONSTANTS.SELECTORS.CONTACT_DIALOG).blur();
     }
   });
 }
@@ -141,7 +159,6 @@ function addContactManageEscapeListener(element) {
       document.documentElement.style.overflow = "auto";
       document.body.scroll = "yes";
       element.close();
-      document.getElementById(CONSTANTS.SELECTORS.CONTACT_DIALOG).blur();
     }
   });
 }
@@ -173,7 +190,7 @@ async function editContact(event, contactId) {
   if (isContactValid(nameInput, mailInput, phoneInput)) {
     await editExistingContact(contactId, nameInput.value, mailInput.value, phoneInput.value);
     if (contactId) {
-      resetForm("contact_form");
+      resetForm(CONSTANTS.SELECTORS.CONTACT_FORM);
       createToast("successEditContact");
       initContactList();
       closeContactManage();
@@ -188,8 +205,12 @@ async function deleteContactFromContacts(contactId) {
   removeExistingContactFromUsers(contactId);
   await deleteExistingContact(contactId);
   createToast("successDeleteContact");
-  initContactList();
-  initContactDetails();
+  if (window.screen.width >= 768) {
+    initContactList();
+    initContactDetails();
+  } else {
+    window.location.href='./contacts.html';
+  }
 }
 
 function fillContactFields(contact) {
