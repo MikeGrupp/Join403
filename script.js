@@ -3,7 +3,6 @@ let userInitials = "";
 
 async function load(pageName) {
   checkUserLogin(pageName);
-  await initDatabase(pageName);
   initPageSpecificLayout(pageName, userInitials);
   checkLoginForPageDesign(pageName);
 }
@@ -16,7 +15,6 @@ function initPageSpecificLayout(pageName, userInitials) {
     case "contacts":
       initDefaultHeader(userInitials);
       initSubmenu();
-      initContacts(pageName);
       break;
     case "help":
       initHelpPageHeader(userInitials);
