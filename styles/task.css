@@ -409,7 +409,7 @@ select:focus {
   cursor: pointer;
 }
 
-.AddTask_assigned_contacts {
+.addTask_assigned_contacts {
   display: flex;
   gap: 6px;
   margin-top: 6px;
@@ -452,7 +452,7 @@ option:hover {
   overflow-x: hidden;
 }
 
-.addtask_subtask {
+.addTask_subtask {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -466,7 +466,7 @@ option:hover {
   font-size: 14px;
 }
 
-.addtask_subtask:hover {
+.addTask_subtask:hover {
   background-color: #d1d1d1;
 }
 
@@ -516,7 +516,7 @@ option:hover {
   background-color: #f6f7f8;
 }
 
-.addTask_requierd {
+.addTask_required {
   display: flex;
   margin-top: px;
   position: absolute;

@@ -14,7 +14,7 @@
     <script src="./scripts/contacts.js"></script>
     <script src="./scripts/utils.js"></script>
     <script src="./scripts/notifications.js"></script>
-    <script src="./scripts/validaton.js"></script>
+    <script src="./scripts/validation.js"></script>
     <script src="./script.js"></script>
 
     <link rel="stylesheet" href="style.css" />
@@ -29,7 +29,7 @@
     <link rel="stylesheet" href="styles/user-colors.css" />
     <link rel="stylesheet" href="styles/media.css" />
   </head>
-  <body onload="load('contacts')">
+  <body onload="load('contacts'), initContacts()">
     <header id="header" class="header"></header>
     <dialog id="submenu_dialog" class="submenu_dialog"></dialog>
     <div class="sidebar" id="sidebar"></div>

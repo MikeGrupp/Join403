@@ -18,10 +18,8 @@ const CONSTANTS = {
   },
 };
 
-function initContacts(pageName) {
-  if (pageName != "contacts") {
-    return;
-  }
+async function initContacts() {
+  setStoredContacts(await createLoadContacts());
   initDesktopAddContactButton();
   initContactList();
   initContactDetails();
