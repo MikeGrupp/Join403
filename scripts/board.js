@@ -185,36 +185,9 @@ async function fetchSubTaskIds() {
 
 async function fetchAssignedAccountsIds() {
   assignedAccountsIds = [];
-  if (assignedAccounts !== null) {
+  if (assignedAccounts !== undefined) {
     assignedAccountsIds = Object.keys(assignedAccounts);
   }
-}
-
-async function postTask() {
-  await postData("/tasks", {
-    description: "Build start page with recipe recommendation...",
-    kategory: "user Story",
-    titel: "Kochwelt page & Recipe Recommender",
-    prio: "low",
-    step: "Done",
-    dueDate: "15/1/2025",
-  });
-}
-
-async function postSubTask(taskId) {
-  await postData("/tasks/" + taskId + "/subtasks", {
-    titel: "Test test test",
-    status: "finished",
-  });
-}
-
-async function postAssignedAccounts(taskId) {
-  await postData("/tasks/" + taskId + "/assignedAccounts", {
-    name: "Eliot Mannheim",
-    initials: "EM",
-    color: "pink_helitrope",
-    id: "-1",
-  });
 }
 
 async function putTask(taskId) {

@@ -13,7 +13,8 @@
     <script src="./scripts/database-controller.js"></script>
     <script src="./script.js"></script>
     <script src="./scripts/board.js"></script>
-    <script src="scripts/task.js"></script>
+    <script src="scripts/task.js" defer></script>
+    <script src="scripts/utils.js"></script>
 
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="styles/fonts.css" />
@@ -30,7 +31,7 @@
     <dialog id="submenu_dialog" class="submenu_dialog"></dialog>
     <div class="sidebar" id="sidebar"></div>
     <main>
-      <div class="addTask_container">
+      <div class="addTask_container" id="addTaskContainer">
         <div class="addTask_content">
           <div class="addTask_headline">
             <h1>Add Task</h1>
@@ -48,8 +49,12 @@
                   id="AddTaskTitle"
                   name="title"
                   type="text"
-                  required
                 />
+                <div class="dropdown_wrapper">
+                  <div class="addTask_requierd d-none" id="addTaskRequierdTitle">
+                    This field is required
+                  </div>
+                </div>
               </div>
               <div class="addTask_formular_second">
                 <label
@@ -93,7 +98,9 @@
                   <div class="dropdown_container d-none" id="dropdownContainer">
                   </div>
                 </div>
-                <div class="AddTask_assigned_contacts" id="AssignedContactsContainer">
+                <div class="dropdown_wrapper">
+                  <div class="AddTask_assigned_contacts" id="AssignedContactsContainer">
+                  </div>
                 </div>
               </div>
             </div>
@@ -107,15 +114,18 @@
                 <input
                   id="AddTaskDate"
                   class="input"
-                  required
                   name="Date"
                   type="date"
                 />
+                <div class="dropdown_wrapper">
+                  <div class="addTask_requierd d-none" id="addTaskRequierdDueDate">
+                    This field is required
+                  </div>
+                </div>
               </div>
               <div class="addTask_formular_second" >
                 <div class="addTask_formular_headline">
                   Prio
-                  <p style="color: red">*</p>
                 </div>
                 <div class="addTask_prio_container" id="prioContainer">
                   <div class="addTask_prio" id="prioUrgent" onclick="renderPrio('urgent')">
@@ -137,7 +147,7 @@
                   Category
                   <p style="color: red">*</p>
                 </label>
-                <div class="div_with_button" onclick="dNone('dropdownContainerCategory'), rotate90('dropdownButtonCategory')">
+                <div id="AddTaskCategory" class="div_with_button" onclick="dNone('dropdownContainerCategory'), rotate90('dropdownButtonCategory')">
                   <div id="AddTaskCategoryHeadline">
                     Select Task Category
                   </div>
@@ -159,6 +169,11 @@
                           User Story
                       </div>
                     </div>
+                  </div>
+                </div>
+                <div class="dropdown_wrapper">
+                  <div class="addTask_requierd d-none" id="addTaskRequierdCategory">
+                    This field is required
                   </div>
                 </div>
               </div>
@@ -201,10 +216,11 @@
                 onmouseover="addTaskRenderCancelButton();"
                 class="white_btn pointer"
                 onmouseout="addTaskResetCancelButton();"
+                onclick="clearAddTask()"
               >
                 Clear <img src="assets/img/button_cancel.svg" alt="cancel" />
               </button>
-              <button class="standard_btn">
+              <button class="standard_btn" onclick="AddTask()">
                 Create Task
                 <img src="assets/img/check.svg" alt="Create Task" />
               </button>

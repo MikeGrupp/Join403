@@ -3,6 +3,9 @@ let contactIds = [];
 let assignedContacts = [];
 let searcheContacts = [];
 let statusDropDownButton = false;
+let currentPrio = "medium";
+let category = "";
+let validation = false;
 
 async function initAddTask() {
   await load("task");
@@ -119,18 +122,6 @@ function inputDropdownMenuFocus() {
     statusDropDownButton = true;
   }
 }
-
-document.addEventListener("click", function (event) {
-  let maindiv = document.getElementById("dropdownContainer"); // Replace with your div's ID
-  let sideDiv = document.getElementById("addTaskContactContainer"); // Another div that should not trigger closing
-  if (
-    maindiv &&
-    !maindiv.contains(event.target) &&
-    (!sideDiv || !sideDiv.contains(event.target))
-  ) {
-    inputDropdownMenuBlur();
-  }
-});
 
 function addTaskRenderCancelButton() {
   let container = document.getElementById("addTaskButtonCancel");
@@ -293,6 +284,7 @@ function renderPrio(prio) {
       <img src="assets/img/Prio baja.svg" alt="Low" />
     `;
     document.getElementById("prioLow").classList.add("addTask_prio_focus_low");
+    currentPrio = "low";
   }
 
   if (prio === "medium") {
@@ -304,6 +296,7 @@ function renderPrio(prio) {
     document
       .getElementById("prioMedium")
       .classList.add("addTask_prio_focus_medium");
+    currentPrio = "medium";
   }
 
   if (prio === "urgent") {
@@ -315,10 +308,137 @@ function renderPrio(prio) {
     document
       .getElementById("prioUrgent")
       .classList.add("addTask_prio_focus_urgent");
+    currentPrio = "urgent";
   }
 }
 
-function renderCategory(category) {
+function renderCategory(input) {
+  category = input;
   let Container = document.getElementById("AddTaskCategoryHeadline");
   Container.innerHTML = `${category}`;
 }
+
+async function AddTask() {
+  AddTaskValidation();
+  if (validation === true) {
+    await postTask();
+    tasks = await loadData("tasks/");
+    fetchTaskIds();
+    let taskId = tasksIds[tasksIds.length - 1];
+    await postSubtask(taskId);
+    await postAssignedAccounts(taskId);
+    clearAddTask();
+  }
+}
+
+function AddTaskValidation() {
+  let title = document.getElementById("AddTaskTitle").value;
+  let dueDate = document.getElementById("AddTaskDate").value;
+  if (title === "") {
+    dNone("addTaskRequierdTitle");
+    document.getElementById("AddTaskTitle").classList.add("border_red");
+  } else {
+    if (dueDate === "") {
+      dNone("addTaskRequierdDueDate");
+      document.getElementById("AddTaskDate").classList.add("border_red");
+    } else {
+      if (category === "") {
+        dNone("addTaskRequierdCategory");
+        document.getElementById("AddTaskCategory").classList.add("border_red");
+      } else {
+        validation = true;
+      }
+    }
+  }
+}
+
+async function postTask() {
+  let title = document.getElementById("AddTaskTitle").value;
+  let description = document.getElementById("AddTaskDescription").value;
+  let dueDate = document.getElementById("AddTaskDate").value;
+  let [year, month, day] = dueDate.split("-");
+  let formattedDate = `${day}/${month}/${year}`;
+  await postData("/tasks", {
+    description: description,
+    kategory: category,
+    titel: title,
+    prio: currentPrio,
+    step: "Todo",
+    dueDate: formattedDate,
+  });
+}
+
+async function postAssignedAccounts(taskId) {
+  for (let i = 0; i < assignedContacts.length; i++) {
+    let contact = assignedContacts[i];
+    let name = contact.name;
+    let initials = contact.initials;
+    let color = contact.color;
+    let id = contact.id;
+    await postData("/tasks/" + taskId + "/assignedAccounts", {
+      name: name,
+      initials: initials,
+      color: color,
+      id: id,
+    });
+  }
+}
+
+async function postSubtask(taskId) {
+  for (let i = 0; i < addTaskSubtasks.length; i++) {
+    let title = addTaskSubtasks[i];
+    await postData("/tasks/" + taskId + "/subtasks", {
+      titel: title,
+      status: "open",
+    });
+  }
+}
+
+function clearAddTask() {
+  document.getElementById("AddTaskTitle").value = "";
+  document.getElementById("AddTaskDescription").value = "";
+  document.getElementById("AddTaskDate").value = "";
+  document.getElementById("AddTaskAssignedTo").value = "";
+  reRenderSubtask();
+  for (let i = 0; i < contactIds.length; i++) {
+    let contactId = contactIds[i];
+    let currentCheckBox = document.getElementById("checkbox" + contactId);
+    if ((currentCheckBox.checked = true)) {
+      currentCheckBox.checked = false;
+    }
+  }
+  assignedContacts = [];
+  renderAddtaskAssignedContacts();
+  renderPrio("medium");
+  renderCategory("Select Task Category");
+  category = "";
+  addTaskSubtasks = [];
+  renderSubtaskContainer();
+  document.getElementById("AddTaskTitle").focus();
+  document.getElementById("AddTaskTitle").classList.remove("border_red");
+  document.getElementById("AddTaskDate").classList.remove("border_red");
+  document.getElementById("AddTaskCategory").classList.remove("border_red");
+  document.getElementById("addTaskRequierdTitle").classList.add("d-none");
+  document.getElementById("addTaskRequierdDueDate").classList.add("d-none");
+  document.getElementById("addTaskRequierdCategory").classList.add("d-none");
+}
+
+document
+  .getElementById("AddTaskSubtaskContainer")
+  .addEventListener("keydown", function (event) {
+    if (event.key === "Enter") {
+      AddTaskAddSubtask();
+    }
+  });
+
+document.addEventListener("click", function (event) {
+  let maindiv = document.getElementById("dropdownContainer");
+  let sideDiv = document.getElementById("addTaskContactContainer");
+  if (
+    maindiv &&
+    !maindiv.contains(event.target) &&
+    (!sideDiv || !sideDiv.contains(event.target))
+  ) {
+    inputDropdownMenuBlur();
+  }
+});
