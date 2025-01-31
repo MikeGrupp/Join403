@@ -509,14 +509,14 @@ function templateRenderSummary(
         <div class="row">
           <div class="card" onclick="goToBoard()">
             <div class="icon-pen"></div>
-            <div class="coloumn">
+            <div class="column">
               <span id="todo" class="number">${amountTodo}</span>
               <span class="description">To-do</span>
             </div>
           </div>
           <div class="card" onclick="goToBoard()">
             <div class="icon-check"></div>
-            <div class="coloumn ">
+            <div class="column ">
               <span id="done" class="number">${amountDone}</span>
               <span class="description">Done</span>
             </div>
@@ -528,7 +528,7 @@ function templateRenderSummary(
               <div class="icon_orange">
                 <img src="assets/img/urgent.svg" alt="task_icon">
               </div>
-              <div class="coloumn ">
+              <div class="column ">
                 <span id="urgent" class="number">${amountUrgent}</span>
                 <span class="description">Urgent</span>
               </div>

@@ -16,7 +16,7 @@ const validationDetails = {
     field: "contact_manage_mail"
   },
   invalidContactPhone: {
-    text: "Please enter a valid contact phonenumber.",
+    text: "Please enter a valid contact phone number.",
     field: "contact_manage_mail"
   },
 };

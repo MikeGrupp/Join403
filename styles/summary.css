@@ -194,7 +194,7 @@ main {
     }
 }
 
-.coloumn {
+.column {
     display: flex;
     flex-direction: column;
 }

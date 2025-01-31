@@ -1,7 +1,7 @@
 let addTaskSubtasks = [];
 let contactIds = [];
 let assignedContacts = [];
-let searcheContacts = [];
+let searchContactsArray = [];
 let statusDropDownButton = false;
 let currentPrio = "medium";
 let category = "";
@@ -56,7 +56,7 @@ function searchContacts() {
     .getElementById("AddTaskAssignedTo")
     .value.toLowerCase();
   let length = filterword.length;
-  searcheContacts = [];
+  searchContactsArray = [];
   contactIds = [];
   fetchContactsIds();
   if (length === 0) {
@@ -67,10 +67,10 @@ function searchContacts() {
       let contactId = contactIds[i];
       let name = storedContacts[contactId].name.toLowerCase();
       if (name.includes(filterword)) {
-        searcheContacts.push(contactId);
+        searchContactsArray.push(contactId);
       }
     }
-    contactIds = searcheContacts;
+    contactIds = searchContactsArray;
     renderDropdownContainerContacts();
   }
 }
@@ -335,15 +335,15 @@ function AddTaskValidation() {
   let title = document.getElementById("AddTaskTitle").value;
   let dueDate = document.getElementById("AddTaskDate").value;
   if (title === "") {
-    dNone("addTaskRequierdTitle");
+    dNone("addTaskRequiredTitle");
     document.getElementById("AddTaskTitle").classList.add("border_red");
   } else {
     if (dueDate === "") {
-      dNone("addTaskRequierdDueDate");
+      dNone("addTaskRequiredDueDate");
       document.getElementById("AddTaskDate").classList.add("border_red");
     } else {
       if (category === "") {
-        dNone("addTaskRequierdCategory");
+        dNone("addTaskRequiredCategory");
         document.getElementById("AddTaskCategory").classList.add("border_red");
       } else {
         validation = true;
@@ -418,9 +418,9 @@ function clearAddTask() {
   document.getElementById("AddTaskTitle").classList.remove("border_red");
   document.getElementById("AddTaskDate").classList.remove("border_red");
   document.getElementById("AddTaskCategory").classList.remove("border_red");
-  document.getElementById("addTaskRequierdTitle").classList.add("d-none");
-  document.getElementById("addTaskRequierdDueDate").classList.add("d-none");
-  document.getElementById("addTaskRequierdCategory").classList.add("d-none");
+  document.getElementById("addTaskRequiredTitle").classList.add("d-none");
+  document.getElementById("addTaskRequiredDueDate").classList.add("d-none");
+  document.getElementById("addTaskRequiredCategory").classList.add("d-none");
 }
 
 document

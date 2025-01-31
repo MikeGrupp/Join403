@@ -5,7 +5,7 @@ async function load(pageName) {
   checkUserLogin(pageName);
   await initDatabase(pageName);
   initPageSpecificLayout(pageName, userInitials);
-  chheckLoginForPageDesign(pageName);
+  checkLoginForPageDesign(pageName);
 }
 
 function initPageSpecificLayout(pageName, userInitials) {
@@ -31,7 +31,7 @@ function initPageSpecificLayout(pageName, userInitials) {
   }
 }
 
-function chheckLoginForPageDesign(pageName) {
+function checkLoginForPageDesign(pageName) {
   let getSavedUser = localStorage.getItem('savedUser');
   if (getSavedUser) {
     renderSidebar();
