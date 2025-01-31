@@ -23,7 +23,7 @@ function renderDropdownContainerContacts() {
     let initials = contact.initials;
     let color = contact.color;
     container.innerHTML += `
-    <div class="dropdown_option" onclick="addtaskAssignedContacts('${contactId}')">
+    <div class="dropdown_option" onclick="addTaskAssignedContacts('${contactId}')">
       <div class="dropdown_name">
         <div class="task_account1 bg_${color}">
         ${initials}
@@ -38,8 +38,8 @@ function renderDropdownContainerContacts() {
   }
 }
 
-function renderAddtaskAssignedContacts() {
-  let container = document.getElementById("AssignedContactsContainer");
+function renderAddTaskAssignedContacts() {
+  let container = document.getElementById("assignedContactsContainer");
   container.innerHTML = ``;
   for (let i = 0; i < assignedContacts.length; i++) {
     let assignedContact = assignedContacts[i];
@@ -53,14 +53,14 @@ function renderAddtaskAssignedContacts() {
 
 function searchContacts() {
   let filterword = document
-    .getElementById("AddTaskAssignedTo")
+    .getElementById("addTaskAssignedTo")
     .value.toLowerCase();
   let length = filterword.length;
   searchContactsArray = [];
   contactIds = [];
   fetchContactsIds();
   if (length === 0) {
-    document.getElementById("AddTaskAssignedTo").value = "";
+    document.getElementById("addTaskAssignedTo").value = "";
     renderDropdownContainerContacts();
   } else if (length > 0) {
     for (let i = 0; i < contactIds.length; i++) {
@@ -75,7 +75,7 @@ function searchContacts() {
   }
 }
 
-function addtaskAssignedContacts(contactId) {
+function addTaskAssignedContacts(contactId) {
   let currentCheckBox = document.getElementById("checkbox" + contactId);
   let assignedContact = storedContacts[contactId];
   if (currentCheckBox.checked == false) {
@@ -86,7 +86,7 @@ function addtaskAssignedContacts(contactId) {
     assignedContacts.splice(index, 1);
     currentCheckBox.checked = false;
   }
-  renderAddtaskAssignedContacts();
+  renderAddTaskAssignedContacts();
 }
 
 async function fetchContactsIds() {
@@ -100,7 +100,7 @@ async function fetchContactsIds() {
 
 function arrowDropdownMenu() {
   if (statusDropDownButton === false) {
-    document.getElementById("AddTaskAssignedTo").focus();
+    document.getElementById("addTaskAssignedTo").focus();
   } else {
     statusDropDownButton = false;
     dNone("dropdownContainer");
@@ -137,19 +137,19 @@ function addTaskResetCancelButton() {
 }
 
 function addTaskRenderAddButton() {
-  let input = document.getElementById("AddTaskSubtask").value;
+  let input = document.getElementById("addTaskSubtask").value;
   if (input.length === 0) {
-    let container = document.getElementById("AddTaskSubtaskContainer");
+    let container = document.getElementById("addTaskSubtaskContainer");
     container.innerHTML = `
       <input
         class="input_with_button"
         placeholder="Add new subtask"
-        id="AddTaskSubtask"
+        id="addTaskSubtask"
         name="subtask"
         type="text"
         oninput="addTaskRenderAddButton();"
       />
-      <div class="delete_button" id="AddTaskSubtaskDeleteButton">
+      <div class="delete_button" id="addTaskSubtaskDeleteButton">
         <button class="add_button" onclick="addTaskRenderAddButtonPlusButton()">
           <img src="assets/img/Property 1=add.svg" alt="add" />
         </button>
@@ -157,7 +157,7 @@ function addTaskRenderAddButton() {
     `;
   }
   if (input.length > 0) {
-    let container = document.getElementById("AddTaskSubtaskDeleteButton");
+    let container = document.getElementById("addTaskSubtaskDeleteButton");
     container.innerHTML = ` 
       <button
         class="add_button"
@@ -168,16 +168,16 @@ function addTaskRenderAddButton() {
       <button class="add_button2">
         <img
           src="assets/img/Property 1=check.svg"
-          onclick="AddTaskAddSubtask()"
+          onclick="addTaskAddSubtask()"
           alt="add"
         />
       </button>`;
   }
-  document.getElementById("AddTaskSubtask").focus();
+  document.getElementById("addTaskSubtask").focus();
 }
 
 function addTaskRenderAddButtonPlusButton() {
-  let container = document.getElementById("AddTaskSubtaskDeleteButton");
+  let container = document.getElementById("addTaskSubtaskDeleteButton");
   container.innerHTML = ` 
     <button
       class="add_button"
@@ -188,20 +188,20 @@ function addTaskRenderAddButtonPlusButton() {
     <button class="add_button2">
       <img
         src="assets/img/Property 1=check.svg"
-        onclick="AddTaskAddSubtask()"
+        onclick="addTaskAddSubtask()"
         alt="add"
       />
     </button>`;
-  document.getElementById("AddTaskSubtask").focus();
+  document.getElementById("addTaskSubtask").focus();
 }
 
 function reRenderSubtask() {
-  document.getElementById("AddTaskSubtask").value = "";
+  document.getElementById("addTaskSubtask").value = "";
   addTaskRenderAddButton();
 }
 
-function AddTaskAddSubtask() {
-  let input = document.getElementById("AddTaskSubtask").value;
+function addTaskAddSubtask() {
+  let input = document.getElementById("addTaskSubtask").value;
   addTaskSubtasks.push(input);
   renderSubtaskContainer();
   reRenderSubtask();
@@ -213,7 +213,7 @@ function renderSubtaskContainer() {
   for (let i = 0; i < addTaskSubtasks.length; i++) {
     let subtaskText = addTaskSubtasks[i];
     container.innerHTML += `
-    <div class="addtask_subtask" id="subtask${i}" onmouseout="dNone('subtaskImg${i}')" onmouseover="dNone('subtaskImg${i}')">
+    <div class="addTask_subtask" id="subtask${i}" onmouseout="dNone('subtaskImg${i}')" onmouseover="dNone('subtaskImg${i}')">
       ${templateRenderSubtaskContainer(i, subtaskText)}
     </div>
     `;
@@ -315,12 +315,12 @@ function renderPrio(prio) {
 
 function renderCategory(input) {
   category = input;
-  let Container = document.getElementById("AddTaskCategoryHeadline");
+  let Container = document.getElementById("addTaskCategoryHeadline");
   Container.innerHTML = `${category}`;
 }
 
-async function AddTask() {
-  AddTaskValidation();
+async function addTask() {
+  addTaskValidation();
   if (validation === true) {
     await postTask();
     tasks = await loadData("tasks/");
@@ -332,20 +332,20 @@ async function AddTask() {
   }
 }
 
-function AddTaskValidation() {
-  let title = document.getElementById("AddTaskTitle").value;
-  let dueDate = document.getElementById("AddTaskDate").value;
+function addTaskValidation() {
+  let title = document.getElementById("addTaskTitle").value;
+  let dueDate = document.getElementById("addTaskDate").value;
   if (title === "") {
     dNone("addTaskRequiredTitle");
-    document.getElementById("AddTaskTitle").classList.add("border_red");
+    document.getElementById("addTaskTitle").classList.add("border_red");
   } else {
     if (dueDate === "") {
       dNone("addTaskRequiredDueDate");
-      document.getElementById("AddTaskDate").classList.add("border_red");
+      document.getElementById("addTaskDate").classList.add("border_red");
     } else {
       if (category === "") {
         dNone("addTaskRequiredCategory");
-        document.getElementById("AddTaskCategory").classList.add("border_red");
+        document.getElementById("addTaskCategory").classList.add("border_red");
       } else {
         validation = true;
       }
@@ -354,9 +354,9 @@ function AddTaskValidation() {
 }
 
 async function postTask() {
-  let title = document.getElementById("AddTaskTitle").value;
-  let description = document.getElementById("AddTaskDescription").value;
-  let dueDate = document.getElementById("AddTaskDate").value;
+  let title = document.getElementById("addTaskTitle").value;
+  let description = document.getElementById("addTaskDescription").value;
+  let dueDate = document.getElementById("addTaskDate").value;
   let [year, month, day] = dueDate.split("-");
   let formattedDate = `${day}/${month}/${year}`;
   await postData("/tasks", {
@@ -396,10 +396,10 @@ async function postSubtask(taskId) {
 }
 
 function clearAddTask() {
-  document.getElementById("AddTaskTitle").value = "";
-  document.getElementById("AddTaskDescription").value = "";
-  document.getElementById("AddTaskDate").value = "";
-  document.getElementById("AddTaskAssignedTo").value = "";
+  document.getElementById("addTaskTitle").value = "";
+  document.getElementById("addTaskDescription").value = "";
+  document.getElementById("addTaskDate").value = "";
+  document.getElementById("addTaskAssignedTo").value = "";
   reRenderSubtask();
   for (let i = 0; i < contactIds.length; i++) {
     let contactId = contactIds[i];
@@ -409,26 +409,26 @@ function clearAddTask() {
     }
   }
   assignedContacts = [];
-  renderAddtaskAssignedContacts();
+  renderAddTaskAssignedContacts();
   renderPrio("medium");
   renderCategory("Select Task Category");
   category = "";
   addTaskSubtasks = [];
   renderSubtaskContainer();
-  document.getElementById("AddTaskTitle").focus();
-  document.getElementById("AddTaskTitle").classList.remove("border_red");
-  document.getElementById("AddTaskDate").classList.remove("border_red");
-  document.getElementById("AddTaskCategory").classList.remove("border_red");
+  document.getElementById("addTaskTitle").focus();
+  document.getElementById("addTaskTitle").classList.remove("border_red");
+  document.getElementById("addTaskDate").classList.remove("border_red");
+  document.getElementById("addTaskCategory").classList.remove("border_red");
   document.getElementById("addTaskRequiredTitle").classList.add("d-none");
   document.getElementById("addTaskRequiredDueDate").classList.add("d-none");
   document.getElementById("addTaskRequiredCategory").classList.add("d-none");
 }
 
 document
-  .getElementById("AddTaskSubtaskContainer")
+  .getElementById("addTaskSubtaskContainer")
   .addEventListener("keydown", function (event) {
     if (event.key === "Enter") {
-      AddTaskAddSubtask();
+      addTaskAddSubtask();
     }
   });
 

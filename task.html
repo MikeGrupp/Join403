@@ -38,14 +38,14 @@
           <div class="addTask_formular">
             <div class="addTask_formular_left">
               <div class="addTask_formular_first">
-                <label class="addTask_formular_headline" for="AddTaskTitle">
+                <label class="addTask_formular_headline" for="addTaskTitle">
                   Title
                   <p style="color: red">*</p>
                 </label>
                 <input
                   class="input"
                   placeholder="Enter a title"
-                  id="AddTaskTitle"
+                  id="addTaskTitle"
                   name="title"
                   type="text"
                 />
@@ -58,13 +58,13 @@
               <div class="addTask_formular_second">
                 <label
                   class="addTask_formular_headline"
-                  for="AddTaskDescription"
+                  for="addTaskDescription"
                 >
                   Description
                 </label>
                 <textarea
                   placeholder="Enter a Description"
-                  id="AddTaskDescription"
+                  id="addTaskDescription"
                   name="Description"
                   type="text"
                 ></textarea>
@@ -72,14 +72,14 @@
               <div class="addTask_formular_second">
                 <label
                   class="addTask_formular_headline"
-                  for="AddTaskAssignedTo"
+                  for="addTaskAssignedTo"
                 >
                   Assigned to
                 </label>
                 <div class="addTask_subtask_container" id="addTaskContactContainer">
                   <input
                     class="input_with_button"
-                    id="AddTaskAssignedTo"
+                    id="addTaskAssignedTo"
                     name="AssignedTo"
                     type="text"
                     placeholder="Select contacts to assign"
@@ -98,7 +98,7 @@
                   </div>
                 </div>
                 <div class="dropdown_wrapper">
-                  <div class="AddTask_assigned_contacts" id="AssignedContactsContainer">
+                  <div class="addTask_assigned_contacts" id="assignedContactsContainer">
                   </div>
                 </div>
               </div>
@@ -106,12 +106,12 @@
             <div class="addTask_border"></div>
             <div class="addTask_formular_right">
               <div class="addTask_formular_first">
-                <label class="addTask_formular_headline" for="AddTaskDate">
+                <label class="addTask_formular_headline" for="addTaskDate">
                   Due Date
                   <p style="color: red">*</p>
                 </label>
                 <input
-                  id="AddTaskDate"
+                  id="addTaskDate"
                   class="input"
                   name="Date"
                   type="date"
@@ -142,12 +142,12 @@
                 </div>
               </div>
               <div class="addTask_formular_second">
-                <label class="addTask_formular_headline" for="AddTaskCategory">
+                <label class="addTask_formular_headline" for="addTaskCategory">
                   Category
                   <p style="color: red">*</p>
                 </label>
-                <div id="AddTaskCategory" class="div_with_button" onclick="dNone('dropdownContainerCategory'), rotate90('dropdownButtonCategory')">
-                  <div id="AddTaskCategoryHeadline">
+                <div id="addTaskCategory" class="div_with_button" onclick="dNone('dropdownContainerCategory'), rotate90('dropdownButtonCategory')">
+                  <div id="addTaskCategoryHeadline">
                     Select Task Category
                   </div>
                   <div class="delete_button">
@@ -177,19 +177,19 @@
                 </div>
               </div>
               <div class="addTask_formular_second">
-                <label class="addTask_formular_headline" for="AddTaskSubtask">
+                <label class="addTask_formular_headline" for="addTaskSubtask">
                   Subtask
                 </label>
-                <div class="addTask_subtask_container" id="AddTaskSubtaskContainer">
+                <div class="addTask_subtask_container" id="addTaskSubtaskContainer">
                   <input
                     class="input_with_button"
                     placeholder="Add new subtask"
-                    id="AddTaskSubtask"
+                    id="addTaskSubtask"
                     name="subtask"
                     type="text"
                     oninput="addTaskRenderAddButton();"
                   />
-                  <div class="delete_button" id="AddTaskSubtaskDeleteButton">
+                  <div class="delete_button" id="addTaskSubtaskDeleteButton">
                     <button class="add_button" onclick="addTaskRenderAddButtonPlusButton()">
                       <img src="assets/img/Property 1=add.svg" alt="add" />
                     </button>
@@ -219,7 +219,7 @@
               >
                 Clear <img src="assets/img/button_cancel.svg" alt="cancel" />
               </button>
-              <button class="standard_btn" onclick="AddTask()">
+              <button class="standard_btn" onclick="addTask()">
                 Create Task
                 <img src="assets/img/check.svg" alt="Create Task" />
               </button>
