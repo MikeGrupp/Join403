@@ -10,6 +10,7 @@
     <script src="./scripts/templates.js"></script>
     <script src="./scripts/contacts.js"></script>
     <script src="./scripts/database-controller.js"></script>
+    <script src="./scripts/notifications.js"></script>
     <script src="./script.js"></script>
     <script src="./scripts/board.js"></script>
     <script src="scripts/task.js" defer></script>
@@ -22,8 +23,9 @@
     <link rel="stylesheet" href="styles/sidebar.css" />
     <link rel="stylesheet" href="styles/user-colors.css" />
     <link rel="stylesheet" href="styles/task.css" />
-    <link rel="stylesheet" href="styles/media.css" />
+    <link rel="stylesheet" href="styles/notifications.css" />
     <link rel="stylesheet" href="styles/board.css" />
+    <link rel="stylesheet" href="styles/media.css" />
   </head>
   <body onload="initAddTask()">
     <header id="header" class="header"></header>
@@ -225,6 +227,7 @@
           </div>
         </div>
       </div>
+      <ul id="notifications" class="notifications"></ul>
     </main>
   </body>
 </html>

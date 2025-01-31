@@ -329,6 +329,10 @@ async function addTask() {
     await postSubtask(taskId);
     await postAssignedAccounts(taskId);
     clearAddTask();
+    createToast("successNewTask");
+    setTimeout(function () {
+      window.location.href = "./board.html";
+   }, 925);
   }
 }
 

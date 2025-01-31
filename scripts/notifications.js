@@ -27,6 +27,9 @@ function createToast(notificationId) {
   const toast = document.createElement("li");
   toast.className = "toast";
   toast.innerHTML = `<span>${text}</span>`;
+  if (notificationId === "successNewTask") {
+    toast.innerHTML += toast.innerHTML = `<img src="assets/img/board.svg" alt="board">`;
+  }
   notifications.appendChild(toast);
   toast.timeoutId = setTimeout(() => removeToast(toast), notificationDetails.timer);
 }
