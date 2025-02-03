@@ -18,6 +18,9 @@ const notificationDetails = {
   successNewTask: {
     text: "Task added to board",
   },
+  successDeleteTask: {
+    text: "Task successfully deleted",
+  },
 };
 
 function createToast(notificationId) {
