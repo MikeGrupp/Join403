@@ -604,7 +604,7 @@
 
 @media (min-width: 1921px) {}
 
-@media (max-width: 767px) {
+@media screen and (max-width: 767px) {
   .header {
     width: calc(100% - 16px - 16px);
     height: 40px;
@@ -731,7 +731,7 @@
   }
 
   .contact_list_container {
-    max-height: calc(100vh - 80px * 2);
+    max-height: calc(100vh - (2 * 80px));
     padding-left: 14px;
     width: 100%;
   }
@@ -759,6 +759,7 @@
 
   .contact_list {
     padding: 24px;
+    width: calc(100% - (2 * 24px));
   }
 
   .contact_list dt:first-child {
@@ -840,13 +841,13 @@
   .contact_manage_dialog_container {
     flex-direction: column;
     width: 100%;
-    height: calc(100vh - 40px * 2);
+    height: calc(100vh - (2 * 40px));
     max-height: 760px;
   }
 
   .contact_manage_dialog_title_container {
     height: 45%;
-    width: calc(100vw - 19px * 2 - 24px * 2);
+    width: calc(100vw - (2 * 19px) - (2 * 24px));
     padding: 66px 24px 66px 24px;
     color: #FFFFFF;
     background-color: #2A3647;
@@ -869,7 +870,7 @@
   }
 
   .contact_manage_dialog_input_container {
-    width: calc(100vw - 19px * 2 - 15px * 2);
+    width: calc(100vw - (2 * 19px) - (2 * 15px));
     height: 100%;
     justify-content: end;
     padding: 62px 15px 62px 15px;
@@ -911,7 +912,7 @@
   }
 
   .input_field {
-    width: calc(100% - 21px * 2);
+    width: calc(100% - (2 * 21px));
     padding: 8px 19px 8px 19px;
   }
 
@@ -985,5 +986,39 @@
 @media (max-width: 1170) {
   .kanban_board {
     flex-wrap: wrap;
+  }
+}
+
+@media screen and (max-width: 427px) {
+  .sidebar_links {
+    gap: 0px;
+  }
+
+  .contact_list {
+    font-size: 16px;
+    padding: 8px;
+    width: calc(100% - (2 * 8px));
+  }
+
+  .contact_list dd .contact {
+    font-size: 16px;
+    gap: 4px;
+    padding: 2px 8px 2px 8px;
+  }
+
+  .contact_list dt {
+    padding: 2px 20px 2px 20px;
+  }
+
+  .contact_list dt:first-child {
+    padding-top: 8px;
+  }
+
+  .contact_list_container {
+    padding-left: 0px;
+  }
+
+  .contact_name_mail {
+    font-size: 14px;
   }
 }
