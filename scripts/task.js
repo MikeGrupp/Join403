@@ -319,7 +319,7 @@ function renderCategory(input) {
   Container.innerHTML = `${category}`;
 }
 
-async function addTask() {
+async function addTask(side) {
   addTaskValidation();
   if (validation === true) {
     await postTask();
@@ -329,10 +329,18 @@ async function addTask() {
     await postSubtask(taskId);
     await postAssignedAccounts(taskId);
     clearAddTask();
+    if (side === "board") {
+      tasksIds = [];
+      fetchTaskIds();
+      taskMoveBack("AddtaskBoard", "AddtaskBoardBg");
+      reRenderBoard();
+    }
     createToast("successNewTask");
-    setTimeout(function () {
-      window.location.href = "./board.html";
-   }, 925);
+    if (side === "addTask") {
+      setTimeout(function () {
+        window.location.href = "./board.html";
+      }, 925);
+    }
   }
 }
 

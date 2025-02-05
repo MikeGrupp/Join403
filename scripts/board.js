@@ -293,7 +293,7 @@ async function moveTo(category) {
   reRenderBoard();
 }
 
-function reRenderBoard() {
+async function reRenderBoard() {
   document.getElementById("boardTodo").innerHTML = ``;
   document.getElementById("boardInProgress").innerHTML = ``;
   document.getElementById("boardAwaitFeedback").innerHTML = ``;
@@ -305,35 +305,59 @@ function reRenderBoard() {
   renderBoard();
 }
 
-function taskMoveForward() {
+function taskMoveForward(div) {
   let id = null;
-  let container = document.getElementById("taskDetail");
+  let container = document.getElementById(div);
   let pos = 0;
+  let position = 0;
   clearInterval(id);
   id = setInterval(frame, 1);
+  if (div === "taskDetail") {
+    position = 35;
+  }
+  if (div === "addtaskBoard") {
+    position = 50;
+  }
   function frame() {
-    if (pos == 35) {
+    if (pos == position) {
       clearInterval(id);
     } else {
       pos++;
-      container.style.right = pos + "vw";
+      if (div === "taskDetail") {
+        container.style.right = pos + "vw";
+      }
+      if (div === "addtaskBoard") {
+        container.style.right = "calc(" + pos + "vw - 384px)";
+      }
     }
   }
 }
 
-function taskMoveBack() {
+function taskMoveBack(div, BgDiv) {
   let id = null;
-  let container = document.getElementById("taskDetail");
+  let container = document.getElementById(div);
   let pos = 0;
   clearInterval(id);
+  let position = 0;
   id = setInterval(frame, 1);
+  if (div === "taskDetail") {
+    position = 35;
+  }
+  if (div === "addtaskBoard") {
+    position = 50;
+  }
   function frame() {
-    if (pos == 35) {
+    if (pos == position) {
       clearInterval(id);
-      dNone("taskDetailBg");
+      dNone(BgDiv);
     } else {
       pos++;
-      container.style.right = "-" + pos + "vh";
+      if (div === "taskDetail") {
+        container.style.right = -pos + "vw";
+      }
+      if (div === "addtaskBoard") {
+        container.style.right = "calc( -" + pos + "vw - 384px)";
+      }
     }
   }
 }
@@ -362,7 +386,7 @@ function renderDetailTask(taskId) {
   )}`;
   renderDetailAccounts(task);
   renderDetailSubtasks(taskId);
-  taskMoveForward();
+  taskMoveForward("taskDetail");
 }
 
 function renderDetailAccounts(task) {
@@ -446,6 +470,7 @@ function search() {
   fetchTaskIds();
   if (length === 0) {
     document.getElementById("taskSearch").value = "";
+    document.getElementById("BoardRequiredSearch").classList.add("d-none");
     reRenderBoard();
   } else if (length > 0) {
     for (let i = 0; i < tasksIds.length; i++) {
@@ -456,10 +481,12 @@ function search() {
         searchTasks.push(taskId);
       }
     }
+    document.getElementById("BoardRequiredSearch").classList.add("d-none");
     tasksIds = searchTasks;
     reRenderBoard();
     if (searchTasks.length === 0) {
-      alert("No task found");
+      dNone("BoardRequiredSearch");
+      document.getElementById("BoardRequiredSearch").classList.remove("d-none");
     }
   }
 }

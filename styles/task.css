@@ -15,6 +15,7 @@
   align-items: center;
   justify-content: flex-start;
   flex-direction: column;
+  width: 100%;
 }
 
 .addTask_content {
@@ -516,9 +517,13 @@ option:hover {
   background-color: #f6f7f8;
 }
 
+.addTask_prio img {
+  width: 15px;
+}
+
 .addTask_required {
   display: flex;
-  margin-top: px;
+  margin-top: 2px;
   position: absolute;
   top: 100%;
   left: 0;
