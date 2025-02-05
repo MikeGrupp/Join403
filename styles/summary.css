@@ -1,4 +1,4 @@
-main {
+.vcenter {
     display: flex;
     flex-direction: column;
     padding: 64px;
@@ -11,10 +11,18 @@ main {
     gap: 64px;
 }
 
-.title {
+.sum_title {
     display: flex;
     align-items: center;
     gap: 32px;
+}
+
+.desk {
+    display: block;
+}
+
+.mob {
+    display: none;
 }
 
 .greeting_box {
@@ -33,7 +41,7 @@ main {
     color: #29ABE2;
 }
 
-.blue_line {
+.blue_line_sum {
     background-color: #29ABE2;
     height: 64px;
     width: 4px;
@@ -256,6 +264,10 @@ main {
 }
 
 .icon_orange {
+    background-image: url(../assets/img/urgent.svg);
+    background-size: 24px;
+    background-position: center;
+    background-repeat: no-repeat;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -263,4 +275,4 @@ main {
     width: 64px;
     height: 64px;
     border-radius: 64px;
-}
+} 

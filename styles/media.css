@@ -1,4 +1,121 @@
 @media screen and (max-width: 427px) and (min-width: 320px) {
+  main {
+    margin-left: 0;
+  }
+
+  .greeting_box {
+    position: absolute;
+    width: 100vw;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    animation: fadeout 500ms linear forwards;
+    animation-delay: 2000ms;
+  }
+
+  .vcenter {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 76px;
+    padding: 16px;
+    gap: 48px;
+  }
+
+  .sum_title {
+    align-items: baseline;
+    gap: 8px;
+    flex-direction: column;
+    animation: fadein 500ms linear forwards;
+    animation-delay: 2000ms;
+  }
+
+  .desk {
+    display: none;
+  }
+
+  .mob {
+    display: block;
+  }
+
+  .blue_line_sum {
+    height: 2px;
+    width: 64px;
+  }
+
+  .progress_cards {
+    gap: 16px;
+    width: calc(100vw - 32px);
+    animation: fadein 500ms linear forwards;
+    animation-delay: 2000ms;
+  }
+
+  .row {
+    gap: 16px;
+  }
+
+  .card {
+    padding: 16px;
+    gap: 16px;
+    height: 64px;
+  }
+
+  .number {
+    font-size: 32px;
+    text-align: center;
+  }
+
+  .description {
+    font-size: 12px;
+  }
+
+  .icon-pen {
+    background-size: 16px;
+    width: 40px;
+    height: 40px;
+  }
+
+  .icon-check {
+    background-size: 16px;
+    width: 40px;
+    height: 40px;
+  }
+
+  .big_card {
+    padding: 16px;
+    gap: 16px;
+    height: 64px;
+  }
+
+  .right_card {
+    gap: 8px;
+    font-size: 12px;
+  }
+
+  .left_card {
+    gap: 8px;
+  }
+
+  .icon_orange {
+    background-size: 16px;
+    width: 40px;
+    height: 40px;
+  }
+
+  .small_card {
+    padding: 16px;
+    height: 64px;
+  }
+
+  .greeting {
+    font-size: 32px;
+  }
+
+  .username {
+    font-size: 48px;
+  }
+
   .join_logo {
     width: 48px;
     height: auto;
@@ -120,6 +237,129 @@
 }
 
 @media screen and (max-width: 767px) and (min-width: 428px) {
+  main {
+    margin-left: 0;
+  }
+
+  .greeting_box {
+    position: absolute;
+    width: 100vw;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    animation: fadeout 500ms linear forwards;
+    animation-delay: 2000ms;
+  }
+
+  .vcenter {
+    padding: 16px;
+    gap: 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 76px;
+  }
+
+  .sum_title {
+    align-items: baseline;
+    gap: 8px;
+    flex-direction: column;
+    animation: fadein 500ms linear forwards;
+    animation-delay: 2000ms;
+    width: 396px;
+  }
+
+  .desk {
+    display: none;
+  }
+
+  .mob {
+    display: block;
+  }
+
+  .blue_line_sum {
+    height: 2px;
+    width: 64px;
+  }
+
+  .progress_cards {
+    gap: 32px;
+    width: calc(100vw - 32px);
+    animation: fadein 500ms linear forwards;
+    animation-delay: 2000ms;
+  }
+
+  .row {
+    gap: 32px;
+    justify-content: center;
+  }
+
+  .card {
+    padding: 16px;
+    gap: 16px;
+    height: 64px;
+    max-width: 150px;
+  }
+
+  .number {
+    font-size: 32px;
+    text-align: center;
+  }
+
+  .description {
+    font-size: 12px;
+  }
+
+  .icon-pen {
+    background-size: 20px;
+    width: 50px;
+    height: 50px;
+  }
+
+  .icon-check {
+    background-size: 20px;
+    width: 50px;
+    height: 50px;
+  }
+
+  .big_card {
+    padding: 16px;
+    gap: 16px;
+    height: 64px;
+    max-width: 364px;
+  }
+
+  .right_card {
+    gap: 16px;
+    font-size: 14px;
+  }
+
+  .left_card {
+    gap: 16px;
+  }
+
+  .icon_orange {
+    background-size: 20px;
+    width: 50px;
+    height: 50px;
+  }
+
+  .small_card {
+    padding: 16px;
+    height: 64px;
+    max-width: 78px;
+  }
+
+  .greeting {
+    font-size: 32px;
+  }
+
+  .username {
+    font-size: 48px;
+  }
+
   .join_logo {
     width: 48px;
     height: auto;
@@ -238,6 +478,85 @@
 
 
 @media screen and (max-width: 1024px) and (min-width: 768px) {
+  .greeting_box {
+    position: absolute;
+    width: max-content;
+    left: 50%;
+    text-align: center;
+    animation: fadeout 500ms linear forwards;
+    animation-delay: 2000ms;
+  }
+
+  .vcenter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .sum_title {
+    align-items: baseline;
+    gap: 8px;
+    flex-direction: column;
+    animation: fadein 500ms linear forwards;
+    animation-delay: 2000ms;
+    width: 408px;
+  }
+
+  .progress_cards {
+    animation: fadein 500ms linear forwards;
+    animation-delay: 2000ms;
+  }
+
+  .desk {
+    display: none;
+  }
+
+  .mob {
+    display: block;
+  }
+
+  .blue_line_sum {
+    height: 2px;
+    width: 64px;
+  }
+
+  .row {
+    justify-content: center;
+  }
+
+  .card {
+    padding: 16px;
+    gap: 16px;
+    height: 96px;
+    max-width: 156px;
+  }
+
+  .number {
+    font-size: 48px;
+    text-align: center;
+  }
+
+  .big_card {
+    padding: 16px;
+    gap: 16px;
+    height: 96px;
+    max-width: 376px;
+  }
+
+  .small_card {
+    padding: 16px;
+    height: 96px;
+    max-width: 82px;
+  }
+
+  .greeting {
+    font-size: 32px;
+  }
+
+  .username {
+    font-size: 48px;
+  }
+
   .login {
     width: 640px;
     height: auto;
@@ -258,7 +577,28 @@
   }
 }
 
-@media screen and (max-width: 1440px) and (min-width: 1025px) {}
+@media screen and (max-width: 1440px) and (min-width: 1025px) {
+  .greeting_box {
+    position: absolute;
+    width: 100vw;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    animation: fadeout 500ms linear forwards;
+    animation-delay: 2000ms;
+  }
+
+  .sum_title {
+    animation: fadein 500ms linear forwards;
+    animation-delay: 2000ms;
+  }
+
+  .progress_cards {
+    animation: fadein 500ms linear forwards;
+    animation-delay: 2000ms;
+  }
+}
 
 @media screen and (max-width: 1920px) and (min-width: 1441px) {}
 
@@ -434,7 +774,7 @@
     align-items: start;
     gap: 15px;
   }
-  
+
   .title_group .back_arrow {
     display: initial;
   }
@@ -454,7 +794,7 @@
   .title_group p {
     font-size: 20px;
   }
-  
+
   .contact_details {
     animation: none;
     gap: 15px;
@@ -552,7 +892,7 @@
     align-items: center;
   }
 
-  .contact_form_profile_container .profile_badge_large{
+  .contact_form_profile_container .profile_badge_large {
     height: 120px;
     width: 120px;
     font-size: 47px;
@@ -594,15 +934,17 @@
     0% {
       transform: translateY(130%);
     }
+
     100% {
       transform: translateY(0%);
     }
   }
-  
+
   @keyframes show_contact_manage_dialog_close {
     0% {
       transform: translateY(0%);
     }
+
     100% {
       transform: translateY(130%);
     }
@@ -623,15 +965,17 @@
     0% {
       transform: translateY(calc(100vh));
     }
+
     100% {
       transform: translateY(0%);
     }
   }
-  
+
   @keyframes hide_toast {
     0% {
       transform: translateY(0%);
     }
+
     100% {
       transform: translateY(calc(100vh));
     }

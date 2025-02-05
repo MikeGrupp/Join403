@@ -526,9 +526,7 @@ function templateRenderSummary(
         <div class="row">
           <div class="big_card" onclick="goToBoard()">
             <div class="left_card">
-              <div class="icon_orange">
-                <img src="assets/img/urgent.svg" alt="task_icon">
-              </div>
+              <div class="icon_orange"></div>
               <div class="column ">
                 <span id="urgent" class="number">${amountUrgent}</span>
                 <span class="description">Urgent</span>
