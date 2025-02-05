@@ -427,7 +427,7 @@ function templateRenderDetailTask(
         <img
           src="assets/img/Close.svg"
           alt="close task"
-          onclick="taskMoveBack()"
+          onclick="taskMoveBack('taskDetail','taskDetailBg')"
         />
       </div>
     </div>

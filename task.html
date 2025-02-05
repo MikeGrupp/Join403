@@ -52,7 +52,10 @@
                   type="text"
                 />
                 <div class="dropdown_wrapper">
-                  <div class="addTask_required d-none" id="addTaskRequiredTitle">
+                  <div
+                    class="addTask_required d-none"
+                    id="addTaskRequiredTitle"
+                  >
                     This field is required
                   </div>
                 </div>
@@ -77,7 +80,10 @@
                 >
                   Assigned to
                 </label>
-                <div class="addTask_subtask_container" id="addTaskContactContainer">
+                <div
+                  class="addTask_subtask_container"
+                  id="addTaskContactContainer"
+                >
                   <input
                     class="input_with_button"
                     id="addTaskAssignedTo"
@@ -89,17 +95,26 @@
                   />
                   <div class="delete_button">
                     <button class="add_button" onclick="arrowDropdownMenu()">
-                      <img id="dropdownButton" style="width: 14px; height: 14px;"  src="assets/img/pfeil_nach_unten.png" alt="">
+                      <img
+                        id="dropdownButton"
+                        style="width: 14px; height: 14px"
+                        src="assets/img/pfeil_nach_unten.png"
+                        alt=""
+                      />
                     </button>
                   </div>
                 </div>
                 <div class="dropdown_wrapper">
-                  <div class="dropdown_container d-none" id="dropdownContainer">
-                  </div>
+                  <div
+                    class="dropdown_container d-none"
+                    id="dropdownContainer"
+                  ></div>
                 </div>
                 <div class="dropdown_wrapper">
-                  <div class="addTask_assigned_contacts" id="assignedContactsContainer">
-                  </div>
+                  <div
+                    class="addTask_assigned_contacts"
+                    id="assignedContactsContainer"
+                  ></div>
                 </div>
               </div>
             </div>
@@ -110,32 +125,40 @@
                   Due Date
                   <span style="color: red">*</span>
                 </label>
-                <input
-                  id="addTaskDate"
-                  class="input"
-                  name="Date"
-                  type="date"
-                />
+                <input id="addTaskDate" class="input" name="Date" type="date" />
                 <div class="dropdown_wrapper">
-                  <div class="addTask_required d-none" id="addTaskRequiredDueDate">
+                  <div
+                    class="addTask_required d-none"
+                    id="addTaskRequiredDueDate"
+                  >
                     This field is required
                   </div>
                 </div>
               </div>
-              <div class="addTask_formular_second" >
-                <div class="addTask_formular_headline">
-                  Prio
-                </div>
+              <div class="addTask_formular_second">
+                <div class="addTask_formular_headline">Prio</div>
                 <div class="addTask_prio_container" id="prioContainer">
-                  <div class="addTask_prio" id="prioUrgent" onclick="renderPrio('urgent')">
+                  <div
+                    class="addTask_prio"
+                    id="prioUrgent"
+                    onclick="renderPrio('urgent')"
+                  >
                     Urgent
                     <img src="assets/img/prio_urgent.svg" alt="Urgent" />
                   </div>
-                  <div class="addTask_prio addTask_prio_focus_medium" id="prioMedium" onclick="renderPrio('medium')" >
+                  <div
+                    class="addTask_prio addTask_prio_focus_medium"
+                    id="prioMedium"
+                    onclick="renderPrio('medium')"
+                  >
                     Medium
                     <img src="assets/img/Prio media.svg" alt="Medium" />
                   </div>
-                  <div class="addTask_prio" id="prioLow" onclick="renderPrio('low')">
+                  <div
+                    class="addTask_prio"
+                    id="prioLow"
+                    onclick="renderPrio('low')"
+                  >
                     Low
                     <img src="assets/img/prio_low.svg" alt="Low" />
                   </div>
@@ -146,32 +169,47 @@
                   Category
                   <span style="color: red">*</span>
                 </label>
-                <div id="addTaskCategory" class="div_with_button" onclick="dNone('dropdownContainerCategory'), rotate90('dropdownButtonCategory')">
-                  <div id="addTaskCategoryHeadline">
-                    Select Task Category
-                  </div>
+                <div
+                  id="addTaskCategory"
+                  class="div_with_button"
+                  onclick="dNone('dropdownContainerCategory'), rotate90('dropdownButtonCategory')"
+                >
+                  <div id="addTaskCategoryHeadline">Select Task Category</div>
                   <div class="delete_button">
                     <button class="add_button">
-                      <img id="dropdownButtonCategory" style="width: 14px; height: 14px;"  src="assets/img/pfeil_nach_unten.png" alt="">
+                      <img
+                        id="dropdownButtonCategory"
+                        style="width: 14px; height: 14px"
+                        src="assets/img/pfeil_nach_unten.png"
+                        alt=""
+                      />
                     </button>
                   </div>
                 </div>
                 <div class="dropdown_wrapper">
-                  <div class="dropdown_container d-none" id="dropdownContainerCategory">
-                    <div class="dropdown_option" onclick="renderCategory('Technical Task'), dNone('dropdownContainerCategory'), rotate90('dropdownButtonCategory')">
-                      <div class="dropdown_name_category" >
-                          Technical Task
-                      </div>
+                  <div
+                    class="dropdown_container d-none"
+                    id="dropdownContainerCategory"
+                  >
+                    <div
+                      class="dropdown_option"
+                      onclick="renderCategory('Technical Task'), dNone('dropdownContainerCategory'), rotate90('dropdownButtonCategory')"
+                    >
+                      <div class="dropdown_name_category">Technical Task</div>
                     </div>
-                    <div class="dropdown_option" onclick="renderCategory('User Story'), dNone('dropdownContainerCategory'), rotate90('dropdownButtonCategory')">
-                      <div class="dropdown_name_category">
-                          User Story
-                      </div>
+                    <div
+                      class="dropdown_option"
+                      onclick="renderCategory('User Story'), dNone('dropdownContainerCategory'), rotate90('dropdownButtonCategory')"
+                    >
+                      <div class="dropdown_name_category">User Story</div>
                     </div>
                   </div>
                 </div>
                 <div class="dropdown_wrapper">
-                  <div class="addTask_required d-none" id="addTaskRequiredCategory">
+                  <div
+                    class="addTask_required d-none"
+                    id="addTaskRequiredCategory"
+                  >
                     This field is required
                   </div>
                 </div>
@@ -180,7 +218,10 @@
                 <label class="addTask_formular_headline" for="addTaskSubtask">
                   Subtask
                 </label>
-                <div class="addTask_subtask_container" id="addTaskSubtaskContainer">
+                <div
+                  class="addTask_subtask_container"
+                  id="addTaskSubtaskContainer"
+                >
                   <input
                     class="input_with_button"
                     placeholder="Add new subtask"
@@ -190,19 +231,21 @@
                     oninput="addTaskRenderAddButton();"
                   />
                   <div class="delete_button" id="addTaskSubtaskDeleteButton">
-                    <button class="add_button" onclick="addTaskRenderAddButtonPlusButton()">
+                    <button
+                      class="add_button"
+                      onclick="addTaskRenderAddButtonPlusButton()"
+                    >
                       <img src="assets/img/Property 1=add.svg" alt="add" />
                     </button>
                   </div>
                 </div>
-                  <div class="dropdown_wrapper">
-                    <div class="subtask_container" id="subtaskContainer">
-                    </div>
-                  </div>
+                <div class="dropdown_wrapper">
+                  <div class="subtask_container" id="subtaskContainer"></div>
                 </div>
               </div>
             </div>
           </div>
+        </div>
         <div class="wrapper">
           <div class="addTask_button_container">
             <div class="addTask_button_info">
@@ -219,7 +262,7 @@
               >
                 Clear <img src="assets/img/button_cancel.svg" alt="cancel" />
               </button>
-              <button class="standard_btn" onclick="addTask()">
+              <button class="standard_btn" onclick="addTask('addTask')">
                 Create Task
                 <img src="assets/img/check.svg" alt="Create Task" />
               </button>
