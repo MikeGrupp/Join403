@@ -406,6 +406,7 @@ function templateRenderAssignedAccounts(initials, accountNr, color, position) {
 }
 
 function templateRenderDetailTask(
+  taskId,
   title,
   description,
   category,
@@ -454,7 +455,7 @@ function templateRenderDetailTask(
     </div>
     <div class="task_detail_subtasks" id="detailSubtasks"></div>
     <div class="detail_task_edit_delete">
-      <div class="detail_task_delete">
+      <div class="detail_task_delete" onclick="deleteTaskFromTasks('${taskId}')">
         <div class="detail_task_delete_img" id="detailTaskDeleteImg"></div>
         Delete
       </div>

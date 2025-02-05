@@ -377,6 +377,7 @@ function renderDetailTask(taskId) {
   }
   let container = document.getElementById("taskDetail");
   container.innerHTML = `${templateRenderDetailTask(
+    taskId,
     title,
     description,
     category,
@@ -541,4 +542,25 @@ function highlightBorder() {
   document
     .getElementById(currentDraggedElement)
     .classList.add("animation_task_drag_and_drop");
+}
+
+async function deleteTaskFromTasks(taskId) {
+  tasks = await loadData("tasks/");
+    if (tasks.hasOwnProperty(taskId)) {
+      await deleteExistingTask(taskId);
+      createToast("successDeleteTask");
+      taskMoveBack();
+      setTimeout(function () {
+        window.location.href = "./board.html";
+     }, 800);
+    }
+}
+
+async function deleteExistingTask(taskId) {
+  await deleteTask(taskId);
+  return taskId;
+}
+
+async function deleteTask(taskId) {
+  return await deleteData("/tasks/" + taskId);
 }

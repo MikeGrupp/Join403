@@ -24,11 +24,11 @@
 
 <body>
     <main class="center">
-        <img class="logo" src="./assets/img/Logo1.svg" alt="Join logo">
+        <img class="join_logo" src="./assets/img/Logo1.svg" alt="Join logo">
         <div class="signup">
             <div class="card_header">
                 <div class="back_arrow">
-                    <img class="" src="./assets/img/arrow-left.svg" onclick="previousPage()" alt="previous page" />
+                    <img src="./assets/img/arrow-left.svg" onclick="previousPage()" alt="previous page" />
                 </div>
                 <div class="headline">
                     <h1>Sign up</h1>
@@ -36,24 +36,24 @@
                 </div>
             </div>
             <form class="signup_form" onsubmit="addUser(); return false;">
-                <label>
+                <label  class="vcenter">
                     <input class="standard_ipt" type="text" id="name" oninput="checkFormInputs()" required
                         placeholder="Name" maxlength="30">
                     <img src="./assets/img/person.svg" class="input_icon" alt="person icon">
                 </label>
-                <label>
+                <label class="vcenter">
                     <input class="standard_ipt" type="email" id="email" oninput="checkFormInputs()" required
                         placeholder="Email" maxlength="30">
                     <img src="./assets/img/mail.svg" class="input_icon" alt="mail icon">
 
                 </label>
-                <label>
+                <label class="vcenter">
                     <input class="standard_ipt" type="password" id="password" oninput="checkFormInputs()" required
                         placeholder="Password">
                     <img src="./assets/img/lock.svg" onclick="togglePassword('password', 'toggle_password')" id="toggle_password" class="input_icon" alt="lock icon">
 
                 </label>
-                <label>
+                <label class="vcenter">
                     <input class="standard_ipt" type="password" id="passwordConfirm" oninput="checkFormInputs()"
                         required placeholder="Confirm Password">
                     <img src="./assets/img/lock.svg" onclick="togglePassword('passwordConfirm', 'toggle_confirmPassword')" id="toggle_confirmPassword" class="input_icon" alt="lock icon">

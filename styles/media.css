@@ -1,9 +1,31 @@
 @media screen and (max-width: 427px) and (min-width: 320px) {
+  .join_logo {
+    width: 48px;
+    height: auto;
+    top: 16px;
+    left: 16px;
+  }
+
+  .signup {
+    width: 254px;
+    height: auto;
+    padding: 32px 16px;
+  }
+
+  .card_header {
+    gap: 24px;
+    margin-left: -48px;
+  }
+
+  .back_arrow {
+    width: 24px;
+    height: 24px;
+  }
+
   .login {
     width: 254px;
     height: auto;
     padding: 32px 16px;
-    border-radius: 32px;
   }
 
   h1 {
@@ -19,6 +41,10 @@
   }
 
   .login_form {
+    gap: 16px;
+  }
+
+  .signup_form {
     gap: 16px;
   }
 
@@ -42,6 +68,11 @@
   }
 
   .standard_btn:enabled {
+    padding: 12px 20px;
+    font-size: 16px;
+  }
+
+  .standard_btn:disabled {
     padding: 12px 20px;
     font-size: 16px;
   }
@@ -88,9 +119,144 @@
   }
 }
 
-@media screen and (max-width: 767px) and (min-width: 428px) {}
+@media screen and (max-width: 767px) and (min-width: 428px) {
+  .join_logo {
+    width: 48px;
+    height: auto;
+    top: 32px;
+    left: 32px;
+  }
 
-@media screen and (max-width: 1024px) and (min-width: 768px) {}
+  .signup {
+    width: 364px;
+    height: auto;
+    padding: 32px 16px;
+  }
+
+  .card_header {
+    align-items: baseline;
+    gap: 24px;
+    margin-left: -57px;
+  }
+
+  .login {
+    width: 364px;
+    height: auto;
+    padding: 32px 16px;
+  }
+
+  h1 {
+    font-size: 48px;
+  }
+
+  .headline {
+    margin-bottom: 32px;
+  }
+
+  .blue_line {
+    width: 96px;
+  }
+
+  .signup_form {
+    gap: 16px;
+  }
+
+  .login_form {
+    gap: 16px;
+  }
+
+  .standard_ipt {
+    width: 340px;
+    height: 32px;
+    font-size: 24px;
+    padding: 8px 12px;
+  }
+
+  .login_buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 180px;
+    gap: 16px;
+  }
+
+  .input_icon {
+    margin-left: -30px;
+  }
+
+  .standard_btn:enabled {
+    padding: 12px 20px;
+    font-size: 16px;
+  }
+
+  .standard_btn:disabled {
+    padding: 12px 20px;
+    font-size: 16px;
+  }
+
+  .white_btn {
+    padding: 12px 20px;
+    font-size: 16px;
+  }
+
+  @keyframes moveToCorner {
+    from {
+      width: 100px;
+      height: auto;
+    }
+
+    to {
+      width: 48px;
+      height: auto;
+      top: 32px;
+      left: 32px;
+    }
+  }
+
+  .linkbox {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    position: absolute;
+    bottom: 16px;
+    width: 200px;
+  }
+
+  .signup_btn {
+    width: auto;
+    gap: 32px;
+    top: auto;
+    bottom: 64px;
+    right: 32px;
+  }
+
+  h3 {
+    padding-top: 12px;
+    font-size: 20px;
+  }
+}
+
+
+@media screen and (max-width: 1024px) and (min-width: 768px) {
+  .login {
+    width: 640px;
+    height: auto;
+    padding: 32px;
+  }
+
+  .signup {
+    width: 640px;
+    height: auto;
+    padding: 32px;
+  }
+
+  .join_logo {
+    width: 64px;
+    height: auto;
+    top: 32px;
+    left: 32px;
+  }
+}
 
 @media screen and (max-width: 1440px) and (min-width: 1025px) {}
 
