@@ -815,7 +815,6 @@
 
   .contact_name {
     font-size: 36px;
-    font-weight: 700;
   }
 
   .contact_manage .contact_manage_menu {
@@ -1019,6 +1018,56 @@
   }
 
   .contact_name_mail {
+    font-size: 16px;
+  }
+
+  .mobile_contact_details_container {
+    padding-top: 16px;
+    padding-left: 8px;
+    gap: 16px;
+  }
+
+  .contact_details {
+    gap: 8px;
+  }
+
+  .title_group {
+    gap: 8px;
+  }
+
+  .title_group h1 {
+    font-size: 36px;
+  }
+
+  .contact_name {
+      font-size: 28px;
+  }
+
+  .title_group p {
+    font-size: 18px;
+  }
+
+  .contact_information h2 {
+    font-size: 18px;
+  }
+
+  .profile_badge_large {
+    height: 70px;
+    width: 70px;
+    min-width: 70px;
+    font-size: 24px;
+  }
+  
+  .contact_head {
+    gap: 10px;
+  }
+
+  .contact_section_container {
+    font-size: 14px;
+    gap: 8px;
+  }
+
+  .mail {
     font-size: 14px;
   }
 }
