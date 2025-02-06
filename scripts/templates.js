@@ -17,7 +17,7 @@ function templateRenderHeaderProfileContainer() {
 
 function templateRenderHeaderUser(initials, fontSize) {
   return `
-    <button id="header_user_profile" class="header_user_profile ${fontSize}" onclick="openSubmenu()">
+    <button id="header_user_profile" class="header_user_profile ${fontSize}" onclick="openSubmenu('submenu_dialog')">
     ${initials}
     </button>
     `;
@@ -166,8 +166,8 @@ function templateRenderDesktopAddContactButton() {
 
 function templateRenderContactListLetter(letter) {
   return `
-        <dt>${letter}</dt>
-        <div class="horizontal_line"></div>
+        <dt class="listLetter">${letter}</dt>
+        <dt class="horizontal_line"></dt>
   `;
 }
 
@@ -200,6 +200,7 @@ function templateRenderContactDetailsDefault() {
 }
 
 function templateRenderContactDetailsForContact(
+  isMobile,
   contactId,
   color,
   initials,
@@ -215,10 +216,8 @@ function templateRenderContactDetailsForContact(
             <div class="contact_manage">
               <span class="contact_name">${name}</span>` +
     templateRenderContactDetailsMenuForContact(contactId) +
-    `     <button id="contact_burger_menu" class="contact_burger_menu" onclick="openContactManageSubmenu()">
-                <img class="menu_image" src="./assets/img/more_vert.svg" alt="open options to manage the contact">
-              </button>
-            </div>
+    templateRenderContactDetailsMobileManageMenuButton(isMobile) +
+            `</div>
           </div>
           <div class="contact_information">
             <h2>Contact Information</h2>
@@ -239,35 +238,31 @@ function templateRenderContactDetailsForContact(
 function templateRenderContactDetailsMenuForContact(contactId) {
   return `
           <menu class="contact_manage_menu">
-            <button onclick="openEditContact('${contactId}')" class="contact_manage_button">
-              <img class="menu_image" src="./assets/img/edit.svg" alt="edit the current contact">
-              <img class="menu_image_hover" src="./assets/img/edit2.svg" alt="edit the current contact">
-              Edit
-            </button>
-            <button onclick="deleteContactFromContacts('${contactId}')" class="contact_manage_button">
-              <img class="menu_image" src="./assets/img/delete.svg" alt="delete the current contact from the List">
-              <img class="menu_image_hover" src="./assets/img/delete2.svg" alt="delete the current contact from the List">
-              Delete
-            </button>
+            <li>
+              <button onclick="openEditContact('${contactId}')" class="contact_manage_button">
+                <img class="menu_image" src="./assets/img/edit.svg" alt="edit the current contact">
+                <img class="menu_image_hover" src="./assets/img/edit2.svg" alt="edit the current contact">
+                Edit
+              </button>
+            </li>
+            <li>
+              <button onclick="deleteContactFromContacts('${contactId}')" class="contact_manage_button">
+                <img class="menu_image" src="./assets/img/delete.svg" alt="delete the current contact from the List">
+                <img class="menu_image_hover" src="./assets/img/delete2.svg" alt="delete the current contact from the List">
+                Delete
+              </button>
+            </li>
           </menu>
   `;
 }
 
-function templateRenderContactDetailsMenuForContact(contactId) {
-  return `
-          <menu class="contact_manage_menu">
-            <button onclick="openEditContact('${contactId}')" class="contact_manage_button">
-              <img class="menu_image" src="./assets/img/edit.svg" alt="edit the current contact">
-              <img class="menu_image_hover" src="./assets/img/edit2.svg" alt="edit the current contact">
-              Edit
-            </button>
-            <button onclick="deleteContactFromContacts('${contactId}')" class="contact_manage_button">
-              <img class="menu_image" src="./assets/img/delete.svg" alt="delete the current contact from the List">
-              <img class="menu_image_hover" src="./assets/img/delete2.svg" alt="delete the current contact from the List">
-              Delete
-            </button>
-          </menu>
-  `;
+function templateRenderContactDetailsMobileManageMenuButton(isMobile) {
+  if (isMobile) {
+    return `<button id="contact_burger_menu" class="contact_burger_menu" onclick="openSubmenu('contact_manage_submenu')">
+              <img class="menu_image" src="./assets/img/more_vert.svg" alt="open options to manage the contact">
+            </button>`;
+  }
+  return "";
 }
 
 function templateRenderContactManageDialog(

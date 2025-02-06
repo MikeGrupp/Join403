@@ -101,6 +101,10 @@
   padding: 0;
 }
 
+.contact_manage_menu {
+  list-style-type: none;
+}
+
 .contact_manage_button {
   min-width: 62px;
   height: 24px;
