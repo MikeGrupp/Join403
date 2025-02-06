@@ -315,7 +315,7 @@ function taskMoveForward(div) {
   if (div === "taskDetail") {
     position = 35;
   }
-  if (div === "addtaskBoard") {
+  if (div === "addTaskBoard") {
     position = 50;
   }
   function frame() {
@@ -326,7 +326,7 @@ function taskMoveForward(div) {
       if (div === "taskDetail") {
         container.style.right = pos + "vw";
       }
-      if (div === "addtaskBoard") {
+      if (div === "addTaskBoard") {
         container.style.right = "calc(" + pos + "vw - 384px)";
       }
     }
@@ -343,7 +343,7 @@ function taskMoveBack(div, BgDiv) {
   if (div === "taskDetail") {
     position = 35;
   }
-  if (div === "addtaskBoard") {
+  if (div === "addTaskBoard") {
     position = 50;
   }
   function frame() {
@@ -355,7 +355,7 @@ function taskMoveBack(div, BgDiv) {
       if (div === "taskDetail") {
         container.style.right = -pos + "vw";
       }
-      if (div === "addtaskBoard") {
+      if (div === "addTaskBoard") {
         container.style.right = "calc( -" + pos + "vw - 384px)";
       }
     }

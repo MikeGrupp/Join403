@@ -332,7 +332,7 @@ async function addTask(side) {
     if (side === "board") {
       tasksIds = [];
       fetchTaskIds();
-      taskMoveBack("AddtaskBoard", "AddtaskBoardBg");
+      taskMoveBack("addTaskBoard", "addTaskBoardBg");
       reRenderBoard();
     }
     createToast("successNewTask");
