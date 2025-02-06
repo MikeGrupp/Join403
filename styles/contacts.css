@@ -1,5 +1,6 @@
 .contacts_main {
   display: flex;
+  position: relative;
 }
 
 .contact_list_container {

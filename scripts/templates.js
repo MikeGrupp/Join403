@@ -189,7 +189,7 @@ function templateRenderContactDetailsDefault() {
   return `
         <div class="title_group">
           <div class="back_arrow">
-            <img class="" src="./assets/img/arrow-left.svg" onclick="window.location.href='./contacts.html'" alt="back to contacts page" />
+            <img class="" src="./assets/img/arrow-left.svg" onclick="dNone('mobile_contact_details_container')" alt="back to contacts page" />
           </div>
           <h1>Contacts</h1>
           <div class="vertical_line"></div>

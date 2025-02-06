@@ -5,7 +5,7 @@ const CONSTANTS = {
     CONTACT_ADD_CONTAINER: "add_contact_container",
     CONTACT_DETAILS_D: "desktop_contact_details_container",
     CONTACT_DETAILS_M: "mobile_contact_details_container",
-    CONTACT_DETAILS_SUBMENU: "contact_manage_submenu",
+    CONTACT_MANAGE_SUBMENU: "contact_manage_submenu",
     CONTACT_BURGER_MENU: "contact_burger_menu",
     CONTACT_DIALOG: "contact_manage_dialog",
     CONTACT_FORM: "contact_form",
@@ -68,10 +68,7 @@ function initContactManageDialog(mode, contactId, initials, color) {
 }
 
 function openContactDetails(contactId) {
-  if (window.screen.width < 768) {
-    dNone(CONSTANTS.SELECTORS.CONTACT_LIST_CONTAINER);
-    dNone(CONSTANTS.SELECTORS.CONTACT_DETAILS_M);
-  }
+  dNone(CONSTANTS.SELECTORS.CONTACT_DETAILS_M);
   markAsSelectedContact(contactId);
   let contact = getStoredContactById(contactId);
   initContactDetailsDesktop(contact);
@@ -114,9 +111,9 @@ function initContactDetailsMobile(contact) {
 }
 
 function initContactManageSubmenu(contactId) {
-  let contactManageSubmenu = document.getElementById(CONSTANTS.SELECTORS.CONTACT_DETAILS_SUBMENU);
+  let contactManageSubmenu = document.getElementById(CONSTANTS.SELECTORS.CONTACT_MANAGE_SUBMENU);
   contactManageSubmenu.innerHTML = templateRenderContactDetailsMenuForContact(contactId);
-  initSubmenuListeners(CONSTANTS.SELECTORS.CONTACT_DETAILS_SUBMENU, CONSTANTS.SELECTORS.CONTACT_BURGER_MENU);
+  initSubmenuListeners(CONSTANTS.SELECTORS.CONTACT_MANAGE_SUBMENU, CONSTANTS.SELECTORS.CONTACT_BURGER_MENU);
 }
 
 function markAsSelectedContact(contactId) {
@@ -225,14 +222,10 @@ async function deleteContactFromContacts(contactId) {
   removeExistingContactFromUsers(contactId);
   await deleteExistingContact(contactId);
   createToast("successDeleteContact");
-  if (window.screen.width >= 768) {
-    initContactList();
-    initContactDetails();
-  } else {
-    setTimeout(function () {
-      window.location.href = "./contacts.html";
-   }, 800);
-  }
+  initContactList();
+  initContactDetails();
+  closeSubmenu(CONSTANTS.SELECTORS.CONTACT_MANAGE_SUBMENU);
+  dNone(CONSTANTS.SELECTORS.CONTACT_DETAILS_M);
 }
 
 function fillContactFields(contact) {
