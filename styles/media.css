@@ -1007,11 +1007,11 @@
     padding: 2px 8px 2px 8px;
   }
 
-  .contact_list dt {
+  .contact_list .list_letter {
     padding: 2px 20px 2px 20px;
   }
 
-  .contact_list dt:first-child {
+  .contact_list .list_letter:first-child {
     padding-top: 8px;
   }
 

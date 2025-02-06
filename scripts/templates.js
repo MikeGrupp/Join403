@@ -166,7 +166,7 @@ function templateRenderDesktopAddContactButton() {
 
 function templateRenderContactListLetter(letter) {
   return `
-        <dt class="listLetter">${letter}</dt>
+        <dt class="list_letter">${letter}</dt>
         <dt class="horizontal_line"></dt>
   `;
 }

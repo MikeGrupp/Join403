@@ -18,12 +18,12 @@
   font-size: 20px;
 }
 
-.contact_list .listLetter {
+.contact_list .list_letter {
   height: calc(58px - (2 * 17px));
   padding: 17px 36px 17px 36px;
 }
 
-.contact_list .listLetter:first-child {
+.contact_list .list_letter:first-child {
   padding-top: 4px;
 }
 
