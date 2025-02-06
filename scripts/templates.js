@@ -239,33 +239,20 @@ function templateRenderContactDetailsForContact(
 function templateRenderContactDetailsMenuForContact(contactId) {
   return `
           <menu class="contact_manage_menu">
-            <button onclick="openEditContact('${contactId}')" class="contact_manage_button">
-              <img class="menu_image" src="./assets/img/edit.svg" alt="edit the current contact">
-              <img class="menu_image_hover" src="./assets/img/edit2.svg" alt="edit the current contact">
-              Edit
-            </button>
-            <button onclick="deleteContactFromContacts('${contactId}')" class="contact_manage_button">
-              <img class="menu_image" src="./assets/img/delete.svg" alt="delete the current contact from the List">
-              <img class="menu_image_hover" src="./assets/img/delete2.svg" alt="delete the current contact from the List">
-              Delete
-            </button>
-          </menu>
-  `;
-}
-
-function templateRenderContactDetailsMenuForContact(contactId) {
-  return `
-          <menu class="contact_manage_menu">
-            <button onclick="openEditContact('${contactId}')" class="contact_manage_button">
-              <img class="menu_image" src="./assets/img/edit.svg" alt="edit the current contact">
-              <img class="menu_image_hover" src="./assets/img/edit2.svg" alt="edit the current contact">
-              Edit
-            </button>
-            <button onclick="deleteContactFromContacts('${contactId}')" class="contact_manage_button">
-              <img class="menu_image" src="./assets/img/delete.svg" alt="delete the current contact from the List">
-              <img class="menu_image_hover" src="./assets/img/delete2.svg" alt="delete the current contact from the List">
-              Delete
-            </button>
+            <li>
+              <button onclick="openEditContact('${contactId}')" class="contact_manage_button">
+                <img class="menu_image" src="./assets/img/edit.svg" alt="edit the current contact">
+                <img class="menu_image_hover" src="./assets/img/edit2.svg" alt="edit the current contact">
+                Edit
+              </button>
+            </li>
+            <li>
+              <button onclick="deleteContactFromContacts('${contactId}')" class="contact_manage_button">
+                <img class="menu_image" src="./assets/img/delete.svg" alt="delete the current contact from the List">
+                <img class="menu_image_hover" src="./assets/img/delete2.svg" alt="delete the current contact from the List">
+                Delete
+              </button>
+            </li>
           </menu>
   `;
 }
