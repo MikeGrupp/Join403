@@ -17,7 +17,7 @@ function templateRenderHeaderProfileContainer() {
 
 function templateRenderHeaderUser(initials, fontSize) {
   return `
-    <button id="header_user_profile" class="header_user_profile ${fontSize}" onclick="openSubmenu()">
+    <button id="header_user_profile" class="header_user_profile ${fontSize}" onclick="openSubmenu('submenu_dialog')">
     ${initials}
     </button>
     `;
@@ -200,6 +200,7 @@ function templateRenderContactDetailsDefault() {
 }
 
 function templateRenderContactDetailsForContact(
+  isMobile,
   contactId,
   color,
   initials,
@@ -215,10 +216,8 @@ function templateRenderContactDetailsForContact(
             <div class="contact_manage">
               <span class="contact_name">${name}</span>` +
     templateRenderContactDetailsMenuForContact(contactId) +
-    `     <button id="contact_burger_menu" class="contact_burger_menu" onclick="openContactManageSubmenu()">
-                <img class="menu_image" src="./assets/img/more_vert.svg" alt="open options to manage the contact">
-              </button>
-            </div>
+    templateRenderContactDetailsMobileManageMenuButton(isMobile) +
+            `</div>
           </div>
           <div class="contact_information">
             <h2>Contact Information</h2>
@@ -255,6 +254,15 @@ function templateRenderContactDetailsMenuForContact(contactId) {
             </li>
           </menu>
   `;
+}
+
+function templateRenderContactDetailsMobileManageMenuButton(isMobile) {
+  if (isMobile) {
+    return `<button id="contact_burger_menu" class="contact_burger_menu" onclick="openSubmenu('contact_manage_submenu')">
+              <img class="menu_image" src="./assets/img/more_vert.svg" alt="open options to manage the contact">
+            </button>`;
+  }
+  return "";
 }
 
 function templateRenderContactManageDialog(

@@ -6,6 +6,7 @@ const CONSTANTS = {
     CONTACT_DETAILS_D: "desktop_contact_details_container",
     CONTACT_DETAILS_M: "mobile_contact_details_container",
     CONTACT_DETAILS_SUBMENU: "contact_manage_submenu",
+    CONTACT_BURGER_MENU: "contact_burger_menu",
     CONTACT_DIALOG: "contact_manage_dialog",
     CONTACT_FORM: "contact_form",
     CONTACT_NAME: "contact_manage_name",
@@ -73,28 +74,49 @@ function openContactDetails(contactId) {
   }
   markAsSelectedContact(contactId);
   let contact = getStoredContactById(contactId);
-  let contactDetailsHtml = templateRenderContactDetailsDefault();
+  initContactDetailsDesktop(contact);
+  initContactDetailsMobile(contact);
+}
+
+function initContactDetailsDesktop(contact) {
+  let contactDetailsDesktopHtml = templateRenderContactDetailsDefault();
   if (contact != null) {
-    contactDetailsHtml += templateRenderContactDetailsForContact(
-      contactId,
+    contactDetailsDesktopHtml += templateRenderContactDetailsForContact(
+      false,
+      contact.id,
       contact.color,
       contact.initials,
       contact.name,
       contact.mail,
       contact.phone
     );
+    let contactDetails = document.getElementById(CONSTANTS.SELECTORS.CONTACT_DETAILS_D);
+    contactDetails.innerHTML = contactDetailsDesktopHtml;
   }
-  let contactDetails = document.getElementById(CONSTANTS.SELECTORS.CONTACT_DETAILS_D);
-  contactDetails.innerHTML = contactDetailsHtml;
-  let contactDetailsMobile = document.getElementById(CONSTANTS.SELECTORS.CONTACT_DETAILS_M);
-  contactDetailsMobile.innerHTML = contactDetailsHtml;
-  initContactManageSubmenu(contactId);
+}
+
+function initContactDetailsMobile(contact) {
+  let contactDetailsMobileHtml = templateRenderContactDetailsDefault();
+  if (contact != null) {
+    contactDetailsMobileHtml += templateRenderContactDetailsForContact(
+      true,
+      contact.id,
+      contact.color,
+      contact.initials,
+      contact.name,
+      contact.mail,
+      contact.phone
+    );
+    let contactDetailsMobile = document.getElementById(CONSTANTS.SELECTORS.CONTACT_DETAILS_M);
+    contactDetailsMobile.innerHTML = contactDetailsMobileHtml;
+    initContactManageSubmenu(contact.id);
+  }
 }
 
 function initContactManageSubmenu(contactId) {
   let contactManageSubmenu = document.getElementById(CONSTANTS.SELECTORS.CONTACT_DETAILS_SUBMENU);
   contactManageSubmenu.innerHTML = templateRenderContactDetailsMenuForContact(contactId);
-  initContactManageSubmenuListeners();
+  initSubmenuListeners(CONSTANTS.SELECTORS.CONTACT_DETAILS_SUBMENU, CONSTANTS.SELECTORS.CONTACT_BURGER_MENU);
 }
 
 function markAsSelectedContact(contactId) {
