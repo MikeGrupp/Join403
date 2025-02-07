@@ -962,14 +962,13 @@
   }
 
   .notifications {
-    transform: translateY(-50%);
     bottom: 20%;
-    left: 0;
   }
 
   .notifications .toast {
-    position: relative;
-    border-radius: 16px;
+    font-size: 18px;
+    width: 280px;
+    height: 60px;
   }
 
   @keyframes show_toast {
@@ -1133,5 +1132,11 @@
   .contact_form_profile_buttons {
     gap: 12px;
     margin-top: 8px;
+  }
+
+  .notifications .toast {
+    font-size: 16px;
+    width: 250px;
+    height: 50px;
   }
 }
