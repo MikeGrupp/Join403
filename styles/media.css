@@ -604,6 +604,90 @@
 
 @media (min-width: 1921px) {}
 
+@media screen and (max-width: 1024px) {
+  .header {
+    padding: 20px 40px 20px 300px;
+    width: calc(100% - 300px - 40px);
+  }
+
+  .desktop_contact_details_container {
+    padding-top: 40px;
+    padding-left: 15px;
+    gap: 14px;
+  }
+
+  .title_group {
+    gap: 4px;
+  }
+
+  .title_group h1 {
+    font-size: 18px;
+  }
+
+  .title_group .vertical_line {
+    height: 30px;
+    width: 2px;
+  }
+
+  .title_group p {
+    font-size: 14px;
+  }
+
+  .contact_details {
+    gap: 11px;
+  }
+
+  .contact_head {
+    gap: 15px;
+  }
+
+  .profile_badge_large {
+    height: 60px;
+    width: 60px;
+    min-width: 60px;
+    font-size: 24px;
+  }
+
+  .contact_manage {
+    gap: 4px;
+  }
+
+  .contact_name {
+    font-size: 18px;
+  }
+
+  .contact_manage_menu {
+    gap: 4px;
+  }
+
+  .contact_manage_button {
+    min-width: 52px;
+    height: 20px;
+    font-size: 14px;
+  }
+
+  .menu_image {
+    height: 20px;
+  }
+
+  .contact_information {
+    height: 37px;
+  }
+
+  .contact_information h2 {
+    font-size: 16px;
+  }
+
+  .contact_section_container {
+    font-size: 14px;
+    gap: 7px;
+  }
+
+  .mail {
+    font-size: 14px;
+  }
+}
+
 @media screen and (max-width: 767px) {
   .header {
     width: calc(100% - 16px - 16px);
