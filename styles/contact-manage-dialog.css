@@ -35,7 +35,7 @@
 .contact_manage_dialog_container {
   display: flex;
   flex-direction: row;
-  width: 1212px;
+  /* width: 1212px; */
   height: 592px;
 }
 
@@ -80,14 +80,14 @@
 }
 
 .contact_manage_dialog_input_container {
-  width: calc(100% - 467px - 48px);
+  position: relative;
   padding: 66px 48px 66px 0;
   border-top-right-radius: 30px;
   border-bottom-right-radius: 30px;
   background-color: #ffffff;
   display: flex;
-  flex-direction: column;
-  gap: 48px;
+  align-items: end;
+  justify-content: end;
 }
 
 .contact_manage_close_button {
@@ -101,6 +101,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  position: absolute;
+  z-index: 10;
+  top: 48px;
+  right: 48px;
 }
 
 .contact_manage_close_icon {
@@ -118,8 +122,8 @@
 }
 
 .contact_form_profile_badge_position {
-  margin-top: 67px;
-  margin-left: 79px;
+  margin: 32px;
+  align-self: center;
 }
 
 .contact_form_profile {

@@ -278,7 +278,7 @@ function templateRenderContactManageDialog(
         '<p class="contact_manage_dialog_subtitle" role="doc-subtitle">Tasks are better with a team!</p>',
       buttonLeftText: "Cancel",
       buttonLeftOnClick: `resetForm('contact_form'), closeContactManage()`,
-      buttonLeftOnMobile: "d-none",
+      buttonLeftDesktopClass: "button_close_desktop",
       buttonRightText: "Create contact",
       buttonRightEnabled: "disabled",
       onSubmit: "addNewContact(event)",
@@ -289,7 +289,7 @@ function templateRenderContactManageDialog(
       subtitle: "",
       buttonLeftText: "Delete",
       buttonLeftOnClick: `resetForm('contact_form'), closeContactManage(), deleteContactFromContacts('${contactId}')`,
-      buttonLeftOnMobile: "",
+      buttonLeftDesktopClass: "",
       buttonRightText: "Save",
       buttonRightEnabled: "",
       onSubmit: `editContact(event, '${contactId}')`,
@@ -303,6 +303,9 @@ function templateRenderContactManageDialog(
   }
   return `
     <div class="contact_manage_dialog_container">
+      <button onclick="closeContactManage()" class="contact_manage_close_button">
+        <img src="./assets/img/Close.svg" class="contact_manage_close_icon" alt="close icon">
+      </button>
       <div class="contact_manage_dialog_title_container">
         <img class="contact_manage_dialog_logo" src="./assets/img/Logo2.svg" alt="">
         <h1 class="contact_manage_dialog_title">${modeConfig.title}</h1>
@@ -310,13 +313,10 @@ function templateRenderContactManageDialog(
         <div class="horizontal_blue_line"></div>
       </div>
       <div class="contact_manage_dialog_input_container">
-        <button onclick="closeContactManage()" class="contact_manage_close_button">
-          <img src="./assets/img/Close.svg" class="contact_manage_close_icon" alt="close icon">
-        </button>
+        <span class="profile_badge_large bg_${color} contact_form_profile_badge_position">
+          ${modeConfig.profileBadge}
+        </span>
         <div class="contact_form_profile_container">
-          <span class="profile_badge_large bg_${color} contact_form_profile_badge_position">
-            ${modeConfig.profileBadge}
-          </span>
           <form class="contact_form_profile" id="contact_form">
             <div class="contact_form_profile_inputs">
               <input id="contact_manage_name" class="input_field input_icon_person" type="text" required maxlength="30" placeholder="Name" aria-label="Name" oninput="isContactValid(contact_manage_name, contact_manage_mail, contact_manage_phone)">
@@ -325,9 +325,11 @@ function templateRenderContactManageDialog(
             </div>
             <pre id="log"></pre>
             <div class="contact_form_profile_buttons">
-              <button class="button button_close ${modeConfig.buttonLeftOnMobile}" type="reset" onclick="${modeConfig.buttonLeftOnClick}" form="contact_form">
-                ${modeConfig.buttonLeftText}
-              </button>
+              <div class="${modeConfig.buttonLeftDesktopClass}">
+                <button class="button button_close" type="reset" onclick="${modeConfig.buttonLeftOnClick}" form="contact_form">
+                  ${modeConfig.buttonLeftText}
+                </button>
+              </div>
               <button id="submitButton" class="button button_create" type="submit" form="contact_form" onclick="${modeConfig.onSubmit}" ${modeConfig.buttonRightEnabled}>
                 ${modeConfig.buttonRightText}
                 <img class="button_icon" src="./assets/img/check.svg" alt="">

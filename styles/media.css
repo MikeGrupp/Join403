@@ -851,7 +851,7 @@
   .contact_manage_dialog_title_container {
     height: 45%;
     width: calc(100vw - (2 * 19px) - (2 * 24px));
-    padding: 66px 24px 66px 24px;
+    padding: 48px 24px 48px 24px;
     border-top-left-radius: 30px;
     border-bottom-left-radius: 0;
     border-top-right-radius: 30px;
@@ -873,19 +873,25 @@
   .contact_manage_dialog_input_container {
     width: calc(100vw - (2 * 19px) - (2 * 15px));
     height: 100%;
-    justify-content: end;
-    padding: 62px 15px 62px 15px;
+    padding: 48px 15px 20px 15px;
     border-top-right-radius: 0;
     border-bottom-left-radius: 30px;
     border-bottom-right-radius: 30px;
     background-color: #FFFFFF;
     flex-direction: column;
     gap: 48px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .button_close_desktop {
+    display: none;
   }
 
   .contact_manage_close_button {
     position: absolute;
     top: 24px;
+    right: 24px;
     filter: brightness(0) invert(1);
   }
 
@@ -905,10 +911,9 @@
   }
 
   .contact_form_profile_badge_position {
-    margin-top: 0;
-    margin-left: 0;
+    margin: 0;
     position: absolute;
-    bottom: 55%;
+    top: -40px;
   }
 
   .contact_form_profile_inputs {
@@ -1034,6 +1039,11 @@
     width: calc(100% - 8px);
   }
 
+  .contact_manage_close_button {
+    top: 20px;
+    right: 20px;
+  }
+
   .contact_details {
     gap: 8px;
   }
@@ -1088,15 +1098,7 @@
   }
 
   .contact_manage_dialog_input_container {
-    width: calc(100vw - (2 * 19px) - (2 * 15px));
-    height: 100%;
     padding: 40px 15px 20px 15px;
-    border-top-right-radius: 0;
-    border-bottom-left-radius: 30px;
-    border-bottom-right-radius: 30px;
-    background-color: #FFFFFF;
-    flex-direction: column;
-    gap: 48px;
   }
 
   .contact_manage_dialog_title {
@@ -1112,6 +1114,10 @@
     width: 70px;
     min-width: 70px;
     font-size: 24px;
+  }
+
+  .contact_form_profile_badge_position {
+    top: -35px;
   }
 
   .contact_form_profile_inputs {
