@@ -211,6 +211,7 @@ async function editContact(event, contactId) {
       createToast("successEditContact");
       initContactList();
       closeContactManage();
+      closeSubmenu(CONSTANTS.SELECTORS.CONTACT_MANAGE_SUBMENU);
       openContactDetails(contactId);
     }
   }
