@@ -118,6 +118,8 @@
 .contact_form_profile_container {
   display: flex;
   justify-content: space-between;
+  align-self: center;
+  padding-top: 64px;
 }
 
 .contact_form_profile_badge_position {
