@@ -610,6 +610,69 @@
     width: calc(100% - 300px - 40px);
   }
 
+  .sidebar {
+    width: 180px;
+  }
+
+  main {
+    margin-left: 180px;
+  }
+
+
+  .contact_list_container {
+    width: calc(310px - 14px);
+    padding-left: 0;
+  }
+  
+  .contact_list {
+    width: calc(296px - (2 * 12px));
+    padding: 0 12px 16px 12px;
+    font-size: 16px;
+  }
+
+  .contact_list .list_letter {
+    height: calc(40px - (2 * 8px));
+    padding: 8px 18px 8px 18px;
+  }
+
+  .contact_list .list_letter:first-child {
+    padding-top: 2px;
+  }
+
+  .contact_list dd .contact {
+    height: 64px;
+    padding: 8px 12px 8px 12px;
+    font-size: 16px;
+    gap: 8px;
+  }
+
+  .profile_badge {
+    height: 35px;
+    width: 35px;
+    min-width: 35px;
+  }
+
+  .contact_name_mail {
+    gap: 3px;
+  }
+
+  .mail {
+    font-size: 14px;
+  }
+
+  .add_contact_container {
+    height: 80px;
+    padding-left: 12px;
+  }
+
+  .add_contact {
+    height: 50px;
+    width: 272px;
+    padding: 6px 8px 6px 8px;
+    font-size: 20px;
+    gap: 8px;
+  }
+
   .desktop_contact_details_container {
     padding-top: 40px;
     padding-left: 15px;
@@ -617,20 +680,20 @@
   }
 
   .title_group {
-    gap: 4px;
+    gap: 6px;
   }
 
   .title_group h1 {
-    font-size: 18px;
+    font-size: 26px;
   }
 
   .title_group .vertical_line {
-    height: 30px;
+    height: 26px;
     width: 2px;
   }
 
   .title_group p {
-    font-size: 14px;
+    font-size: 16px;
   }
 
   .contact_details {
@@ -641,7 +704,7 @@
     gap: 15px;
   }
 
-  .profile_badge_large {
+  .contact_head .profile_badge_large {
     height: 60px;
     width: 60px;
     min-width: 60px;
@@ -681,10 +744,6 @@
   .contact_section_container {
     font-size: 14px;
     gap: 7px;
-  }
-
-  .mail {
-    font-size: 14px;
   }
 }
 
@@ -1165,10 +1224,6 @@
   .contact_section_container {
     font-size: 14px;
     gap: 8px;
-  }
-
-  .mail {
-    font-size: 14px;
   }
 
   .contact_manage_dialog_title_container {
