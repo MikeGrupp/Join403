@@ -10,6 +10,12 @@ function openSubmenu(elementId) {
   submenu.focus();
 }
 
+function closeSubmenu(elementId) {
+  let submenu = document.getElementById(elementId);
+  submenu.showModal();
+  submenu.close();
+}
+
 function addOutsideClickClosingListener(element, elementIdToBlur) {
   element.addEventListener("click", (e) => {
     const elementDimensions = element.getBoundingClientRect();
