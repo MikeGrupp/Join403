@@ -520,9 +520,52 @@
 }
 
 @media screen and (max-width: 767px) {
+  .fadeout-box {
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    z-index: 100;
+    animation: fadeout 2000ms forwards;
+    animation-delay: 300ms;
+    background-color: #2A3647;
+  }
+
+  .logo-animation {
+    position: absolute;
+    width: 128px;
+    height: 156px;
+    z-index: 100;
+    animation: moveToCorner 500ms linear forwards;
+    animation-delay: 500ms;
+    background-image: url(../assets/img/Logo2.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  @keyframes moveToCorner {
+    0% {
+      width: 128px;
+      height: 156px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-image: url(../assets/img/Logo2.svg);
+    }
+
+    100% {
+      width: 64px;
+      height: 78px;
+      top: 16px;
+      left: 16px;
+      transform: none;
+      background-image: url(../assets/img/Logo1.svg);
+    }
+  }
+
   .textpage {
-    padding: 64px;
+    padding: 32px;
     gap: 24px;
+    max-height: calc(100vh - (16px * 2) - 32px);
   }
 
   main {
@@ -658,23 +701,19 @@
     gap: 16px;
   }
 
-  .white_btn {
+  .standard_btn:enabled {
     padding: 12px 20px;
     font-size: 16px;
   }
 
-  @keyframes moveToCorner {
-    from {
-      width: 100px;
-      height: auto;
-    }
+  .standard_btn:disabled {
+    padding: 12px 20px;
+    font-size: 16px;
+  }
 
-    to {
-      width: 48px;
-      height: auto;
-      top: 32px;
-      left: 32px;
-    }
+  .white_btn {
+    padding: 12px 20px;
+    font-size: 16px;
   }
 
   .linkbox {
@@ -756,7 +795,6 @@
     height: 80px;
     width: 100%;
     box-shadow: 0px 0px 4px 0px #0000001A;
-
   }
 
   .logo {
@@ -799,6 +837,7 @@
   .summary {
     flex-direction: column;
     gap: 4px;
+    height: auto;
   }
 
   .summary_focus {
@@ -816,7 +855,17 @@
     font-family: 'Open Sans';
   }
 
+  .subMenu_login {
+    display: flex;
+    flex-direction: row;
+  }
+
   .sidebar_subMenu {
+    display: flex;
+    margin-bottom: 0;
+  }
+
+  .subMenu_hide {
     display: none;
   }
 
@@ -1094,6 +1143,12 @@
 }
 
 @media screen and (max-width: 427px) {
+  .textpage {
+    padding: 16px;
+    gap: 16px;
+    max-height: calc(100vh - (16px * 2) - 32px);
+  }
+
   main {
     margin-left: 0;
   }
@@ -1185,31 +1240,6 @@
 
   .input_icon {
     margin-left: -30px;
-  }
-
-  .standard_btn:enabled {
-    padding: 12px 20px;
-    font-size: 16px;
-  }
-
-  .standard_btn:disabled {
-    padding: 12px 20px;
-    font-size: 16px;
-  }
-
-
-  @keyframes moveToCorner {
-    from {
-      width: 100px;
-      height: auto;
-    }
-
-    to {
-      width: 48px;
-      height: auto;
-      top: 16px;
-      left: 16px;
-    }
   }
 
   .linkbox {

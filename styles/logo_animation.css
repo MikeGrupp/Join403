@@ -1,31 +1,40 @@
 .logo-animation {
     position: absolute;
+    width: 300px;
+    height: 362px;
     z-index: 100;
     animation: moveToCorner 500ms linear forwards;
-    animation-delay: 100ms;
-    top: 64px;
-    left: 64px;
+    animation-delay: 500ms;
+    background-image: url(../assets/img/Logo1.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
-.fadein-box {
-    animation: fadein 1000ms forwards;
-    animation-delay: 100ms;
+.fadeout-box {
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    z-index: 100;
+    animation: fadeout 2000ms forwards;
+    animation-delay: 300ms;
+    background-color: white;
 }
 
 @keyframes moveToCorner {
-    from {
+    0% {
         width: 300px;
-        height: 360px;
+        height: 362px;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
     }
 
-    to {
-        width: 100px;
-        height: 120px;
+    100% {
+        width: 102px;
+        height: 124px;
         top: 64px;
         left: 64px;
+        transform: none;
     }
 }
 

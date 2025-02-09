@@ -74,7 +74,7 @@ function templateRenderSidebar() {
           </div>
         </a>
       </nav>
-      <div class="sidebar_subMenu">
+      <div class="sidebar_subMenu subMenu_hide">
         <div class="sidebar_submenu_background" id="privacy">
           <a class="summary" href="privacy.html">
             <p>Privacy Policy</p>
@@ -142,7 +142,7 @@ function templateRenderSidebarSummary(pageName) {
 function templateRenderSidebarLogin() {
   return `
     <div class="logo">
-      <img src="assets/img/Logo2.svg" alt="Logo" />
+      <img src="assets/img/Logo2.svg" alt="Logo"/>
     </div>
     <div class="sidebar_menu">
       <nav class="sidebar_links">
@@ -153,7 +153,19 @@ function templateRenderSidebarLogin() {
           </div>
         </a>
         </div>
-      </div>
+        <div class="sidebar_subMenu">
+          <div class="sidebar_submenu_background" id="privacy">
+            <a class="summary" href="privacy.html">
+              <p>Privacy Policy</p>
+            </a>
+          </div>
+          <div class="sidebar_submenu_background" id="legal">
+            <a class="summary" href="legal_notice.html">
+              <p>Legal notice</p>
+            </a>
+          </div>
+        </div>
+      </nav>
     </div>
   `;
 }
@@ -217,7 +229,7 @@ function templateRenderContactDetailsForContact(
               <span class="contact_name">${name}</span>` +
     templateRenderContactDetailsMenuForContact(contactId) +
     templateRenderContactDetailsMobileManageMenuButton(isMobile) +
-            `</div>
+    `</div>
           </div>
           <div class="contact_information">
             <h2>Contact Information</h2>
