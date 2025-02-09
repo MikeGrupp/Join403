@@ -24,21 +24,23 @@
   <link rel="stylesheet" href="styles/user-colors.css" />
   <link rel="stylesheet" href="styles/notifications.css" />
   <link rel="stylesheet" href="styles/summary.css" />
+  <link rel="stylesheet" href="styles/logo_animation.css" />
   <link rel="stylesheet" href="styles/media.css" />
 </head>
 
-<body onload="load('summary'); msgRender(); renderGreeting(); createSummary();">
+<body onload="load('summary'); msgRender(); renderGreeting(); createSummary(); startAnimation();">
   <header id="header" class="header"></header>
   <dialog id="submenu_dialog" class="submenu_dialog"></dialog>
   <div class="sidebar" id="sidebar"></div>
-  <main>
-    <div class="title">
+  <main class="vcenter">
+    <div class="sum_title hidden" id="sumTitle">
       <h1>Join 360</h1>
-      <div class="blue_line"></div>
+      <div class="blue_line_sum desk"></div>
       <p>Key Metrics at a Glance</p>
+      <div class="blue_line_sum mob"></div>
     </div>
     <div class="split">
-      <div class="progress_cards" id="progressCards"></div>
+      <div class="progress_cards hidden" id="progressCards"></div>
       <div class="greeting_box" id="greetingBox"></div>
     </div>
   </main>

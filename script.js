@@ -84,7 +84,7 @@ function initNoUserHeader() {
 function initSubmenu() {
   let submenu = document.getElementById("submenu_dialog");
   submenu.innerHTML = templateRenderSubmenu();
-  initSubmenuListeners();
+  initSubmenuListeners(submenu.id, "header_user_profile");
 }
 
 function renderSidebar() {

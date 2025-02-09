@@ -97,7 +97,7 @@ function findDeadline() {
 
 function formatDate(dueDate) {
   const months = [
-    "January", "February", "March", "April", "May", "June", 
+    "January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"
   ];
 
@@ -111,18 +111,34 @@ function filterTasks() {
   inProgressTasks = storedTasks.filter(task => task.step === "InProgress");
   feedbackTasks = storedTasks.filter(task => task.step === "AwaitFeedback");
   doneTasks = storedTasks.filter(task => task.step === "Done");
-  urgentTask = storedTasks.filter(task => task.prio === "Urgent")
-
+  urgentTask = storedTasks.filter(task => task.prio === "Urgent");
 
   storedTasks.sort((a, b) => {
+    if (!a.dueDate || !b.dueDate) return 0;
+
     let dateA = new Date(a.dueDate.split('/').reverse().join('-'));
     let dateB = new Date(b.dueDate.split('/').reverse().join('-'));
+
     return dateA - dateB;
   });
 }
+
 
 async function createSummary() {
   setStoredTasks(await loadTasks());
   filterTasks();
   renderSummary();
+}
+
+function startAnimation() {
+  let progressCard = document.getElementById("progressCards");
+  let sumTitle = document.getElementById("sumTitle");
+
+  document.getElementById("progressCards").classList.add("show");
+  setTimeout(() => {
+    progressCard.classList.remove("hidden");
+    progressCard.classList.add("show");
+    sumTitle.classList.remove("hidden");
+    sumTitle.classList.add("show");
+  }, 2000);
 }

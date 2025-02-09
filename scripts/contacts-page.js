@@ -5,7 +5,8 @@ const CONSTANTS = {
     CONTACT_ADD_CONTAINER: "add_contact_container",
     CONTACT_DETAILS_D: "desktop_contact_details_container",
     CONTACT_DETAILS_M: "mobile_contact_details_container",
-    CONTACT_DETAILS_SUBMENU: "contact_manage_submenu",
+    CONTACT_MANAGE_SUBMENU: "contact_manage_submenu",
+    CONTACT_BURGER_MENU: "contact_burger_menu",
     CONTACT_DIALOG: "contact_manage_dialog",
     CONTACT_FORM: "contact_form",
     CONTACT_NAME: "contact_manage_name",
@@ -67,34 +68,52 @@ function initContactManageDialog(mode, contactId, initials, color) {
 }
 
 function openContactDetails(contactId) {
-  if (window.screen.width < 768) {
-    dNone(CONSTANTS.SELECTORS.CONTACT_LIST_CONTAINER);
-    dNone(CONSTANTS.SELECTORS.CONTACT_DETAILS_M);
-  }
+  dNone(CONSTANTS.SELECTORS.CONTACT_DETAILS_M);
   markAsSelectedContact(contactId);
   let contact = getStoredContactById(contactId);
-  let contactDetailsHtml = templateRenderContactDetailsDefault();
+  initContactDetailsDesktop(contact);
+  initContactDetailsMobile(contact);
+}
+
+function initContactDetailsDesktop(contact) {
+  let contactDetailsDesktopHtml = templateRenderContactDetailsDefault();
   if (contact != null) {
-    contactDetailsHtml += templateRenderContactDetailsForContact(
-      contactId,
+    contactDetailsDesktopHtml += templateRenderContactDetailsForContact(
+      false,
+      contact.id,
       contact.color,
       contact.initials,
       contact.name,
       contact.mail,
       contact.phone
     );
+    let contactDetails = document.getElementById(CONSTANTS.SELECTORS.CONTACT_DETAILS_D);
+    contactDetails.innerHTML = contactDetailsDesktopHtml;
   }
-  let contactDetails = document.getElementById(CONSTANTS.SELECTORS.CONTACT_DETAILS_D);
-  contactDetails.innerHTML = contactDetailsHtml;
-  let contactDetailsMobile = document.getElementById(CONSTANTS.SELECTORS.CONTACT_DETAILS_M);
-  contactDetailsMobile.innerHTML = contactDetailsHtml;
-  initContactManageSubmenu(contactId);
+}
+
+function initContactDetailsMobile(contact) {
+  let contactDetailsMobileHtml = templateRenderContactDetailsDefault();
+  if (contact != null) {
+    contactDetailsMobileHtml += templateRenderContactDetailsForContact(
+      true,
+      contact.id,
+      contact.color,
+      contact.initials,
+      contact.name,
+      contact.mail,
+      contact.phone
+    );
+    let contactDetailsMobile = document.getElementById(CONSTANTS.SELECTORS.CONTACT_DETAILS_M);
+    contactDetailsMobile.innerHTML = contactDetailsMobileHtml;
+    initContactManageSubmenu(contact.id);
+  }
 }
 
 function initContactManageSubmenu(contactId) {
-  let contactManageSubmenu = document.getElementById(CONSTANTS.SELECTORS.CONTACT_DETAILS_SUBMENU);
+  let contactManageSubmenu = document.getElementById(CONSTANTS.SELECTORS.CONTACT_MANAGE_SUBMENU);
   contactManageSubmenu.innerHTML = templateRenderContactDetailsMenuForContact(contactId);
-  initContactManageSubmenuListeners();
+  initSubmenuListeners(CONSTANTS.SELECTORS.CONTACT_MANAGE_SUBMENU, CONSTANTS.SELECTORS.CONTACT_BURGER_MENU);
 }
 
 function markAsSelectedContact(contactId) {
@@ -192,6 +211,7 @@ async function editContact(event, contactId) {
       createToast("successEditContact");
       initContactList();
       closeContactManage();
+      closeSubmenu(CONSTANTS.SELECTORS.CONTACT_MANAGE_SUBMENU);
       openContactDetails(contactId);
     }
   }
@@ -203,14 +223,10 @@ async function deleteContactFromContacts(contactId) {
   removeExistingContactFromUsers(contactId);
   await deleteExistingContact(contactId);
   createToast("successDeleteContact");
-  if (window.screen.width >= 768) {
-    initContactList();
-    initContactDetails();
-  } else {
-    setTimeout(function () {
-      window.location.href = "./contacts.html";
-   }, 800);
-  }
+  initContactList();
+  initContactDetails();
+  closeSubmenu(CONSTANTS.SELECTORS.CONTACT_MANAGE_SUBMENU);
+  dNone(CONSTANTS.SELECTORS.CONTACT_DETAILS_M);
 }
 
 function fillContactFields(contact) {

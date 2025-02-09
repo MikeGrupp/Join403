@@ -365,7 +365,7 @@ async function addTask(side) {
       tasks = await loadData("tasks/");
       tasksIds = [];
       fetchTaskIds();
-      taskMoveBack("addtaskBoard", "addtaskBoardBg");
+      taskMoveBack("addTaskBoard", "addTaskBoardBg");
       reRenderBoard();
     }
     createToast("successNewTask");

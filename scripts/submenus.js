@@ -1,25 +1,19 @@
-function initSubmenuListeners() {
-  let submenu = document.getElementById("submenu_dialog");
-  addOutsideClickClosingListener(submenu, "header_user_profile");
-  addEscapeListener(submenu, "header_user_profile");
+function initSubmenuListeners(elementId, elementIdToBlur) {
+  let submenu = document.getElementById(elementId);
+  addOutsideClickClosingListener(submenu, elementIdToBlur);
+  addEscapeListener(submenu, elementIdToBlur);
 }
 
-function openSubmenu() {
-  let submenu = document.getElementById("submenu_dialog");
+function openSubmenu(elementId) {
+  let submenu = document.getElementById(elementId);
   submenu.showModal();
   submenu.focus();
 }
 
-function initContactManageSubmenuListeners() {
-  let contactManageSubmenu = document.getElementById("contact_manage_submenu");
-  addOutsideClickClosingListener(contactManageSubmenu, "contact_burger_menu");
-  addEscapeListener(contactManageSubmenu, "contact_burger_menu");
-}
-
-function openContactManageSubmenu() {
-  let contactManageSubmenu = document.getElementById("contact_manage_submenu");
-  contactManageSubmenu.showModal();
-  contactManageSubmenu.focus();
+function closeSubmenu(elementId) {
+  let submenu = document.getElementById(elementId);
+  submenu.showModal();
+  submenu.close();
 }
 
 function addOutsideClickClosingListener(element, elementIdToBlur) {

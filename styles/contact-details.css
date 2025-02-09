@@ -7,11 +7,16 @@
 }
 
 .mobile_contact_details_container {
-  display: flex;
+  position: absolute;
+  z-index: 10;
+  display: none;
   flex-direction: column;
   padding-top: 24px;
   padding-left: 16px;
   gap: 32px;
+  background-color: #f6f7f8;
+  width: calc(100% - 16px);
+  height: calc(100vh - (2 * 80px));
 }
 
 .title_group {
@@ -92,6 +97,7 @@
 
 .contact_name {
   font-size: 47px;
+  font-weight: 700;
 }
 
 .contact_manage_menu {
@@ -99,6 +105,10 @@
   gap: 8px;
   margin: 0;
   padding: 0;
+}
+
+.contact_manage_menu {
+  list-style-type: none;
 }
 
 .contact_manage_button {
@@ -160,7 +170,7 @@
   position: absolute;
   width: 56px;
   height: 56px;
-  top: calc(100vh - 168px);
+  top: calc(100vh - 248px);
   right: 15px;
   padding: 12px;
   gap: 10px;

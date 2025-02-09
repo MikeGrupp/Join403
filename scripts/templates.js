@@ -17,7 +17,7 @@ function templateRenderHeaderProfileContainer() {
 
 function templateRenderHeaderUser(initials, fontSize) {
   return `
-    <button id="header_user_profile" class="header_user_profile ${fontSize}" onclick="openSubmenu()">
+    <button id="header_user_profile" class="header_user_profile ${fontSize}" onclick="openSubmenu('submenu_dialog')">
     ${initials}
     </button>
     `;
@@ -166,8 +166,8 @@ function templateRenderDesktopAddContactButton() {
 
 function templateRenderContactListLetter(letter) {
   return `
-        <dt>${letter}</dt>
-        <div class="horizontal_line"></div>
+        <dt class="list_letter">${letter}</dt>
+        <dt class="horizontal_line"></dt>
   `;
 }
 
@@ -189,7 +189,7 @@ function templateRenderContactDetailsDefault() {
   return `
         <div class="title_group">
           <div class="back_arrow">
-            <img class="" src="./assets/img/arrow-left.svg" onclick="window.location.href='./contacts.html'" alt="back to contacts page" />
+            <img class="" src="./assets/img/arrow-left.svg" onclick="dNone('mobile_contact_details_container')" alt="back to contacts page" />
           </div>
           <h1>Contacts</h1>
           <div class="vertical_line"></div>
@@ -200,6 +200,7 @@ function templateRenderContactDetailsDefault() {
 }
 
 function templateRenderContactDetailsForContact(
+  isMobile,
   contactId,
   color,
   initials,
@@ -215,10 +216,8 @@ function templateRenderContactDetailsForContact(
             <div class="contact_manage">
               <span class="contact_name">${name}</span>` +
     templateRenderContactDetailsMenuForContact(contactId) +
-    `     <button id="contact_burger_menu" class="contact_burger_menu" onclick="openContactManageSubmenu()">
-                <img class="menu_image" src="./assets/img/more_vert.svg" alt="open options to manage the contact">
-              </button>
-            </div>
+    templateRenderContactDetailsMobileManageMenuButton(isMobile) +
+            `</div>
           </div>
           <div class="contact_information">
             <h2>Contact Information</h2>
@@ -239,35 +238,31 @@ function templateRenderContactDetailsForContact(
 function templateRenderContactDetailsMenuForContact(contactId) {
   return `
           <menu class="contact_manage_menu">
-            <button onclick="openEditContact('${contactId}')" class="contact_manage_button">
-              <img class="menu_image" src="./assets/img/edit.svg" alt="edit the current contact">
-              <img class="menu_image_hover" src="./assets/img/edit2.svg" alt="edit the current contact">
-              Edit
-            </button>
-            <button onclick="deleteContactFromContacts('${contactId}')" class="contact_manage_button">
-              <img class="menu_image" src="./assets/img/delete.svg" alt="delete the current contact from the List">
-              <img class="menu_image_hover" src="./assets/img/delete2.svg" alt="delete the current contact from the List">
-              Delete
-            </button>
+            <li>
+              <button onclick="openEditContact('${contactId}')" class="contact_manage_button">
+                <img class="menu_image" src="./assets/img/edit.svg" alt="edit the current contact">
+                <img class="menu_image_hover" src="./assets/img/edit2.svg" alt="edit the current contact">
+                Edit
+              </button>
+            </li>
+            <li>
+              <button onclick="deleteContactFromContacts('${contactId}')" class="contact_manage_button">
+                <img class="menu_image" src="./assets/img/delete.svg" alt="delete the current contact from the List">
+                <img class="menu_image_hover" src="./assets/img/delete2.svg" alt="delete the current contact from the List">
+                Delete
+              </button>
+            </li>
           </menu>
   `;
 }
 
-function templateRenderContactDetailsMenuForContact(contactId) {
-  return `
-          <menu class="contact_manage_menu">
-            <button onclick="openEditContact('${contactId}')" class="contact_manage_button">
-              <img class="menu_image" src="./assets/img/edit.svg" alt="edit the current contact">
-              <img class="menu_image_hover" src="./assets/img/edit2.svg" alt="edit the current contact">
-              Edit
-            </button>
-            <button onclick="deleteContactFromContacts('${contactId}')" class="contact_manage_button">
-              <img class="menu_image" src="./assets/img/delete.svg" alt="delete the current contact from the List">
-              <img class="menu_image_hover" src="./assets/img/delete2.svg" alt="delete the current contact from the List">
-              Delete
-            </button>
-          </menu>
-  `;
+function templateRenderContactDetailsMobileManageMenuButton(isMobile) {
+  if (isMobile) {
+    return `<button id="contact_burger_menu" class="contact_burger_menu" onclick="openSubmenu('contact_manage_submenu')">
+              <img class="menu_image" src="./assets/img/more_vert.svg" alt="open options to manage the contact">
+            </button>`;
+  }
+  return "";
 }
 
 function templateRenderContactManageDialog(
@@ -283,7 +278,7 @@ function templateRenderContactManageDialog(
         '<p class="contact_manage_dialog_subtitle" role="doc-subtitle">Tasks are better with a team!</p>',
       buttonLeftText: "Cancel",
       buttonLeftOnClick: `resetForm('contact_form'), closeContactManage()`,
-      buttonLeftOnMobile: "d-none",
+      buttonLeftDesktopClass: "button_close_desktop",
       buttonRightText: "Create contact",
       buttonRightEnabled: "disabled",
       onSubmit: "addNewContact(event)",
@@ -294,7 +289,7 @@ function templateRenderContactManageDialog(
       subtitle: "",
       buttonLeftText: "Delete",
       buttonLeftOnClick: `resetForm('contact_form'), closeContactManage(), deleteContactFromContacts('${contactId}')`,
-      buttonLeftOnMobile: "",
+      buttonLeftDesktopClass: "",
       buttonRightText: "Save",
       buttonRightEnabled: "",
       onSubmit: `editContact(event, '${contactId}')`,
@@ -308,6 +303,9 @@ function templateRenderContactManageDialog(
   }
   return `
     <div class="contact_manage_dialog_container">
+      <button onclick="closeContactManage()" class="contact_manage_close_button">
+        <img src="./assets/img/Close.svg" class="contact_manage_close_icon" alt="close icon">
+      </button>
       <div class="contact_manage_dialog_title_container">
         <img class="contact_manage_dialog_logo" src="./assets/img/Logo2.svg" alt="">
         <h1 class="contact_manage_dialog_title">${modeConfig.title}</h1>
@@ -315,13 +313,10 @@ function templateRenderContactManageDialog(
         <div class="horizontal_blue_line"></div>
       </div>
       <div class="contact_manage_dialog_input_container">
-        <button onclick="closeContactManage()" class="contact_manage_close_button">
-          <img src="./assets/img/Close.svg" class="contact_manage_close_icon" alt="close icon">
-        </button>
+        <span class="profile_badge_large bg_${color} contact_form_profile_badge_position">
+          ${modeConfig.profileBadge}
+        </span>
         <div class="contact_form_profile_container">
-          <span class="profile_badge_large bg_${color} contact_form_profile_badge_position">
-            ${modeConfig.profileBadge}
-          </span>
           <form class="contact_form_profile" id="contact_form">
             <div class="contact_form_profile_inputs">
               <input id="contact_manage_name" class="input_field input_icon_person" type="text" required maxlength="30" placeholder="Name" aria-label="Name" oninput="isContactValid(contact_manage_name, contact_manage_mail, contact_manage_phone)">
@@ -330,9 +325,11 @@ function templateRenderContactManageDialog(
             </div>
             <pre id="log"></pre>
             <div class="contact_form_profile_buttons">
-              <button class="button button_close ${modeConfig.buttonLeftOnMobile}" type="reset" onclick="${modeConfig.buttonLeftOnClick}" form="contact_form">
-                ${modeConfig.buttonLeftText}
-              </button>
+              <div class="${modeConfig.buttonLeftDesktopClass}">
+                <button class="button button_close" type="reset" onclick="${modeConfig.buttonLeftOnClick}" form="contact_form">
+                  ${modeConfig.buttonLeftText}
+                </button>
+              </div>
               <button id="submitButton" class="button button_create" type="submit" form="contact_form" onclick="${modeConfig.onSubmit}" ${modeConfig.buttonRightEnabled}>
                 ${modeConfig.buttonRightText}
                 <img class="button_icon" src="./assets/img/check.svg" alt="">
@@ -526,9 +523,7 @@ function templateRenderSummary(
         <div class="row">
           <div class="big_card" onclick="goToBoard()">
             <div class="left_card">
-              <div class="icon_orange">
-                <img src="assets/img/urgent.svg" alt="task_icon">
-              </div>
+              <div class="icon_orange"></div>
               <div class="column ">
                 <span id="urgent" class="number">${amountUrgent}</span>
                 <span class="description">Urgent</span>

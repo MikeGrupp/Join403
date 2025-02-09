@@ -10,7 +10,6 @@
     <script src="./scripts/templates.js"></script>
     <script src="./scripts/contacts.js"></script>
     <script src="./scripts/database-controller.js"></script>
-    <script src="./scripts/notifications.js"></script>
     <script src="./scripts/utils.js"></script>
     <script src="./scripts/board.js"></script>
     <script src="./scripts/task.js" defer></script>
@@ -45,12 +44,12 @@
     </div>
     <div
       class="taskdetail_bg d-none"
-      id="addtaskBoardBg"
-      onclick="taskMoveBack('addtaskBoard','addtaskBoardBg')"
+      id="addTaskBoardBg"
+      onclick="taskMoveBack('addTaskBoard','addTaskBoardBg')"
     >
       <div
         class="addtask_board"
-        id="addtaskBoard"
+        id="addTaskBoard"
         onclick="event.stopPropagation()"
       >
         <div class="addTask_container" id="addTaskContainer">
@@ -299,7 +298,6 @@
             </div>
           </div>
         </div>
-        <ul id="notifications" class="notifications"></ul>
       </div>
     </div>
     <main>
@@ -324,8 +322,7 @@
                 </div>
                 <button
                   class="add_task_button"
-                  onclick="dNone('addtaskBoardBg'),taskMoveForward('addtaskBoard')"
-                  ;
+                  onclick="dNone('addTaskBoardBg'),taskMoveForward('addTaskBoard')"
                 >
                   Add task
                   <img src="assets/img/add.svg" alt="add" />
