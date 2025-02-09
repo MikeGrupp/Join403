@@ -6,6 +6,7 @@ let statusDropDownButton = false;
 let currentPrio = "medium";
 let category = "";
 let validation = false;
+let editSubtasks = [];
 
 async function initAddTask() {
   await load("task");
@@ -13,7 +14,7 @@ async function initAddTask() {
   renderDropdownContainerContacts();
 }
 
-function renderDropdownContainerContacts() {
+function renderDropdownContainerContacts(side) {
   let container = document.getElementById("dropdownContainer");
   container.innerHTML = ``;
   for (let i = 0; i < contactIds.length; i++) {
@@ -35,6 +36,9 @@ function renderDropdownContainerContacts() {
         <input id="checkbox${contactId}" type="checkbox">
     </div>
   `;
+  }
+  if (side === "board") {
+    checkAssignedContacts();
   }
 }
 
@@ -130,10 +134,22 @@ function addTaskRenderCancelButton() {
     'Clear <img src="assets/img/button_cancel_hover.svg" alt="cancel"/>';
 }
 
+function addTaskBoardRenderCancelButton() {
+  let container = document.getElementById("addTaskButtonCancel");
+  container.innerHTML =
+    'Cancel <img src="assets/img/button_cancel_hover.svg" alt="cancel"/>';
+}
+
 function addTaskResetCancelButton() {
   let container = document.getElementById("addTaskButtonCancel");
   container.innerHTML =
     'Clear <img src="assets/img/button_cancel.svg" alt="cancel"/>';
+}
+
+function addTaskBoardResetCancelButton() {
+  let container = document.getElementById("addTaskButtonCancel");
+  container.innerHTML =
+    'Cancel <img src="assets/img/button_cancel.svg" alt="cancel"/>';
 }
 
 function addTaskRenderAddButton() {
@@ -203,6 +219,11 @@ function reRenderSubtask() {
 function addTaskAddSubtask() {
   let input = document.getElementById("addTaskSubtask").value;
   addTaskSubtasks.push(input);
+  let arrayEditSubtask = {
+    status: "open",
+    titel: input,
+  };
+  editSubtasks.push(arrayEditSubtask);
   renderSubtaskContainer();
   reRenderSubtask();
 }
@@ -224,6 +245,8 @@ function subtaskRenderEdit(id) {
   container = document.getElementById("subtask" + id);
   toggleClassWithoutHover(id);
   let subtaskText = addTaskSubtasks[id];
+  document.getElementById("subtask" + id).onmouseover = null;
+  document.getElementById("subtask" + id).onmouseout = null;
   container.innerHTML = `
     <div class="subtask_d_flex addTask_subtask_container">
       <input id="editSubtask${id}" type="text" style="font-size: 14px; padding: 4px 15px;" value="${subtaskText}" class="input_with_button">
@@ -243,8 +266,16 @@ function subtaskRenderEdit(id) {
 function finishedEditSubtask(id) {
   let editText = document.getElementById("editSubtask" + id).value;
   addTaskSubtasks[id] = editText;
+  editSubtasks[id].titel = editText;
+  let onmouseoverId = "subtaskImg" + id;
   container = document.getElementById("subtask" + id);
   container.innerHTML = `${templateRenderSubtaskContainer(id, editText)}`;
+  document.getElementById("subtask" + id).onmouseover = function () {
+    dNone(onmouseoverId);
+  };
+  document.getElementById("subtask" + id).onmouseout = function () {
+    dNone(onmouseoverId);
+  };
 }
 
 function toggleClassWithoutHover(id) {
@@ -254,6 +285,7 @@ function toggleClassWithoutHover(id) {
 
 function deleteSubtask(i) {
   addTaskSubtasks.splice(i, 1);
+  editSubtasks.splice(i, 1);
   renderSubtaskContainer();
 }
 
@@ -330,9 +362,10 @@ async function addTask(side) {
     await postAssignedAccounts(taskId);
     clearAddTask();
     if (side === "board") {
+      tasks = await loadData("tasks/");
       tasksIds = [];
       fetchTaskIds();
-      taskMoveBack("AddtaskBoard", "AddtaskBoardBg");
+      taskMoveBack("addtaskBoard", "addtaskBoardBg");
       reRenderBoard();
     }
     createToast("successNewTask");
@@ -455,3 +488,61 @@ document.addEventListener("click", function (event) {
     inputDropdownMenuBlur();
   }
 });
+
+async function editTask(taskId) {
+  await patchTask(taskId);
+  await patchAssignedAccounts(taskId);
+  await patchSubtasks(taskId);
+  tasks = await loadData("tasks/");
+  reRenderBoard();
+  taskMoveBack("taskDetail", "taskDetailBg");
+  addTaskSubtasks = [];
+}
+
+async function patchTask(taskId) {
+  let titel = document.getElementById("addTaskTitle").value;
+  let description = document.getElementById("addTaskDescription").value;
+  let dueDate = document.getElementById("addTaskDate").value;
+  let [year, month, day] = dueDate.split("-");
+  let formattedDate = `${day}/${month}/${year}`;
+  let step = tasks[taskId].step;
+  await patchData("/tasks/" + taskId, {
+    description: description,
+    titel: titel,
+    prio: currentPrio,
+    step: step,
+    dueDate: formattedDate,
+  });
+}
+
+async function patchAssignedAccounts(taskId) {
+  await deleteData("/tasks/" + taskId + "/assignedAccounts");
+  await postAssignedAccounts(taskId);
+}
+
+async function patchSubtasks(taskId) {
+  await deleteData("/tasks/" + taskId + "/subtasks");
+  await postEditSubtasks(taskId);
+}
+
+async function postEditSubtasks(taskId) {
+  for (let i = 0; i < editSubtasks.length; i++) {
+    let editSubtask = editSubtasks[i];
+    let titel = editSubtask.titel;
+    let status = editSubtask.status;
+    await postData("/tasks/" + taskId + "/subtasks", {
+      titel: titel,
+      status: status,
+    });
+  }
+}
+
+function loadEditSubtasksArray() {
+  let amountSubtasks = subtasksIds.length;
+  editSubtasks = [];
+  for (let i = 0; i < amountSubtasks; i++) {
+    let subtaskId = subtasksIds[i];
+    let subtask = subtasks[subtaskId];
+    editSubtasks.push(subtask);
+  }
+}

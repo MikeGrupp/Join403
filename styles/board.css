@@ -489,6 +489,52 @@
   animation: wiggleAnimation 0.5s normal;
 }
 
+.editTask_container {
+  max-height: 766px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+.editTask_closing_button {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.addTask_formular_second_subtask {
+  display: flex;
+  align-items: start;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 54px;
+  width: calc(100% - 2px);
+}
+
+.subtask_container_edit {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  z-index: 999;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 10px;
+  flex-direction: column;
+}
+
+.subtask_container_edit img {
+  height: 5px;
+}
+
+.board_edit {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  margin-top: 15px;
+}
+
 @keyframes wiggleAnimation {
   37% {
     transform: rotate(5deg);

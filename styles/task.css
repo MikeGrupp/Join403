@@ -52,7 +52,7 @@
   align-items: start;
   justify-content: center;
   flex-direction: column;
-  width: 100%;
+  width: calc(100% - 2px);
 }
 
 .addTask_formular_headline {
@@ -67,7 +67,7 @@
   justify-content: center;
   flex-direction: column;
   margin-top: 20px;
-  width: 100%;
+  width: calc(100% - 2px);
 }
 
 .addTask_formular_right {
@@ -271,6 +271,7 @@ textarea {
   align-items: center;
   justify-content: center;
   margin-right: 5px;
+  cursor: pointer;
 }
 
 .add_button img {

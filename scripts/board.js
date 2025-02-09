@@ -390,6 +390,76 @@ function renderDetailTask(taskId) {
   taskMoveForward("taskDetail");
 }
 
+function renderDetailEditTask(taskId) {
+  let task = tasks[taskId];
+  let title = task.titel;
+  let description = task.description;
+  let prio = task.prio;
+  let dueDate = task.dueDate;
+  let [day, month, year] = dueDate.split("/");
+  let formattedDate = `${year}-${month}-${day}`;
+  let container = document.getElementById("taskDetail");
+  container.innerHTML = `${templateRenderDetailEditTask(
+    taskId,
+    title,
+    description,
+    formattedDate
+  )}`;
+  renderEditAccounts(taskId);
+  renderEditSubtasks(taskId);
+  renderPrio(prio);
+  loadEditSubtasksArray();
+}
+
+function renderEditAccounts(taskId) {
+  task = tasks[taskId];
+  assignedAccounts = task.assignedAccounts;
+  fetchAssignedAccountsIds();
+  let amountAssignedAccounts = assignedAccountsIds.length;
+  assignedContacts = [];
+  let container = document.getElementById("assignedContactsContainer");
+  container.innerHTML = ``;
+  for (let i = 0; i < amountAssignedAccounts; i++) {
+    let accountId = assignedAccountsIds[i];
+    let account = assignedAccounts[accountId];
+    let initials = account.initials;
+    let color = account.color;
+    assignedContacts.push(account);
+    container.innerHTML += `
+      <div class="task_account1 bg_${color}">${initials}</div>
+    `;
+  }
+  renderDropdownContainerContacts("board");
+}
+
+function checkAssignedContacts() {
+  let amountAssignedAccounts = assignedAccountsIds.length;
+  for (let i = 0; i < amountAssignedAccounts; i++) {
+    let accountId = assignedAccountsIds[i];
+    let account = assignedAccounts[accountId];
+    let id = "checkbox" + account.id;
+    let currentCheckBox = document.getElementById(id);
+    currentCheckBox.checked = true;
+  }
+}
+
+function renderEditSubtasks(taskId) {
+  addTaskSubtasks = [];
+  task = tasks[taskId];
+  subtasks = task.subtasks;
+  fetchSubTaskIds();
+  let amountSubtasks = subtasksIds.length;
+
+  for (let i = 0; i < amountSubtasks; i++) {
+    let subtaskId = subtasksIds[i];
+    let subtask = subtasks[subtaskId];
+    let title = subtask.titel;
+    addTaskSubtasks.push(title);
+    renderSubtaskContainer();
+    reRenderSubtask();
+  }
+}
+
 function renderDetailAccounts(task) {
   assignedAccounts = task.assignedAccounts;
   fetchAssignedAccountsIds();
@@ -546,14 +616,14 @@ function highlightBorder() {
 
 async function deleteTaskFromTasks(taskId) {
   tasks = await loadData("tasks/");
-    if (tasks.hasOwnProperty(taskId)) {
-      await deleteExistingTask(taskId);
-      createToast("successDeleteTask");
-      taskMoveBack();
-      setTimeout(function () {
-        window.location.href = "./board.html";
-     }, 800);
-    }
+  if (tasks.hasOwnProperty(taskId)) {
+    await deleteExistingTask(taskId);
+    createToast("successDeleteTask");
+    taskMoveBack();
+    setTimeout(function () {
+      window.location.href = "./board.html";
+    }, 800);
+  }
 }
 
 async function deleteExistingTask(taskId) {

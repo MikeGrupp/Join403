@@ -459,7 +459,7 @@ function templateRenderDetailTask(
         <div class="detail_task_delete_img" id="detailTaskDeleteImg"></div>
         Delete
       </div>
-      <div class="detail_task_edit">
+      <div class="detail_task_edit" onclick="renderDetailEditTask('${taskId}')">
         <div class="detail_task_edit_img" id="detailTaskEditImg"></div>
         Edit
       </div>
@@ -565,12 +565,163 @@ function templateRenderSubtaskContainer(i, subtaskText) {
         ${subtaskText}
       </div>
       <div class="subtask_button d-none" id="subtaskImg${i}">
-        <div class="subtask_edit_button">
-          <img src="assets/img/edit.svg" alt="edit"onclick="subtaskRenderEdit(${i})" >
+        <div class="subtask_edit_button" onclick="subtaskRenderEdit(${i})">
+          <img src="assets/img/edit.svg" alt="edit" >
         </div>
         <div class="subtask_delete_button" onclick="deleteSubtask(${i})">
           <img src="assets/img/delete.svg" alt="delete" />
         </div>
       </div>
+  `;
+}
+
+function templateRenderDetailEditTask(
+  taskId,
+  title,
+  description,
+  formattedDate
+) {
+  return `
+    <div class="wrapper">
+      <div
+        class="editTask_closing_button"
+        onclick="taskMoveBack('taskDetail','taskDetailBg')"
+      >
+        <div class="add_button">
+          <img src="assets/img/button_cancel.svg" alt="close" />
+        </div>
+      </div>
+      <div class="editTask_container">
+        <div class="addTask_formular_first">
+          <label class="addTask_formular_headline" for="addTaskTitle">
+            Title
+          </label>
+          <input
+            class="input"
+            placeholder="Enter a title"
+            id="addTaskTitle"
+            name="title"
+            type="text"
+            value="${title}"
+          />
+        </div>
+        <div class="addTask_formular_second">
+          <label class="addTask_formular_headline" for="addTaskDescription">
+            Description
+          </label>
+          <textarea
+            placeholder="Enter a Description"
+            id="addTaskDescription"
+            name="Description"
+          >
+${description}</textarea
+          >
+        </div>
+        <div class="addTask_formular_second">
+          <label class="addTask_formular_headline" for="addTaskDate">
+            Due Date
+          </label>
+          <input
+            id="addTaskDate"
+            value="${formattedDate}"
+            class="input"
+            name="Date"
+            type="date"
+          />
+          <div class="dropdown_wrapper"></div>
+        </div>
+        <div class="addTask_formular_second">
+          <div class="addTask_formular_headline">Prio</div>
+          <div class="addTask_prio_container" id="prioContainer">
+            <div
+              class="addTask_prio"
+              id="prioUrgent"
+              onclick="renderPrio('urgent')"
+            >
+              Urgent
+              <img src="assets/img/prio_urgent.svg" alt="Urgent" />
+            </div>
+            <div
+              class="addTask_prio addTask_prio_focus_medium"
+              id="prioMedium"
+              onclick="renderPrio('medium')"
+            >
+              Medium
+              <img src="assets/img/Prio media.svg" alt="Medium" />
+            </div>
+            <div class="addTask_prio" id="prioLow" onclick="renderPrio('low')">
+              Low
+              <img src="assets/img/prio_low.svg" alt="Low" />
+            </div>
+          </div>
+        </div>
+        <div class="addTask_formular_second">
+          <label class="addTask_formular_headline" for="addTaskAssignedTo">
+            Assigned to
+          </label>
+          <div class="addTask_subtask_container" id="addTaskContactContainer">
+            <input
+              class="input_with_button"
+              id="addTaskAssignedTo"
+              name="AssignedTo"
+              type="text"
+              placeholder="Select contacts to assign"
+              onfocus="inputDropdownMenuFocus()"
+              oninput="searchContacts()"
+            />
+            <div class="delete_button">
+              <button class="add_button" onclick="arrowDropdownMenu()">
+                <img
+                  id="dropdownButton"
+                  style="width: 14px; height: 14px"
+                  src="assets/img/pfeil_nach_unten.png"
+                  alt=""
+                />
+              </button>
+            </div>
+          </div>
+          <div class="dropdown_wrapper">
+            <div class="dropdown_container d-none" id="dropdownContainer"></div>
+          </div>
+          <div class="dropdown_wrapper">
+            <div
+              class="addTask_assigned_contacts"
+              id="assignedContactsContainer"
+            ></div>
+          </div>
+          <div class="addTask_formular_second_subtask">
+            <label class="addTask_formular_headline" for="addTaskSubtask">
+              Subtask
+            </label>
+            <div class="addTask_subtask_container" id="addTaskSubtaskContainer">
+              <input
+                class="input_with_button"
+                placeholder="Add new subtask"
+                id="addTaskSubtask"
+                name="subtask"
+                type="text"
+                oninput="addTaskRenderAddButton();"
+              />
+              <div class="delete_button" id="addTaskSubtaskDeleteButton">
+                <button
+                  class="add_button"
+                  onclick="addTaskRenderAddButtonPlusButton()"
+                >
+                  <img src="assets/img/Property 1=add.svg" alt="add" />
+                </button>
+              </div>
+            </div>
+            <div class="dropdown_wrapper">
+              <div class="subtask_container_edit" id="subtaskContainer"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="board_edit">
+        <button class="standard_btn" onclick="editTask('${taskId}')">
+          OK <img src="assets/img/check.svg" alt="Create Task" />
+        </button>
+      </div>
+    </div>
   `;
 }
