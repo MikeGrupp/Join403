@@ -1244,6 +1244,20 @@
 }
 
 @media screen and (max-width: 427px) {
+  @media (orientation: landscape) {
+    body > *:not(#turn) {
+      display: none;
+    }
+
+    #turn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+    }
+  }
+
   .find_add_task {
     flex-direction: column;
     align-items: flex-start;
