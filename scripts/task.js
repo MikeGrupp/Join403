@@ -406,7 +406,7 @@ async function postTask() {
   let formattedDate = `${day}/${month}/${year}`;
   await postData("/tasks", {
     description: description,
-    kategory: category,
+    category: category,
     titel: title,
     prio: currentPrio,
     step: "Todo",
