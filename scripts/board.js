@@ -429,7 +429,7 @@ function renderEditAccounts(taskId) {
       <div class="task_account1 bg_${color}">${initials}</div>
     `;
   }
-  renderDropdownContainerContacts("board");
+  renderDropdownContainerContacts();
 }
 
 function checkAssignedContacts() {

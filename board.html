@@ -27,7 +27,7 @@
     <link rel="stylesheet" href="styles/media.css" />
     <link rel="stylesheet" href="styles/task.css" />
   </head>
-  <body onload="load('board'), initBoard(), initAddTask()">
+  <body onload="  initAddTask(), load('board'), initBoard()">
     <header id="header" class="header"></header>
     <dialog id="submenu_dialog" class="submenu_dialog"></dialog>
     <div class="sidebar" id="sidebar"></div>
@@ -286,7 +286,7 @@
                   onmouseover="addTaskBoardRenderCancelButton();"
                   class="white_btn pointer"
                   onmouseout="addTaskBoardResetCancelButton();"
-                  onclick="clearAddTask(), taskMoveBack('addtaskBoard', 'addtaskBoardBg')"
+                  onclick="clearAddTask(), taskMoveBack('addtaskBoard', 'addTaskBoardBg')"
                 >
                   Cancel <img src="assets/img/button_cancel.svg" alt="cancel" />
                 </button>

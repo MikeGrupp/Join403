@@ -12,9 +12,11 @@ async function initAddTask() {
   await load("task");
   await fetchContactsIds();
   renderDropdownContainerContacts();
+  assignedAccounts = [];
+  assignedAccountsIds = [];
 }
 
-function renderDropdownContainerContacts(side) {
+function renderDropdownContainerContacts() {
   let container = document.getElementById("dropdownContainer");
   container.innerHTML = ``;
   for (let i = 0; i < contactIds.length; i++) {
@@ -37,9 +39,7 @@ function renderDropdownContainerContacts(side) {
     </div>
   `;
   }
-  if (side === "board") {
-    checkAssignedContacts();
-  }
+  checkAssignedContacts();
 }
 
 function renderAddTaskAssignedContacts() {
@@ -55,14 +55,14 @@ function renderAddTaskAssignedContacts() {
   }
 }
 
-function searchContacts() {
+async function searchContacts() {
   let filterword = document
     .getElementById("addTaskAssignedTo")
     .value.toLowerCase();
   let length = filterword.length;
   searchContactsArray = [];
   contactIds = [];
-  fetchContactsIds();
+  await fetchContactsIds();
   if (length === 0) {
     document.getElementById("addTaskAssignedTo").value = "";
     renderDropdownContainerContacts();
@@ -83,10 +83,14 @@ function addTaskAssignedContacts(contactId) {
   let currentCheckBox = document.getElementById("checkbox" + contactId);
   let assignedContact = storedContacts[contactId];
   if (currentCheckBox.checked == false) {
+    assignedAccounts.push(assignedContact);
+    assignedAccountsIds.push(assignedContact);
     assignedContacts.push(assignedContact);
     currentCheckBox.checked = true;
   } else {
     let index = assignedContacts.findIndex((item) => item.id === contactId);
+    assignedAccounts.splice(assignedContact);
+    assignedAccountsIds.splice(assignedContact);
     assignedContacts.splice(index, 1);
     currentCheckBox.checked = false;
   }
@@ -491,7 +495,7 @@ document.addEventListener("click", function (event) {
 
 async function editTask(taskId) {
   await patchTask(taskId);
-  await patchAssignedAccounts(taskId);
+  await patchAssignedAccounts2(taskId);
   await patchSubtasks(taskId);
   tasks = await loadData("tasks/");
   reRenderBoard();
@@ -515,7 +519,7 @@ async function patchTask(taskId) {
   });
 }
 
-async function patchAssignedAccounts(taskId) {
+async function patchAssignedAccounts2(taskId) {
   await deleteData("/tasks/" + taskId + "/assignedAccounts");
   await postAssignedAccounts(taskId);
 }
