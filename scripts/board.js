@@ -37,7 +37,7 @@ async function renderBoard() {
 async function renderTasks(task, taskId) {
   let title = task.titel;
   let description = task.description;
-  let category = task.kategory;
+  let category = task.category;
   let backgroundColorCategory = null;
   let prio = task.prio;
   let step = "board" + task.step;
@@ -193,7 +193,7 @@ async function fetchAssignedAccountsIds() {
 async function putTask(taskId) {
   let task = tasks[taskId];
   let contentDescription = task.description;
-  let contentCategory = task.kategory;
+  let contentCategory = task.category;
   let contentTitle = task.titel;
   let contentPrio = task.prio;
   let contentStep = task.step;
@@ -201,7 +201,7 @@ async function putTask(taskId) {
 
   await patchData("/tasks/" + taskId, {
     description: contentDescription,
-    kategory: contentCategory,
+    category: contentCategory,
     titel: contentTitle,
     prio: contentPrio,
     step: contentStep,
@@ -366,7 +366,7 @@ function renderDetailTask(taskId) {
   let task = tasks[taskId];
   let title = task.titel;
   let description = task.description;
-  let category = task.kategory;
+  let category = task.category;
   let backgroundColorCategory = null;
   let prio = task.prio;
   let dueDate = task.dueDate;
