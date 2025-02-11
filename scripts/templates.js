@@ -23,25 +23,6 @@ function templateRenderHeaderUser(initials, fontSize) {
     `;
 }
 
-function templateRenderSubmenu() {
-  return `
-      <menu id="submenu" class="submenu">
-        <li class="submenu_entry toggle_help_entry">
-          <a class="submenu_entry_link" href="./help.html">Help</a>
-        </li>
-        <li class="submenu_entry">
-          <a class="submenu_entry_link" href="./legal_notice.html">Legal Notice</a>
-        </li>
-        <li class="submenu_entry">
-          <a class="submenu_entry_link" href="./privacy.html">Privacy Policy</a>
-        </li>
-        <li class="submenu_entry">
-          <a class="submenu_entry_link" href="#" onclick="userLogout()">Log out</a>
-        </li>
-      </menu>
-        `;
-}
-
 function templateRenderSidebar() {
   return `
     <div class="logo">

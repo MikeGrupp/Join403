@@ -29,7 +29,7 @@
   </head>
   <body onload="  initAddTask(), load('board'), initBoard()">
     <header id="header" class="header"></header>
-    <dialog id="submenu_dialog" class="submenu_dialog"></dialog>
+    <dialog id="submenu_dialog" class="submenu_dialog" w3-include-html="templates/submenu.html"></dialog>
     <div class="sidebar" id="sidebar"></div>
     <div
       class="taskdetail_bg d-none"
@@ -419,4 +419,7 @@
       <ul id="notifications" class="notifications"></ul>
     </main>
   </body>
+  <script>
+    includeHtml();
+  </script>
 </html>
