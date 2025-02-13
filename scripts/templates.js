@@ -655,8 +655,8 @@ ${description}</textarea
               <button class="add_button" onclick="arrowDropdownMenu()">
                 <img
                   id="dropdownButton"
-                  style="width: 14px; height: 14px"
-                  src="assets/img/pfeil_nach_unten.png"
+                  style="width: 24px; height: 24px"
+                  src="assets/img/arrowDropDown.svg"
                   alt=""
                 />
               </button>
