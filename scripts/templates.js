@@ -269,7 +269,7 @@ function templateRenderContactManageDialog(
       buttonRightText: "Create contact",
       buttonRightEnabled: "disabled",
       onSubmit: "addNewContact(event)",
-      profileBadge: `<img src="./assets/img/person_white.svg" alt="person icon">`,
+      profileBadge: `<img src="./assets/img/personWhite.svg" alt="person icon">`,
     },
     edit: {
       title: "Edit contact",
