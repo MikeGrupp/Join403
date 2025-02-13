@@ -101,7 +101,7 @@
     }
 
     .icon-pen {
-        background-image: url(../assets/img/edit3-white.svg);
+        background-image: url(../assets/img/edit3White.svg);
         background-color: #2A3647;
     }
 
@@ -236,7 +236,7 @@
 }
 
 .icon-pen {
-    background-image: url(../assets/img/edit3-white.svg);
+    background-image: url(../assets/img/edit3White.svg);
     background-size: 24px;
     background-position: center;
     background-repeat: no-repeat;
