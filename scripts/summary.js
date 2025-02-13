@@ -134,7 +134,6 @@ function startAnimation() {
   let progressCard = document.getElementById("progressCards");
   let sumTitle = document.getElementById("sumTitle");
 
-  document.getElementById("progressCards").classList.add("show");
   setTimeout(() => {
     progressCard.classList.remove("hidden");
     progressCard.classList.add("show");

@@ -213,6 +213,40 @@
 }
 
 @media screen and (max-width: 1024px) {
+  .kanban_board {
+    flex-direction: column;
+    flex: 1;
+  }
+
+  .board_todo {
+    width: auto;
+  }
+
+  .board_subline {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .board_tasks {
+    min-height: auto;
+    flex-direction: row;
+    width: 100%;
+    gap: 16px;
+    padding-bottom: 16px;
+    padding-left: 4px;
+    overflow: auto;
+  }
+
+  .board_task {
+    min-width: 200px;
+    width: 200px;
+  }
+
+  .taskdetail {
+    width: 60vw;
+  }
+
   .greeting_box {
     transform: translate(-40%, -50%);
   }
@@ -520,6 +554,12 @@
 }
 
 @media screen and (max-width: 767px) {
+  .taskbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+  }
+
   .fadeout-box {
     position: absolute;
     height: 100vh;
@@ -1143,6 +1183,12 @@
 }
 
 @media screen and (max-width: 427px) {
+  .find_add_task {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
   .textpage {
     padding: 16px;
     gap: 16px;
