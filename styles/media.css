@@ -578,7 +578,7 @@
     z-index: 100;
     animation: moveToCorner 500ms linear forwards;
     animation-delay: 500ms;
-    background-image: url(../assets/img/Logo2.svg);
+    background-image: url(../assets/img/logo2.svg);
     background-repeat: no-repeat;
     background-size: cover;
   }
@@ -590,7 +590,7 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      background-image: url(../assets/img/Logo2.svg);
+      background-image: url(../assets/img/logo2.svg);
     }
 
     100% {

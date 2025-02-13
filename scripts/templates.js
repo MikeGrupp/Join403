@@ -26,7 +26,7 @@ function templateRenderHeaderUser(initials, fontSize) {
 function templateRenderSidebar() {
   return `
     <div class="logo">
-      <img src="assets/img/Logo2.svg" alt="Logo" />
+      <img src="assets/img/logo2.svg" alt="Logo" />
     </div>
     <div class="sidebar_menu">
       <nav class="sidebar_links">
@@ -123,7 +123,7 @@ function templateRenderSidebarSummary(pageName) {
 function templateRenderSidebarLogin() {
   return `
     <div class="logo">
-      <img src="assets/img/Logo2.svg" alt="Logo"/>
+      <img src="assets/img/logo2.svg" alt="Logo"/>
     </div>
     <div class="sidebar_menu">
       <nav class="sidebar_links">
@@ -294,7 +294,7 @@ function templateRenderContactManageDialog(
         <img src="./assets/img/close.svg" class="contact_manage_close_icon" alt="close icon">
       </button>
       <div class="contact_manage_dialog_title_container">
-        <img class="contact_manage_dialog_logo" src="./assets/img/Logo2.svg" alt="">
+        <img class="contact_manage_dialog_logo" src="./assets/img/logo2.svg" alt="">
         <h1 class="contact_manage_dialog_title">${modeConfig.title}</h1>
         ${modeConfig.subtitle}
         <div class="horizontal_blue_line"></div>
