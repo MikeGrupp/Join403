@@ -152,7 +152,7 @@ function changeImgToLock(imgId) {
 
 function changeImgToClosedEye(imgId) {
     let content = document.getElementById(imgId)
-    content.src = './assets/img/visibility_off.svg'
+    content.src = './assets/img/visibilityOff.svg'
 }
 
 function changeImgToOpenEye(imgId) {
