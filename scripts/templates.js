@@ -291,7 +291,7 @@ function templateRenderContactManageDialog(
   return `
     <div class="contact_manage_dialog_container">
       <button onclick="closeContactManage()" class="contact_manage_close_button">
-        <img src="./assets/img/Close.svg" class="contact_manage_close_icon" alt="close icon">
+        <img src="./assets/img/close.svg" class="contact_manage_close_icon" alt="close icon">
       </button>
       <div class="contact_manage_dialog_title_container">
         <img class="contact_manage_dialog_logo" src="./assets/img/Logo2.svg" alt="">
@@ -409,7 +409,7 @@ function templateRenderDetailTask(
       </div>
       <div class="detail_task_close_button">
         <img
-          src="assets/img/Close.svg"
+          src="assets/img/close.svg"
           alt="close task"
           onclick="taskMoveBack('taskDetail','taskDetailBg')"
         />
