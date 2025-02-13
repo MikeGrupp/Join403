@@ -75,7 +75,7 @@ function templateRenderSidebarSummary(pageName) {
   if (pageName === "summary") {
     return `
       <div class="summary_focus">
-        <img src="assets/img/summary_focus.svg" alt="summary" />
+        <img src="assets/img/summaryFocus.svg" alt="summary" />
         <p>Summary</p>
       </div>
     `;
@@ -83,7 +83,7 @@ function templateRenderSidebarSummary(pageName) {
   if (pageName === "task") {
     return `
       <div class="summary_focus">
-        <img src="assets/img/addTask_focus.svg" alt="addTask" />
+        <img src="assets/img/addTaskFocus.svg" alt="addTask" />
         <p>Add Task</p>
       </div>
     `;
@@ -91,7 +91,7 @@ function templateRenderSidebarSummary(pageName) {
   if (pageName === "board") {
     return `
       <div class="summary_focus">
-        <img src="assets/img/board_focus.svg" alt="board" />
+        <img src="assets/img/boardFocus.svg" alt="board" />
         <p>Board</p>
       </div>
     `;
@@ -99,7 +99,7 @@ function templateRenderSidebarSummary(pageName) {
   if (pageName === "contacts") {
     return `
       <div class="summary_focus">
-        <img src="assets/img/contacts_focus.svg" alt="contacts" />
+        <img src="assets/img/contactsFocus.svg" alt="contacts" />
         <p>Contacts</p>
       </div>
     `;
