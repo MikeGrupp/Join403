@@ -7,6 +7,7 @@ let currentPrio = "medium";
 let category = "";
 let validation = false;
 let editSubtasks = [];
+let step = "Todo";
 
 async function initAddTask() {
   await load("task");
@@ -413,7 +414,7 @@ async function postTask() {
     category: category,
     titel: title,
     prio: currentPrio,
-    step: "Todo",
+    step: step,
     dueDate: formattedDate,
   });
 }
@@ -425,7 +426,7 @@ async function postAssignedAccounts(taskId) {
     let initials = contact.initials;
     let color = contact.color;
     let id = contact.id;
-    await postData("/tasks/" + taskId + "/assignedAccounts", {
+    await patchData("/tasks/" + taskId + "/assignedAccounts/" + id, {
       name: name,
       initials: initials,
       color: color,
@@ -509,12 +510,12 @@ async function patchTask(taskId) {
   let dueDate = document.getElementById("addTaskDate").value;
   let [year, month, day] = dueDate.split("-");
   let formattedDate = `${day}/${month}/${year}`;
-  let step = tasks[taskId].step;
+  let taskStep = tasks[taskId].step;
   await patchData("/tasks/" + taskId, {
     description: description,
     titel: titel,
     prio: currentPrio,
-    step: step,
+    step: taskStep,
     dueDate: formattedDate,
   });
 }
@@ -549,4 +550,8 @@ function loadEditSubtasksArray() {
     let subtask = subtasks[subtaskId];
     editSubtasks.push(subtask);
   }
+}
+
+function selectStep(taskStep) {
+  step = taskStep;
 }

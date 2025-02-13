@@ -413,15 +413,12 @@ function renderDetailEditTask(taskId) {
 
 function renderEditAccounts(taskId) {
   task = tasks[taskId];
-  assignedAccounts = task.assignedAccounts;
-  fetchAssignedAccountsIds();
   let amountAssignedAccounts = assignedAccountsIds.length;
   assignedContacts = [];
   let container = document.getElementById("assignedContactsContainer");
   container.innerHTML = ``;
   for (let i = 0; i < amountAssignedAccounts; i++) {
-    let accountId = assignedAccountsIds[i];
-    let account = assignedAccounts[accountId];
+    let account = assignedAccounts[i];
     let initials = account.initials;
     let color = account.color;
     assignedContacts.push(account);
@@ -435,11 +432,12 @@ function renderEditAccounts(taskId) {
 function checkAssignedContacts() {
   let amountAssignedAccounts = assignedAccountsIds.length;
   for (let i = 0; i < amountAssignedAccounts; i++) {
-    let accountId = assignedAccountsIds[i];
-    let account = assignedAccounts[accountId];
-    let id = "checkbox" + account.id;
-    let currentCheckBox = document.getElementById(id);
-    currentCheckBox.checked = true;
+    try {
+      let account = assignedAccounts[i];
+      let id = "checkbox" + account.id;
+      let currentCheckBox = document.getElementById(id);
+      currentCheckBox.checked = true;
+    } catch (error) {}
   }
 }
 
@@ -463,11 +461,16 @@ function renderEditSubtasks(taskId) {
 function renderDetailAccounts(task) {
   assignedAccounts = task.assignedAccounts;
   fetchAssignedAccountsIds();
+  assignedAccounts = [];
+  for (let i = 0; i < assignedAccountsIds.length; i++) {
+    let assignedAccountId = assignedAccountsIds[i];
+    let assignedContact = storedContacts[assignedAccountId];
+    assignedAccounts.push(assignedContact);
+  }
   let amountAssignedAccounts = assignedAccountsIds.length;
 
   for (let i = 0; i < amountAssignedAccounts; i++) {
-    let accountId = assignedAccountsIds[i];
-    let account = assignedAccounts[accountId];
+    let account = assignedAccounts[i];
     let name = account.name;
     let initials = account.initials;
     let backgroundColor = account.color;
