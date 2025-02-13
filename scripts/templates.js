@@ -1,6 +1,6 @@
 function templateRenderBasicHeader() {
   return `
-      <img class="logo_mobile" src="./assets/img/logo-mobile.svg" alt="Join logo" />
+      <img class="logo_mobile" src="./assets/img/logoMobile.svg" alt="Join logo" />
       <span class="desktop_header_title">Kanban Project Management Tool</span>
       `;
 }
