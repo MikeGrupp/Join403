@@ -246,7 +246,7 @@ function templateRenderContactDetailsMenuForContact(contactId) {
 function templateRenderContactDetailsMobileManageMenuButton(isMobile) {
   if (isMobile) {
     return `<button id="contact_burger_menu" class="contact_burger_menu" onclick="openSubmenu('contact_manage_submenu')">
-              <img class="menu_image" src="./assets/img/more_vert.svg" alt="open options to manage the contact">
+              <img class="menu_image" src="./assets/img/moreVert.svg" alt="open options to manage the contact">
             </button>`;
   }
   return "";
