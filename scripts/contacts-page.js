@@ -2,7 +2,6 @@ const CONSTANTS = {
   SELECTORS: {
     CONTACT_LIST_CONTAINER: "contact_list_container",
     CONTACT_LIST: "contact_list",
-    CONTACT_ADD_CONTAINER: "add_contact_container",
     CONTACT_DETAILS_D: "desktop_contact_details_container",
     CONTACT_DETAILS_M: "mobile_contact_details_container",
     CONTACT_MANAGE_SUBMENU: "contact_manage_submenu",
@@ -21,15 +20,8 @@ const CONSTANTS = {
 
 async function initContacts() {
   setStoredContacts(await createLoadContacts());
-  initDesktopAddContactButton();
   initContactList();
   initContactDetails();
-}
-
-function initDesktopAddContactButton() {
-  let desktopAddContactContainerHtml = templateRenderDesktopAddContactButton();
-  let desktopAddContactContainer = document.getElementById(CONSTANTS.SELECTORS.CONTACT_ADD_CONTAINER);
-  desktopAddContactContainer.innerHTML = desktopAddContactContainerHtml;
 }
 
 function initContactList() {

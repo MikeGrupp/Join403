@@ -31,11 +31,11 @@
   </head>
   <body onload="load('contacts'), initContacts()">
     <header id="header" class="header"></header>
-    <dialog id="submenu_dialog" class="submenu_dialog"></dialog>
+    <dialog id="submenu_dialog" class="submenu_dialog" w3-include-html="templates/submenu.html"></dialog>
     <div class="sidebar" id="sidebar"></div>
     <main class="contacts_main">
       <div id="contact_list_container" class="contact_list_container">
-        <div id="add_contact_container" class="add_contact_container">
+        <div id="add_contact_container" class="add_contact_container" w3-include-html="templates/desktopAddContactButton.html">
         </div>
         <dl id="contact_list" class="contact_list">
         </dl>
@@ -49,4 +49,7 @@
       <ul id="notifications" class="notifications"></ul>
     </main>
   </body>
+  <script>
+    includeHtml();
+  </script>
 </html>

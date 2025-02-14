@@ -14,11 +14,11 @@ function initPageSpecificLayout(pageName, userInitials) {
     case "board":
     case "contacts":
       initDefaultHeader(userInitials);
-      initSubmenu();
+      initSubmenuListeners("submenu_dialog", "header_user_profile");
       break;
     case "help":
       initHelpPageHeader(userInitials);
-      initSubmenu();
+      initSubmenuListeners("submenu_dialog", "header_user_profile");
       break;
     case "privacy":
     case "legal":
@@ -81,12 +81,6 @@ function initNoUserHeader() {
   header.innerHTML = templateRenderBasicHeader();
 }
 
-function initSubmenu() {
-  let submenu = document.getElementById("submenu_dialog");
-  submenu.innerHTML = templateRenderSubmenu();
-  initSubmenuListeners(submenu.id, "header_user_profile");
-}
-
 function renderSidebar() {
   let container = document.getElementById("sidebar");
   container.innerHTML = `${templateRenderSidebar()}`;
@@ -127,5 +121,19 @@ function userLogout() {
     checkUserLogin();
   } else {
     checkUserLogin();
+  }
+}
+
+async function includeHtml() {
+  let includeElements = document.querySelectorAll('[w3-include-html]');
+  for (let i = 0; i < includeElements.length; i++) {
+      const element = includeElements[i];
+      file = element.getAttribute("w3-include-html");
+      let resp = await fetch(file);
+      if (resp.ok) {
+          element.innerHTML = await resp.text();
+      } else {
+          element.innerHTML = 'Page not found';
+      }
   }
 }
