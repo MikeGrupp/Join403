@@ -148,13 +148,13 @@ function addTaskBoardRenderCancelButton() {
 function addTaskResetCancelButton() {
   let container = document.getElementById("addTaskButtonCancel");
   container.innerHTML =
-    'Clear <img src="assets/img/button_cancel.svg" alt="cancel"/>';
+    'Clear <img src="assets/img/buttonCancel.svg" alt="cancel"/>';
 }
 
 function addTaskBoardResetCancelButton() {
   let container = document.getElementById("addTaskButtonCancel");
   container.innerHTML =
-    'Cancel <img src="assets/img/button_cancel.svg" alt="cancel"/>';
+    'Cancel <img src="assets/img/buttonCancel.svg" alt="cancel"/>';
 }
 
 function addTaskRenderAddButton() {

@@ -570,7 +570,7 @@ function templateRenderDetailEditTask(
         onclick="taskMoveBack('taskDetail','taskDetailBg')"
       >
         <div class="add_button">
-          <img src="assets/img/button_cancel.svg" alt="close" />
+          <img src="assets/img/buttonCancel.svg" alt="close" />
         </div>
       </div>
       <div class="editTask_container">
