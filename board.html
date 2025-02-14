@@ -4,12 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Join</title>
-    <link rel="icon" type="image/x-icon" href="./assets/img/Logo1.svg" />
+    <link rel="icon" type="image/x-icon" href="assets/img/logo1.svg" />
 
     <script src="./scripts/submenus.js"></script>
     <script src="./scripts/templates.js"></script>
     <script src="./scripts/contacts.js"></script>
-    <script src="./scripts/database-controller.js"></script>
+    <script src="scripts/databaseController.js"></script>
     <script src="./scripts/utils.js"></script>
     <script src="./scripts/board.js"></script>
     <script src="./scripts/task.js" defer></script>
@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="styles/header.css" />
     <link rel="stylesheet" href="styles/submenus.css" />
     <link rel="stylesheet" href="styles/sidebar.css" />
-    <link rel="stylesheet" href="styles/user-colors.css" />
+    <link rel="stylesheet" href="styles/userColors.css" />
     <link rel="stylesheet" href="styles/notifications.css" />
     <link rel="stylesheet" href="styles/board.css" />
     <link rel="stylesheet" href="styles/media.css" />
@@ -117,8 +117,8 @@
                       <button class="add_button" onclick="arrowDropdownMenu()">
                         <img
                           id="dropdownButton"
-                          style="width: 14px; height: 14px"
-                          src="assets/img/pfeil_nach_unten.png"
+                          style="width: 24px; height: 24px"
+                          src="assets/img/arrowDropDown.svg"
                           alt=""
                         />
                       </button>
@@ -207,8 +207,8 @@
                       <button class="add_button">
                         <img
                           id="dropdownButtonCategory"
-                          style="width: 14px; height: 14px"
-                          src="assets/img/pfeil_nach_unten.png"
+                          style="width: 24px; height: 24px"
+                          src="assets/img/arrowDropDown.svg"
                           alt=""
                         />
                       </button>
@@ -288,7 +288,7 @@
                   onmouseout="addTaskBoardResetCancelButton();"
                   onclick="clearAddTask(), taskMoveBack('addtaskBoard', 'addTaskBoardBg')"
                 >
-                  Cancel <img src="assets/img/button_cancel.svg" alt="cancel" />
+                  Cancel <img src="assets/img/buttonCancel.svg" alt="cancel" />
                 </button>
                 <button class="standard_btn" onclick="addTask('board')">
                   Create Task
@@ -342,7 +342,7 @@
                 To do
                 <img
                   class="board_subline_img"
-                  src="assets/img/plus_button.svg"
+                  src="assets/img/plusButton.svg"
                   alt="add Task"
                   onclick="dNone('addTaskBoardBg'),taskMoveForward('addTaskBoard'), selectStep('Todo')"
                 />
@@ -363,7 +363,7 @@
                 In progress
                 <img
                   class="board_subline_img"
-                  src="assets/img/plus_button.svg"
+                  src="assets/img/plusButton.svg"
                   alt="add Task"
                   onclick="dNone('addTaskBoardBg'),taskMoveForward('addTaskBoard'), selectStep('InProgress')"
                 />
@@ -384,7 +384,7 @@
                 Await feedback
                 <img
                   class="board_subline_img"
-                  src="assets/img/plus_button.svg"
+                  src="assets/img/plusButton.svg"
                   alt="add Task"
                   onclick="dNone('addTaskBoardBg'),taskMoveForward('addTaskBoard'), selectStep('AwaitFeedback')"
                 />

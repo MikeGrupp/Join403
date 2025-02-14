@@ -152,7 +152,7 @@
 }
 
 .board_subline_img:hover {
-  content: url("../assets/img/plus_button_v2.0.svg");
+  content: url("../assets/img/plusButton2.svg");
   cursor: pointer;
 }
 

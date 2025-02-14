@@ -1,6 +1,6 @@
 function templateRenderBasicHeader() {
   return `
-      <img class="logo_mobile" src="./assets/img/logo-mobile.svg" alt="Join logo" />
+      <img class="logo_mobile" src="./assets/img/logoMobile.svg" alt="Join logo" />
       <span class="desktop_header_title">Kanban Project Management Tool</span>
       `;
 }
@@ -26,7 +26,7 @@ function templateRenderHeaderUser(initials, fontSize) {
 function templateRenderSidebar() {
   return `
     <div class="logo">
-      <img src="assets/img/Logo2.svg" alt="Logo" />
+      <img src="assets/img/logo2.svg" alt="Logo" />
     </div>
     <div class="sidebar_menu">
       <nav class="sidebar_links">
@@ -62,7 +62,7 @@ function templateRenderSidebar() {
           </a>
         </div>
         <div class="sidebar_submenu_background" id="legal">
-          <a class="summary" href="legal_notice.html">
+          <a class="summary" href="legalNotice.html">
             <p>Legal notice</p>
           </a>
         </div>
@@ -75,7 +75,7 @@ function templateRenderSidebarSummary(pageName) {
   if (pageName === "summary") {
     return `
       <div class="summary_focus">
-        <img src="assets/img/summary_focus.svg" alt="summary" />
+        <img src="assets/img/summaryFocus.svg" alt="summary" />
         <p>Summary</p>
       </div>
     `;
@@ -83,7 +83,7 @@ function templateRenderSidebarSummary(pageName) {
   if (pageName === "task") {
     return `
       <div class="summary_focus">
-        <img src="assets/img/addTask_focus.svg" alt="addTask" />
+        <img src="assets/img/addTaskFocus.svg" alt="addTask" />
         <p>Add Task</p>
       </div>
     `;
@@ -91,7 +91,7 @@ function templateRenderSidebarSummary(pageName) {
   if (pageName === "board") {
     return `
       <div class="summary_focus">
-        <img src="assets/img/board_focus.svg" alt="board" />
+        <img src="assets/img/boardFocus.svg" alt="board" />
         <p>Board</p>
       </div>
     `;
@@ -99,7 +99,7 @@ function templateRenderSidebarSummary(pageName) {
   if (pageName === "contacts") {
     return `
       <div class="summary_focus">
-        <img src="assets/img/contacts_focus.svg" alt="contacts" />
+        <img src="assets/img/contactsFocus.svg" alt="contacts" />
         <p>Contacts</p>
       </div>
     `;
@@ -123,7 +123,7 @@ function templateRenderSidebarSummary(pageName) {
 function templateRenderSidebarLogin() {
   return `
     <div class="logo">
-      <img src="assets/img/Logo2.svg" alt="Logo"/>
+      <img src="assets/img/logo2.svg" alt="Logo"/>
     </div>
     <div class="sidebar_menu">
       <nav class="sidebar_links">
@@ -141,7 +141,7 @@ function templateRenderSidebarLogin() {
             </a>
           </div>
           <div class="sidebar_submenu_background" id="legal">
-            <a class="summary" href="legal_notice.html">
+            <a class="summary" href="legalNotice.html">
               <p>Legal notice</p>
             </a>
           </div>
@@ -176,7 +176,7 @@ function templateRenderContactDetailsDefault() {
   return `
         <div class="title_group">
           <div class="back_arrow">
-            <img class="" src="./assets/img/arrow-left.svg" onclick="dNone('mobile_contact_details_container')" alt="back to contacts page" />
+            <img class="" src="./assets/img/arrowLeft.svg" onclick="dNone('mobile_contact_details_container')" alt="back to contacts page" />
           </div>
           <h1>Contacts</h1>
           <div class="vertical_line"></div>
@@ -246,7 +246,7 @@ function templateRenderContactDetailsMenuForContact(contactId) {
 function templateRenderContactDetailsMobileManageMenuButton(isMobile) {
   if (isMobile) {
     return `<button id="contact_burger_menu" class="contact_burger_menu" onclick="openSubmenu('contact_manage_submenu')">
-              <img class="menu_image" src="./assets/img/more_vert.svg" alt="open options to manage the contact">
+              <img class="menu_image" src="./assets/img/moreVert.svg" alt="open options to manage the contact">
             </button>`;
   }
   return "";
@@ -269,7 +269,7 @@ function templateRenderContactManageDialog(
       buttonRightText: "Create contact",
       buttonRightEnabled: "disabled",
       onSubmit: "addNewContact(event)",
-      profileBadge: `<img src="./assets/img/person_white.svg" alt="person icon">`,
+      profileBadge: `<img src="./assets/img/personWhite.svg" alt="person icon">`,
     },
     edit: {
       title: "Edit contact",
@@ -291,10 +291,10 @@ function templateRenderContactManageDialog(
   return `
     <div class="contact_manage_dialog_container">
       <button onclick="closeContactManage()" class="contact_manage_close_button">
-        <img src="./assets/img/Close.svg" class="contact_manage_close_icon" alt="close icon">
+        <img src="./assets/img/close.svg" class="contact_manage_close_icon" alt="close icon">
       </button>
       <div class="contact_manage_dialog_title_container">
-        <img class="contact_manage_dialog_logo" src="./assets/img/Logo2.svg" alt="">
+        <img class="contact_manage_dialog_logo" src="./assets/img/logo2.svg" alt="">
         <h1 class="contact_manage_dialog_title">${modeConfig.title}</h1>
         ${modeConfig.subtitle}
         <div class="horizontal_blue_line"></div>
@@ -409,7 +409,7 @@ function templateRenderDetailTask(
       </div>
       <div class="detail_task_close_button">
         <img
-          src="assets/img/Close.svg"
+          src="assets/img/close.svg"
           alt="close task"
           onclick="taskMoveBack('taskDetail','taskDetailBg')"
         />
@@ -570,7 +570,7 @@ function templateRenderDetailEditTask(
         onclick="taskMoveBack('taskDetail','taskDetailBg')"
       >
         <div class="add_button">
-          <img src="assets/img/button_cancel.svg" alt="close" />
+          <img src="assets/img/buttonCancel.svg" alt="close" />
         </div>
       </div>
       <div class="editTask_container">
@@ -655,8 +655,8 @@ ${description}</textarea
               <button class="add_button" onclick="arrowDropdownMenu()">
                 <img
                   id="dropdownButton"
-                  style="width: 14px; height: 14px"
-                  src="assets/img/pfeil_nach_unten.png"
+                  style="width: 24px; height: 24px"
+                  src="assets/img/arrowDropDown.svg"
                   alt=""
                 />
               </button>

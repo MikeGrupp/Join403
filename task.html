@@ -4,12 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Join</title>
-    <link rel="icon" type="image/x-icon" href="./assets/img/Logo1.svg" />
+    <link rel="icon" type="image/x-icon" href="assets/img/logo1.svg" />
 
     <script src="./scripts/submenus.js"></script>
     <script src="./scripts/templates.js"></script>
     <script src="./scripts/contacts.js"></script>
-    <script src="./scripts/database-controller.js"></script>
+    <script src="scripts/databaseController.js"></script>
     <script src="./scripts/notifications.js"></script>
     <script src="./script.js"></script>
     <script src="./scripts/board.js"></script>
@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="styles/header.css" />
     <link rel="stylesheet" href="styles/submenus.css" />
     <link rel="stylesheet" href="styles/sidebar.css" />
-    <link rel="stylesheet" href="styles/user-colors.css" />
+    <link rel="stylesheet" href="styles/userColors.css" />
     <link rel="stylesheet" href="styles/task.css" />
     <link rel="stylesheet" href="styles/notifications.css" />
     <link rel="stylesheet" href="styles/board.css" />
@@ -97,8 +97,8 @@
                     <button class="add_button" onclick="arrowDropdownMenu()">
                       <img
                         id="dropdownButton"
-                        style="width: 14px; height: 14px"
-                        src="assets/img/pfeil_nach_unten.png"
+                        style="width: 24px; height: 24px"
+                        src="assets/img/arrowDropDown.svg"
                         alt=""
                       />
                     </button>
@@ -179,8 +179,8 @@
                     <button class="add_button">
                       <img
                         id="dropdownButtonCategory"
-                        style="width: 14px; height: 14px"
-                        src="assets/img/pfeil_nach_unten.png"
+                        style="width: 24px; height: 24px"
+                        src="assets/img/arrowDropDown.svg"
                         alt=""
                       />
                     </button>
@@ -264,7 +264,7 @@
                 onmouseout="addTaskResetCancelButton();"
                 onclick="clearAddTask()"
               >
-                Clear <img src="assets/img/button_cancel.svg" alt="cancel" />
+                Clear <img src="assets/img/buttonCancel.svg" alt="cancel" />
               </button>
               <button class="standard_btn" onclick="addTask('addTask')">
                 Create Task
@@ -282,7 +282,7 @@
           onmouseout="addTaskResetCancelButton();"
           onclick="clearAddTask()"
         >
-          Clear <img src="assets/img/button_cancel.svg" alt="cancel" />
+          Clear <img src="assets/img/buttonCancel.svg" alt="cancel" />
         </button>
         <button class="standard_btn" onclick="addTask('addTask')">
           Create Task
