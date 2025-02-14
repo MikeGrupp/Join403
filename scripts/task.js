@@ -136,13 +136,13 @@ function inputDropdownMenuFocus() {
 function addTaskRenderCancelButton() {
   let container = document.getElementById("addTaskButtonCancel");
   container.innerHTML =
-    'Clear <img src="assets/img/button_cancel_hover.svg" alt="cancel"/>';
+    'Clear <img src="assets/img/buttonCancelHover.svg" alt="cancel"/>';
 }
 
 function addTaskBoardRenderCancelButton() {
   let container = document.getElementById("addTaskButtonCancel");
   container.innerHTML =
-    'Cancel <img src="assets/img/button_cancel_hover.svg" alt="cancel"/>';
+    'Cancel <img src="assets/img/buttonCancelHover.svg" alt="cancel"/>';
 }
 
 function addTaskResetCancelButton() {

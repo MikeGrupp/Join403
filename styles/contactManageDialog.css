@@ -208,7 +208,7 @@
 }
 
 .button_close:hover .button_icon {
-  content: url("/assets/img/button_cancel_hover.svg");
+  content: url("/assets/img/buttonCancelHover.svg");
 }
 
 .button_close:active {
