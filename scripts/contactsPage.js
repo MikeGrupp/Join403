@@ -19,7 +19,7 @@ const CONSTANTS = {
 };
 
 async function initContacts() {
-  setStoredContacts(await createLoadContacts());
+  setStoredContacts(await loadContacts());
   initContactList();
   initContactDetails();
 }
@@ -177,7 +177,6 @@ async function addNewContact(event) {
   let nameInput = document.getElementById(CONSTANTS.SELECTORS.CONTACT_NAME);
   let mailInput = document.getElementById(CONSTANTS.SELECTORS.CONTACT_MAIL);
   let phoneInput = document.getElementById(CONSTANTS.SELECTORS.CONTACT_PHONE);
-
   await reloadContactsFromDatabase();
   if (isContactValid(nameInput, mailInput, phoneInput)) {
     let newContactId = await createNewContact(nameInput.value, mailInput.value, phoneInput.value);
@@ -194,7 +193,6 @@ async function editContact(event, contactId) {
   let nameInput = document.getElementById(CONSTANTS.SELECTORS.CONTACT_NAME);
   let mailInput = document.getElementById(CONSTANTS.SELECTORS.CONTACT_MAIL);
   let phoneInput = document.getElementById(CONSTANTS.SELECTORS.CONTACT_PHONE);
-
   await reloadContactsFromDatabase();
   if (isContactValid(nameInput, mailInput, phoneInput)) {
     await editExistingContact(contactId, nameInput.value, mailInput.value, phoneInput.value);

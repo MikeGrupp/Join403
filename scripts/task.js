@@ -99,7 +99,7 @@ function addTaskAssignedContacts(contactId) {
 }
 
 async function fetchContactsIds() {
-  setStoredContacts(await createLoadContacts());
+  setStoredContacts(await loadContacts());
   let contactResponse = storedContacts;
   let contactKeysArray = Object.keys(contactResponse);
   for (let i = 0; i < contactKeysArray.length; i++) {

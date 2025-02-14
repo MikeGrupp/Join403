@@ -44,7 +44,6 @@ function initDefaultHeader(userInitials) {
   headerString += templateRenderHeaderProfileContainer();
   let header = document.getElementById("header");
   header.innerHTML = headerString;
-
   let headerProfileContainer = document.getElementById(
     "header_profile_container"
   );

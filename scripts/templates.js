@@ -283,7 +283,6 @@ function templateRenderContactManageDialog(
       profileBadge: initials,
     },
   };
-
   const modeConfig = config[mode];
   if (!modeConfig) {
     return;

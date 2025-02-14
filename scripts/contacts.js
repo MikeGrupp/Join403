@@ -65,7 +65,7 @@ async function createNewContact(name, mail, phone) {
   let newContactId = await postContact(name, initials, mail, phone, color);
   if (newContactId) {
     addStoredContact(newContactId, name, initials, mail, phone, color);
-    resetForm("contact_form");
+    resetForm(CONSTANTS.SELECTORS.CONTACT_FORM);
     createToast("successNewContact");
   }
   return newContactId;
@@ -85,7 +85,7 @@ async function deleteExistingContact(contactId) {
 }
 
 async function reloadContactsFromDatabase() {
-  setStoredContacts(await createLoadContacts());
+  setStoredContacts(await loadContacts());
 }
 
 async function postContact(name, initials, mail, phone, color) {

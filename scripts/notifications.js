@@ -26,7 +26,6 @@ const notificationDetails = {
 function createToast(notificationId) {
   const text = notificationDetails[notificationId].text;
   const notifications = document.getElementById("notifications");
-
   const toast = document.createElement("li");
   toast.className = "toast";
   toast.innerHTML = `<span>${text}</span>`;
