@@ -219,7 +219,7 @@
 }
 
 .button_close:active .button_icon {
-  content: url("/assets/img/button_cancel_click.svg");
+  content: url("/assets/img/buttonCancelClick.svg");
 }
 
 .button_create {
