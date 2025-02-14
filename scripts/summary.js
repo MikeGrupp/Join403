@@ -197,7 +197,7 @@ function filterTasks() {
   inProgressTasks = storedTasks.filter((task) => task.step === "InProgress");
   feedbackTasks = storedTasks.filter((task) => task.step === "AwaitFeedback");
   doneTasks = storedTasks.filter((task) => task.step === "Done");
-  urgentTasks = storedTasks.filter((task) => task.prio === "Urgent" && task.step !== "Done");
+  urgentTasks = storedTasks.filter((task) => task.prio === "urgent" && task.step !== "Done");
 }
 
 /**
