@@ -518,7 +518,7 @@ function templateRenderSummary(
             <div class="grey_line"></div>
             <div class="right_card">
               <span id="deadline"><b>${deadline}</b></span>
-              <span>Upcoming Deadline</span>
+              ${deadline !== "No coming Deadlines!" ? '<span>Upcoming Deadline</span>' : ''}
             </div>
           </div>
         </div>

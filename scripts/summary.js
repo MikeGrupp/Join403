@@ -4,7 +4,7 @@ let todoTasks = [];
 let inProgressTasks = [];
 let feedbackTasks = [];
 let doneTasks = [];
-let urgentTask = [];
+let urgentTasks = [];
 
 function msgRender() {
   const urlParams = new URLSearchParams(window.location.search);
@@ -71,8 +71,8 @@ function renderSummary() {
   let amountInProgress = inProgressTasks.length;
   let amountFeedback = feedbackTasks.length;
   let amountDone = doneTasks.length;
-  let amountUrgent = urgentTask.length;
-  let deadline = findDeadline();
+  let amountUrgent = urgentTasks.length;
+  let deadline = getNextDeadline();
 
   progressCards.innerHTML = templateRenderSummary(
     amountTasks,
@@ -83,16 +83,6 @@ function renderSummary() {
     amountUrgent,
     deadline
   )
-}
-
-function findDeadline() {
-  let deadlineTask = storedTasks.find(task => task.step !== "Done");
-
-  if (!deadlineTask) {
-    return "No coming Deadlines!";
-  }
-
-  return formatDate(deadlineTask.dueDate);
 }
 
 function formatDate(dueDate) {
@@ -111,18 +101,25 @@ function filterTasks() {
   inProgressTasks = storedTasks.filter(task => task.step === "InProgress");
   feedbackTasks = storedTasks.filter(task => task.step === "AwaitFeedback");
   doneTasks = storedTasks.filter(task => task.step === "Done");
-  urgentTask = storedTasks.filter(task => task.prio === "Urgent");
-
-  storedTasks.sort((a, b) => {
-    if (!a.dueDate || !b.dueDate) return 0;
-
-    let dateA = new Date(a.dueDate.split('/').reverse().join('-'));
-    let dateB = new Date(b.dueDate.split('/').reverse().join('-'));
-
-    return dateA - dateB;
-  });
+  urgentTasks = storedTasks.filter(task => task.prio === "urgent" && task.step !== "Done");
 }
 
+function getNextDeadline() {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  let upcomingTasks = storedTasks
+    .filter(task => task.step !== "Done" && task.dueDate)
+    .map(task => ({ ...task, parsedDate: new Date(task.dueDate.split('/').reverse().join('-')) }))
+    .filter(task => task.parsedDate >= today)
+    .sort((a, b) => a.parsedDate - b.parsedDate);
+
+  if (!upcomingTasks.length) {
+    return "No coming Deadlines!";
+  }
+
+  return formatDate(upcomingTasks[0].dueDate);
+}
 
 async function createSummary() {
   setStoredTasks(await loadTasks());
