@@ -19,7 +19,7 @@ const CONSTANTS = {
 };
 
 async function initContacts() {
-  setStoredContacts(await createLoadContacts());
+  setStoredContacts(await loadContacts());
   initContactList();
   initContactDetails();
 }
