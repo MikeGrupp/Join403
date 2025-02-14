@@ -62,7 +62,7 @@ function templateRenderSidebar() {
           </a>
         </div>
         <div class="sidebar_submenu_background" id="legal">
-          <a class="summary" href="legal_notice.html">
+          <a class="summary" href="legalNotice.html">
             <p>Legal notice</p>
           </a>
         </div>
@@ -141,7 +141,7 @@ function templateRenderSidebarLogin() {
             </a>
           </div>
           <div class="sidebar_submenu_background" id="legal">
-            <a class="summary" href="legal_notice.html">
+            <a class="summary" href="legalNotice.html">
               <p>Legal notice</p>
             </a>
           </div>
