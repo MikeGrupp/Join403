@@ -318,6 +318,14 @@ function taskMoveForward(div) {
   if (div === "addTaskBoard") {
     position = 50;
   }
+  if (div === "taskDetail" && window.innerWidth < 1025) {
+    position = 20;
+    window.addEventListener("resize", () => {
+      if (div === "taskDetail" && window.innerWidth < 1025) {
+        position = 20;
+      }
+    });
+  }
   function frame() {
     if (pos == position) {
       clearInterval(id);
@@ -345,6 +353,9 @@ function taskMoveBack(div, BgDiv) {
   }
   if (div === "addTaskBoard") {
     position = 50;
+  }
+  if (div === "taskDetail" && window.innerWidth < 1025) {
+    position = 20;
   }
   function frame() {
     if (pos == position) {

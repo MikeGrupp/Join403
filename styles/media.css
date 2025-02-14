@@ -1,4 +1,5 @@
-@media (min-width: 1921px) {}
+@media (min-width: 1921px) {
+}
 
 @media screen and (max-width: 1440px) {
   .greeting_box {
@@ -567,7 +568,7 @@
     z-index: 100;
     animation: fadeout 2000ms forwards;
     animation-delay: 300ms;
-    background-color: #2A3647;
+    background-color: #2a3647;
   }
 
   .logo-animation {
@@ -834,7 +835,7 @@
     bottom: 0;
     height: 80px;
     width: 100%;
-    box-shadow: 0px 0px 4px 0px #0000001A;
+    box-shadow: 0px 0px 4px 0px #0000001a;
   }
 
   .logo {
@@ -887,12 +888,12 @@
 
   .summary p {
     font-size: 14px;
-    font-family: 'Open Sans';
+    font-family: "Open Sans";
   }
 
   .summary_focus p {
     font-size: 14px;
-    font-family: 'Open Sans';
+    font-family: "Open Sans";
   }
 
   .subMenu_login {
@@ -1060,7 +1061,7 @@
     border-top-right-radius: 0;
     border-bottom-left-radius: 30px;
     border-bottom-right-radius: 30px;
-    background-color: #FFFFFF;
+    background-color: #ffffff;
     flex-direction: column;
     gap: 48px;
     align-items: center;
@@ -1173,6 +1174,66 @@
     100% {
       transform: translateY(calc(100vh));
     }
+  }
+
+  .addTask_formular {
+    flex-direction: column;
+  }
+
+  .addTask_border {
+    display: none;
+  }
+
+  .addTask_content {
+    margin-top: 0px;
+  }
+
+  .addTask_headline {
+    margin-top: 10px;
+  }
+
+  .addTask_container {
+    overflow-x: hidden;
+    overflow-y: auto;
+    max-height: calc(100vh - 237px);
+  }
+
+  .addTask_formular_left {
+    width: 100%;
+  }
+
+  .addTask_formular_right {
+    width: 100%;
+    margin-left: 0px;
+    margin-top: 20px;
+  }
+
+  .addTask_button_container {
+    display: none;
+  }
+
+  .addTask_button_info_display {
+    display: none;
+  }
+
+  .addTask_button_info_mobile {
+    display: flex;
+  }
+
+  .addTask_assigned_contacts {
+    position: relative;
+  }
+
+  .subtask_container {
+    position: relative;
+    max-height: 9999999px;
+  }
+
+  .addTask_button_content_mobile {
+    display: flex;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 100%;
   }
 }
 

@@ -90,11 +90,20 @@
   gap: 16px;
 }
 
-.addTask_button_info {
+.addTask_button_info_display {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 5px;
+}
+
+.addTask_button_info_mobile {
+  display: none;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 5px;
+  width: 100%;
+  margin-top: 20px;
 }
 
 .standard_btn:enabled {
@@ -536,4 +545,8 @@ option:hover {
 
 .border_red {
   border-color: red;
+}
+
+.addTask_button_content_mobile {
+  display: none;
 }
