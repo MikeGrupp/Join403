@@ -1,5 +1,5 @@
 /**
- * Randomly selects and returns a color from a predefined array of colors.
+ * Randomly selects and returns a color from a predefined array of colors
  *
  * @returns {string} A randomly selected color name from the COLORS array
  */
@@ -27,7 +27,7 @@ function selectRandomColor() {
 }
 
 /**
- * Takes a full name string and returns the initials by taking the first character of each word.
+ * Takes a full name string and returns the initials by taking the first character of each word
  *
  * @param {string} name - A string containing one or more names separated by spaces
  * @returns {string} A string containing the initials (first character of each word) joined together
@@ -42,9 +42,9 @@ function determineInitials(name) {
 }
 
 /**
- * Resets all form elements within a form to their default values.
+ * Resets all form elements within a form to their default values
  * This includes clearing text inputs, unchecking radio/checkboxes,
- * and resetting select elements to their default selected options.
+ * and resetting select elements to their default selected options
  *
  * @param {string} formId - The HTML id attribute of the form element to reset
  */
