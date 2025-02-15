@@ -64,6 +64,13 @@ let editSubtasks = [];
 let step = "Todo";
 
 /**
+ * String representing the current amount of Accounts
+ *
+ * @type {string}
+ */
+let addedAccounts = 0;
+
+/**
  * Initializes the add task functionality. Loads task data, fetches contact IDs, and renders the contact dropdown
  * @async
  */
@@ -126,7 +133,9 @@ function renderAddTaskAssignedContacts() {
  * @async
  */
 async function searchContacts() {
-  let filterword = document.getElementById("addTaskAssignedTo").value.toLowerCase();
+  let filterword = document
+    .getElementById("addTaskAssignedTo")
+    .value.toLowerCase();
   let length = filterword.length;
   searchContactsArray = [];
   contactIds = [];
@@ -155,17 +164,38 @@ async function searchContacts() {
 function addTaskAssignedContacts(contactId) {
   let currentCheckBox = document.getElementById("checkbox" + contactId);
   let assignedContact = storedContacts[contactId];
-  if (currentCheckBox.checked == false) {
-    assignedAccounts.push(assignedContact);
-    assignedAccountsIds.push(assignedContact);
-    assignedContacts.push(assignedContact);
-    currentCheckBox.checked = true;
+  if (addedAccounts < 4) {
+    if (currentCheckBox.checked == false) {
+      assignedAccounts.push(assignedContact);
+      assignedAccountsIds.push(assignedContact);
+      assignedContacts.push(assignedContact);
+      currentCheckBox.checked = true;
+      addedAccounts++;
+    } else {
+      let index = assignedContacts.findIndex((item) => item.id === contactId);
+      assignedAccounts.splice(assignedContact);
+      assignedAccountsIds.splice(assignedContact);
+      assignedContacts.splice(index, 1);
+      currentCheckBox.checked = false;
+      addedAccounts--;
+    }
+    document.getElementById("addTaskRequiredContacts").classList.add("d-none");
   } else {
-    let index = assignedContacts.findIndex((item) => item.id === contactId);
-    assignedAccounts.splice(assignedContact);
-    assignedAccountsIds.splice(assignedContact);
-    assignedContacts.splice(index, 1);
-    currentCheckBox.checked = false;
+    if (currentCheckBox.checked == true) {
+      let index = assignedContacts.findIndex((item) => item.id === contactId);
+      assignedAccounts.splice(assignedContact);
+      assignedAccountsIds.splice(assignedContact);
+      assignedContacts.splice(index, 1);
+      currentCheckBox.checked = false;
+      addedAccounts--;
+      document
+        .getElementById("addTaskRequiredContacts")
+        .classList.add("d-none");
+    } else {
+      document
+        .getElementById("addTaskRequiredContacts")
+        .classList.remove("d-none");
+    }
   }
   renderAddTaskAssignedContacts();
 }
@@ -224,7 +254,8 @@ function inputDropdownMenuFocus() {
  */
 function addTaskRenderCancelButton() {
   let container = document.getElementById("addTaskButtonCancel");
-  container.innerHTML = 'Clear <img src="assets/img/buttonCancelHover.svg" alt="cancel"/>';
+  container.innerHTML =
+    'Clear <img src="assets/img/buttonCancelHover.svg" alt="cancel"/>';
 }
 
 /**
@@ -232,7 +263,8 @@ function addTaskRenderCancelButton() {
  */
 function addTaskBoardRenderCancelButton() {
   let container = document.getElementById("addTaskButtonCancel");
-  container.innerHTML = 'Cancel <img src="assets/img/buttonCancelHover.svg" alt="cancel"/>';
+  container.innerHTML =
+    'Cancel <img src="assets/img/buttonCancelHover.svg" alt="cancel"/>';
 }
 
 /**
@@ -240,7 +272,8 @@ function addTaskBoardRenderCancelButton() {
  */
 function addTaskResetCancelButton() {
   let container = document.getElementById("addTaskButtonCancel");
-  container.innerHTML = 'Clear <img src="assets/img/buttonCancel.svg" alt="cancel"/>';
+  container.innerHTML =
+    'Clear <img src="assets/img/buttonCancel.svg" alt="cancel"/>';
 }
 
 /**
@@ -248,7 +281,8 @@ function addTaskResetCancelButton() {
  */
 function addTaskBoardResetCancelButton() {
   let container = document.getElementById("addTaskButtonCancel");
-  container.innerHTML = 'Cancel <img src="assets/img/buttonCancel.svg" alt="cancel"/>';
+  container.innerHTML =
+    'Cancel <img src="assets/img/buttonCancel.svg" alt="cancel"/>';
 }
 
 /**
@@ -474,7 +508,9 @@ function renderPrio(prio) {
       Medium
       <img src="assets/img/Prio media.svg" alt="Medium" />
     `;
-    document.getElementById("prioMedium").classList.add("addTask_prio_focus_medium");
+    document
+      .getElementById("prioMedium")
+      .classList.add("addTask_prio_focus_medium");
     currentPrio = "medium";
   }
 
@@ -484,7 +520,9 @@ function renderPrio(prio) {
       Urgent
       <img src="assets/img/Prio alta.svg" alt="urgent" />
     `;
-    document.getElementById("prioUrgent").classList.add("addTask_prio_focus_urgent");
+    document
+      .getElementById("prioUrgent")
+      .classList.add("addTask_prio_focus_urgent");
     currentPrio = "urgent";
   }
 }
@@ -649,16 +687,22 @@ function clearAddTask() {
   document.getElementById("addTaskRequiredCategory").classList.add("d-none");
 }
 
-document.getElementById("addTaskSubtaskContainer").addEventListener("keydown", function (event) {
-  if (event.key === "Enter") {
-    addTaskAddSubtask();
-  }
-});
+document
+  .getElementById("addTaskSubtaskContainer")
+  .addEventListener("keydown", function (event) {
+    if (event.key === "Enter") {
+      addTaskAddSubtask();
+    }
+  });
 
 document.addEventListener("click", function (event) {
   let maindiv = document.getElementById("dropdownContainer");
   let sideDiv = document.getElementById("addTaskContactContainer");
-  if (maindiv && !maindiv.contains(event.target) && (!sideDiv || !sideDiv.contains(event.target))) {
+  if (
+    maindiv &&
+    !maindiv.contains(event.target) &&
+    (!sideDiv || !sideDiv.contains(event.target))
+  ) {
     inputDropdownMenuBlur();
   }
 });

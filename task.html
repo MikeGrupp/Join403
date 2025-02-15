@@ -29,7 +29,11 @@
   </head>
   <body onload="initAddTask()">
     <header id="header" class="header"></header>
-    <dialog id="submenu_dialog" class="submenu_dialog" w3-include-html="templates/submenu.html"></dialog>
+    <dialog
+      id="submenu_dialog"
+      class="submenu_dialog"
+      w3-include-html="templates/submenu.html"
+    ></dialog>
     <div class="sidebar" id="sidebar"></div>
     <main>
       <div class="addTask_container" id="addTaskContainer">
@@ -115,6 +119,15 @@
                     class="addTask_assigned_contacts"
                     id="assignedContactsContainer"
                   ></div>
+                </div>
+                <div class="dropdown_wrapper">
+                  <div
+                    class="addTask_required d-none"
+                    id="addTaskRequiredContacts"
+                    style="top: 130px"
+                  >
+                    max. 4 User
+                  </div>
                 </div>
               </div>
             </div>

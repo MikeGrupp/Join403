@@ -532,6 +532,13 @@
   margin-top: 15px;
 }
 
+.addTask_button_info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
 @keyframes wiggleAnimation {
   37% {
     transform: rotate(5deg);
