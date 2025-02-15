@@ -516,6 +516,9 @@ function taskMoveForward(div) {
   if (div === "taskDetail" && window.innerWidth < 1025) {
     position = 20;
   }
+  if (div === "taskDetail" && window.innerWidth < 428) {
+    position = 0;
+  }
   if (div === "addTaskBoard" && window.innerWidth < 767) {
     window.open("task.html");
   }
@@ -555,6 +558,12 @@ function taskMoveBack(div, bgDiv) {
   }
   if (div === "taskDetail" && window.innerWidth < 1025) {
     position = 20;
+  }
+  if (div === "taskDetail" && window.innerWidth < 428) {
+    position = 0;
+  }
+  if (div === "addTaskBoard" && window.innerWidth < 767) {
+    window.open("task.html");
   }
   function frame() {
     if (pos == position) {
