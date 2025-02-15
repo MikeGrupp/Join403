@@ -106,10 +106,6 @@
     font-size: 24px;
   }
 
-  .contact_details {
-    /* gap: 11px; */
-  }
-
   .contact_head {
     gap: 30px;
   }
@@ -119,10 +115,6 @@
     width: 90px;
     min-width: 90px;
     font-size: 36px;
-  }
-
-  .contact_manage {
-    /* gap: 4px; */
   }
 
   .contact_name {

@@ -320,11 +320,6 @@ function taskMoveForward(div) {
   }
   if (div === "taskDetail" && window.innerWidth < 1025) {
     position = 20;
-    window.addEventListener("resize", () => {
-      if (div === "taskDetail" && window.innerWidth < 1025) {
-        position = 20;
-      }
-    });
   }
   function frame() {
     if (pos == position) {
