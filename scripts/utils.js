@@ -1,3 +1,8 @@
+/**
+ * Randomly selects and returns a color from a predefined array of colors
+ *
+ * @returns {string} A randomly selected color name from the COLORS array
+ */
 function selectRandomColor() {
   const COLORS = [
     "orange",
@@ -21,6 +26,12 @@ function selectRandomColor() {
   return COLORS[randomNumber];
 }
 
+/**
+ * Takes a full name string and returns the initials by taking the first character of each word
+ *
+ * @param {string} name - A string containing one or more names separated by spaces
+ * @returns {string} A string containing the initials (first character of each word) joined together
+ */
 function determineInitials(name) {
   return name
     .split(" ")
@@ -30,18 +41,35 @@ function determineInitials(name) {
     .join("");
 }
 
+/**
+ * Resets all form elements within a form to their default values
+ * This includes clearing text inputs, unchecking radio/checkboxes,
+ * and resetting select elements to their default selected options
+ *
+ * @param {string} formId - The HTML id attribute of the form element to reset
+ */
 function resetForm(formId) {
   document.getElementById(formId).reset();
 }
 
+/**
+ * Navigates to the previous page in browser history if available,
+ * otherwise redirects to index.html
+ *
+ */
 function previousPage() {
   if (window.history.length > 1) {
-      window.history.back();
+    window.history.back();
   } else {
-      window.location.href = 'index.html';
+    window.location.href = "index.html";
   }
 }
 
+/**
+ * Toggles the "d-none" class on an HTML element to show/hide it
+ *
+ * @param {string} id - The ID of the HTML element to toggle visibility
+ */
 function dNone(id) {
   document.getElementById(id).classList.toggle("d-none");
 }

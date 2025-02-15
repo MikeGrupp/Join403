@@ -1,5 +1,4 @@
-@media (min-width: 1921px) {
-}
+@media (min-width: 1921px) {}
 
 @media screen and (max-width: 1440px) {
   .greeting_box {
@@ -547,6 +546,22 @@
 }
 
 @media screen and (max-width: 767px) {
+  .registered_user_28 {
+    font-size: 24px;
+  }
+
+  .registered_user_20 {
+    font-size: 16px;
+  }
+
+  .registered_user_14 {
+    font-size: 12px;
+  }
+
+  .registered_user_10 {
+    font-size: 10px;
+  }
+
   .taskbar {
     flex-direction: column;
     align-items: flex-start;
@@ -558,7 +573,7 @@
     height: 100vh;
     width: 100vw;
     z-index: 100;
-    animation: fadeout 2000ms forwards;
+    animation: fadeout 1000ms forwards;
     animation-delay: 300ms;
     background-color: #2a3647;
   }
@@ -598,7 +613,7 @@
   .textpage {
     padding: 32px;
     gap: 24px;
-    max-height: calc(100vh - (16px * 2) - 32px);
+    max-height: calc(100vh - 220px);
   }
 
   main {
@@ -1229,13 +1244,21 @@
   }
 }
 
-@media (max-width: 1170) {
-  .kanban_board {
-    flex-wrap: wrap;
-  }
-}
-
 @media screen and (max-width: 427px) {
+  @media (orientation: landscape) {
+    body > *:not(#turn) {
+      display: none;
+    }
+
+    #turn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+    }
+  }
+
   .find_add_task {
     flex-direction: column;
     align-items: flex-start;
@@ -1245,7 +1268,6 @@
   .textpage {
     padding: 16px;
     gap: 16px;
-    max-height: calc(100vh - (16px * 2) - 32px);
   }
 
   main {

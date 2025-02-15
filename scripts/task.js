@@ -1,14 +1,72 @@
+/**
+ * Array to store subtasks for a task
+ *
+ * @type {Array<string>}
+ */
 let addTaskSubtasks = [];
+
+/**
+ * Array to store contact IDs
+ *
+ * @type {Array<string>}
+ */
 let contactIds = [];
+
+/**
+ * Array to store assigned contacts
+ * @type {Array<Object>}
+ */
 let assignedContacts = [];
+
+/**
+ * Array to store search results for contacts
+ * @type {Array<string>}
+ */
 let searchContactsArray = [];
+
+/**
+ * Boolean to track the status of the dropdown button for contacts
+ * @type {boolean}
+ */
 let statusDropDownButton = false;
+
+/**
+ * String representing the current priority of a task. Defaults to "medium"
+ * @type {string}
+ */
 let currentPrio = "medium";
+
+/**
+ * String representing the category of a task
+ * @type {string}
+ */
 let category = "";
+
+/**
+ * Boolean to track the validation status of a task form
+ *
+ * @type {boolean}
+ */
 let validation = false;
+
+/**
+ * Array to store subtasks for editing
+ *
+ * @type {Array<Object>}
+ */
 let editSubtasks = [];
+
+/**
+ * String representing the current step of a task. Defaults to "Todo"
+ *
+ * @type {string}
+ */
 let step = "Todo";
 
+/**
+ * Initializes the add task functionality. Loads task data, fetches contact IDs, and renders the contact dropdown
+ * @async
+ */
 async function initAddTask() {
   await load("task");
   await fetchContactsIds();
@@ -17,6 +75,9 @@ async function initAddTask() {
   assignedAccountsIds = [];
 }
 
+/**
+ * Renders the dropdown container with contacts
+ */
 function renderDropdownContainerContacts() {
   let container = document.getElementById("dropdownContainer");
   container.innerHTML = ``;
@@ -43,6 +104,9 @@ function renderDropdownContainerContacts() {
   checkAssignedContacts();
 }
 
+/**
+ * Renders the assigned contacts
+ */
 function renderAddTaskAssignedContacts() {
   let container = document.getElementById("assignedContactsContainer");
   container.innerHTML = ``;
@@ -56,10 +120,13 @@ function renderAddTaskAssignedContacts() {
   }
 }
 
+/**
+ * Searches for contacts based on the input value
+ *
+ * @async
+ */
 async function searchContacts() {
-  let filterword = document
-    .getElementById("addTaskAssignedTo")
-    .value.toLowerCase();
+  let filterword = document.getElementById("addTaskAssignedTo").value.toLowerCase();
   let length = filterword.length;
   searchContactsArray = [];
   contactIds = [];
@@ -80,6 +147,11 @@ async function searchContacts() {
   }
 }
 
+/**
+ * Adds or removes a contact from the assigned contacts list
+ *
+ * @param {string} contactId - The ID of the contact to add or remove
+ */
 function addTaskAssignedContacts(contactId) {
   let currentCheckBox = document.getElementById("checkbox" + contactId);
   let assignedContact = storedContacts[contactId];
@@ -98,6 +170,11 @@ function addTaskAssignedContacts(contactId) {
   renderAddTaskAssignedContacts();
 }
 
+/**
+ * Fetches contact IDs and stores them in the `contactIds` array
+ *
+ * @async
+ */
 async function fetchContactsIds() {
   setStoredContacts(await loadContacts());
   let contactResponse = storedContacts;
@@ -107,6 +184,9 @@ async function fetchContactsIds() {
   }
 }
 
+/**
+ * Toggles the dropdown menu for assigned contacts
+ */
 function arrowDropdownMenu() {
   if (statusDropDownButton === false) {
     document.getElementById("addTaskAssignedTo").focus();
@@ -117,6 +197,9 @@ function arrowDropdownMenu() {
   }
 }
 
+/**
+ * Handles the blur event on the contact dropdown input
+ */
 function inputDropdownMenuBlur() {
   if (statusDropDownButton === true) {
     dNone("dropdownContainer");
@@ -125,6 +208,9 @@ function inputDropdownMenuBlur() {
   }
 }
 
+/**
+ * Handles the focus event on the contact dropdown input
+ */
 function inputDropdownMenuFocus() {
   if (statusDropDownButton === false) {
     dNone("dropdownContainer");
@@ -133,30 +219,41 @@ function inputDropdownMenuFocus() {
   }
 }
 
+/**
+ * Renders the cancel button within the "addTaskButtonCancel" container
+ */
 function addTaskRenderCancelButton() {
   let container = document.getElementById("addTaskButtonCancel");
-  container.innerHTML =
-    'Clear <img src="assets/img/buttonCancelHover.svg" alt="cancel"/>';
+  container.innerHTML = 'Clear <img src="assets/img/buttonCancelHover.svg" alt="cancel"/>';
 }
 
+/**
+ * Renders the cancel button within the add task board
+ */
 function addTaskBoardRenderCancelButton() {
   let container = document.getElementById("addTaskButtonCancel");
-  container.innerHTML =
-    'Cancel <img src="assets/img/buttonCancelHover.svg" alt="cancel"/>';
+  container.innerHTML = 'Cancel <img src="assets/img/buttonCancelHover.svg" alt="cancel"/>';
 }
 
+/**
+ * Adds a "Clear" button with a cancel icon to the "addTaskButtonCancel" container
+ */
 function addTaskResetCancelButton() {
   let container = document.getElementById("addTaskButtonCancel");
-  container.innerHTML =
-    'Clear <img src="assets/img/buttonCancel.svg" alt="cancel"/>';
+  container.innerHTML = 'Clear <img src="assets/img/buttonCancel.svg" alt="cancel"/>';
 }
 
+/**
+ * Sets the inner HTML of the "addTaskButtonCancel" element to include a cancel button with an image
+ */
 function addTaskBoardResetCancelButton() {
   let container = document.getElementById("addTaskButtonCancel");
-  container.innerHTML =
-    'Cancel <img src="assets/img/buttonCancel.svg" alt="cancel"/>';
+  container.innerHTML = 'Cancel <img src="assets/img/buttonCancel.svg" alt="cancel"/>';
 }
 
+/**
+ * Dynamically renders the add subtask input field and associated buttons
+ */
 function addTaskRenderAddButton() {
   let input = document.getElementById("addTaskSubtask").value;
   if (input.length === 0) {
@@ -197,6 +294,9 @@ function addTaskRenderAddButton() {
   document.getElementById("addTaskSubtask").focus();
 }
 
+/**
+ * Renders the add task button and the plus button within the specified container
+ */
 function addTaskRenderAddButtonPlusButton() {
   let container = document.getElementById("addTaskSubtaskDeleteButton");
   container.innerHTML = ` 
@@ -216,11 +316,17 @@ function addTaskRenderAddButtonPlusButton() {
   document.getElementById("addTaskSubtask").focus();
 }
 
+/**
+ * Clears the input field for adding subtasks and re-renders the "Add" button.
+ */
 function reRenderSubtask() {
   document.getElementById("addTaskSubtask").value = "";
   addTaskRenderAddButton();
 }
 
+/**
+ * Adds a new task or subtask to the respective arrays and updates the UI
+ */
 function addTaskAddSubtask() {
   let input = document.getElementById("addTaskSubtask").value;
   addTaskSubtasks.push(input);
@@ -233,6 +339,9 @@ function addTaskAddSubtask() {
   reRenderSubtask();
 }
 
+/**
+ * Renders the subtask container by dynamically creating and adding subtask elements to the DOM
+ */
 function renderSubtaskContainer() {
   let container = document.getElementById("subtaskContainer");
   container.innerHTML = ``;
@@ -246,6 +355,13 @@ function renderSubtaskContainer() {
   }
 }
 
+/**
+ * Renders the subtask edit input field for a given subtask ID.
+ * This function replaces the subtask text with an input field, allowing the user to edit the subtask.
+ * It also adds delete and checkmark buttons for managing the subtask.
+ *
+ * @param {number} id - The ID of the subtask to edit
+ */
 function subtaskRenderEdit(id) {
   container = document.getElementById("subtask" + id);
   toggleClassWithoutHover(id);
@@ -268,6 +384,11 @@ function subtaskRenderEdit(id) {
   `;
 }
 
+/**
+ * Finishes editing a subtask, updating the task list and UI
+ *
+ * @param {number|string} id - The ID of the subtask that was edited.  This can be a number or a string.
+ */
 function finishedEditSubtask(id) {
   let editText = document.getElementById("editSubtask" + id).value;
   addTaskSubtasks[id] = editText;
@@ -283,21 +404,43 @@ function finishedEditSubtask(id) {
   };
 }
 
+/**
+ * Toggles the "without_hover_background" class on the element with the specified ID.
+ * The ID is dynamically generated by prefixing "subtask" to the provided input.
+ *
+ * @param {string|number} id - The ID of the subtask element, without the "subtask" prefix.
+ *                          This will be concatenated with "subtask" to form the final ID.
+ */
 function toggleClassWithoutHover(id) {
   let container = document.getElementById("subtask" + id);
   container.classList.toggle("without_hover_background");
 }
 
+/**
+ * Deletes a subtask at the specified index
+ *
+ * @param {number} i - The index of the subtask to delete
+ */
 function deleteSubtask(i) {
   addTaskSubtasks.splice(i, 1);
   editSubtasks.splice(i, 1);
   renderSubtaskContainer();
 }
 
+/**
+ * Rotates an element 90 degrees by toggling a CSS class
+ *
+ * @param {string} id - The ID of the element to rotate
+ */
 function rotate90(id) {
   document.getElementById(id).classList.toggle("rotate90");
 }
 
+/**
+ * Renders and updates the priority selection UI
+ *
+ * @param {string} prio - The priority to select ('low', 'medium', or 'urgent')
+ */
 function renderPrio(prio) {
   let container = document.getElementById("prioContainer");
   container.innerHTML = `
@@ -331,9 +474,7 @@ function renderPrio(prio) {
       Medium
       <img src="assets/img/Prio media.svg" alt="Medium" />
     `;
-    document
-      .getElementById("prioMedium")
-      .classList.add("addTask_prio_focus_medium");
+    document.getElementById("prioMedium").classList.add("addTask_prio_focus_medium");
     currentPrio = "medium";
   }
 
@@ -343,19 +484,28 @@ function renderPrio(prio) {
       Urgent
       <img src="assets/img/Prio alta.svg" alt="urgent" />
     `;
-    document
-      .getElementById("prioUrgent")
-      .classList.add("addTask_prio_focus_urgent");
+    document.getElementById("prioUrgent").classList.add("addTask_prio_focus_urgent");
     currentPrio = "urgent";
   }
 }
 
+/**
+ * Renders the category headline in the UI
+ *
+ * @param {string} input - The category name to display
+ */
 function renderCategory(input) {
   category = input;
   let Container = document.getElementById("addTaskCategoryHeadline");
   Container.innerHTML = `${category}`;
 }
 
+/**
+ * Adds a new task
+ *
+ * @async
+ * @param {string} side - Indicates whether the task is added from the board or the add task page ("board" or "addTask")
+ */
 async function addTask(side) {
   addTaskValidation();
   if (validation === true) {
@@ -382,6 +532,11 @@ async function addTask(side) {
   }
 }
 
+/**
+ * Validates the input fields for adding a new task
+ * Checks if the title, due date, and category are filled
+ * Displays error messages and highlights invalid fields if necessary
+ */
 function addTaskValidation() {
   let title = document.getElementById("addTaskTitle").value;
   let dueDate = document.getElementById("addTaskDate").value;
@@ -403,6 +558,11 @@ function addTaskValidation() {
   }
 }
 
+/**
+ * Posts a new task to the Database
+ *
+ * @async
+ */
 async function postTask() {
   let title = document.getElementById("addTaskTitle").value;
   let description = document.getElementById("addTaskDescription").value;
@@ -419,6 +579,12 @@ async function postTask() {
   });
 }
 
+/**
+ * Posts assigned account data to a specific task
+ *
+ * @async
+ * @param {string|number} taskId - The ID of the task to which the accounts are assigned.  This could be a string or number.
+ */
 async function postAssignedAccounts(taskId) {
   for (let i = 0; i < assignedContacts.length; i++) {
     let contact = assignedContacts[i];
@@ -435,6 +601,12 @@ async function postAssignedAccounts(taskId) {
   }
 }
 
+/**
+ * Posts subtasks for a given task ID
+ *
+ * @async
+ * @param {string|number} taskId - The ID of the parent task
+ */
 async function postSubtask(taskId) {
   for (let i = 0; i < addTaskSubtasks.length; i++) {
     let title = addTaskSubtasks[i];
@@ -445,6 +617,9 @@ async function postSubtask(taskId) {
   }
 }
 
+/**
+ * Clears the input fields and resets the state of the add task form
+ */
 function clearAddTask() {
   document.getElementById("addTaskTitle").value = "";
   document.getElementById("addTaskDescription").value = "";
@@ -474,26 +649,26 @@ function clearAddTask() {
   document.getElementById("addTaskRequiredCategory").classList.add("d-none");
 }
 
-document
-  .getElementById("addTaskSubtaskContainer")
-  .addEventListener("keydown", function (event) {
-    if (event.key === "Enter") {
-      addTaskAddSubtask();
-    }
-  });
+document.getElementById("addTaskSubtaskContainer").addEventListener("keydown", function (event) {
+  if (event.key === "Enter") {
+    addTaskAddSubtask();
+  }
+});
 
 document.addEventListener("click", function (event) {
   let maindiv = document.getElementById("dropdownContainer");
   let sideDiv = document.getElementById("addTaskContactContainer");
-  if (
-    maindiv &&
-    !maindiv.contains(event.target) &&
-    (!sideDiv || !sideDiv.contains(event.target))
-  ) {
+  if (maindiv && !maindiv.contains(event.target) && (!sideDiv || !sideDiv.contains(event.target))) {
     inputDropdownMenuBlur();
   }
 });
 
+/**
+ * Edits an existing task
+ *
+ * @async
+ * @param {string} taskId - The ID of the task to edit
+ */
 async function editTask(taskId) {
   await patchTask(taskId);
   await patchAssignedAccounts2(taskId);
@@ -504,6 +679,12 @@ async function editTask(taskId) {
   addTaskSubtasks = [];
 }
 
+/**
+ * Updates an existing task with the provided details
+ *
+ * @async
+ * @param {string} taskId - The ID of the task to be updated
+ */
 async function patchTask(taskId) {
   let titel = document.getElementById("addTaskTitle").value;
   let description = document.getElementById("addTaskDescription").value;
@@ -520,16 +701,37 @@ async function patchTask(taskId) {
   });
 }
 
+/**
+ * Updates the assigned accounts for a given task
+ *
+ * @async
+ * @param {string|number} taskId - The ID of the task to update.  This should be a string or number
+ *                             that can be coerced into a string for URL construction
+ */
 async function patchAssignedAccounts2(taskId) {
   await deleteData("/tasks/" + taskId + "/assignedAccounts");
   await postAssignedAccounts(taskId);
 }
 
+/**
+ * Patches subtasks for a given task ID.  This function deletes existing subtasks
+ * and then posts updated subtasks.
+ *
+ * @async
+ * @param {string|number} taskId - The ID of the task for which to patch subtasks.
+ *                             This can be a string or a number.
+ */
 async function patchSubtasks(taskId) {
   await deleteData("/tasks/" + taskId + "/subtasks");
   await postEditSubtasks(taskId);
 }
 
+/**
+ * Posts edited subtasks for a given task ID
+ *
+ * @async
+ * @param {string|number} taskId - The ID of the parent task.  Should be coercible to a string
+ */
 async function postEditSubtasks(taskId) {
   for (let i = 0; i < editSubtasks.length; i++) {
     let editSubtask = editSubtasks[i];
@@ -542,6 +744,9 @@ async function postEditSubtasks(taskId) {
   }
 }
 
+/**
+ * Loads and populates the `editSubtasks` array with subtask objects based on `subtasksIds`
+ */
 function loadEditSubtasksArray() {
   let amountSubtasks = subtasksIds.length;
   editSubtasks = [];
@@ -552,6 +757,11 @@ function loadEditSubtasksArray() {
   }
 }
 
+/**
+ * Selects the step/status of a task
+ *
+ * @param {string} taskStep - The step/status to set for the task
+ */
 function selectStep(taskStep) {
   step = taskStep;
 }

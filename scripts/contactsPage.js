@@ -1,3 +1,6 @@
+/**
+ * Object containing constants for selectors and classes used in the contacts page
+ */
 const CONSTANTS = {
   SELECTORS: {
     CONTACT_LIST_CONTAINER: "contact_list_container",
@@ -18,12 +21,20 @@ const CONSTANTS = {
   },
 };
 
+/**
+ * Initializes the contacts page by loading contacts, initializing the contact list, and initializing contact details
+ *
+ * @async
+ */
 async function initContacts() {
   setStoredContacts(await loadContacts());
   initContactList();
   initContactDetails();
 }
 
+/**
+ * Initializes the contact list by sorting contacts alphabetically and rendering them into the DOM
+ */
 function initContactList() {
   let sortedContacts = getStoredContacts().sort((a, b) => a.name.localeCompare(b.name));
   let contactListHtml = "";
@@ -45,6 +56,9 @@ function initContactList() {
   contactList.innerHTML = contactListHtml;
 }
 
+/**
+ * Initializes the default contact details view for both desktop and mobile
+ */
 function initContactDetails() {
   let contactDetailsHtml = templateRenderContactDetailsDefault();
   let contactDetails = document.getElementById(CONSTANTS.SELECTORS.CONTACT_DETAILS_D);
@@ -53,12 +67,25 @@ function initContactDetails() {
   contactDetailsMobile.innerHTML = contactDetailsHtml;
 }
 
+/**
+ * Initializes the contact management dialog with the specified mode (create or edit) and contact details
+ *
+ * @param {string} mode - The mode of the dialog (create or edit)
+ * @param {string} contactId - The ID of the contact being edited
+ * @param {string} initials - The initials of the contact being edited
+ * @param {string} color - The color of the contact being edited
+ */
 function initContactManageDialog(mode, contactId, initials, color) {
   let contactManageDialogHtml = templateRenderContactManageDialog(mode, contactId, initials, color);
   let contactManageDialog = document.getElementById(CONSTANTS.SELECTORS.CONTACT_DIALOG);
   contactManageDialog.innerHTML = contactManageDialogHtml;
 }
 
+/**
+ * Opens the contact details view for the specified contact
+ *
+ * @param {string} contactId - The ID of the contact to display
+ */
 function openContactDetails(contactId) {
   dNone(CONSTANTS.SELECTORS.CONTACT_DETAILS_M);
   markAsSelectedContact(contactId);
@@ -67,6 +94,11 @@ function openContactDetails(contactId) {
   initContactDetailsMobile(contact);
 }
 
+/**
+ * Initializes the contact details view for desktop
+ *
+ * @param {object} contact - The contact object to display
+ */
 function initContactDetailsDesktop(contact) {
   let contactDetailsDesktopHtml = templateRenderContactDetailsDefault();
   if (contact != null) {
@@ -84,6 +116,11 @@ function initContactDetailsDesktop(contact) {
   }
 }
 
+/**
+ * Initializes the contact details view for mobile
+ *
+ * @param {object} contact - The contact object to display
+ */
 function initContactDetailsMobile(contact) {
   let contactDetailsMobileHtml = templateRenderContactDetailsDefault();
   if (contact != null) {
@@ -102,12 +139,22 @@ function initContactDetailsMobile(contact) {
   }
 }
 
+/**
+ * Initializes the contact management submenu for the specified contact
+ *
+ * @param {string} contactId - The ID of the contact
+ */
 function initContactManageSubmenu(contactId) {
   let contactManageSubmenu = document.getElementById(CONSTANTS.SELECTORS.CONTACT_MANAGE_SUBMENU);
   contactManageSubmenu.innerHTML = templateRenderContactDetailsMenuForContact(contactId);
   initSubmenuListeners(CONSTANTS.SELECTORS.CONTACT_MANAGE_SUBMENU, CONSTANTS.SELECTORS.CONTACT_BURGER_MENU);
 }
 
+/**
+ * Marks the specified contact as selected in the contact list
+ *
+ * @param {string} contactId - The ID of the contact to mark as selected
+ */
 function markAsSelectedContact(contactId) {
   let contacts = document.getElementsByClassName(CONSTANTS.CLASSES.CONTACT);
   for (let i = 0; i < contacts.length; i++) {
@@ -118,6 +165,9 @@ function markAsSelectedContact(contactId) {
   contactById.focus();
 }
 
+/**
+ * Opens the contact management dialog
+ */
 function openContactManage() {
   document.activeElement?.blur();
   document.documentElement.style.overflow = "hidden";
@@ -128,11 +178,19 @@ function openContactManage() {
   modal.showModal();
 }
 
+/**
+ * Opens the contact management dialog in create mode
+ */
 function openCreateContact() {
   initContactManageDialog("create");
   openContactManage();
 }
 
+/**
+ * Opens the contact management dialog in edit mode for the specified contact
+ *
+ * @param {string} contactId - The ID of the contact to edit
+ */
 function openEditContact(contactId) {
   reloadContactsFromDatabase();
   let contact = getStoredContactById(contactId);
@@ -141,11 +199,19 @@ function openEditContact(contactId) {
   fillContactFields(contact);
 }
 
+/**
+ * Closes the contact management dialog
+ */
 function closeContactManage() {
   let modal = document.getElementById(CONSTANTS.SELECTORS.CONTACT_DIALOG);
   modal.close();
 }
 
+/**
+ * Adds an event listener to close the contact management dialog when the user clicks outside of it
+ *
+ * @param {HTMLElement} element - The contact management dialog element
+ */
 function addContactManageOutsideClickClosingListener(element) {
   element.addEventListener("click", (e) => {
     const elementDimensions = element.getBoundingClientRect();
@@ -162,6 +228,11 @@ function addContactManageOutsideClickClosingListener(element) {
   });
 }
 
+/**
+ * Adds an event listener to close the contact management dialog when the Escape key is pressed
+ *
+ * @param {HTMLElement} element - The contact management dialog element
+ */
 function addContactManageEscapeListener(element) {
   element.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
@@ -172,6 +243,12 @@ function addContactManageEscapeListener(element) {
   });
 }
 
+/**
+ * Adds a new contact to the database
+ *
+ * @async
+ * @param {Event} event - The form submit event
+ */
 async function addNewContact(event) {
   event.preventDefault();
   let nameInput = document.getElementById(CONSTANTS.SELECTORS.CONTACT_NAME);
@@ -188,6 +265,13 @@ async function addNewContact(event) {
   }
 }
 
+/**
+ * Edits an existing contact in the database
+ *
+ * @async
+ * @param {Event} event - The form submit event
+ * @param {string} contactId - The ID of the contact to edit
+ */
 async function editContact(event, contactId) {
   event.preventDefault();
   let nameInput = document.getElementById(CONSTANTS.SELECTORS.CONTACT_NAME);
@@ -207,6 +291,12 @@ async function editContact(event, contactId) {
   }
 }
 
+/**
+ * Deletes a contact from the database and related tasks/users
+ *
+ * @async
+ * @param {string} contactId - The ID of the contact to delete
+ */
 async function deleteContactFromContacts(contactId) {
   await reloadContactsFromDatabase();
   removeExistingContactFromTasks(contactId);
@@ -219,6 +309,11 @@ async function deleteContactFromContacts(contactId) {
   dNone(CONSTANTS.SELECTORS.CONTACT_DETAILS_M);
 }
 
+/**
+ * Fills the contact form fields with the data from the given contact object
+ *
+ * @param {object} contact - The contact object containing the data to fill the form.  Assumed to have properties: name, mail, phone
+ */
 function fillContactFields(contact) {
   document.getElementById(CONSTANTS.SELECTORS.CONTACT_NAME).value = contact.name;
   document.getElementById(CONSTANTS.SELECTORS.CONTACT_MAIL).value = contact.mail;

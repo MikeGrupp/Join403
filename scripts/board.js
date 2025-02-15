@@ -1,22 +1,110 @@
+/**
+ * An array of task objects
+ *
+ * @type {Array<Object>}
+ */
 let tasks = [];
+
+/**
+ * An array of task IDs
+ *
+ * @type {Array<string>}
+ */
 let tasksIds = [];
+
+/**
+ * An array of subtask objects
+ *
+ * @type {Array<Object>}
+ */
 let subtasks = [];
+
+/**
+ * An array of subtask IDs
+ *
+ * @type {Array<string>}
+ */
 let subtasksIds = [];
+
+/**
+ * An array of finished subtask objects
+ *
+ * @type {Array<Object>}
+ */
 let subtaskFinished = [];
+
+/**
+ * An array of assigned account objects
+ *
+ * @type {Array<Object>}
+ */
 let assignedAccounts = [];
+
+/**
+ * An array of assigned account IDs
+ *
+ * @type {Array<string>}
+ */
 let assignedAccountsIds = [];
+
+/**
+ * An array of task IDs that match the search criteria
+ *
+ * @type {Array<string>}
+ */
 let searchTasks = [];
+
+/**
+ * The number of tasks in the "Todo" category
+ *
+ * @type {number}
+ */
 let arrayTodo = 0;
+
+/**
+ * The number of tasks in the "In Progress" category
+ *
+ * @type {number}
+ */
 let arrayInProgresse = 0;
+
+/**
+ * The number of tasks in the "Await Feedback" category
+ *
+ * @type {number}
+ */
 let arrayAwaitFeedback = 0;
+
+/**
+ * The number of tasks in the "Done" category
+ *
+ * @type {number}
+ */
 let arrayDone = 0;
+
+/**
+ * The ID of the currently dragged element
+ *
+ * @type {string}
+ */
 let currentDraggedElement;
 
+/**
+ * Initializes the board by loading task data, fetching task IDs, and rendering the board
+ *
+ * @async
+ */
 async function initBoard() {
   tasks = await loadData("tasks/");
   fetchTaskIds();
   renderBoard();
 }
+
+/**
+ * Renders the board by counting tasks, rendering the "no task" messages, and rendering each task
+ *
+ * @async
+ */
 async function renderBoard() {
   countNoTask();
   renderNoTask();
@@ -34,6 +122,13 @@ async function renderBoard() {
   }
 }
 
+/**
+ * Renders a task on the board
+ *
+ * @async
+ * @param {Object} task - The task object
+ * @param {string} taskId - The ID of the task
+ */
 async function renderTasks(task, taskId) {
   let title = task.titel;
   let description = task.description;
@@ -47,16 +142,14 @@ async function renderTasks(task, taskId) {
     backgroundColorCategory = "#0038ff";
   }
   let container = document.getElementById(step);
-  container.innerHTML += `${templateRenderTask(
-    title,
-    description,
-    category,
-    taskId,
-    backgroundColorCategory,
-    prio
-  )}`;
+  container.innerHTML += `${templateRenderTask(title, description, category, taskId, backgroundColorCategory, prio)}`;
 }
 
+/**
+ * Renders the subtasks for a given task
+ *
+ * @param {string} taskId - The ID of the task
+ */
 function renderSubtasks(taskId) {
   let amountSubtasks = subtasksIds.length;
   let amountSubtasksFinished = subtaskFinished.length;
@@ -65,14 +158,15 @@ function renderSubtasks(taskId) {
   if (amountSubtasks === 0) {
     container.innerHTML = ``;
   } else {
-    container.innerHTML += `${templateRenderSubtasks(
-      subtasksInPercent,
-      amountSubtasksFinished,
-      amountSubtasks
-    )}`;
+    container.innerHTML += `${templateRenderSubtasks(subtasksInPercent, amountSubtasksFinished, amountSubtasks)}`;
   }
 }
 
+/**
+ * Renders the assigned accounts for a given task
+ *
+ * @param {string} taskId - The ID of the task
+ */
 function renderAssignedAccounts(taskId) {
   let amountAssignedAccounts = assignedAccountsIds.length;
   let container = document.getElementById("accounts" + taskId);
@@ -91,16 +185,14 @@ function renderAssignedAccounts(taskId) {
       } else {
         accountNr = 2;
       }
-      container.innerHTML += `${templateRenderAssignedAccounts(
-        initials,
-        accountNr,
-        color,
-        position
-      )}`;
+      container.innerHTML += `${templateRenderAssignedAccounts(initials, accountNr, color, position)}`;
     }
   }
 }
 
+/**
+ * Counts the number of tasks in each category
+ */
 function countNoTask() {
   for (let i = 0; i < tasksIds.length; i++) {
     let taskId = tasksIds[i];
@@ -122,6 +214,9 @@ function countNoTask() {
   }
 }
 
+/**
+ * Renders the "no task" messages for each category
+ */
 function renderNoTask() {
   if (arrayTodo > 0) {
     document.getElementById("boardTodo").innerHTML = ``;
@@ -154,6 +249,11 @@ function renderNoTask() {
   }
 }
 
+/**
+ * Fetches the IDs of all tasks
+ *
+ * @async
+ */
 async function fetchTaskIds() {
   let taskResponse = tasks;
   let taskKeysArray = Object.keys(taskResponse);
@@ -163,6 +263,11 @@ async function fetchTaskIds() {
   }
 }
 
+/**
+ * Fetches the finished subtasks for a given task
+ *
+ * @async
+ */
 async function fetchSubTaskFinished() {
   subtaskFinished = [];
   for (let i = 0; i < subtasksIds.length; i++) {
@@ -174,6 +279,11 @@ async function fetchSubTaskFinished() {
   }
 }
 
+/**
+ * Fetches the IDs of all subtasks for a given task
+ *
+ * @async
+ */
 async function fetchSubTaskIds() {
   subtasksIds = [];
   try {
@@ -183,6 +293,11 @@ async function fetchSubTaskIds() {
   } catch (err) {}
 }
 
+/**
+ * Fetches the IDs of all assigned accounts for a given task
+ *
+ * @async
+ */
 async function fetchAssignedAccountsIds() {
   assignedAccountsIds = [];
   if (assignedAccounts !== undefined) {
@@ -190,6 +305,12 @@ async function fetchAssignedAccountsIds() {
   }
 }
 
+/**
+ * Updates a task on the database
+ *
+ * @async
+ * @param {string} taskId - The ID of the task to update
+ */
 async function putTask(taskId) {
   let task = tasks[taskId];
   let contentDescription = task.description;
@@ -209,6 +330,12 @@ async function putTask(taskId) {
   });
 }
 
+/**
+ * Updates the subtasks for a given task on the database
+ *
+ * @async
+ * @param {string} taskId - The ID of the task to update
+ */
 async function patchSubTask(taskId) {
   let task = tasks[currentDraggedElement];
   subtasks = task.subtasks;
@@ -226,6 +353,12 @@ async function patchSubTask(taskId) {
   }
 }
 
+/**
+ * Updates the assigned accounts for a given task on the database
+ *
+ * @async
+ * @param {string} taskId - The ID of the task to update
+ */
 async function patchAssignedAccounts(taskId) {
   let task = tasks[currentDraggedElement];
   assignedAccounts = task.assignedAccounts;
@@ -244,15 +377,19 @@ async function patchAssignedAccounts(taskId) {
   }
 }
 
+/**
+ * Removes a contact from all tasks
+ *
+ * @async
+ * @param {string} contactId - The ID of the contact to remove
+ * @returns {Promise<string>} The ID of the removed contact
+ */
 async function removeExistingContactFromTasks(contactId) {
   tasks = await loadData("tasks/");
   for (const taskId in tasks) {
     if (tasks.hasOwnProperty(taskId)) {
       const task = tasks[taskId];
-      if (
-        task.assignedAccounts &&
-        task.assignedAccounts.hasOwnProperty(contactId)
-      ) {
+      if (task.assignedAccounts && task.assignedAccounts.hasOwnProperty(contactId)) {
         deleteContactFromTasks(taskId, contactId);
       }
     }
@@ -260,12 +397,23 @@ async function removeExistingContactFromTasks(contactId) {
   return contactId;
 }
 
+/**
+ * Deletes a contact from a specific task
+ *
+ * @async
+ * @param {string} taskId - The ID of the task
+ * @param {string} contactId - The ID of the contact
+ */
 async function deleteContactFromTasks(taskId, contactId) {
-  return await deleteData(
-    "/tasks/" + taskId + "/assignedAccounts/" + contactId
-  );
+  return await deleteData("/tasks/" + taskId + "/assignedAccounts/" + contactId);
 }
 
+/**
+ * Updates the step of a task on the database
+ *
+ * @async
+ * @param {string} taskId - The ID of the task to update
+ */
 async function patchStep(taskId) {
   let task = tasks[taskId];
   contentStep = task.step;
@@ -274,14 +422,30 @@ async function patchStep(taskId) {
   });
 }
 
+/**
+ * Sets the ID of the currently dragged element
+ *
+ * @param {string} id - The ID of the dragged element
+ */
 function startDragging(id) {
   currentDraggedElement = id;
 }
 
+/**
+ * Allows drop of an element
+ *
+ * @param {DragEvent} ev - The drag event
+ */
 function allowDrop(ev) {
   ev.preventDefault();
 }
 
+/**
+ * Moves a task to a different category
+ *
+ * @async
+ * @param {string} category - The category to move the task to
+ */
 async function moveTo(category) {
   removeHighlight("boardTodo");
   removeHighlight("boardInProgress");
@@ -293,6 +457,11 @@ async function moveTo(category) {
   reRenderBoard();
 }
 
+/**
+ * Re-renders the board
+ *
+ * @async
+ */
 async function reRenderBoard() {
   document.getElementById("boardTodo").innerHTML = ``;
   document.getElementById("boardInProgress").innerHTML = ``;
@@ -305,6 +474,11 @@ async function reRenderBoard() {
   renderBoard();
 }
 
+/**
+ * Moves a task container forward
+ *
+ * @param {string} div - The ID of the task container
+ */
 function taskMoveForward(div) {
   let id = null;
   let container = document.getElementById(div);
@@ -336,7 +510,13 @@ function taskMoveForward(div) {
   }
 }
 
-function taskMoveBack(div, BgDiv) {
+/**
+ * Moves a task container backward
+ *
+ * @param {string} div - The ID of the task container
+ * @param {string} bgDiv - The ID of the background div
+ */
+function taskMoveBack(div, bgDiv) {
   let id = null;
   let container = document.getElementById(div);
   let pos = 0;
@@ -355,7 +535,7 @@ function taskMoveBack(div, BgDiv) {
   function frame() {
     if (pos == position) {
       clearInterval(id);
-      dNone(BgDiv);
+      dNone(bgDiv);
     } else {
       pos++;
       if (div === "taskDetail") {
@@ -368,6 +548,11 @@ function taskMoveBack(div, BgDiv) {
   }
 }
 
+/**
+ * Renders the details of a task
+ *
+ * @param {string} taskId - The ID of the task
+ */
 function renderDetailTask(taskId) {
   let task = tasks[taskId];
   let title = task.titel;
@@ -396,6 +581,11 @@ function renderDetailTask(taskId) {
   taskMoveForward("taskDetail");
 }
 
+/**
+ * Renders the edit form for a task
+ *
+ * @param {string} taskId - The ID of the task
+ */
 function renderDetailEditTask(taskId) {
   let task = tasks[taskId];
   let title = task.titel;
@@ -405,18 +595,18 @@ function renderDetailEditTask(taskId) {
   let [day, month, year] = dueDate.split("/");
   let formattedDate = `${year}-${month}-${day}`;
   let container = document.getElementById("taskDetail");
-  container.innerHTML = `${templateRenderDetailEditTask(
-    taskId,
-    title,
-    description,
-    formattedDate
-  )}`;
+  container.innerHTML = `${templateRenderDetailEditTask(taskId, title, description, formattedDate)}`;
   renderEditAccounts(taskId);
   renderEditSubtasks(taskId);
   renderPrio(prio);
   loadEditSubtasksArray();
 }
 
+/**
+ * Renders the assigned accounts in the edit form for a task
+ *
+ * @param {string} taskId - The ID of the task
+ */
 function renderEditAccounts(taskId) {
   task = tasks[taskId];
   let amountAssignedAccounts = assignedAccountsIds.length;
@@ -435,6 +625,9 @@ function renderEditAccounts(taskId) {
   renderDropdownContainerContacts();
 }
 
+/**
+ * Checks the assigned contacts in the edit form
+ */
 function checkAssignedContacts() {
   let amountAssignedAccounts = assignedAccountsIds.length;
   for (let i = 0; i < amountAssignedAccounts; i++) {
@@ -447,6 +640,11 @@ function checkAssignedContacts() {
   }
 }
 
+/**
+ * Renders the subtasks in the edit form for a task
+ *
+ * @param {string} taskId - The ID of the task
+ */
 function renderEditSubtasks(taskId) {
   addTaskSubtasks = [];
   task = tasks[taskId];
@@ -464,6 +662,11 @@ function renderEditSubtasks(taskId) {
   }
 }
 
+/**
+ * Renders the assigned accounts for a task in the detail view
+ *
+ * @param {object} task - The task object containing assigned accounts
+ */
 function renderDetailAccounts(task) {
   assignedAccounts = task.assignedAccounts;
   fetchAssignedAccountsIds();
@@ -481,14 +684,15 @@ function renderDetailAccounts(task) {
     let initials = account.initials;
     let backgroundColor = account.color;
     let container = document.getElementById("detailAssignedAccounts");
-    container.innerHTML += `${templateRenderDetailAccounts(
-      name,
-      initials,
-      backgroundColor
-    )}`;
+    container.innerHTML += `${templateRenderDetailAccounts(name, initials, backgroundColor)}`;
   }
 }
 
+/**
+ * Renders the subtasks for a task in the detail view
+ *
+ * @param {string|number} taskId - The ID of the task
+ */
 function renderDetailSubtasks(taskId) {
   task = tasks[taskId];
   subtasks = task.subtasks;
@@ -513,16 +717,16 @@ function renderDetailSubtasks(taskId) {
       checked = "checked";
     }
     let container = document.getElementById("detailSubtasksContainer");
-    container.innerHTML += `${templateRenderDetailSubtasks(
-      title,
-      status,
-      checked,
-      taskId,
-      subtaskId
-    )}`;
+    container.innerHTML += `${templateRenderDetailSubtasks(title, status, checked, taskId, subtaskId)}`;
   }
 }
 
+/**
+ * Checks or unchecks a subtask and updates its status
+ *
+ * @param {string|number} taskId - The ID of the parent task
+ * @param {string|number} subtaskId - The ID of the subtask
+ */
 function checkSubtask(taskId, subtaskId) {
   let status = tasks[taskId].subtasks[subtaskId].status;
   if (status !== "finished") {
@@ -534,6 +738,13 @@ function checkSubtask(taskId, subtaskId) {
   patchStatusSubtask(taskId, subtaskId);
 }
 
+/**
+ * Patches the status of a subtask on the database
+ *
+ * @async
+ * @param {string|number} taskId - The ID of the parent task
+ * @param {string|number} subtaskId - The ID of the subtask
+ */
 async function patchStatusSubtask(taskId, subtaskId) {
   let subtask = tasks[taskId].subtasks[subtaskId];
   contentSubtaskStatus = subtask.status;
@@ -542,6 +753,9 @@ async function patchStatusSubtask(taskId, subtaskId) {
   });
 }
 
+/**
+ * Searches for tasks based on the search term
+ */
 function search() {
   let filterword = document.getElementById("taskSearch").value.toLowerCase();
   let length = filterword.length;
@@ -579,50 +793,52 @@ document.addEventListener("keydown", function (event) {
   } catch (error) {}
 });
 
+/**
+ * Highlights a drag area
+ *
+ * @param {string} id - The ID of the element to highlight
+ */
 function highlight(id) {
   document.getElementById(id).classList.add("drag-area-highlight");
 }
 
+/**
+ * Removes the highlight from a drag area
+ *
+ * @param {string} id - The ID of the element to remove the highlight from
+ */
 function removeHighlight(id) {
   document.getElementById(id).classList.remove("drag-area-highlight");
 }
 
+/**
+ * Removes the highlight border from all drag areas
+ */
 function removeHighlightBorder() {
-  document
-    .getElementById("boardTodo")
-    .classList.remove("drag_area_highlight_border");
-  document
-    .getElementById("boardInProgress")
-    .classList.remove("drag_area_highlight_border");
-  document
-    .getElementById("boardAwaitFeedback")
-    .classList.remove("drag_area_highlight_border");
-  document
-    .getElementById("boardDone")
-    .classList.remove("drag_area_highlight_border");
-  document
-    .getElementById(currentDraggedElement)
-    .classList.remove("animation_task_drag_and_drop");
+  document.getElementById("boardTodo").classList.remove("drag_area_highlight_border");
+  document.getElementById("boardInProgress").classList.remove("drag_area_highlight_border");
+  document.getElementById("boardAwaitFeedback").classList.remove("drag_area_highlight_border");
+  document.getElementById("boardDone").classList.remove("drag_area_highlight_border");
+  document.getElementById(currentDraggedElement).classList.remove("animation_task_drag_and_drop");
 }
 
+/**
+ * Highlights the border of all drag areas
+ */
 function highlightBorder() {
-  document
-    .getElementById("boardTodo")
-    .classList.add("drag_area_highlight_border");
-  document
-    .getElementById("boardInProgress")
-    .classList.add("drag_area_highlight_border");
-  document
-    .getElementById("boardAwaitFeedback")
-    .classList.add("drag_area_highlight_border");
-  document
-    .getElementById("boardDone")
-    .classList.add("drag_area_highlight_border");
-  document
-    .getElementById(currentDraggedElement)
-    .classList.add("animation_task_drag_and_drop");
+  document.getElementById("boardTodo").classList.add("drag_area_highlight_border");
+  document.getElementById("boardInProgress").classList.add("drag_area_highlight_border");
+  document.getElementById("boardAwaitFeedback").classList.add("drag_area_highlight_border");
+  document.getElementById("boardDone").classList.add("drag_area_highlight_border");
+  document.getElementById(currentDraggedElement).classList.add("animation_task_drag_and_drop");
 }
 
+/**
+ * Deletes a task from the tasks data
+ *
+ * @async
+ * @param {string|number} taskId - The ID of the task to delete
+ */
 async function deleteTaskFromTasks(taskId) {
   tasks = await loadData("tasks/");
   if (tasks.hasOwnProperty(taskId)) {
@@ -635,11 +851,25 @@ async function deleteTaskFromTasks(taskId) {
   }
 }
 
+/**
+ * Deletes an existing task
+ *
+ * @async
+ * @param {string|number} taskId - The ID of the task to delete
+ * @returns {Promise<string|number>} The ID of the deleted task
+ */
 async function deleteExistingTask(taskId) {
   await deleteTask(taskId);
   return taskId;
 }
 
+/**
+ * Deletes a task from the database
+ *
+ * @async
+ * @param {string|number} taskId - The ID of the task to delete
+ * @returns {Promise<any>} The response from the database
+ */
 async function deleteTask(taskId) {
   return await deleteData("/tasks/" + taskId);
 }
