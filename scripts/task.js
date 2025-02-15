@@ -252,8 +252,8 @@ function inputDropdownMenuFocus() {
 /**
  * Renders the cancel button within the "addTaskButtonCancel" container
  */
-function addTaskRenderCancelButton() {
-  let container = document.getElementById("addTaskButtonCancel");
+function addTaskRenderCancelButton(id) {
+  let container = document.getElementById(id);
   container.innerHTML =
     'Clear <img src="assets/img/buttonCancelHover.svg" alt="cancel"/>';
 }
@@ -261,8 +261,8 @@ function addTaskRenderCancelButton() {
 /**
  * Renders the cancel button within the add task board
  */
-function addTaskBoardRenderCancelButton() {
-  let container = document.getElementById("addTaskButtonCancel");
+function addTaskBoardRenderCancelButton(id) {
+  let container = document.getElementById(id);
   container.innerHTML =
     'Cancel <img src="assets/img/buttonCancelHover.svg" alt="cancel"/>';
 }
@@ -270,8 +270,8 @@ function addTaskBoardRenderCancelButton() {
 /**
  * Adds a "Clear" button with a cancel icon to the "addTaskButtonCancel" container
  */
-function addTaskResetCancelButton() {
-  let container = document.getElementById("addTaskButtonCancel");
+function addTaskResetCancelButton(id) {
+  let container = document.getElementById(id);
   container.innerHTML =
     'Clear <img src="assets/img/buttonCancel.svg" alt="cancel"/>';
 }
@@ -279,8 +279,8 @@ function addTaskResetCancelButton() {
 /**
  * Sets the inner HTML of the "addTaskButtonCancel" element to include a cancel button with an image
  */
-function addTaskBoardResetCancelButton() {
-  let container = document.getElementById("addTaskButtonCancel");
+function addTaskBoardResetCancelButton(id) {
+  let container = document.getElementById(id);
   container.innerHTML =
     'Cancel <img src="assets/img/buttonCancel.svg" alt="cancel"/>';
 }

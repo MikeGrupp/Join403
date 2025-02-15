@@ -296,9 +296,9 @@
               <div class="addTask_button_content">
                 <button
                   id="addTaskButtonCancel"
-                  onmouseover="addTaskBoardRenderCancelButton();"
+                  onmouseover="addTaskBoardRenderCancelButton('addTaskButtonCancel');"
                   class="white_btn pointer"
-                  onmouseout="addTaskBoardResetCancelButton();"
+                  onmouseout="addTaskBoardResetCancelButton('addTaskButtonCancel');"
                   onclick="clearAddTask(), taskMoveBack('addtaskBoard', 'addTaskBoardBg')"
                 >
                   Cancel <img src="assets/img/buttonCancel.svg" alt="cancel" />

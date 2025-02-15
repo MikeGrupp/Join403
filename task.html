@@ -272,9 +272,9 @@
             <div class="addTask_button_content">
               <button
                 id="addTaskButtonCancel"
-                onmouseover="addTaskRenderCancelButton();"
+                onmouseover="addTaskRenderCancelButton('addTaskButtonCancel');"
                 class="white_btn pointer"
-                onmouseout="addTaskResetCancelButton();"
+                onmouseout="addTaskResetCancelButton('addTaskButtonCancel');"
                 onclick="clearAddTask()"
               >
                 Clear <img src="assets/img/buttonCancel.svg" alt="cancel" />
@@ -289,10 +289,10 @@
       </div>
       <div class="addTask_button_content addTask_button_content_mobile">
         <button
-          id="addTaskButtonCancel"
-          onmouseover="addTaskRenderCancelButton();"
+          id="addTaskButtonCancelMobile"
+          onmouseover="addTaskRenderCancelButton('addTaskButtonCancelMobile');"
           class="white_btn pointer"
-          onmouseout="addTaskResetCancelButton();"
+          onmouseout="addTaskResetCancelButton('addTaskButtonCancelMobile');"
           onclick="clearAddTask()"
         >
           Clear <img src="assets/img/buttonCancel.svg" alt="cancel" />
