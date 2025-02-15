@@ -142,7 +142,14 @@ async function renderTasks(task, taskId) {
     backgroundColorCategory = "#0038ff";
   }
   let container = document.getElementById(step);
-  container.innerHTML += `${templateRenderTask(title, description, category, taskId, backgroundColorCategory, prio)}`;
+  container.innerHTML += `${templateRenderTask(
+    title,
+    description,
+    category,
+    taskId,
+    backgroundColorCategory,
+    prio
+  )}`;
 }
 
 /**
@@ -158,7 +165,11 @@ function renderSubtasks(taskId) {
   if (amountSubtasks === 0) {
     container.innerHTML = ``;
   } else {
-    container.innerHTML += `${templateRenderSubtasks(subtasksInPercent, amountSubtasksFinished, amountSubtasks)}`;
+    container.innerHTML += `${templateRenderSubtasks(
+      subtasksInPercent,
+      amountSubtasksFinished,
+      amountSubtasks
+    )}`;
   }
 }
 
@@ -185,7 +196,12 @@ function renderAssignedAccounts(taskId) {
       } else {
         accountNr = 2;
       }
-      container.innerHTML += `${templateRenderAssignedAccounts(initials, accountNr, color, position)}`;
+      container.innerHTML += `${templateRenderAssignedAccounts(
+        initials,
+        accountNr,
+        color,
+        position
+      )}`;
     }
   }
 }
@@ -389,7 +405,10 @@ async function removeExistingContactFromTasks(contactId) {
   for (const taskId in tasks) {
     if (tasks.hasOwnProperty(taskId)) {
       const task = tasks[taskId];
-      if (task.assignedAccounts && task.assignedAccounts.hasOwnProperty(contactId)) {
+      if (
+        task.assignedAccounts &&
+        task.assignedAccounts.hasOwnProperty(contactId)
+      ) {
         deleteContactFromTasks(taskId, contactId);
       }
     }
@@ -405,7 +424,9 @@ async function removeExistingContactFromTasks(contactId) {
  * @param {string} contactId - The ID of the contact
  */
 async function deleteContactFromTasks(taskId, contactId) {
-  return await deleteData("/tasks/" + taskId + "/assignedAccounts/" + contactId);
+  return await deleteData(
+    "/tasks/" + taskId + "/assignedAccounts/" + contactId
+  );
 }
 
 /**
@@ -494,6 +515,9 @@ function taskMoveForward(div) {
   }
   if (div === "taskDetail" && window.innerWidth < 1025) {
     position = 20;
+  }
+  if (div === "addTaskBoard" && window.innerWidth < 767) {
+    window.open("task.html");
   }
   function frame() {
     if (pos == position) {
@@ -595,7 +619,12 @@ function renderDetailEditTask(taskId) {
   let [day, month, year] = dueDate.split("/");
   let formattedDate = `${year}-${month}-${day}`;
   let container = document.getElementById("taskDetail");
-  container.innerHTML = `${templateRenderDetailEditTask(taskId, title, description, formattedDate)}`;
+  container.innerHTML = `${templateRenderDetailEditTask(
+    taskId,
+    title,
+    description,
+    formattedDate
+  )}`;
   renderEditAccounts(taskId);
   renderEditSubtasks(taskId);
   renderPrio(prio);
@@ -684,7 +713,11 @@ function renderDetailAccounts(task) {
     let initials = account.initials;
     let backgroundColor = account.color;
     let container = document.getElementById("detailAssignedAccounts");
-    container.innerHTML += `${templateRenderDetailAccounts(name, initials, backgroundColor)}`;
+    container.innerHTML += `${templateRenderDetailAccounts(
+      name,
+      initials,
+      backgroundColor
+    )}`;
   }
 }
 
@@ -717,7 +750,13 @@ function renderDetailSubtasks(taskId) {
       checked = "checked";
     }
     let container = document.getElementById("detailSubtasksContainer");
-    container.innerHTML += `${templateRenderDetailSubtasks(title, status, checked, taskId, subtaskId)}`;
+    container.innerHTML += `${templateRenderDetailSubtasks(
+      title,
+      status,
+      checked,
+      taskId,
+      subtaskId
+    )}`;
   }
 }
 
@@ -815,22 +854,42 @@ function removeHighlight(id) {
  * Removes the highlight border from all drag areas
  */
 function removeHighlightBorder() {
-  document.getElementById("boardTodo").classList.remove("drag_area_highlight_border");
-  document.getElementById("boardInProgress").classList.remove("drag_area_highlight_border");
-  document.getElementById("boardAwaitFeedback").classList.remove("drag_area_highlight_border");
-  document.getElementById("boardDone").classList.remove("drag_area_highlight_border");
-  document.getElementById(currentDraggedElement).classList.remove("animation_task_drag_and_drop");
+  document
+    .getElementById("boardTodo")
+    .classList.remove("drag_area_highlight_border");
+  document
+    .getElementById("boardInProgress")
+    .classList.remove("drag_area_highlight_border");
+  document
+    .getElementById("boardAwaitFeedback")
+    .classList.remove("drag_area_highlight_border");
+  document
+    .getElementById("boardDone")
+    .classList.remove("drag_area_highlight_border");
+  document
+    .getElementById(currentDraggedElement)
+    .classList.remove("animation_task_drag_and_drop");
 }
 
 /**
  * Highlights the border of all drag areas
  */
 function highlightBorder() {
-  document.getElementById("boardTodo").classList.add("drag_area_highlight_border");
-  document.getElementById("boardInProgress").classList.add("drag_area_highlight_border");
-  document.getElementById("boardAwaitFeedback").classList.add("drag_area_highlight_border");
-  document.getElementById("boardDone").classList.add("drag_area_highlight_border");
-  document.getElementById(currentDraggedElement).classList.add("animation_task_drag_and_drop");
+  document
+    .getElementById("boardTodo")
+    .classList.add("drag_area_highlight_border");
+  document
+    .getElementById("boardInProgress")
+    .classList.add("drag_area_highlight_border");
+  document
+    .getElementById("boardAwaitFeedback")
+    .classList.add("drag_area_highlight_border");
+  document
+    .getElementById("boardDone")
+    .classList.add("drag_area_highlight_border");
+  document
+    .getElementById(currentDraggedElement)
+    .classList.add("animation_task_drag_and_drop");
 }
 
 /**
