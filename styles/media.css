@@ -547,6 +547,10 @@
 }
 
 @media screen and (max-width: 767px) {
+  .main_board {
+    max-height: calc(100dvh - (2 * 80px));
+  }
+
   .registered_user_28 {
     font-size: 24px;
   }
@@ -614,7 +618,7 @@
   .textpage {
     padding: 32px;
     gap: 24px;
-    max-height: calc(100vh - 220px);
+    max-height: calc(100dvh - (2 * 80px));
   }
 
   main {
@@ -629,7 +633,7 @@
     padding: 16px;
     gap: 24px;
     justify-content: center;
-    margin-bottom: 76px;
+    margin-bottom: 80px;
   }
 
   .sum_title {
@@ -920,10 +924,11 @@
 
   .contacts_main {
     margin-left: 0;
+    max-height: calc(100dvh - (2 * 80px));
   }
 
   .contact_list_container {
-    max-height: calc(100vh - (2 * 80px));
+    max-height: calc(100dvh - (2 * 80px));
     padding-left: 14px;
     width: 100%;
   }
@@ -936,7 +941,7 @@
     position: absolute;
     width: 56px;
     height: 56px;
-    top: calc(100vh - 248px);
+    top: calc(100vh - 300px);
     right: 15px;
     padding: 12px;
     gap: 10px;
@@ -1203,7 +1208,7 @@
   .addTask_container {
     overflow-x: hidden;
     overflow-y: auto;
-    max-height: calc(100vh - 237px);
+    max-height: calc(100dvh - 237px);
   }
 
   .addTask_formular_left {
