@@ -37,6 +37,7 @@ const validationDetails = {
  * @returns {boolean} Returns true if all fields are valid, false otherwise
  */
 function isContactValid(nameField, mailField, phoneField) {
+  removeCustomValidationMessage(mailField);
   if (
     isFieldValid(nameField, "invalidContactName") &&
     isFieldValid(mailField, "invalidContactMail") &&
@@ -80,23 +81,13 @@ function isFieldValid(field, validationDetailsId) {
 function isValidEmailFormat(field, validationDetailsId) {
   let regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   if (!regex.test(field.value)) {
+    field.setCustomValidity(" ");
     displayCustomValidationMessage(validationDetailsId);
     return false;
   }
+  field.setCustomValidity("");
   removeValidationMessage();
   return true;
-}
-
-/**
- * Displays the browser's default validation message for a field
- *
- * @param {HTMLInputElement} field - The input field element that failed validation
- * @param {string} validationMessage - The validation message to display
- */
-function displayDefaultValidationMessage(field, validationMessage) {
-  field.setCustomValidity(" ");
-  const logElement = document.getElementById("log");
-  logElement.innerText = validationMessage;
 }
 
 /**
@@ -116,6 +107,15 @@ function displayCustomValidationMessage(validationMessageId) {
 function removeValidationMessage() {
   const logElement = document.getElementById("log");
   logElement.innerText = "";
+}
+
+/**
+ * Removes any custom validation message set on a form field
+ *
+ * @param {HTMLElement} field - The field element to validate
+ */
+function removeCustomValidationMessage(field) {
+  field.setCustomValidity("");
 }
 
 /**
