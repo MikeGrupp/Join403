@@ -24,7 +24,7 @@ const validationDetails = {
   },
   invalidContactPhone: {
     text: "Please enter a valid contact phone number.",
-    field: "contact_manage_mail",
+    field: "contact_manage_phone",
   },
 };
 
@@ -40,6 +40,7 @@ function isContactValid(nameField, mailField, phoneField) {
   if (
     isFieldValid(nameField, "invalidContactName") &&
     isFieldValid(mailField, "invalidContactMail") &&
+    isValidEmailFormat(mailField, "invalidContactMail") &&
     isFieldValid(phoneField, "invalidContactPhone")
   ) {
     enableSubmitButton(true);
@@ -58,6 +59,27 @@ function isContactValid(nameField, mailField, phoneField) {
  */
 function isFieldValid(field, validationDetailsId) {
   if (!field.checkValidity()) {
+    displayCustomValidationMessage(validationDetailsId);
+    return false;
+  }
+  removeValidationMessage();
+  return true;
+}
+
+/**
+ * Validates if a form field contains a properly formatted email address.
+ * The function checks using a regex pattern that ensures:
+ * - Valid characters before @ (letters, numbers, and certain special characters)
+ * - Valid domain name
+ * - Top-level domain has at least 2 characters
+ * 
+ * @param {HTMLInputElement} field - The input field element to validate
+ * @param {string} validationDetailsId - The ID of the element where validation messages will be displayed
+ * @returns {boolean} Returns true if the email format is valid, false otherwise
+ */
+function isValidEmailFormat(field, validationDetailsId) {
+  let regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  if (!regex.test(field.value)) {
     displayCustomValidationMessage(validationDetailsId);
     return false;
   }
