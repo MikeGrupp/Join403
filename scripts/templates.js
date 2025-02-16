@@ -1,3 +1,8 @@
+/**
+ * Renders the basic header section with logo and title
+ * 
+ * @returns {string} HTML string containing the mobile logo and desktop header title
+ */
 function templateRenderBasicHeader() {
   return `
       <img class="logo_mobile" src="./assets/img/logoMobile.svg" alt="Join logo" />
@@ -5,6 +10,11 @@ function templateRenderBasicHeader() {
       `;
 }
 
+/**
+ * Renders the header profile container with help link
+ * 
+ * @returns {string} HTML string containing the profile container with help link
+ */
 function templateRenderHeaderProfileContainer() {
   return `
       <div id="header_profile_container" class="header_profile_container">
@@ -15,6 +25,13 @@ function templateRenderHeaderProfileContainer() {
         `;
 }
 
+/**
+ * Renders the user profile button in the header
+ * 
+ * @param {string} initials - The user's initials to display
+ * @param {string} fontSize - CSS class name for font size
+ * @returns {string} HTML string containing the user profile button
+ */
 function templateRenderHeaderUser(initials, fontSize) {
   return `
     <button id="header_user_profile" class="header_user_profile ${fontSize}" onclick="openSubmenu('submenu_dialog')">
@@ -23,6 +40,11 @@ function templateRenderHeaderUser(initials, fontSize) {
     `;
 }
 
+/**
+ * Renders the main sidebar navigation
+ * 
+ * @returns {string} HTML string containing the complete sidebar with logo, navigation links and submenu
+ */
 function templateRenderSidebar() {
   return `
     <div class="logo">
@@ -71,6 +93,12 @@ function templateRenderSidebar() {
   `;
 }
 
+/**
+ * Renders the focused sidebar item based on current page
+ * 
+ * @param {string} pageName - Current page identifier ('summary'|'task'|'board'|'contacts'|'privacy'|'legal')
+ * @returns {string} HTML string containing the focused sidebar item
+ */
 function templateRenderSidebarSummary(pageName) {
   if (pageName === "summary") {
     return `
@@ -120,6 +148,11 @@ function templateRenderSidebarSummary(pageName) {
   }
 }
 
+/**
+ * Renders the login sidebar version
+ * 
+ * @returns {string} HTML string containing the sidebar with login option
+ */
 function templateRenderSidebarLogin() {
   return `
     <div class="logo">
@@ -151,6 +184,12 @@ function templateRenderSidebarLogin() {
   `;
 }
 
+/**
+ * Renders a letter divider for the contact list
+ * 
+ * @param {string} letter - The letter to display as divider
+ * @returns {string} HTML string containing the letter divider
+ */
 function templateRenderContactListLetter(letter) {
   return `
         <dt class="list_letter">${letter}</dt>
@@ -158,6 +197,16 @@ function templateRenderContactListLetter(letter) {
   `;
 }
 
+/**
+ * Renders a single contact entry in the contact list
+ * 
+ * @param {string} id - Unique identifier for the contact
+ * @param {string} color - CSS color class for the profile badge
+ * @param {string} initials - Contact's initials
+ * @param {string} name - Contact's full name
+ * @param {string} mail - Contact's email address
+ * @returns {string} HTML string containing the contact entry
+ */
 function templateRenderContactListEntry(id, color, initials, name, mail) {
   return `
   <dd>
@@ -172,6 +221,11 @@ function templateRenderContactListEntry(id, color, initials, name, mail) {
   `;
 }
 
+/**
+ * Renders the default contact details view
+ * 
+ * @returns {string} HTML string containing the default contact details header
+ */
 function templateRenderContactDetailsDefault() {
   return `
         <div class="title_group">
@@ -186,6 +240,18 @@ function templateRenderContactDetailsDefault() {
   `;
 }
 
+/**
+ * Renders detailed contact information
+ * 
+ * @param {boolean} isMobile - Whether the view is for mobile devices
+ * @param {string} contactId - Unique identifier for the contact
+ * @param {string} color - CSS color class for the profile badge
+ * @param {string} initials - Contact's initials
+ * @param {string} name - Contact's full name
+ * @param {string} mail - Contact's email address
+ * @param {string} phone - Contact's phone number
+ * @returns {string} HTML string containing the detailed contact information
+ */
 function templateRenderContactDetailsForContact(
   isMobile,
   contactId,
@@ -222,6 +288,12 @@ function templateRenderContactDetailsForContact(
   );
 }
 
+/**
+ * Renders the contact management menu
+ * 
+ * @param {string} contactId - Unique identifier for the contact
+ * @returns {string} HTML string containing the contact management menu
+ */
 function templateRenderContactDetailsMenuForContact(contactId) {
   return `
           <menu class="contact_manage_menu">
@@ -243,6 +315,12 @@ function templateRenderContactDetailsMenuForContact(contactId) {
   `;
 }
 
+/**
+ * Renders the mobile menu button for contact management if on mobile
+ * 
+ * @param {boolean} isMobile - Whether the view is for mobile devices
+ * @returns {string} HTML string containing the mobile menu button or empty string
+ */
 function templateRenderContactDetailsMobileManageMenuButton(isMobile) {
   if (isMobile) {
     return `<button id="contact_burger_menu" class="contact_burger_menu" onclick="openSubmenu('contact_manage_submenu')">
@@ -252,6 +330,15 @@ function templateRenderContactDetailsMobileManageMenuButton(isMobile) {
   return "";
 }
 
+/**
+ * Renders the contact management dialog for creating or editing contacts
+ * 
+ * @param {string} mode - Dialog mode ('create'|'edit')
+ * @param {string} [contactId=''] - Contact ID for edit mode
+ * @param {string} [initials=''] - Contact initials for edit mode
+ * @param {string} [color='grey'] - Profile badge color
+ * @returns {string} HTML string containing the contact management dialog
+ */
 function templateRenderContactManageDialog(
   mode,
   contactId = "",
@@ -328,6 +415,17 @@ function templateRenderContactManageDialog(
   `;
 }
 
+/**
+ * Renders a task card for the board view
+ * 
+ * @param {string} title - Task title
+ * @param {string} description - Task description
+ * @param {string} category - Task category
+ * @param {string} taskId - Unique identifier for the task
+ * @param {string} backgroundColorCategory - CSS color for category background
+ * @param {string} prio - Task priority level
+ * @returns {string} HTML string containing the task card
+ */
 function templateRenderTask(
   title,
   description,
@@ -365,6 +463,14 @@ function templateRenderTask(
   `;
 }
 
+/**
+ * Renders the subtasks progress section
+ * 
+ * @param {number} subtasksInPercent - Percentage of completed subtasks
+ * @param {number} amountSubtasksFinished - Number of completed subtasks
+ * @param {number} amountSubtasks - Total number of subtasks
+ * @returns {string} HTML string containing the subtasks progress section
+ */
 function templateRenderSubtasks(
   subtasksInPercent,
   amountSubtasksFinished,
@@ -381,6 +487,15 @@ function templateRenderSubtasks(
   `;
 }
 
+/**
+ * Renders assigned account avatars
+ * 
+ * @param {string} initials - User initials
+ * @param {number} accountNr - Account number for positioning
+ * @param {string} color - CSS color class for the avatar
+ * @param {number} position - Position offset for overlapping avatars
+ * @returns {string} HTML string containing the assigned account avatar
+ */
 function templateRenderAssignedAccounts(initials, accountNr, color, position) {
   return `
             <div class="task_account${accountNr} bg_${color}" style="--position: -${position}px">${initials}</div>
@@ -388,6 +503,18 @@ function templateRenderAssignedAccounts(initials, accountNr, color, position) {
 `;
 }
 
+/**
+ * Renders the detailed task view
+ * 
+ * @param {string} taskId - Unique identifier for the task
+ * @param {string} title - Task title
+ * @param {string} description - Task description
+ * @param {string} category - Task category
+ * @param {string} backgroundColorCategory - CSS color for category background
+ * @param {string} prio - Task priority level
+ * @param {string} dueDate - Task due date
+ * @returns {string} HTML string containing the detailed task view
+ */
 function templateRenderDetailTask(
   taskId,
   title,
@@ -450,6 +577,14 @@ function templateRenderDetailTask(
   </div>`;
 }
 
+/**
+ * Renders assigned account details
+ * 
+ * @param {string} name - User's full name
+ * @param {string} initials - User's initials
+ * @param {string} backgroundColor - CSS color class for the avatar
+ * @returns {string} HTML string containing the assigned account details
+ */
 function templateRenderDetailAccounts(name, initials, backgroundColor) {
   return ` 
     <div class="task_detail_assigned_account_content">
@@ -458,6 +593,16 @@ function templateRenderDetailAccounts(name, initials, backgroundColor) {
     </div>`;
 }
 
+/**
+ * Renders a subtask item in the detailed task view
+ * 
+ * @param {string} title - Subtask title
+ * @param {string} status - Subtask status
+ * @param {string} checked - HTML checked attribute if subtask is complete
+ * @param {string} taskId - Parent task identifier
+ * @param {string} subtaskId - Subtask identifier
+ * @returns {string} HTML string containing the subtask item
+ */
 function templateRenderDetailSubtasks(
   title,
   status,
@@ -473,6 +618,13 @@ function templateRenderDetailSubtasks(
   `;
 }
 
+/**
+ * Renders the summary greeting section
+ * 
+ * @param {string} greetingMessage - Time-based greeting message
+ * @param {string} username - User's name
+ * @returns {string} HTML string containing the greeting section
+ */
 function templateRenderSummaryGreeting(greetingMessage, username) {
   return `
         <span class="greeting">${greetingMessage}</span>
@@ -480,6 +632,13 @@ function templateRenderSummaryGreeting(greetingMessage, username) {
 `;
 }
 
+/**
+ * Renders the summary greeting section
+ * 
+ * @param {string} greetingMessage - Time-based greeting message
+ * @param {string} username - User's name
+ * @returns {string} HTML string containing the greeting section
+ */
 function templateRenderSummary(
   amountTasks,
   amountTodo,
@@ -539,6 +698,13 @@ function templateRenderSummary(
 `;
 }
 
+/**
+ * Renders a subtask container
+ * 
+ * @param {number} i - Subtask index
+ * @param {string} subtaskText - Subtask description
+ * @returns {string} HTML string containing the subtask container
+ */
 function templateRenderSubtaskContainer(i, subtaskText) {
   return `
       <div class="subtask_d_flex">
@@ -556,6 +722,15 @@ function templateRenderSubtaskContainer(i, subtaskText) {
   `;
 }
 
+/**
+ * Renders the detailed task edit view
+ * 
+ * @param {string} taskId - Unique identifier for the task
+ * @param {string} title - Task title
+ * @param {string} description - Task description
+ * @param {string} formattedDate - Formatted due date
+ * @returns {string} HTML string containing the task edit form
+ */
 function templateRenderDetailEditTask(
   taskId,
   title,
