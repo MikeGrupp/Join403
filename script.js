@@ -1,12 +1,35 @@
+/**
+ * Current logged-in user object
+ * 
+ * @type {string}
+ */
 let currentUser = "";
+
+/**
+ * Initials of the current logged-in user
+ * 
+ * @type {string}
+ */
 let userInitials = "";
 
+/**
+ * Initializes the page layout and performs necessary checks based on the provided page name
+ * 
+ * @async
+ * @param {string} pageName - The name of the current page being loaded
+ */
 async function load(pageName) {
   checkUserLogin(pageName);
   initPageSpecificLayout(pageName, userInitials);
   checkLoginForPageDesign(pageName);
 }
 
+/**
+ * Initializes the page-specific layout elements based on the page name and user initials
+ * 
+ * @param {string} pageName - The name of the current page
+ * @param {string} userInitials - The initials of the current user
+ */
 function initPageSpecificLayout(pageName, userInitials) {
   switch (pageName) {
     case "summary":
@@ -29,6 +52,11 @@ function initPageSpecificLayout(pageName, userInitials) {
   }
 }
 
+/**
+ * Checks user login status and renders appropriate sidebar content
+ * 
+ * @param {string} pageName - The name of the current page
+ */
 function checkLoginForPageDesign(pageName) {
   let getSavedUser = localStorage.getItem('savedUser');
   if (getSavedUser) {
@@ -39,6 +67,11 @@ function checkLoginForPageDesign(pageName) {
   }
 }
 
+/**
+ * Initializes the default header with user profile information
+ * 
+ * @param {string} userInitials - The initials of the current user
+ */
 function initDefaultHeader(userInitials) {
   let headerString = templateRenderBasicHeader();
   headerString += templateRenderHeaderProfileContainer();
@@ -51,6 +84,11 @@ function initDefaultHeader(userInitials) {
   headerProfileContainer.innerHTML += templateRenderHeaderUser(userInitials, fontSize);
 }
 
+/**
+ * Determines the appropriate CSS class for user initials based on their length
+ * 
+ * @returns {string} CSS class name for user initials sizing
+ */
 function checkUserInitialsLength() {
   let length = userInitials.length;
 
@@ -67,6 +105,11 @@ function checkUserInitialsLength() {
   }
 }
 
+/**
+ * Initializes the help page header with user information
+ * 
+ * @param {string} userInitials - The initials of the current user
+ */
 function initHelpPageHeader(userInitials) {
   let headerString = templateRenderBasicHeader();
   let fontSize = checkUserInitialsLength();
@@ -75,21 +118,35 @@ function initHelpPageHeader(userInitials) {
   header.innerHTML = headerString;
 }
 
+/**
+ * Initializes the header for pages that don't require user authentication
+ */
 function initNoUserHeader() {
   let header = document.getElementById("header");
   header.innerHTML = templateRenderBasicHeader();
 }
 
+/**
+ * Renders the main sidebar navigation for authenticated users
+ */
 function renderSidebar() {
   let container = document.getElementById("sidebar");
   container.innerHTML = `${templateRenderSidebar()}`;
 }
 
+/**
+ * Renders the login form in the sidebar for non-authenticated users
+ */
 function renderSidebarLogin() {
   let container = document.getElementById("sidebar");
   container.innerHTML = `${templateRenderSidebarLogin()}`;
 }
 
+/**
+ * Renders the sidebar summary section for the current page
+ * 
+ * @param {string} pageName - The name of the current page
+ */
 function renderSidebarSummary(pageName) {
   if (pageName != "help") {
     document.getElementById(pageName).innerHTML = templateRenderSidebarSummary(pageName);
@@ -97,10 +154,20 @@ function renderSidebarSummary(pageName) {
   }
 }
 
+/**
+ * Applies focus styling to the current page's sidebar item
+ * 
+ * @param {string} pageName - The name of the current page
+ */
 function sidebarFocus(pageName) {
   document.getElementById(pageName).classList.add("bgSummary_focus");
 }
 
+/**
+ * Verifies user authentication and redirects to login page if necessary
+ * 
+ * @param {string} pageName - The name of the current page
+ */
 function checkUserLogin(pageName) {
   if (pageName !== 'privacy' && pageName !== 'legal') {
     let getSavedUser = localStorage.getItem('savedUser');
@@ -114,6 +181,9 @@ function checkUserLogin(pageName) {
   }
 }
 
+/**
+ * Logs out the current user by removing their data from localStorage
+ */
 function userLogout() {
   if (localStorage.getItem('savedUser')) {
     localStorage.removeItem('savedUser');
@@ -123,6 +193,11 @@ function userLogout() {
   }
 }
 
+/**
+ * Includes external HTML content into elements with the w3-include-html attribute
+ * 
+ * @async
+ */
 async function includeHtml() {
   let includeElements = document.querySelectorAll('[w3-include-html]');
   for (let i = 0; i < includeElements.length; i++) {
