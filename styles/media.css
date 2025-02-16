@@ -228,6 +228,7 @@
     gap: 16px;
     padding-bottom: 16px;
     padding-left: 4px;
+    padding-right: 4px;
     overflow: auto;
   }
 
@@ -705,7 +706,7 @@
 
   .signup {
     width: 364px;
-    padding: 32px 16px;
+    padding: 16px 16px;
   }
 
   .card_header {
@@ -1369,7 +1370,7 @@
 
   .standard_ipt {
     width: 222px;
-    height: 28px;
+    height: 24px;
     font-size: 16px;
   }
 

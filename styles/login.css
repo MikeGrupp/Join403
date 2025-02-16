@@ -254,6 +254,8 @@ input[type='checkbox']:hover {
     display: flex;
     justify-content: center;
     align-items: center;
-    position: relative;
-    bottom: 20vh;
+    text-align: center;
+    color: red;
+    font-size: 14px;
+    width: 100%;
 }

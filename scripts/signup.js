@@ -1,9 +1,5 @@
 /**
- * Handles the user signup process
- * Retrieves user input, checks for email existence, creates a new contact and user,
- * and redirects to the login page upon successful signup
- *
- * @async
+ * Adds a new user by validating input fields and making API requests.
  */
 async function addUser() {
     let name = document.getElementById('name');
@@ -12,18 +8,44 @@ async function addUser() {
     let passwordConfirm = document.getElementById('passwordConfirm');
     let initials = determineInitials(name.value);
 
+    await signupValidation(name, email, password, passwordConfirm, initials);
+}
+
+/**
+ * Validates user signup details and handles user registration.
+ * @param {HTMLElement} name - The name input field.
+ * @param {HTMLElement} email - The email input field.
+ * @param {HTMLElement} password - The password input field.
+ * @param {HTMLElement} passwordConfirm - The password confirmation input field.
+ * @param {string} initials - The user's initials.
+ */
+async function signupValidation(name, email, password, passwordConfirm, initials) {
     if (password.value === passwordConfirm.value) {
         let check = await checkUserEmail();
         if (check === true) {
-            let newContactId = await postData("/contacts", {name: name.value, initials: initials, mail: email.value, phone: '', color: selectRandomColor()});
-            postData("users", { "name": name.value, "email": email.value, "password": password.value, "assignedContact": newContactId, "initials": initials});
-            window.location.href = 'login.html?msg=successSignup';
+            if (validateEmail(email.value) === true) {
+                let newContactId = await postData("/contacts", { name: name.value, initials: initials, mail: email.value, phone: '', color: selectRandomColor() });
+                postData("users", { "name": name.value, "email": email.value, "password": password.value, "assignedContact": newContactId, "initials": initials });
+                window.location.href = 'login.html?msg=successSignup';
+            } else {
+                postMsg(`Please enter a valid contact email.`)
+            }
         } else {
-            postMsg(`This Email is already in use, please use another`);
+            postMsg(`This Email is already in use, please use another.`);
         }
     } else {
         postMsg(`Your passwords don't match, please try again.`)
     }
+}
+
+/**
+ * Validates an email address format.
+ * @param {string} input - The email address to validate.
+ * @returns {boolean} True if the email format is valid, otherwise false.
+ */
+function validateEmail(input) {
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return emailPattern.test(input);
 }
 
 /**
