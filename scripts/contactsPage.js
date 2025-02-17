@@ -32,27 +32,34 @@ async function initContacts() {
 }
 
 /**
- * Initializes the contact list by sorting contacts alphabetically and rendering them into the DOM
+ * Initializes the contact list by retrieving stored contacts, sorting them alphabetically,
+ * rendering the list HTML, and updating the contact list element in the DOM
  */
 function initContactList() {
-  let sortedContacts = getStoredContacts().sort((a, b) => a.name.localeCompare(b.name));
+  const sortedContacts = getStoredContacts().sort((a, b) => a.name.localeCompare(b.name));
+  const contactListHtml = renderContactList(sortedContacts);
+  document.getElementById(CONSTANTS.SELECTORS.CONTACT_LIST).innerHTML = contactListHtml;
+}
+
+/**
+ * Renders the HTML for the contact list based on the provided array of contacts
+ *
+ * @param {Array<Object>} contacts - An array of contact objects, each with properties like
+ *                                 `id`, `color`, `initials`, `name`, and `mail`
+ * @returns {string} The HTML string representing the rendered contact list
+ */
+function renderContactList(contacts) {
   let contactListHtml = "";
   let currentFirstLetter = "";
-  sortedContacts.forEach((contact) => {
-    if (currentFirstLetter != contact.name[0].toUpperCase()) {
-      currentFirstLetter = contact.name[0].toUpperCase();
+  contacts.forEach((contact) => {
+    const firstLetter = contact.name[0].toUpperCase();
+    if (currentFirstLetter !== firstLetter) {
+      currentFirstLetter = firstLetter;
       contactListHtml += templateRenderContactListLetter(currentFirstLetter);
     }
-    contactListHtml += templateRenderContactListEntry(
-      contact.id,
-      contact.color,
-      contact.initials,
-      contact.name,
-      contact.mail
-    );
+    contactListHtml += templateRenderContactListEntry(contact.id, contact.color, contact.initials, contact.name, contact.mail);
   });
-  let contactList = document.getElementById(CONSTANTS.SELECTORS.CONTACT_LIST);
-  contactList.innerHTML = contactListHtml;
+  return contactListHtml;
 }
 
 /**
