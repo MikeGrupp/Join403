@@ -273,20 +273,33 @@ async function createAndOpenContact(nameInput, mailInput, phoneInput) {
  */
 async function editContact(event, contactId) {
   event.preventDefault();
-  let nameInput = document.getElementById(CONSTANTS.SELECTORS.CONTACT_NAME);
-  let mailInput = document.getElementById(CONSTANTS.SELECTORS.CONTACT_MAIL);
-  let phoneInput = document.getElementById(CONSTANTS.SELECTORS.CONTACT_PHONE);
+  const nameInput = document.getElementById(CONSTANTS.SELECTORS.CONTACT_NAME);
+  const mailInput = document.getElementById(CONSTANTS.SELECTORS.CONTACT_MAIL);
+  const phoneInput = document.getElementById(CONSTANTS.SELECTORS.CONTACT_PHONE);
   await reloadContactsFromDatabase();
   if (isContactValid(nameInput, mailInput, phoneInput, false)) {
-    await editExistingContact(contactId, nameInput.value, mailInput.value, phoneInput.value);
-    if (contactId) {
-      resetForm(CONSTANTS.SELECTORS.CONTACT_FORM);
-      createToast("successEditContact");
-      initContactList();
-      closeContactManage();
-      closeSubmenu(CONSTANTS.SELECTORS.CONTACT_MANAGE_SUBMENU);
-      openContactDetails(contactId);
-    }
+    await editAndOpenContact(contactId, nameInput, mailInput, phoneInput);
+  }
+}
+
+/**
+ * Edits an existing contact and opens its details in the UI
+ *
+ * @async
+ * @param {number} contactId - The ID of the contact to edit
+ * @param {HTMLInputElement} nameInput - The input element for the contact's name
+ * @param {HTMLInputElement} mailInput - The input element for the contact's email
+ * @param {HTMLInputElement} phoneInput - The input element for the contact's phone number
+ */
+async function editAndOpenContact(contactId, nameInput, mailInput, phoneInput) {
+  await editExistingContact(contactId, nameInput.value, mailInput.value, phoneInput.value);
+  if (contactId) {
+    resetForm(CONSTANTS.SELECTORS.CONTACT_FORM);
+    createToast("successEditContact");
+    initContactList();
+    closeContactManage();
+    closeSubmenu(CONSTANTS.SELECTORS.CONTACT_MANAGE_SUBMENU);
+    openContactDetails(contactId);
   }
 }
 
