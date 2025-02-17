@@ -1,5 +1,4 @@
-@media (min-width: 1921px) {
-}
+@media (min-width: 1921px) {}
 
 @media screen and (max-width: 1440px) {
   .greeting_box {
@@ -1264,7 +1263,7 @@
 
 @media screen and (max-width: 427px) {
   @media (orientation: landscape) {
-    body > *:not(#turn) {
+    body>*:not(#turn) {
       display: none;
     }
 
@@ -1275,6 +1274,18 @@
       height: 100vh;
       text-align: center;
     }
+  }
+
+  .small_card {
+    max-width: 121px;
+  }
+
+  .card {
+    max-width: 181px;
+  }
+
+  .big_card {
+    max-width: 363px;
   }
 
   .find_add_task {
