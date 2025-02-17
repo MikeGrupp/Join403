@@ -123,15 +123,7 @@ function initContactDetailsDesktop(contact) {
 function initContactDetailsMobile(contact) {
   let contactDetailsMobileHtml = templateRenderContactDetailsDefault();
   if (contact != null) {
-    contactDetailsMobileHtml += templateRenderContactDetailsForContact(
-      true,
-      contact.id,
-      contact.color,
-      contact.initials,
-      contact.name,
-      contact.mail,
-      contact.phone
-    );
+    contactDetailsMobileHtml += templateRenderContactDetailsForContact(true, contact.id, contact.color, contact.initials, contact.name, contact.mail, contact.phone);
     let contactDetailsMobile = document.getElementById(CONSTANTS.SELECTORS.CONTACT_DETAILS_M);
     contactDetailsMobile.innerHTML = contactDetailsMobileHtml;
     initContactManageSubmenu(contact.id);
