@@ -31,24 +31,17 @@ async function load(pageName) {
  * @param {string} userInitials - The initials of the current user
  */
 function initPageSpecificLayout(pageName, userInitials) {
-  switch (pageName) {
-    case "summary":
-    case "task":
-    case "board":
-    case "contacts":
-      initDefaultHeader(userInitials);
-      initSubmenuListeners("submenu_dialog", "header_user_profile");
-      break;
-    case "help":
-      initHelpPageHeader(userInitials);
-      initSubmenuListeners("submenu_dialog", "header_user_profile");
-      break;
-    case "privacy":
-    case "legal":
-      initNoUserHeader();
-      break;
-    default:
-      break;
+  const pagesWithDefaultHeader = ["summary", "task", "board", "contacts"];
+  const pagesWithHelpHeader = ["help"];
+  const pagesWithNoUserHeader = ["privacy", "legal"];
+  if (pagesWithDefaultHeader.includes(pageName)) {
+    initDefaultHeader(userInitials);
+    initSubmenuListeners("submenu_dialog", "header_user_profile");
+  } else if (pagesWithHelpHeader.includes(pageName)) {
+    initHelpPageHeader(userInitials);
+    initSubmenuListeners("submenu_dialog", "header_user_profile");
+  } else if (pagesWithNoUserHeader.includes(pageName)) {
+    initNoUserHeader();
   }
 }
 
