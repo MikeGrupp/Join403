@@ -84,7 +84,6 @@ function initDefaultHeader(userInitials) {
  */
 function checkUserInitialsLength() {
   let length = userInitials.length;
-
   if (length === 1) {
     return "registered_user_28";
   } else if (length === 2) {
