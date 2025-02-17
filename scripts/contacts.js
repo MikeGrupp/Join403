@@ -93,10 +93,7 @@ function getStoredContactById(contactId) {
  * @returns {Object|null} An object of contacts, or null if the input is null
  */
 function mapContactsJson(json) {
-  if (json == null) {
-    return null;
-  }
-  return Object.entries(json).reduce((contactsObject, [firebaseId, contact]) => {
+  return json == null ? null : Object.entries(json).reduce((contactsObject, [firebaseId, contact]) => {
     contactsObject[firebaseId] = {
       id: firebaseId,
       name: contact.name,
