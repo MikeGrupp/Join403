@@ -191,6 +191,75 @@ function templateRenderSidebarLogin() {
  * @param {string} username - User's name
  * @returns {string} HTML string containing the greeting section
  */
+function templateRenderSummary(
+  amountTasks,
+  amountTodo,
+  amountInProgress,
+  amountFeedback,
+  amountDone,
+  amountUrgent,
+  deadline
+) {
+  return `
+          <div class="row">
+            <div class="card" onclick="goToBoard()">
+              <div class="icon-pen"></div>
+              <div class="column">
+                <span id="todo" class="number">${amountTodo}</span>
+                <span class="description">To-do</span>
+              </div>
+            </div>
+            <div class="card" onclick="goToBoard()">
+              <div class="icon-check"></div>
+              <div class="column ">
+                <span id="done" class="number">${amountDone}</span>
+                <span class="description">Done</span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="big_card" onclick="goToBoard()">
+              <div class="left_card">
+                <div class="icon_orange"></div>
+                <div class="column ">
+                  <span id="urgent" class="number">${amountUrgent}</span>
+                  <span class="description">Urgent</span>
+                </div>
+              </div>
+              <div class="grey_line"></div>
+              <div class="right_card">
+                <span id="deadline"><b>${deadline}</b></span>
+                ${deadline !== "No coming Deadlines!"
+      ? "<span>Upcoming Deadline</span>"
+      : ""
+    }
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="small_card" onclick="goToBoard()">
+              <span id="taskAmount" class="number">${amountTasks}</span>
+              <span class="description">Tasks in Board</span>
+            </div>
+            <div class="small_card" onclick="goToBoard()">
+              <span id="taskInProgress" class="number">${amountInProgress}</span>
+              <span class="description">Tasks in Progress</span>
+            </div>
+            <div class="small_card" onclick="goToBoard()">
+              <span id="taskFeedback" class="number">${amountFeedback}</span>
+              <span class="description">Awaiting Feedback</span>
+            </div>
+          </div>
+  `;
+}
+
+/**
+ * Renders the summary greeting section
+ *
+ * @param {string} greetingMessage - Time-based greeting message
+ * @param {string} username - User's name
+ * @returns {string} HTML string containing the greeting section
+ */
 function templateRenderSummaryGreeting(greetingMessage, username) {
   return `
         <span class="greeting">${greetingMessage}</span>
