@@ -1256,6 +1256,10 @@
     top: -102px !important;
     left: 100px;
   }
+
+  .taskdetail {
+    width: 100vw;
+  }
 }
 
 @media screen and (max-width: 427px) {
@@ -1527,9 +1531,5 @@
     font-size: 16px;
     width: 250px;
     height: 50px;
-  }
-
-  .taskdetail {
-    width: 100vw;
   }
 }

@@ -4,12 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Join</title>
-    <link rel="icon" type="image/x-icon" href="assets/img/logo1.svg">
+    <link rel="icon" type="image/x-icon" href="assets/img/logo1.svg" />
 
     <script src="./scripts/submenus.js"></script>
     <script src="./scripts/templates.js"></script>
     <script src="scripts/databaseController.js"></script>
     <script src="./scripts/board.js"></script>
+    <script src="./scripts/boardDeleteContact.js"></script>
     <script src="scripts/contactsPage.js"></script>
     <script src="./scripts/contacts.js"></script>
     <script src="./scripts/utils.js"></script>
@@ -31,21 +32,34 @@
   </head>
   <body onload="load('contacts'), initContacts()">
     <header id="header" class="header"></header>
-    <dialog id="submenu_dialog" class="submenu_dialog" w3-include-html="./templates/submenu.html"></dialog>
+    <dialog
+      id="submenu_dialog"
+      class="submenu_dialog"
+      w3-include-html="./templates/submenu.html"
+    ></dialog>
     <div class="sidebar" id="sidebar"></div>
     <main class="contacts_main">
       <div id="contact_list_container" class="contact_list_container">
-        <div id="add_contact_container" class="add_contact_container" w3-include-html="./templates/desktopAddContactButton.html">
-        </div>
-        <dl id="contact_list" class="contact_list">
-        </dl>
+        <div
+          id="add_contact_container"
+          class="add_contact_container"
+          w3-include-html="./templates/desktopAddContactButton.html"
+        ></div>
+        <dl id="contact_list" class="contact_list"></dl>
       </div>
-      <div id="desktop_contact_details_container" class="desktop_contact_details_container">
-      </div>
-      <div id="mobile_contact_details_container" class="mobile_contact_details_container d-none">
-      </div>
+      <div
+        id="desktop_contact_details_container"
+        class="desktop_contact_details_container"
+      ></div>
+      <div
+        id="mobile_contact_details_container"
+        class="mobile_contact_details_container d-none"
+      ></div>
       <dialog id="contact_manage_dialog" class="contact_manage_dialog"></dialog>
-      <dialog id="contact_manage_submenu" class="contact_manage_submenu"></dialog>
+      <dialog
+        id="contact_manage_submenu"
+        class="contact_manage_submenu"
+      ></dialog>
       <ul id="notifications" class="notifications"></ul>
     </main>
     <div id="turn">
