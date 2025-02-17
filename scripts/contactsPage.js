@@ -108,14 +108,7 @@ function openContactDetails(contactId) {
 function initContactDetailsDesktop(contact) {
   let contactDetailsDesktopHtml = templateRenderContactDetailsDefault();
   if (contact != null) {
-    contactDetailsDesktopHtml += templateRenderContactDetailsForContact(
-      false,
-      contact.id,
-      contact.color,
-      contact.initials,
-      contact.name,
-      contact.mail,
-      contact.phone
+    contactDetailsDesktopHtml += templateRenderContactDetailsForContact(false, contact.id, contact.color, contact.initials, contact.name, contact.mail, contact.phone
     );
     let contactDetails = document.getElementById(CONSTANTS.SELECTORS.CONTACT_DETAILS_D);
     contactDetails.innerHTML = contactDetailsDesktopHtml;
