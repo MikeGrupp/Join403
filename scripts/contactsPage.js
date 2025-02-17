@@ -204,18 +204,13 @@ function closeContactManage() {
  *
  * @param {HTMLElement} element - The contact management dialog element
  */
-function addContactManageOutsideClickClosingListener(element) {
-  element.addEventListener("click", (e) => {
-    const elementDimensions = element.getBoundingClientRect();
-    if (
-      e.clientX < elementDimensions.left ||
-      e.clientX > elementDimensions.right ||
-      e.clientY < elementDimensions.top ||
-      e.clientY > elementDimensions.bottom
-    ) {
+function addContactManageOutsideClickClosingListener(el) {
+  el.addEventListener("click", (e) => {
+    const rect = el.getBoundingClientRect();
+    if (e.clientX < rect.left || e.clientX > rect.right || e.clientY < rect.top || e.clientY > rect.bottom) {
       document.documentElement.style.overflow = "auto";
       document.body.scroll = "yes";
-      element.close();
+      el.close();
     }
   });
 }
