@@ -1,27 +1,33 @@
 /**
+ * An array of color names
+ * 
+ * @type {string[]}
+ */
+const COLORS = [
+  "orange",
+  "pink",
+  "violet_blue",
+  "violet",
+  "blue_cerulean ",
+  "green_java ",
+  "red_bittersweet ",
+  "orange_tangerine ",
+  "pink_helitrope ",
+  "yellow_supernova ",
+  "blue_ribbon ",
+  "green_yellow ",
+  "yellow_sun ",
+  "red_coral ",
+  "yellow_sin ",
+  "purple_minsk",
+];
+
+/**
  * Randomly selects and returns a color from a predefined array of colors
  *
  * @returns {string} A randomly selected color name from the COLORS array
  */
 function selectRandomColor() {
-  const COLORS = [
-    "orange",
-    "pink",
-    "violet_blue",
-    "violet",
-    "blue_cerulean ",
-    "green_java ",
-    "red_bittersweet ",
-    "orange_tangerine ",
-    "pink_helitrope ",
-    "yellow_supernova ",
-    "blue_ribbon ",
-    "green_yellow ",
-    "yellow_sun ",
-    "red_coral ",
-    "yellow_sin ",
-    "purple_minsk",
-  ];
   let randomNumber = Math.floor(Math.random() * COLORS.length);
   return COLORS[randomNumber];
 }
