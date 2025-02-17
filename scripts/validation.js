@@ -1,49 +1,52 @@
 /**
  * Validation details for form fields containing error messages and associated field IDs
  *
- * @typedef {Object} ValidationDetail
- * @property {string} text - The error message to display
- * @property {string} field - The ID of the form field associated with this validation
+ * @typedef {Object} VALIDATION_DETAILS
+ * @property {string} TEXT - The error message to display
+ * @property {string} FIELD - The ID of the form field associated with this validation
+ * @constant
+ * @type {Object<string, VALIDATION_DETAILS>}
  */
-const validationDetails = {
-  invalidCredentials: {
-    text: "Check your email and password. Please try again.",
-    field: "password",
+const VALIDATION_DETAILS = {
+  INVALID_CONTACT_NAME: {
+    TEXT: "Please enter a valid contact name.",
+    FIELD: "contact_manage_name",
   },
-  invalidPasswordMatch: {
-    text: "Your passwords don't match. Please try again.",
-    field: "passwordConfirm",
+  INVALID_CONTACT_MAIL: {
+    TEXT: "Please enter a valid contact email.",
+    FIELD: "contact_manage_mail",
   },
-  invalidContactName: {
-    text: "Please enter a valid contact name.",
-    field: "contact_manage_name",
-  },
-  invalidContactMail: {
-    text: "Please enter a valid contact email.",
-    field: "contact_manage_mail",
-  },
-  invalidContactPhone: {
-    text: "Please enter a valid contact phone number.",
-    field: "contact_manage_phone",
+  INVALID_CONTACT_PHONE: {
+    TEXT: "Please enter a valid contact phone number.",
+    FIELD: "contact_manage_phone",
   },
 };
 
 /**
- * Validates contact form fields and controls submit button state
+ * Array to store current validation error messages
  *
- * @param {HTMLElement} nameField - The name input field element to validate
- * @param {HTMLElement} mailField - The email input field element to validate
- * @param {HTMLElement} phoneField - The phone input field element to validate
- * @returns {boolean} Returns true if all fields are valid, false otherwise
+ * @type {string[]}
  */
-function isContactValid(nameField, mailField, phoneField) {
-  removeCustomValidationMessage(mailField);
-  if (
-    isFieldValid(nameField, "invalidContactName") &&
-    isFieldValid(mailField, "invalidContactMail") &&
-    isValidEmailFormat(mailField, "invalidContactMail") &&
-    isFieldValid(phoneField, "invalidContactPhone")
-  ) {
+let currentValidationMessages = [];
+
+/**
+ * Validates the contact form fields (name, email, and phone)
+ *
+ * @param {HTMLInputElement} nameField - The input field for the contact name
+ * @param {HTMLInputElement} mailField - The input field for the contact email
+ * @param {HTMLInputElement} phoneField - The input field for the contact phone
+ * @param {boolean} fieldFocusCheck - A boolean indicating whether to check field focus
+ * @returns {boolean} True if the contact information is valid, false otherwise
+ */
+function isContactValid(nameField, mailField, phoneField, fieldFocusCheck) {
+  currentValidationMessages = [];
+  removeValidationMessage();
+  validateName(fieldFocusCheck, nameField);
+  validateMail(fieldFocusCheck, mailField);
+  validatePhone(phoneField);
+  if (currentValidationMessages.length > 0) {
+    displayFirstValidationMessage();
+  } else if (nameField.value !== "" && mailField.value !== "") {
     enableSubmitButton(true);
     return true;
   }
@@ -52,51 +55,112 @@ function isContactValid(nameField, mailField, phoneField) {
 }
 
 /**
- * Validates a single form field using HTML5 validation and custom validation rules
+ * Validates the contact name field
  *
- * @param {HTMLInputElement} field - The input field element to validate
- * @param {string} validationDetailsId - The key to look up validation details from validationDetails object
- * @returns {boolean} Returns true if the field is valid, false otherwise
+ * @param {boolean} fieldFocusCheck - A boolean indicating whether to check field focus
+ * @param {HTMLInputElement} nameField - The input field for the contact name
  */
-function isFieldValid(field, validationDetailsId) {
-  if (!field.checkValidity()) {
-    displayCustomValidationMessage(validationDetailsId);
-    return false;
+function validateName(fieldFocusCheck, nameField) {
+  if ((fieldFocusCheck && isFieldTouched(nameField)) || !fieldFocusCheck) {
+    if (!nameField.checkValidity()) {
+      currentValidationMessages.push(VALIDATION_DETAILS.INVALID_CONTACT_NAME.TEXT);
+    }
   }
-  removeValidationMessage();
-  return true;
 }
 
 /**
- * Validates if a form field contains a properly formatted email address.
+ * Validates the contact email field
+ *
+ * @param {boolean} fieldFocusCheck - A boolean indicating whether to check field focus
+ * @param {HTMLInputElement} mailField - The input field for the contact email
+ */
+function validateMail(fieldFocusCheck, mailField) {
+  removeCustomValidationMessage(mailField);
+  if ((fieldFocusCheck && isFieldTouched(mailField)) || !fieldFocusCheck) {
+    if (!(mailField.checkValidity() && isValidEmailFormat(mailField))) {
+      currentValidationMessages.push(VALIDATION_DETAILS.INVALID_CONTACT_MAIL.TEXT);
+    }
+  }
+}
+
+/**
+ * Validates the contact phone field
+ *
+ * @param {HTMLInputElement} phoneField - The input field for the contact phone
+ */
+function validatePhone(phoneField) {
+  removeCustomValidationMessage(phoneField);
+  if (phoneField.value !== "" && !(isFieldValid(phoneField) && isValidPhoneFormat(phoneField))) {
+    currentValidationMessages.push(VALIDATION_DETAILS.INVALID_CONTACT_PHONE.TEXT);
+  }
+}
+
+/**
+ * Checks if a field has been touched (focused by the user)
+ *
+ * @param {HTMLInputElement} field - The input field to check
+ * @returns {boolean} True if the field has been touched, false otherwise
+ */
+function isFieldTouched(field) {
+  return field.classList.contains("touched");
+}
+
+/**
+ * Validates a single form field using HTML5 validation
+ *
+ * @param {HTMLInputElement} field - The input field element to validate
+ * @returns {boolean} True if the field is valid, false otherwise
+ */
+function isFieldValid(field) {
+  return field.checkValidity();
+}
+
+/**
+ * Validates if a form field contains a properly formatted email address
  * The function checks using a regex pattern that ensures:
  * - Valid characters before @ (letters, numbers, and certain special characters)
  * - Valid domain name
  * - Top-level domain has at least 2 characters
- * 
+ *
  * @param {HTMLInputElement} field - The input field element to validate
- * @param {string} validationDetailsId - The ID of the element where validation messages will be displayed
- * @returns {boolean} Returns true if the email format is valid, false otherwise
+ * @returns {boolean} True if the email format is valid, false otherwise
  */
-function isValidEmailFormat(field, validationDetailsId) {
+function isValidEmailFormat(field) {
   let regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   if (!regex.test(field.value)) {
     field.setCustomValidity(" ");
-    displayCustomValidationMessage(validationDetailsId);
     return false;
   }
   field.setCustomValidity("");
-  removeValidationMessage();
   return true;
 }
 
 /**
- * Displays a custom validation message from the validationDetails object
+ * Validates if a form field contains a properly formatted phone number
+ * The function checks using a regex pattern that ensures:
+ * - An optional leading "+" sign.
+ * - An optional area code enclosed in parentheses with at least two digits.
+ * - Hyphens, spaces, or periods as separators.
+ * - At least four digits following the area code or the beginning if no area code.
  *
- * @param {string} validationMessageId - The key to look up the validation message in validationDetails
+ * @param {HTMLInputElement} field - The input field element to validate
+ * @returns {boolean} True if the phone format is valid, false otherwise
  */
-function displayCustomValidationMessage(validationMessageId) {
-  const message = validationDetails[validationMessageId].text;
+function isValidPhoneFormat(field) {
+  let regex = /^[\+]?[(]?[0-9]{2,}[)]?[-\s\.]?[0-9\s]{4,}$/;
+  if (!regex.test(field.value)) {
+    field.setCustomValidity(" ");
+    return false;
+  }
+  field.setCustomValidity("");
+  return true;
+}
+
+/**
+ * Displays the first validation error message
+ */
+function displayFirstValidationMessage() {
+  const message = currentValidationMessages.find((element) => element !== undefined);
   const logElement = document.getElementById("log");
   logElement.innerText = message;
 }
@@ -112,7 +176,7 @@ function removeValidationMessage() {
 /**
  * Removes any custom validation message set on a form field
  *
- * @param {HTMLElement} field - The field element to validate
+ * @param {HTMLInputElement} field - The field element to clear custom validity on
  */
 function removeCustomValidationMessage(field) {
   field.setCustomValidity("");
