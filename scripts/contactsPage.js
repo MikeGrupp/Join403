@@ -3,7 +3,6 @@
  */
 const CONSTANTS = {
   SELECTORS: {
-    CONTACT_LIST_CONTAINER: "contact_list_container",
     CONTACT_LIST: "contact_list",
     CONTACT_DETAILS_D: "desktop_contact_details_container",
     CONTACT_DETAILS_M: "mobile_contact_details_container",
@@ -256,7 +255,7 @@ async function addNewContact(event) {
   let mailInput = document.getElementById(CONSTANTS.SELECTORS.CONTACT_MAIL);
   let phoneInput = document.getElementById(CONSTANTS.SELECTORS.CONTACT_PHONE);
   await reloadContactsFromDatabase();
-  if (isContactValid(nameInput, mailInput, phoneInput)) {
+  if (isContactValid(nameInput, mailInput, phoneInput, false)) {
     let newContactId = await createNewContact(nameInput.value, mailInput.value, phoneInput.value);
     if (newContactId) {
       initContactList();
@@ -279,7 +278,7 @@ async function editContact(event, contactId) {
   let mailInput = document.getElementById(CONSTANTS.SELECTORS.CONTACT_MAIL);
   let phoneInput = document.getElementById(CONSTANTS.SELECTORS.CONTACT_PHONE);
   await reloadContactsFromDatabase();
-  if (isContactValid(nameInput, mailInput, phoneInput)) {
+  if (isContactValid(nameInput, mailInput, phoneInput, false)) {
     await editExistingContact(contactId, nameInput.value, mailInput.value, phoneInput.value);
     if (contactId) {
       resetForm(CONSTANTS.SELECTORS.CONTACT_FORM);
@@ -342,4 +341,16 @@ function addFormFocusListener(element) {
     element.classList.add('touched');
     validateContact(true);
   });
+}
+
+/**
+ * Validates the contact form by calling the `isContactValid` function with the appropriate field elements
+ *
+ * @param {boolean} fieldFocusCheck - A boolean indicating whether to check field focus
+ */
+function validateContact(fieldFocusCheck) {
+  let nameInput = document.getElementById(CONSTANTS.SELECTORS.CONTACT_NAME);
+  let mailInput = document.getElementById(CONSTANTS.SELECTORS.CONTACT_MAIL);
+  let phoneInput = document.getElementById(CONSTANTS.SELECTORS.CONTACT_PHONE);
+  isContactValid(nameInput, mailInput, phoneInput, fieldFocusCheck);
 }
