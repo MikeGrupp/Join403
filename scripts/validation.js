@@ -30,28 +30,58 @@ const VALIDATION_DETAILS = {
 let currentValidationMessages = [];
 
 /**
- * Validates the contact form fields (name, email, and phone)
+ * Validates the contact fields (name, email, and phone)
  *
- * @param {HTMLInputElement} nameField - The input field for the contact name
- * @param {HTMLInputElement} mailField - The input field for the contact email
- * @param {HTMLInputElement} phoneField - The input field for the contact phone
- * @param {boolean} fieldFocusCheck - A boolean indicating whether to check field focus
- * @returns {boolean} True if the contact information is valid, false otherwise
+ * @param {HTMLInputElement} nameField - The name input field
+ * @param {HTMLInputElement} mailField - The email input field
+ * @param {HTMLInputElement} phoneField - The phone input field
+ * @param {boolean} fieldFocusCheck - A boolean indicating whether to perform field focus checks
+ * @returns {boolean} True if all validations pass, false otherwise
  */
-function isContactValid(nameField, mailField, phoneField, fieldFocusCheck) {
+function validateContactFields(nameField, mailField, phoneField, fieldFocusCheck) {
   currentValidationMessages = [];
   removeValidationMessage();
   validateName(fieldFocusCheck, nameField);
   validateMail(fieldFocusCheck, mailField);
   validatePhone(phoneField);
-  if (currentValidationMessages.length > 0) {
-    displayFirstValidationMessage();
-  } else if (nameField.value !== "" && mailField.value !== "") {
+  return currentValidationMessages.length === 0;
+}
+
+/**
+ * Handles the logic for enabling/disabling the submit button
+ * based on the name and email field values
+ *
+ * @param {HTMLInputElement} nameField - The name input field
+ * @param {HTMLInputElement} mailField - The email input field
+ * @returns {boolean} True if both name and email have values, false otherwise
+ */
+function handleContactValidation(nameField, mailField) {
+  if (nameField.value !== "" && mailField.value !== "") {
     enableSubmitButton(true);
     return true;
   }
   enableSubmitButton(false);
   return false;
+}
+
+/**
+ * Checks if the contact form is valid, performing all necessary validations
+ * and handling the submit button state
+ *
+ * @param {HTMLInputElement} nameField - The name input field
+ * @param {HTMLInputElement} mailField - The email input field
+ * @param {HTMLInputElement} phoneField - The phone input field
+ * @param {boolean} fieldFocusCheck A boolean indicating whether to perform field focus checks
+ * @returns {boolean} True if the form is valid and ready for submission, false otherwise
+ */
+function isContactValid(nameField, mailField, phoneField, fieldFocusCheck) {
+  if (validateContactFields(nameField, mailField, phoneField, fieldFocusCheck)) {
+    return handleContactValidation(nameField, mailField);
+  } else {
+    displayFirstValidationMessage();
+    enableSubmitButton(false);
+    return false;
+  }
 }
 
 /**

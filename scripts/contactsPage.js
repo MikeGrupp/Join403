@@ -32,27 +32,34 @@ async function initContacts() {
 }
 
 /**
- * Initializes the contact list by sorting contacts alphabetically and rendering them into the DOM
+ * Initializes the contact list by retrieving stored contacts, sorting them alphabetically,
+ * rendering the list HTML, and updating the contact list element in the DOM
  */
 function initContactList() {
-  let sortedContacts = getStoredContacts().sort((a, b) => a.name.localeCompare(b.name));
+  const sortedContacts = getStoredContacts().sort((a, b) => a.name.localeCompare(b.name));
+  const contactListHtml = renderContactList(sortedContacts);
+  document.getElementById(CONSTANTS.SELECTORS.CONTACT_LIST).innerHTML = contactListHtml;
+}
+
+/**
+ * Renders the HTML for the contact list based on the provided array of contacts
+ *
+ * @param {Array<Object>} contacts - An array of contact objects, each with properties like
+ *                                 `id`, `color`, `initials`, `name`, and `mail`
+ * @returns {string} The HTML string representing the rendered contact list
+ */
+function renderContactList(contacts) {
   let contactListHtml = "";
   let currentFirstLetter = "";
-  sortedContacts.forEach((contact) => {
-    if (currentFirstLetter != contact.name[0].toUpperCase()) {
-      currentFirstLetter = contact.name[0].toUpperCase();
+  contacts.forEach((contact) => {
+    const firstLetter = contact.name[0].toUpperCase();
+    if (currentFirstLetter !== firstLetter) {
+      currentFirstLetter = firstLetter;
       contactListHtml += templateRenderContactListLetter(currentFirstLetter);
     }
-    contactListHtml += templateRenderContactListEntry(
-      contact.id,
-      contact.color,
-      contact.initials,
-      contact.name,
-      contact.mail
-    );
+    contactListHtml += templateRenderContactListEntry(contact.id, contact.color, contact.initials, contact.name, contact.mail);
   });
-  let contactList = document.getElementById(CONSTANTS.SELECTORS.CONTACT_LIST);
-  contactList.innerHTML = contactListHtml;
+  return contactListHtml;
 }
 
 /**
@@ -101,14 +108,7 @@ function openContactDetails(contactId) {
 function initContactDetailsDesktop(contact) {
   let contactDetailsDesktopHtml = templateRenderContactDetailsDefault();
   if (contact != null) {
-    contactDetailsDesktopHtml += templateRenderContactDetailsForContact(
-      false,
-      contact.id,
-      contact.color,
-      contact.initials,
-      contact.name,
-      contact.mail,
-      contact.phone
+    contactDetailsDesktopHtml += templateRenderContactDetailsForContact(false, contact.id, contact.color, contact.initials, contact.name, contact.mail, contact.phone
     );
     let contactDetails = document.getElementById(CONSTANTS.SELECTORS.CONTACT_DETAILS_D);
     contactDetails.innerHTML = contactDetailsDesktopHtml;
@@ -123,15 +123,7 @@ function initContactDetailsDesktop(contact) {
 function initContactDetailsMobile(contact) {
   let contactDetailsMobileHtml = templateRenderContactDetailsDefault();
   if (contact != null) {
-    contactDetailsMobileHtml += templateRenderContactDetailsForContact(
-      true,
-      contact.id,
-      contact.color,
-      contact.initials,
-      contact.name,
-      contact.mail,
-      contact.phone
-    );
+    contactDetailsMobileHtml += templateRenderContactDetailsForContact(true, contact.id, contact.color, contact.initials, contact.name, contact.mail, contact.phone);
     let contactDetailsMobile = document.getElementById(CONSTANTS.SELECTORS.CONTACT_DETAILS_M);
     contactDetailsMobile.innerHTML = contactDetailsMobileHtml;
     initContactManageSubmenu(contact.id);
@@ -212,18 +204,13 @@ function closeContactManage() {
  *
  * @param {HTMLElement} element - The contact management dialog element
  */
-function addContactManageOutsideClickClosingListener(element) {
-  element.addEventListener("click", (e) => {
-    const elementDimensions = element.getBoundingClientRect();
-    if (
-      e.clientX < elementDimensions.left ||
-      e.clientX > elementDimensions.right ||
-      e.clientY < elementDimensions.top ||
-      e.clientY > elementDimensions.bottom
-    ) {
+function addContactManageOutsideClickClosingListener(el) {
+  el.addEventListener("click", (e) => {
+    const rect = el.getBoundingClientRect();
+    if (e.clientX < rect.left || e.clientX > rect.right || e.clientY < rect.top || e.clientY > rect.bottom) {
       document.documentElement.style.overflow = "auto";
       document.body.scroll = "yes";
-      element.close();
+      el.close();
     }
   });
 }
@@ -256,12 +243,24 @@ async function addNewContact(event) {
   let phoneInput = document.getElementById(CONSTANTS.SELECTORS.CONTACT_PHONE);
   await reloadContactsFromDatabase();
   if (isContactValid(nameInput, mailInput, phoneInput, false)) {
-    let newContactId = await createNewContact(nameInput.value, mailInput.value, phoneInput.value);
-    if (newContactId) {
-      initContactList();
-      closeContactManage();
-      openContactDetails(newContactId);
-    }
+    await createAndOpenContact(nameInput, mailInput, phoneInput);
+  }
+}
+
+/**
+ * Creates a new contact and opens its details in the UI
+ *
+ * @async
+ * @param {HTMLInputElement} nameInput - The input element for the contact's name
+ * @param {HTMLInputElement} mailInput - The input element for the contact's email
+ * @param {HTMLInputElement} phoneInput - The input element for the contact's phone number
+ */
+async function createAndOpenContact(nameInput, mailInput, phoneInput) {
+  const newContactId = await createNewContact(nameInput.value, mailInput.value, phoneInput.value);
+  if (newContactId) {
+    initContactList();
+    closeContactManage();
+    openContactDetails(newContactId);
   }
 }
 
@@ -274,20 +273,33 @@ async function addNewContact(event) {
  */
 async function editContact(event, contactId) {
   event.preventDefault();
-  let nameInput = document.getElementById(CONSTANTS.SELECTORS.CONTACT_NAME);
-  let mailInput = document.getElementById(CONSTANTS.SELECTORS.CONTACT_MAIL);
-  let phoneInput = document.getElementById(CONSTANTS.SELECTORS.CONTACT_PHONE);
+  const nameInput = document.getElementById(CONSTANTS.SELECTORS.CONTACT_NAME);
+  const mailInput = document.getElementById(CONSTANTS.SELECTORS.CONTACT_MAIL);
+  const phoneInput = document.getElementById(CONSTANTS.SELECTORS.CONTACT_PHONE);
   await reloadContactsFromDatabase();
   if (isContactValid(nameInput, mailInput, phoneInput, false)) {
-    await editExistingContact(contactId, nameInput.value, mailInput.value, phoneInput.value);
-    if (contactId) {
-      resetForm(CONSTANTS.SELECTORS.CONTACT_FORM);
-      createToast("successEditContact");
-      initContactList();
-      closeContactManage();
-      closeSubmenu(CONSTANTS.SELECTORS.CONTACT_MANAGE_SUBMENU);
-      openContactDetails(contactId);
-    }
+    await editAndOpenContact(contactId, nameInput, mailInput, phoneInput);
+  }
+}
+
+/**
+ * Edits an existing contact and opens its details in the UI
+ *
+ * @async
+ * @param {number} contactId - The ID of the contact to edit
+ * @param {HTMLInputElement} nameInput - The input element for the contact's name
+ * @param {HTMLInputElement} mailInput - The input element for the contact's email
+ * @param {HTMLInputElement} phoneInput - The input element for the contact's phone number
+ */
+async function editAndOpenContact(contactId, nameInput, mailInput, phoneInput) {
+  await editExistingContact(contactId, nameInput.value, mailInput.value, phoneInput.value);
+  if (contactId) {
+    resetForm(CONSTANTS.SELECTORS.CONTACT_FORM);
+    createToast("successEditContact");
+    initContactList();
+    closeContactManage();
+    closeSubmenu(CONSTANTS.SELECTORS.CONTACT_MANAGE_SUBMENU);
+    openContactDetails(contactId);
   }
 }
 
