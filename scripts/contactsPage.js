@@ -175,6 +175,7 @@ function openContactManage() {
   let modal = document.getElementById(CONSTANTS.SELECTORS.CONTACT_DIALOG);
   addContactManageOutsideClickClosingListener(modal);
   addContactManageEscapeListener(modal);
+  addContactFieldsFocusListeners();
   modal.showModal();
 }
 
@@ -318,4 +319,27 @@ function fillContactFields(contact) {
   document.getElementById(CONSTANTS.SELECTORS.CONTACT_NAME).value = contact.name;
   document.getElementById(CONSTANTS.SELECTORS.CONTACT_MAIL).value = contact.mail;
   document.getElementById(CONSTANTS.SELECTORS.CONTACT_PHONE).value = contact.phone;
+}
+
+/**
+ * Adds focus listeners to the contact name, email, and phone input fields
+ * When these fields gain focus, the 'touched' class is added to them
+ */
+function addContactFieldsFocusListeners() {
+  addFormFocusListener(document.getElementById(CONSTANTS.SELECTORS.CONTACT_NAME));
+  addFormFocusListener(document.getElementById(CONSTANTS.SELECTORS.CONTACT_MAIL));
+  addFormFocusListener(document.getElementById(CONSTANTS.SELECTORS.CONTACT_PHONE));
+}
+
+/**
+ * Adds a focus listener to the given element
+ * When the element gains focus, the 'touched' class is added to it
+ *
+ * @param {HTMLElement} element - The HTML element to add the focus listener to
+ */
+function addFormFocusListener(element) {
+  element.addEventListener('focus', () => {
+    element.classList.add('touched');
+    validateContact(true);
+  });
 }
