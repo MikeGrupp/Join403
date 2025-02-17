@@ -243,12 +243,24 @@ async function addNewContact(event) {
   let phoneInput = document.getElementById(CONSTANTS.SELECTORS.CONTACT_PHONE);
   await reloadContactsFromDatabase();
   if (isContactValid(nameInput, mailInput, phoneInput, false)) {
-    let newContactId = await createNewContact(nameInput.value, mailInput.value, phoneInput.value);
-    if (newContactId) {
-      initContactList();
-      closeContactManage();
-      openContactDetails(newContactId);
-    }
+    await createAndOpenContact(nameInput, mailInput, phoneInput);
+  }
+}
+
+/**
+ * Creates a new contact and opens its details in the UI
+ *
+ * @async
+ * @param {HTMLInputElement} nameInput - The input element for the contact's name
+ * @param {HTMLInputElement} mailInput - The input element for the contact's email
+ * @param {HTMLInputElement} phoneInput - The input element for the contact's phone number
+ */
+async function createAndOpenContact(nameInput, mailInput, phoneInput) {
+  const newContactId = await createNewContact(nameInput.value, mailInput.value, phoneInput.value);
+  if (newContactId) {
+    initContactList();
+    closeContactManage();
+    openContactDetails(newContactId);
   }
 }
 
