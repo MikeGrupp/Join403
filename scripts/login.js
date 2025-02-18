@@ -32,25 +32,58 @@ function msgRender() {
 }
 
 /**
+ * Gets form elements from the DOM
+ * 
+ * @returns {Object} Object containing form elements
+ */
+function getLoginFormElements() {
+  return {
+    email: document.getElementById("email"),
+    password: document.getElementById("password"),
+    rememberMe: document.getElementById("rememberLogin")
+  };
+}
+
+/**
+ * Validates user credentials against stored users
+ * 
+ * @param {string} email - User email
+ * @param {string} password - User password
+ * @param {Array} users - Array of stored users
+ * @returns {Object|null} Found user or null
+ */
+function validateUser(email, password, users) {
+  return users.find((u) => u.email === email && u.password === password);
+}
+
+/**
+ * Handles remember me functionality
+ * 
+ * @param {boolean} isChecked - Remember me checkbox state
+ * @param {string} email - User email
+ * @param {string} password - User password
+ */
+function handleRememberMe(isChecked, email, password) {
+  if (isChecked) {
+    rememberMyLogin(email, password);
+  } else {
+    removeMyLogin();
+  }
+}
+
+/**
  * Handles user login
  *
  * @async
  */
 async function login() {
-  let email = document.getElementById("email");
-  let password = document.getElementById("password");
-  let rememberMe = document.getElementById("rememberLogin");
+  const { email, password, rememberMe } = getLoginFormElements();
   let login = false;
   setStoredUsers(await loadUsers());
-  let user = storedUsers.find((u) => u.email === email.value && u.password === password.value);
+  const user = validateUser(email.value, password.value, storedUsers);
   if (user) {
     login = true;
-    if (rememberMe.checked === true) {
-      rememberMyLogin(email.value, password.value);
-    }
-  }
-  if (rememberMe.checked === false) {
-    removeMyLogin();
+    handleRememberMe(rememberMe.checked, email.value, password.value);
   }
   checkLogin(login);
 }
@@ -195,7 +228,6 @@ function mapUsersJson(json) {
  */
 function togglePassword(inputId, imgId) {
   let iptPassword = document.getElementById(inputId);
-
   if (iptPassword.value !== "") {
     if (iptPassword.type === "password") {
       iptPassword.type = "text";
