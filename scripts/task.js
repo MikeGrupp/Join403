@@ -113,32 +113,67 @@ function renderCategory(input) {
 }
 
 /**
- * Clears the input fields and resets the state of the add task form
+ * Clears the input fields for task details
  */
-function clearAddTask() {
+function clearTaskInputs() {
   document.getElementById("addTaskTitle").value = "";
   document.getElementById("addTaskDescription").value = "";
   document.getElementById("addTaskDate").value = "";
   document.getElementById("addTaskAssignedTo").value = "";
-  reRenderSubtask();
+}
+
+/**
+ * Resets the assigned contacts and checkboxes
+ */
+function resetAssignedContacts() {
   for (let i = 0; i < contactIds.length; i++) {
     let contactId = contactIds[i];
     let currentCheckBox = document.getElementById("checkbox" + contactId);
-    currentCheckBox.checked = true ? currentCheckBox.checked = false : "";
+    currentCheckBox.checked = false;
   }
   assignedContacts = [];
   renderAddTaskAssignedContacts();
+}
+
+/**
+ * Resets task priority, category, and subtasks
+ */
+function resetTaskProperties() {
   renderPrio("medium");
   renderCategory("Select Task Category");
   category = "";
   addTaskSubtasks = [];
   renderSubtaskContainer();
+}
+
+/**
+ * Clears validation error styles
+ */
+function clearValidationErrorStyles() {
   document.getElementById("addTaskTitle").classList.remove("border_red");
   document.getElementById("addTaskDate").classList.remove("border_red");
   document.getElementById("addTaskCategory").classList.remove("border_red");
+}
+
+/**
+ * Hides required field error messages
+ */
+function hideRequiredFieldErrors() {
   document.getElementById("addTaskRequiredTitle").classList.add("d-none");
   document.getElementById("addTaskRequiredDueDate").classList.add("d-none");
   document.getElementById("addTaskRequiredCategory").classList.add("d-none");
+}
+
+/**
+ * Clears the add task form and resets its state
+ */
+function clearAddTask() {
+  clearTaskInputs();
+  reRenderSubtask();
+  resetAssignedContacts();
+  resetTaskProperties();
+  clearValidationErrorStyles();
+  hideRequiredFieldErrors();
 }
 
 document
