@@ -31,7 +31,8 @@
   }
 
   .contact_list_container {
-    width: calc(330px - 14px);
+    width: calc(350px - 14px);
+    padding-left: 0;
   }
 
   .contact_list {
@@ -42,7 +43,7 @@
 
   .contact_list .list_letter {
     height: calc(40px - (2 * 8px));
-    padding: 8px 18px 8px 18px;
+    padding: 8px 18px 8px 25px;
   }
 
   .contact_list .list_letter:first-child {
@@ -345,14 +346,14 @@
   }
 
   .contact_list {
-    width: calc(296px - (2 * 12px));
-    padding: 0 12px 16px 12px;
+    width: calc(270px - (2 * 8px));
+    padding: 0 8px 16px 8px;
     font-size: 16px;
   }
 
   .contact_list .list_letter {
     height: calc(40px - (2 * 8px));
-    padding: 8px 18px 8px 18px;
+    padding: 8px 8px 8px 28px;
   }
 
   .contact_list .list_letter:first-child {
@@ -361,7 +362,7 @@
 
   .contact_list dd .contact {
     height: 64px;
-    padding: 8px 12px 8px 12px;
+    padding: 8px 8px 8px 18px;
     font-size: 16px;
     gap: 8px;
   }
@@ -382,7 +383,8 @@
 
   .add_contact_container {
     height: 80px;
-    padding-left: 12px;
+    padding-left: 8px;
+    padding-right: 8px;
   }
 
   .add_contact {
