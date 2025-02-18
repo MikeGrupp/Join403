@@ -9,29 +9,65 @@ let validation = false;
  * Adds a new task
  *
  * @async
- * @param {string} side - Indicates whether the task is added from the board or the add task page ("board" or "addTask")
+ * @param {string} site - Indicates whether the task is added from the board or the add task page ("board" or "addTask")
  */
-async function addTask(side) {
+async function addTask(site) {
   addTaskValidation();
-  if (validation) {
-    await postTask();
-    tasks = await loadData("tasks/");
-    fetchTaskIds();
-    let taskId = tasksIds[tasksIds.length - 1];
-    await postSubtask(taskId);
-    await postAssignedAccounts(taskId);
-    clearAddTask();
-    if (side === "board") {
-      tasksIds = [];
-      fetchTaskIds();
-      taskMoveBack("addTaskBoard", "addTaskBoardBg");
-      reRenderBoard();
-    }
-    createToast("successNewTask");
-    if (side === "addTask") {
-      setTimeout(() => window.location.href = "./board.html", 925);
-    }
+  if (!validation) {
+    return;
   }
+  const taskId = await createTaskWithSubtasks();
+  handlePostTaskSuccess(site, taskId);
+}
+
+/**
+* Creates a new task and its associated subtasks
+* 
+* @async
+* @returns {string} The ID of the created task
+*/
+async function createTaskWithSubtasks() {
+  await postTask();
+  tasks = await loadData("tasks/");
+  fetchTaskIds();
+  const taskId = tasksIds[tasksIds.length - 1];
+  await postSubtask(taskId);
+  await postAssignedAccounts(taskId);
+  return taskId;
+}
+
+/**
+* Handles successful task creation
+* 
+* @async
+* @param {string} site - The site where the task was added from
+* @param {string} taskId - The ID of the created task
+*/
+async function handlePostTaskSuccess(site, taskId) {
+  clearAddTask();
+  if (site === "board") {
+      handleBoardSiteSuccess();
+  } else if (site === "addTask") {
+      handleAddTaskSiteSuccess();
+  }
+  createToast("successNewTask");
+}
+
+/**
+* Handles success specifically for board site additions
+*/
+function handleBoardSiteSuccess() {
+  tasksIds = [];
+  fetchTaskIds();
+  taskMoveBack("addTaskBoard", "addTaskBoardBg");
+  reRenderBoard();
+}
+
+/**
+* Handles success specifically for add task page additions
+*/
+function handleAddTaskSiteSuccess() {
+  setTimeout(() => window.location.href = "./board.html", 925);
 }
 
 /**
