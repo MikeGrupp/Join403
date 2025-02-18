@@ -71,25 +71,61 @@ function handleAddTaskSiteSuccess() {
 }
 
 /**
- * Validates the input fields for adding a new task
- * Checks if the title, due date, and category are filled
- * Displays error messages and highlights invalid fields if necessary
+ * Validates the task title
+ * 
+ * @returns {boolean} True if valid, false otherwise
  */
-function addTaskValidation() {
+function validateTitle() {
   let title = document.getElementById("addTaskTitle").value;
-  let dueDate = document.getElementById("addTaskDate").value;
   if (title === "") {
     dNone("addTaskRequiredTitle");
     document.getElementById("addTaskTitle").classList.add("border_red");
-  } else if (dueDate === "") {
+    return false;
+  }
+  return true;
+}
+
+/**
+ * Validates the task due date
+ * 
+ * @returns {boolean} True if valid, false otherwise
+ */
+function validateDueDate() {
+  let dueDate = document.getElementById("addTaskDate").value;
+  if (dueDate === "") {
     dNone("addTaskRequiredDueDate");
     document.getElementById("addTaskDate").classList.add("border_red");
-  } else if (category === "") {
+    return false;
+  }
+  return true;
+}
+
+
+/**
+ * Validates the task category
+ * 
+ * @returns {boolean} True if valid, false otherwise
+ */
+function validateCategory() {
+  let category = document.getElementById("addTaskCategory").value;
+  if (category === "") {
     dNone("addTaskRequiredCategory");
     document.getElementById("addTaskCategory").classList.add("border_red");
-  } else {
-    validation = true;
+    return false;
   }
+  return true;
+}
+
+/**
+ * Validates all input fields for adding a new task
+ * 
+ * @returns {boolean} True if all fields are valid, false otherwise
+ */
+function addTaskValidation() {
+  let isValidTitle = validateTitle();
+  let isValidDueDate = validateDueDate();
+  let isValidCategory = validateCategory();
+  return isValidTitle && isValidDueDate && isValidCategory;
 }
 
 /**
