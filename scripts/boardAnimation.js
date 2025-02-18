@@ -4,33 +4,36 @@
  * @param {string} div - The ID of the task container
  */
 function taskMoveForward(div) {
-  let id = null;
   let container = document.getElementById(div);
-  let pos = 0;
   let position = calculatePosition(div);
-  clearInterval(id);
-  id = setInterval(frame, 1);
   if (div === "addTaskBoard" && window.innerWidth < 767) {
     window.open("task.html");
     window.close();
+    return;
   }
-  function frame() {
+  frameMoveForward(container, position, div);
+}
+
+/**
+ * Animates the task container movement
+ * @param {HTMLElement} container - The task container element
+ * @param {number} position - The target position
+ * @param {string} div - The ID of the task container
+ */
+function frameMoveForward(container, position, div) {
+  let pos = 0;
+  let id = setInterval(() => {
     if (pos == position) {
       clearInterval(id);
     } else {
       pos++;
-      if (div === "taskDetail") {
-        container.style.right = pos + "vw";
-      }
-      if (div === "addTaskBoard") {
-        container.style.right = "calc(" + pos + "vw - 384px)";
-      }
+      container.style.right = div === "taskDetail" ? pos + "vw" : "calc(" + pos + "vw - 384px)";
     }
-  }
+  }, 1);
 }
 
 /**
- * Calculates the target position for the container based on its ID and screen width.
+ * Calculates the target position for the container based on its ID and screen width
  * @param {string} div - The ID of the task container
  * @returns {number} - The target position
  */
@@ -53,28 +56,32 @@ function calculatePosition(div) {
  * @param {string} bgDiv - The ID of the background div
  */
 function taskMoveBack(div, bgDiv) {
-  let id = null;
   let container = document.getElementById(div);
-  let pos = 0;
   let position = calculatePosition(div);
-  clearInterval(id);
-  id = setInterval(frame, 1);
   if (div === "addTaskBoard" && window.innerWidth < 767) {
     window.open("task.html");
     window.close();
+    return;
   }
-  function frame() {
+  frameMoveBack(container, position, div, bgDiv);
+}
+
+/**
+ * Animates the task container movement
+ * @param {HTMLElement} container - The task container element
+ * @param {number} position - The target position
+ * @param {string} div - The ID of the task container
+ * @param {string} bgDiv - The ID of the background div
+ */
+function frameMoveBack(container, position, div, bgDiv) {
+  let pos = 0;
+  let id = setInterval(() => {
     if (pos == position) {
       clearInterval(id);
       dNone(bgDiv);
     } else {
       pos++;
-      if (div === "taskDetail") {
-        container.style.right = -pos + "vw";
-      }
-      if (div === "addTaskBoard") {
-        container.style.right = "calc( -" + pos + "vw - 384px)";
-      }
+      container.style.right = div === "taskDetail" ? -pos + "vw" : "calc( -" + pos + "vw - 384px)";
     }
-  }
+  }, 1);
 }

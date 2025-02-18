@@ -71,8 +71,7 @@ function goToBoard() {
  * @returns {string} The greeting message
  */
 function createGreeting() {
-  const d = new Date();
-  let hour = d.getHours();
+  let hour = new Date().getHours();
   let greeting = "";
   if (hour >= 12 && hour < 18) {
     greeting = "Good afternoon,";
@@ -143,24 +142,37 @@ function setStoredTasks(tasks) {
  */
 function renderSummary() {
   let progressCards = document.getElementById("progressCards");
-  let amountTasks = storedTasks.length;
-  let amountTodo = todoTasks.length;
-  let amountInProgress = inProgressTasks.length;
-  let amountFeedback = feedbackTasks.length;
-  let amountDone = doneTasks.length;
-  let amountUrgent = urgentTasks.length;
-  let deadline = getNextDeadline();
-
   progressCards.innerHTML = templateRenderSummary(
-    amountTasks,
-    amountTodo,
-    amountInProgress,
-    amountFeedback,
-    amountDone,
-    amountUrgent,
-    deadline
+    storedTasks.length,
+    todoTasks.length,
+    inProgressTasks.length,
+    feedbackTasks.length,
+    doneTasks.length,
+    urgentTasks.length,
+    getNextDeadline()
   );
 }
+
+/**
+ * An array of month names
+ * 
+ * @constant
+ * @type {string[]}
+ */
+const MONTHS = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
 
 /**
  * Formats a date string into a readable format
@@ -169,24 +181,9 @@ function renderSummary() {
  * @returns {string} The formatted date string in 'DD Month YYYY' format
  */
 function formatDate(dueDate) {
-  const months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
-
   let [day, month, year] = dueDate.split("/");
   month = parseInt(month, 10) - 1;
-  return `${day} ${months[month]} ${year}`;
+  return `${day} ${MONTHS[month]} ${year}`;
 }
 
 /**
@@ -208,13 +205,11 @@ function filterTasks() {
 function getNextDeadline() {
   const today = new Date();
   today.setHours(0, 0, 0, 0);
-
   let upcomingTasks = storedTasks
     .filter(task => task.step !== "Done" && task.dueDate)
     .map(task => ({ ...task, parsedDate: new Date(task.dueDate.split('/').reverse().join('-')) }))
     .filter(task => task.parsedDate >= today)
     .sort((a, b) => a.parsedDate - b.parsedDate);
-
   if (!upcomingTasks.length) {
     return "No coming Deadlines!";
   }

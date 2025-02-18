@@ -9,51 +9,123 @@ let validation = false;
  * Adds a new task
  *
  * @async
- * @param {string} side - Indicates whether the task is added from the board or the add task page ("board" or "addTask")
+ * @param {string} site - Indicates whether the task is added from the board or the add task page ("board" or "addTask")
  */
-async function addTask(side) {
+async function addTask(site) {
   addTaskValidation();
-  if (validation) {
-    await postTask();
-    tasks = await loadData("tasks/");
-    fetchTaskIds();
-    let taskId = tasksIds[tasksIds.length - 1];
-    await postSubtask(taskId);
-    await postAssignedAccounts(taskId);
-    clearAddTask();
-    if (side === "board") {
-      tasksIds = [];
-      fetchTaskIds();
-      taskMoveBack("addTaskBoard", "addTaskBoardBg");
-      reRenderBoard();
-    }
-    createToast("successNewTask");
-    if (side === "addTask") {
-      setTimeout(() => window.location.href = "./board.html", 925);
-    }
+  if (!validation) {
+    return;
   }
+  const taskId = await createTaskWithSubtasks();
+  handlePostTaskSuccess(site, taskId);
 }
 
 /**
- * Validates the input fields for adding a new task
- * Checks if the title, due date, and category are filled
- * Displays error messages and highlights invalid fields if necessary
+* Creates a new task and its associated subtasks
+* 
+* @async
+* @returns {string} The ID of the created task
+*/
+async function createTaskWithSubtasks() {
+  await postTask();
+  tasks = await loadData("tasks/");
+  fetchTaskIds();
+  const taskId = tasksIds[tasksIds.length - 1];
+  await postSubtask(taskId);
+  await postAssignedAccounts(taskId);
+  return taskId;
+}
+
+/**
+* Handles successful task creation
+* 
+* @async
+* @param {string} site - The site where the task was added from
+* @param {string} taskId - The ID of the created task
+*/
+async function handlePostTaskSuccess(site, taskId) {
+  clearAddTask();
+  if (site === "board") {
+      handleBoardSiteSuccess();
+  } else if (site === "addTask") {
+      handleAddTaskSiteSuccess();
+  }
+  createToast("successNewTask");
+}
+
+/**
+* Handles success specifically for board site additions
+*/
+function handleBoardSiteSuccess() {
+  tasksIds = [];
+  fetchTaskIds();
+  taskMoveBack("addTaskBoard", "addTaskBoardBg");
+  reRenderBoard();
+}
+
+/**
+* Handles success specifically for add task page additions
+*/
+function handleAddTaskSiteSuccess() {
+  setTimeout(() => window.location.href = "./board.html", 925);
+}
+
+/**
+ * Validates the task title
+ * 
+ * @returns {boolean} True if valid, false otherwise
  */
-function addTaskValidation() {
+function validateTitle() {
   let title = document.getElementById("addTaskTitle").value;
-  let dueDate = document.getElementById("addTaskDate").value;
   if (title === "") {
     dNone("addTaskRequiredTitle");
     document.getElementById("addTaskTitle").classList.add("border_red");
-  } else if (dueDate === "") {
+    return false;
+  }
+  return true;
+}
+
+/**
+ * Validates the task due date
+ * 
+ * @returns {boolean} True if valid, false otherwise
+ */
+function validateDueDate() {
+  let dueDate = document.getElementById("addTaskDate").value;
+  if (dueDate === "") {
     dNone("addTaskRequiredDueDate");
     document.getElementById("addTaskDate").classList.add("border_red");
-  } else if (category === "") {
+    return false;
+  }
+  return true;
+}
+
+
+/**
+ * Validates the task category
+ * 
+ * @returns {boolean} True if valid, false otherwise
+ */
+function validateCategory() {
+  let category = document.getElementById("addTaskCategory").value;
+  if (category === "") {
     dNone("addTaskRequiredCategory");
     document.getElementById("addTaskCategory").classList.add("border_red");
-  } else {
-    validation = true;
+    return false;
   }
+  return true;
+}
+
+/**
+ * Validates all input fields for adding a new task
+ * 
+ * @returns {boolean} True if all fields are valid, false otherwise
+ */
+function addTaskValidation() {
+  let isValidTitle = validateTitle();
+  let isValidDueDate = validateDueDate();
+  let isValidCategory = validateCategory();
+  return isValidTitle && isValidDueDate && isValidCategory;
 }
 
 /**
