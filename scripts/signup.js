@@ -12,30 +12,56 @@ async function addUser() {
 }
 
 /**
- * Validates user signup details and handles user registration.
- * @param {HTMLElement} name - The name input field.
- * @param {HTMLElement} email - The email input field.
- * @param {HTMLElement} password - The password input field.
- * @param {HTMLElement} passwordConfirm - The password confirmation input field.
- * @param {string} initials - The user's initials.
+ * Main signup validation and registration handler
+ * 
+ * @param {HTMLElement} name - The name input field
+ * @param {HTMLElement} email - The email input field
+ * @param {HTMLElement} password - The password input field
+ * @param {HTMLElement} passwordConfirm - The password confirmation input field
+ * @param {string} initials - The user's initials
  */
 async function signupValidation(name, email, password, passwordConfirm, initials) {
-    if (password.value === passwordConfirm.value) {
-        let check = await checkUserEmail();
-        if (check === true) {
-            if (validateEmail(email.value) === true) {
-                let newContactId = await postData("/contacts", { name: name.value, initials: initials, mail: email.value, phone: '', color: selectRandomColor() });
-                postData("users", { "name": name.value, "email": email.value, "password": password.value, "assignedContact": newContactId, "initials": initials });
-                window.location.href = 'login.html?msg=successSignup';
-            } else {
-                postMsg(`Please enter a valid contact email.`)
-            }
-        } else {
-            postMsg(`This Email is already in use, please use another.`);
-        }
-    } else {
-        postMsg(`Your passwords don't match, please try again.`)
+    if (password.value !== passwordConfirm.value) {
+        return postMsg(`Your passwords don't match, please try again.`);
     }
+    const isValidSignup = await validateSignupDetails(email);
+    if (!isValidSignup) {
+        return;
+    }
+    await createUserAccount(name, email, password, initials);
+}
+
+/**
+ * Validates the signup details including email format and availability
+ * 
+ * @param {HTMLElement} email - The email input field
+ * @returns {Promise<boolean>} Whether the signup details are valid
+ */
+async function validateSignupDetails(email) {
+    const isEmailAvailable = await checkUserEmail();
+    if (!isEmailAvailable) {
+        postMsg(`This Email is already in use, please use another.`);
+        return false;
+    }
+    if (!validateEmail(email.value)) {
+        postMsg(`Please enter a valid contact email.`);
+        return false;
+    }
+    return true;
+}
+
+/**
+ * Creates user account and associated contact
+ * 
+ * @param {HTMLElement} name - The name input field
+ * @param {HTMLElement} email - The email input field
+ * @param {HTMLElement} password - The password input field
+ * @param {string} initials - The user's initials
+ */
+async function createUserAccount(name, email, password, initials) {
+    const newContactId = await postData("/contacts", {name: name.value, initials: initials, mail: email.value, phone: '', color: selectRandomColor()});
+    await postData("users", {name: name.value, email: email.value, password: password.value, assignedContact: newContactId, initials: initials});
+    window.location.href = 'login.html?msg=successSignup';
 }
 
 /**
@@ -84,9 +110,7 @@ function checkFormInputs() {
     const password = document.getElementById('password').value;
     const passwordConfirm = document.getElementById('passwordConfirm').value;
     const policy = document.getElementById('privacyPolicy').checked;
-
     const submitButton = document.getElementById('submitButton');
-
     if (name && email && password && passwordConfirm && policy) {
         submitButton.disabled = false;
     } else {
