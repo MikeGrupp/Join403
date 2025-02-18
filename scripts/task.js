@@ -80,25 +80,63 @@ function rotate90(id) {
 }
 
 /**
+ * Renders the priority selection UI container
+ */
+function renderPrioContainer() {
+  let container = document.getElementById("prioContainer");
+  container.innerHTML = templateRenderPrio();
+}
+
+/**
+ * Sets up the priority data
+ * 
+ * @returns {object} - An object containing priority information
+ */
+function getPrioData() {
+  return {
+    low: { img: "Prio baja.svg", class: "addTask_prio_focus_low" },
+    medium: { img: "Prio media.svg", class: "addTask_prio_focus_medium" },
+    urgent: { img: "Prio alta.svg", class: "addTask_prio_focus_urgent" }
+  };
+}
+
+/**
+ * Updates the selected priority in the UI
+ * 
+ * @param {string} prio - The priority to select ('low', 'medium', or 'urgent')
+ * @param {object} prios - The priority data
+ */
+function updateSelectedPrio(prio, prios) {
+  if (prios[prio]) {
+    let { img, class: className } = prios[prio];
+    setPrioImageAndClass(prio, img, className);
+    currentPrio = prio;
+  }
+}
+
+/**
+ * Sets the image and class for the selected priority
+ * 
+ * @param {string} prio - The priority
+ * @param {string} img - The image filename
+ * @param {string} className - The CSS class name
+ */
+function setPrioImageAndClass(prio, img, className) {
+  let imgContainer = document.getElementById(`prio${prio.charAt(0).toUpperCase() + prio.slice(1)}`);
+  imgContainer.innerHTML = `${prio.charAt(0).toUpperCase() + prio.slice(1)} <img src="assets/img/${img}" alt="${prio}" />`;
+  imgContainer.classList.add(className);
+}
+
+
+/**
  * Renders and updates the priority selection UI
  *
  * @param {string} prio - The priority to select ('low', 'medium', or 'urgent')
  */
 function renderPrio(prio) {
-  let container = document.getElementById("prioContainer");
-  container.innerHTML = templateRenderPrio();
-  let prios = {
-    low: { img: "Prio baja.svg", class: "addTask_prio_focus_low" },
-    medium: { img: "Prio media.svg", class: "addTask_prio_focus_medium" },
-    urgent: { img: "Prio alta.svg", class: "addTask_prio_focus_urgent" }
-  };
-  if (prios[prio]) {
-    let { img, class: className } = prios[prio];
-    let imgContainer = document.getElementById(`prio${prio.charAt(0).toUpperCase() + prio.slice(1)}`);
-    imgContainer.innerHTML = `${prio.charAt(0).toUpperCase() + prio.slice(1)} <img src="assets/img/${img}" alt="${prio}" />`;
-    imgContainer.classList.add(className);
-    currentPrio = prio;
-  }
+  renderPrioContainer();
+  let prios = getPrioData();
+  updateSelectedPrio(prio, prios);
 }
 
 /**
