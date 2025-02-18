@@ -143,22 +143,14 @@ function setStoredTasks(tasks) {
  */
 function renderSummary() {
   let progressCards = document.getElementById("progressCards");
-  let amountTasks = storedTasks.length;
-  let amountTodo = todoTasks.length;
-  let amountInProgress = inProgressTasks.length;
-  let amountFeedback = feedbackTasks.length;
-  let amountDone = doneTasks.length;
-  let amountUrgent = urgentTasks.length;
-  let deadline = getNextDeadline();
-
   progressCards.innerHTML = templateRenderSummary(
-    amountTasks,
-    amountTodo,
-    amountInProgress,
-    amountFeedback,
-    amountDone,
-    amountUrgent,
-    deadline
+    storedTasks.length,
+    todoTasks.length,
+    inProgressTasks.length,
+    feedbackTasks.length,
+    doneTasks.length,
+    urgentTasks.length,
+    getNextDeadline()
   );
 }
 
