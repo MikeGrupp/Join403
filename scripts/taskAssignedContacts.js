@@ -85,20 +85,50 @@ function addTaskAssignedContactsCheckbox(contactId) {
 async function searchContacts() {
   let input = document.getElementById("addTaskAssignedTo");
   let filter = input.value.toLowerCase();
+  await initializeSearch(filter, input);
+  renderDropdownContainerContacts();
+}
+
+/**
+ * Initializes the search process
+ *
+ * @async
+ * @param {string} filter - The filter string
+ * @param {HTMLInputElement} input - The input element
+ */
+async function initializeSearch(filter, input) {
   searchContactsArray = [];
   contactIds = [];
   await fetchContactsIds();
+  handleFilter(filter, input);
+}
+
+/**
+ * Handles the filtering logic
+ *
+ * @param {string} filter - The filter string
+ * @param {HTMLInputElement} input - The input element
+ */
+function handleFilter(filter, input) {
   if (filter.length === 0) {
     input.value = "";
   } else {
-    contactIds.forEach((id) => {
-      if (storedContacts[id].name.toLowerCase().includes(filter)) {
-        searchContactsArray.push(id);
-      }
-    });
-    contactIds = searchContactsArray;
+    filterContacts(filter);
   }
-  renderDropdownContainerContacts();
+}
+
+/**
+ * Filters the contacts based on the filter string
+ *
+ * @param {string} filter - The filter string
+ */
+function filterContacts(filter) {
+  contactIds.forEach((id) => {
+    if (storedContacts[id].name.toLowerCase().includes(filter)) {
+      searchContactsArray.push(id);
+    }
+  });
+  contactIds = searchContactsArray;
 }
 
 /**
