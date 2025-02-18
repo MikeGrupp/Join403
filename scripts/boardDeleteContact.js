@@ -10,10 +10,7 @@ async function removeExistingContactFromTasks(contactId) {
   for (const taskId in tasks) {
     if (tasks.hasOwnProperty(taskId)) {
       const task = tasks[taskId];
-      if (
-        task.assignedAccounts &&
-        task.assignedAccounts.hasOwnProperty(contactId)
-      ) {
+      if (task.assignedAccounts && task.assignedAccounts.hasOwnProperty(contactId)) {
         deleteContactFromTasks(taskId, contactId);
       }
     }

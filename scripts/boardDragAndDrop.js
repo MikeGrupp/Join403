@@ -77,20 +77,15 @@ function removeHighlight(id) {
  */
 function removeHighlightBorder() {
   document
-    .getElementById("boardTodo")
-    .classList.remove("drag_area_highlight_border");
+    .getElementById("boardTodo").classList.remove("drag_area_highlight_border");
   document
-    .getElementById("boardInProgress")
-    .classList.remove("drag_area_highlight_border");
+    .getElementById("boardInProgress").classList.remove("drag_area_highlight_border");
   document
-    .getElementById("boardAwaitFeedback")
-    .classList.remove("drag_area_highlight_border");
+    .getElementById("boardAwaitFeedback").classList.remove("drag_area_highlight_border");
   document
-    .getElementById("boardDone")
-    .classList.remove("drag_area_highlight_border");
+    .getElementById("boardDone").classList.remove("drag_area_highlight_border");
   document
-    .getElementById(currentDraggedElement)
-    .classList.remove("animation_task_drag_and_drop");
+    .getElementById(currentDraggedElement).classList.remove("animation_task_drag_and_drop");
 }
 
 /**
@@ -98,18 +93,13 @@ function removeHighlightBorder() {
  */
 function highlightBorder() {
   document
-    .getElementById("boardTodo")
-    .classList.add("drag_area_highlight_border");
+    .getElementById("boardTodo").classList.add("drag_area_highlight_border");
   document
-    .getElementById("boardInProgress")
-    .classList.add("drag_area_highlight_border");
+    .getElementById("boardInProgress").classList.add("drag_area_highlight_border");
   document
-    .getElementById("boardAwaitFeedback")
-    .classList.add("drag_area_highlight_border");
+    .getElementById("boardAwaitFeedback").classList.add("drag_area_highlight_border");
   document
-    .getElementById("boardDone")
-    .classList.add("drag_area_highlight_border");
+    .getElementById("boardDone").classList.add("drag_area_highlight_border");
   document
-    .getElementById(currentDraggedElement)
-    .classList.add("animation_task_drag_and_drop");
+    .getElementById(currentDraggedElement).classList.add("animation_task_drag_and_drop");
 }

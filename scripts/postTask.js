@@ -13,7 +13,7 @@ let validation = false;
  */
 async function addTask(side) {
   addTaskValidation();
-  if (validation === true) {
+  if (validation) {
     await postTask();
     tasks = await loadData("tasks/");
     fetchTaskIds();
@@ -22,7 +22,6 @@ async function addTask(side) {
     await postAssignedAccounts(taskId);
     clearAddTask();
     if (side === "board") {
-      tasks = await loadData("tasks/");
       tasksIds = [];
       fetchTaskIds();
       taskMoveBack("addTaskBoard", "addTaskBoardBg");
@@ -30,9 +29,7 @@ async function addTask(side) {
     }
     createToast("successNewTask");
     if (side === "addTask") {
-      setTimeout(function () {
-        window.location.href = "./board.html";
-      }, 925);
+      setTimeout(() => window.location.href = "./board.html", 925);
     }
   }
 }
@@ -48,18 +45,14 @@ function addTaskValidation() {
   if (title === "") {
     dNone("addTaskRequiredTitle");
     document.getElementById("addTaskTitle").classList.add("border_red");
+  } else if (dueDate === "") {
+    dNone("addTaskRequiredDueDate");
+    document.getElementById("addTaskDate").classList.add("border_red");
+  } else if (category === "") {
+    dNone("addTaskRequiredCategory");
+    document.getElementById("addTaskCategory").classList.add("border_red");
   } else {
-    if (dueDate === "") {
-      dNone("addTaskRequiredDueDate");
-      document.getElementById("addTaskDate").classList.add("border_red");
-    } else {
-      if (category === "") {
-        dNone("addTaskRequiredCategory");
-        document.getElementById("addTaskCategory").classList.add("border_red");
-      } else {
-        validation = true;
-      }
-    }
+    validation = true;
   }
 }
 
@@ -69,15 +62,13 @@ function addTaskValidation() {
  * @async
  */
 async function postTask() {
-  let title = document.getElementById("addTaskTitle").value;
-  let description = document.getElementById("addTaskDescription").value;
   let dueDate = document.getElementById("addTaskDate").value;
   let [year, month, day] = dueDate.split("-");
   let formattedDate = `${day}/${month}/${year}`;
   await postData("/tasks", {
-    description: description,
+    description: document.getElementById("addTaskDescription").value,
     category: category,
-    titel: title,
+    titel: document.getElementById("addTaskTitle").value,
     prio: currentPrio,
     step: step,
     dueDate: formattedDate,
@@ -93,15 +84,11 @@ async function postTask() {
 async function postAssignedAccounts(taskId) {
   for (let i = 0; i < assignedContacts.length; i++) {
     let contact = assignedContacts[i];
-    let name = contact.name;
-    let initials = contact.initials;
-    let color = contact.color;
-    let id = contact.id;
-    await patchData("/tasks/" + taskId + "/assignedAccounts/" + id, {
-      name: name,
-      initials: initials,
-      color: color,
-      id: id,
+    await patchData("/tasks/" + taskId + "/assignedAccounts/" + contact.id, {
+      name: contact.name,
+      initials: contact.initials,
+      color: contact.color,
+      id: contact.id,
     });
   }
 }

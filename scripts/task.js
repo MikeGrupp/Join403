@@ -87,39 +87,17 @@ function rotate90(id) {
 function renderPrio(prio) {
   let container = document.getElementById("prioContainer");
   container.innerHTML = templateRenderPrio();
-
-  if (prio === "low") {
-    let imgContainer = document.getElementById("prioLow");
-    imgContainer.innerHTML = `
-      Low
-      <img src="assets/img/Prio baja.svg" alt="Low" />
-    `;
-    document.getElementById("prioLow").classList.add("addTask_prio_focus_low");
-    currentPrio = "low";
-  }
-
-  if (prio === "medium") {
-    let imgContainer = document.getElementById("prioMedium");
-    imgContainer.innerHTML = `
-      Medium
-      <img src="assets/img/Prio media.svg" alt="Medium" />
-    `;
-    document
-      .getElementById("prioMedium")
-      .classList.add("addTask_prio_focus_medium");
-    currentPrio = "medium";
-  }
-
-  if (prio === "urgent") {
-    let imgContainer = document.getElementById("prioUrgent");
-    imgContainer.innerHTML = `
-      Urgent
-      <img src="assets/img/Prio alta.svg" alt="urgent" />
-    `;
-    document
-      .getElementById("prioUrgent")
-      .classList.add("addTask_prio_focus_urgent");
-    currentPrio = "urgent";
+  let prios = {
+    low: { img: "Prio baja.svg", class: "addTask_prio_focus_low" },
+    medium: { img: "Prio media.svg", class: "addTask_prio_focus_medium" },
+    urgent: { img: "Prio alta.svg", class: "addTask_prio_focus_urgent" }
+  };
+  if (prios[prio]) {
+    let { img, class: className } = prios[prio];
+    let imgContainer = document.getElementById(`prio${prio.charAt(0).toUpperCase() + prio.slice(1)}`);
+    imgContainer.innerHTML = `${prio.charAt(0).toUpperCase() + prio.slice(1)} <img src="assets/img/${img}" alt="${prio}" />`;
+    imgContainer.classList.add(className);
+    currentPrio = prio;
   }
 }
 
@@ -146,9 +124,7 @@ function clearAddTask() {
   for (let i = 0; i < contactIds.length; i++) {
     let contactId = contactIds[i];
     let currentCheckBox = document.getElementById("checkbox" + contactId);
-    if ((currentCheckBox.checked = true)) {
-      currentCheckBox.checked = false;
-    }
+    currentCheckBox.checked = true ? currentCheckBox.checked = false : "";
   }
   assignedContacts = [];
   renderAddTaskAssignedContacts();
@@ -157,7 +133,6 @@ function clearAddTask() {
   category = "";
   addTaskSubtasks = [];
   renderSubtaskContainer();
-  document.getElementById("addTaskTitle").focus();
   document.getElementById("addTaskTitle").classList.remove("border_red");
   document.getElementById("addTaskDate").classList.remove("border_red");
   document.getElementById("addTaskCategory").classList.remove("border_red");

@@ -23,7 +23,7 @@ function templateRenderTask(
         draggable="true"
         ondragstart="startDragging('${taskId}')"
         id="${taskId}"
-        onclick="dNone('taskDetailBg'), renderDetailTask('${taskId}')"
+        onclick="dNone('taskDetailBg'), initRenderDetailTask('${taskId}')"
       >
         <div class="wrapper">
           <div
@@ -136,7 +136,7 @@ function templateRenderDetailTask(
           <div class="detail_task_delete_img" id="detailTaskDeleteImg"></div>
           Delete
         </div>
-        <div class="detail_task_edit" onclick="renderDetailEditTask('${taskId}')">
+        <div class="detail_task_edit" onclick="initRenderEditTask('${taskId}')">
           <div class="detail_task_edit_img" id="detailTaskEditImg"></div>
           Edit
         </div>

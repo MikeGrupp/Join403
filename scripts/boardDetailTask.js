@@ -1,34 +1,35 @@
 /**
+ *  Initializes the DetailTask
+ *
+ * @param {string} taskId - The ID of the task
+ */
+function initRenderDetailTask(taskId){
+  let task = tasks[taskId];
+  renderDetailTask(task, taskId);
+  renderDetailAccounts(task, taskId);
+  subtasks = task.subtasks;
+  fetchSubTaskIds();
+  renderDetailSubtasksContainer()
+  renderDetailSubtasks(taskId);
+  taskMoveForward("taskDetail");
+}
+
+/**
  * Renders the details of a task
  *
  * @param {string} taskId - The ID of the task
  */
-function renderDetailTask(taskId) {
-  let task = tasks[taskId];
-  let title = task.titel;
-  let description = task.description;
-  let category = task.category;
-  let backgroundColorCategory = null;
-  let prio = task.prio;
-  let dueDate = task.dueDate;
-  if (category === "Technical Task") {
-    backgroundColorCategory = "#1fd7c1";
-  } else {
-    backgroundColorCategory = "#0038ff";
-  }
+function renderDetailTask(task, taskId) {
   let container = document.getElementById("taskDetail");
   container.innerHTML = `${templateRenderDetailTask(
     taskId,
-    title,
-    description,
-    category,
-    backgroundColorCategory,
-    prio,
-    dueDate
+    task.titel,
+    task.description,
+    task.category,
+    getCategoryColor(task.category),
+    task.prio,
+    task.dueDate
   )}`;
-  renderDetailAccounts(task);
-  renderDetailSubtasks(taskId);
-  taskMoveForward("taskDetail");
 }
 
 /**
@@ -36,28 +37,30 @@ function renderDetailTask(taskId) {
  *
  * @param {object} task - The task object containing assigned accounts
  */
-function renderDetailAccounts(task) {
+function renderDetailAccounts(task, taskId) {
   assignedAccounts = task.assignedAccounts;
   fetchAssignedAccountsIds();
+  fetchAssignedAccounts();
+  for (let i = 0; i < assignedAccountsIds.length; i++) {
+    let account = assignedAccounts[i];
+    document.getElementById("detailAssignedAccounts").innerHTML += `${templateRenderDetailAccounts(
+      account.name,
+      account.initials,
+      account.color
+    )}`;
+  }
+}
+
+/**
+ * Push assigned Accounts
+ *
+ */
+function fetchAssignedAccounts(){
   assignedAccounts = [];
   for (let i = 0; i < assignedAccountsIds.length; i++) {
     let assignedAccountId = assignedAccountsIds[i];
     let assignedContact = storedContacts[assignedAccountId];
     assignedAccounts.push(assignedContact);
-  }
-  let amountAssignedAccounts = assignedAccountsIds.length;
-
-  for (let i = 0; i < amountAssignedAccounts; i++) {
-    let account = assignedAccounts[i];
-    let name = account.name;
-    let initials = account.initials;
-    let backgroundColor = account.color;
-    let container = document.getElementById("detailAssignedAccounts");
-    container.innerHTML += `${templateRenderDetailAccounts(
-      name,
-      initials,
-      backgroundColor
-    )}`;
   }
 }
 
@@ -67,36 +70,30 @@ function renderDetailAccounts(task) {
  * @param {string|number} taskId - The ID of the task
  */
 function renderDetailSubtasks(taskId) {
-  task = tasks[taskId];
-  subtasks = task.subtasks;
-  fetchSubTaskIds();
-  let amountSubtasks = subtasksIds.length;
+  for (let i = 0; i < subtasksIds.length; i++) {
+    let subtaskId = subtasksIds[i];
+    let subtask = subtasks[subtaskId];
+    let checked = subtask.status === "finished" ? "checked" : "open";
+    document.getElementById("detailSubtasksContainer").innerHTML += `${templateRenderDetailSubtasks(
+      subtask.titel,
+      subtask.status,
+      checked,
+      taskId,
+      subtaskId
+    )}`;
+  }
+}
 
-  if (amountSubtasks > 0) {
+/**
+ * render the container for the Subtasks
+ */
+function renderDetailSubtasksContainer() {
+  if (subtasksIds.length > 0) {
     let container = document.getElementById("detailSubtasks");
     container.innerHTML = `
         <div class="detail_subtasks_headline">Subtasks</div>
         <div class="task_detail_subtasks_container" id="detailSubtasksContainer"></div>
       `;
-  }
-
-  for (let i = 0; i < amountSubtasks; i++) {
-    let subtaskId = subtasksIds[i];
-    let subtask = subtasks[subtaskId];
-    let title = subtask.titel;
-    let status = subtask.status;
-    let checked;
-    if (status === "finished") {
-      checked = "checked";
-    }
-    let container = document.getElementById("detailSubtasksContainer");
-    container.innerHTML += `${templateRenderDetailSubtasks(
-      title,
-      status,
-      checked,
-      taskId,
-      subtaskId
-    )}`;
   }
 }
 

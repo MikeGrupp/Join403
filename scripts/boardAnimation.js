@@ -7,23 +7,12 @@ function taskMoveForward(div) {
   let id = null;
   let container = document.getElementById(div);
   let pos = 0;
-  let position = 0;
+  let position = calculatePosition(div);
   clearInterval(id);
   id = setInterval(frame, 1);
-  if (div === "taskDetail") {
-    position = 35;
-  }
-  if (div === "addTaskBoard") {
-    position = 50;
-  }
-  if (div === "taskDetail" && window.innerWidth < 1025) {
-    position = 20;
-  }
-  if (div === "taskDetail" && window.innerWidth < 767) {
-    position = 0;
-  }
   if (div === "addTaskBoard" && window.innerWidth < 767) {
     window.open("task.html");
+    window.close();
   }
   function frame() {
     if (pos == position) {
@@ -41,6 +30,23 @@ function taskMoveForward(div) {
 }
 
 /**
+ * Calculates the target position for the container based on its ID and screen width.
+ * @param {string} div - The ID of the task container
+ * @returns {number} - The target position
+ */
+function calculatePosition(div) {
+  if (div === "taskDetail") {
+    if (window.innerWidth < 767) return 0;
+    if (window.innerWidth < 1025) return 20;
+    return 35;
+  }
+  if (div === "addTaskBoard") {
+    return 50;
+  }
+  return 0; // Default fallback if the div is not recognized
+}
+
+/**
  * Moves a task container backward
  *
  * @param {string} div - The ID of the task container
@@ -50,23 +56,12 @@ function taskMoveBack(div, bgDiv) {
   let id = null;
   let container = document.getElementById(div);
   let pos = 0;
+  let position = calculatePosition(div);
   clearInterval(id);
-  let position = 0;
   id = setInterval(frame, 1);
-  if (div === "taskDetail") {
-    position = 35;
-  }
-  if (div === "addTaskBoard") {
-    position = 50;
-  }
-  if (div === "taskDetail" && window.innerWidth < 1025) {
-    position = 20;
-  }
-  if (div === "taskDetail" && window.innerWidth < 767) {
-    position = 0;
-  }
   if (div === "addTaskBoard" && window.innerWidth < 767) {
     window.open("task.html");
+    window.close();
   }
   function frame() {
     if (pos == position) {

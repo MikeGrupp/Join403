@@ -92,20 +92,34 @@ async function initBoard() {
  * @async
  */
 async function renderBoard() {
-  countNoTask();
-  renderNoTask();
+  boardNoTask();
   for (let i = 0; i < tasksIds.length; i++) {
     let taskId = tasksIds[i];
     let task = tasks[taskId];
     subtasks = task.subtasks;
     assignedAccounts = task.assignedAccounts;
-    fetchSubTaskIds();
+    fetchBoardIds();
     fetchSubTaskFinished();
-    fetchAssignedAccountsIds();
     renderTasks(task, taskId);
     renderSubtasks(taskId);
     renderAssignedAccounts(taskId);
   }
+}
+
+/**
+ * fetch Board Ids
+ */
+function fetchBoardIds() {
+  fetchSubTaskIds();
+  fetchAssignedAccountsIds();
+}
+
+/**
+ * Renders if no task the Container NoTask
+ */
+function boardNoTask() {
+  countNoTask();
+  renderNoTask();
 }
 
 /**
@@ -116,26 +130,25 @@ async function renderBoard() {
  * @param {string} taskId - The ID of the task
  */
 async function renderTasks(task, taskId) {
-  let title = task.titel;
-  let description = task.description;
-  let category = task.category;
-  let backgroundColorCategory = null;
-  let prio = task.prio;
   let step = "board" + task.step;
-  if (category === "Technical Task") {
-    backgroundColorCategory = "#1fd7c1";
-  } else {
-    backgroundColorCategory = "#0038ff";
-  }
   let container = document.getElementById(step);
   container.innerHTML += `${templateRenderTask(
-    title,
-    description,
-    category,
+    task.titel,
+    task.description,
+    task.category,
     taskId,
-    backgroundColorCategory,
-    prio
+    getCategoryColor(task.category),
+    task.prio
   )}`;
+}
+
+/**
+ * Determines the background color based on the task category
+ * @param {string} category - The category of the task
+ * @returns {string} - The background color for the category
+ */
+function getCategoryColor(category) {
+  return category === "Technical Task" ? "#1fd7c1" : "#0038ff";
 }
 
 /**
@@ -144,17 +157,15 @@ async function renderTasks(task, taskId) {
  * @param {string} taskId - The ID of the task
  */
 function renderSubtasks(taskId) {
-  let amountSubtasks = subtasksIds.length;
-  let amountSubtasksFinished = subtaskFinished.length;
-  let subtasksInPercent = (100 / amountSubtasks) * amountSubtasksFinished;
+  let subtasksInPercent = (100 / subtasksIds.length) * subtaskFinished.length;
   let container = document.getElementById("subtasks" + taskId);
-  if (amountSubtasks === 0) {
+  if (subtasksIds.length === 0) {
     container.innerHTML = ``;
   } else {
     container.innerHTML += `${templateRenderSubtasks(
       subtasksInPercent,
-      amountSubtasksFinished,
-      amountSubtasks
+      subtaskFinished.length,
+      subtasksIds.length
     )}`;
   }
 }
@@ -165,87 +176,63 @@ function renderSubtasks(taskId) {
  * @param {string} taskId - The ID of the task
  */
 function renderAssignedAccounts(taskId) {
-  let amountAssignedAccounts = assignedAccountsIds.length;
   let container = document.getElementById("accounts" + taskId);
-  let accountNr;
-  if (amountAssignedAccounts === 0) {
+  if (assignedAccountsIds.length === 0) {
     container.innerHTML = ``;
   } else {
-    for (let i = 0; i < amountAssignedAccounts; i++) {
-      let accountId = assignedAccountsIds[i];
-      let account = assignedAccounts[accountId];
-      let initials = account.initials;
-      let color = account.color;
-      let position = i * 8;
-      accountNr = 2;
-      if (i == 0) {
-        accountNr = 1;
-      }
-      container.innerHTML += `${templateRenderAssignedAccounts(
-        initials,
-        accountNr,
-        color,
-        position
-      )}`;
+    for (let i = 0; i < assignedAccountsIds.length; i++) {
+      let account = assignedAccounts[assignedAccountsIds[i]];
+      container.innerHTML += `${getAssignedAccountsParams(account, i)}`;
     }
   }
+}
+
+/**
+ * Generates params for templateRenderAssignedAccounts.
+ * @returns {string} - The generated HTML.
+ */
+function getAssignedAccountsParams(account, i) {
+  return templateRenderAssignedAccounts(
+    account.initials,
+    i === 0 ? 1 : 2,
+    account.color,
+    i * 8
+  );
 }
 
 /**
  * Counts the number of tasks in each category
  */
 function countNoTask() {
-  for (let i = 0; i < tasksIds.length; i++) {
-    let taskId = tasksIds[i];
-    let task = tasks[taskId];
-    let step = task.step;
-    if (step == "Todo") {
-      arrayTodo++;
-    }
-    if (step == "InProgress") {
-      arrayInProgresse++;
-    }
-    if (step == "AwaitFeedback") {
-      arrayAwaitFeedback++;
-    }
-    if (step == "Done") {
-      arrayDone++;
-    }
-  }
+  let counts = countTaskSteps();
+  arrayTodo = counts.Todo;
+  arrayInProgresse = counts.InProgress;
+  arrayAwaitFeedback = counts.AwaitFeedback;
+  arrayDone = counts.Done;
+}
+
+/**
+ * Counts tasks for each step.
+ * @returns {Object} - Object with task counts per category.
+ */
+function countTaskSteps() {
+  let counts = { Todo: 0, InProgress: 0, AwaitFeedback: 0, Done: 0 };
+  tasksIds.forEach((taskId) => counts[tasks[taskId].step]++);
+  return counts;
 }
 
 /**
  * Renders the "no task" messages for each category
  */
 function renderNoTask() {
-  if (arrayTodo > 0) {
-    document.getElementById("boardTodo").innerHTML = ``;
-  }
-  if (arrayInProgresse > 0) {
-    document.getElementById("boardInProgress").innerHTML = ``;
-  }
-  if (arrayAwaitFeedback > 0) {
-    document.getElementById("boardAwaitFeedback").innerHTML = ``;
-  }
-  if (arrayDone > 0) {
-    document.getElementById("boardDone").innerHTML = ``;
-  }
-  if (arrayTodo == 0) {
-    document.getElementById("boardTodo").innerHTML = `                
-    <div class="board_no_task">No tasks To do</div>`;
-  }
-  if (arrayInProgresse == 0) {
-    document.getElementById("boardInProgress").innerHTML = `                
-    <div class="board_no_task">No tasks In progress</div>`;
-  }
-  if (arrayAwaitFeedback == 0) {
-    document.getElementById("boardAwaitFeedback").innerHTML = `                
-    <div class="board_no_task">No tasks Await feedback</div>`;
-  }
-  if (arrayDone == 0) {
-    document.getElementById("boardDone").innerHTML = `                
-    <div class="board_no_task">No tasks Done</div></div>`;
-  }
+  document.getElementById("boardTodo").innerHTML =
+    arrayTodo > 0 ? "" : `<div class="board_no_task">No tasks To do</div>`;
+  document.getElementById("boardInProgress").innerHTML =
+    arrayInProgresse > 0 ? "" : `<div class="board_no_task">No tasks In progress</div>`;
+  document.getElementById("boardAwaitFeedback").innerHTML =
+    arrayAwaitFeedback > 0 ? "" : `<div class="board_no_task">No tasks Await feedback</div>`;
+  document.getElementById("boardDone").innerHTML =
+    arrayDone > 0 ? "" : `<div class="board_no_task">No tasks Done</div></div>`;
 }
 
 /**
@@ -254,9 +241,9 @@ function renderNoTask() {
  * @async
  */
 async function fetchTaskIds() {
+  tasksIds = [];
   let taskResponse = tasks;
   let taskKeysArray = Object.keys(taskResponse);
-
   for (let i = 0; i < taskKeysArray.length; i++) {
     tasksIds.push(taskKeysArray[i]);
   }
@@ -312,19 +299,13 @@ async function fetchAssignedAccountsIds() {
  */
 async function putTask(taskId) {
   let task = tasks[taskId];
-  let contentDescription = task.description;
-  let contentCategory = task.category;
-  let contentTitle = task.titel;
-  let contentPrio = task.prio;
-  let contentStep = task.step;
-  let contentDueDate = task.dueDate;
   await patchData("/tasks/" + taskId, {
-    description: contentDescription,
-    category: contentCategory,
-    titel: contentTitle,
-    prio: contentPrio,
-    step: contentStep,
-    dueDate: contentDueDate,
+    description: task.description,
+    category: task.category,
+    titel: task.titel,
+    prio: task.prio,
+    step: task.step,
+    dueDate: task.dueDate,
   });
 }
 
@@ -342,11 +323,9 @@ async function patchSubTask(taskId) {
   for (let i = 0; i < subtasksIds.length; i++) {
     let subtaskId = subtasksIds[i];
     let subtask = subtasks[subtaskId];
-    let contentTitle = subtask.titel;
-    let contentStatus = subtask.status;
     await patchData("/tasks/" + taskId + "/subtasks/" + subtaskId, {
-      titel: contentTitle,
-      status: contentStatus,
+      titel: subtask.titel,
+      status: subtask.status,
     });
   }
 }
@@ -364,13 +343,10 @@ async function patchAssignedAccounts(taskId) {
   for (let i = 0; i < assignedAccountsIds.length; i++) {
     let accountId = assignedAccountsIds[i];
     let account = assignedAccounts[accountId];
-    let contentInitials = account.initials;
-    let contentColor = account.color;
-    let contentName = account.name;
     await patchData("/tasks/" + taskId + "/assignedAccounts/" + accountId, {
-      initials: contentInitials,
-      color: contentColor,
-      name: contentName,
+      initials: account.initials,
+      color: account.color,
+      name: account.name,
     });
   }
 }

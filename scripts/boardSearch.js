@@ -12,29 +12,22 @@ function search() {
   let filterword = document.getElementById("taskSearch").value.toLowerCase();
   let length = filterword.length;
   searchTasks = [];
-  tasksIds = [];
   fetchTaskIds();
-  if (length === 0) {
-    document.getElementById("taskSearch").value = "";
-    document.getElementById("BoardRequiredSearch").classList.add("d-none");
-    reRenderBoard();
-  } else if (length > 0) {
-    for (let i = 0; i < tasksIds.length; i++) {
-      let taskId = tasksIds[i];
-      let title = tasks[taskId].titel.toLowerCase();
-      let description = tasks[taskId].description.toLowerCase();
-      if (title.includes(filterword) || description.includes(filterword)) {
-        searchTasks.push(taskId);
-      }
-    }
-    document.getElementById("BoardRequiredSearch").classList.add("d-none");
-    tasksIds = searchTasks;
-    reRenderBoard();
-    if (searchTasks.length === 0) {
-      dNone("BoardRequiredSearch");
-      document.getElementById("BoardRequiredSearch").classList.remove("d-none");
-    }
-  }
+  length === 0 ? document.getElementById("BoardRequiredSearch").classList.add("d-none") : searchFilter(filterword);
+  reRenderBoard();
+}
+
+/**
+ * filter for tasks based on the search term
+ */
+function searchFilter(filterword) {
+  searchTasks = tasksIds.filter(taskId => 
+    tasks[taskId].titel.toLowerCase().includes(filterword) || 
+    tasks[taskId].description.toLowerCase().includes(filterword)
+  );
+  document.getElementById("BoardRequiredSearch").classList.add("d-none");
+  tasksIds = searchTasks;
+  searchTasks.length === 0 ? dNone("BoardRequiredSearch") : "";
 }
 
 document.addEventListener("keydown", function (event) {

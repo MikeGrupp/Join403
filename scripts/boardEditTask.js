@@ -1,48 +1,47 @@
 /**
- * Renders the edit form for a task
+ *  Initializes the EditTask
  *
  * @param {string} taskId - The ID of the task
  */
-function renderDetailEditTask(taskId) {
+function initRenderEditTask(taskId){
   let task = tasks[taskId];
-  let title = task.titel;
-  let description = task.description;
-  let prio = task.prio;
-  let dueDate = task.dueDate;
-  let [day, month, year] = dueDate.split("/");
-  let formattedDate = `${year}-${month}-${day}`;
-  let container = document.getElementById("taskDetail");
-  container.innerHTML = `${templateRenderDetailEditTask(
-    taskId,
-    title,
-    description,
-    formattedDate
-  )}`;
-  renderEditAccounts(taskId);
-  renderEditSubtasks(taskId);
-  renderPrio(prio);
+  renderDetailEditTask(task,taskId)
+  renderEditAccounts();
+  renderEditSubtasks(task);
+  renderPrio(task.prio);
   loadEditSubtasksArray();
 }
 
 /**
- * Renders the assigned accounts in the edit form for a task
+ * Renders the edit form for a task
  *
  * @param {string} taskId - The ID of the task
  */
-function renderEditAccounts(taskId) {
-  task = tasks[taskId];
-  let amountAssignedAccounts = assignedAccountsIds.length;
+function renderDetailEditTask(task,taskId) {
+  let [day, month, year] = task.dueDate.split("/");
+  let formattedDate = `${year}-${month}-${day}`;
+  let container = document.getElementById("taskDetail");
+  container.innerHTML = `${templateRenderDetailEditTask(
+    taskId,
+    task.titel,
+    task.description,
+    formattedDate
+  )}`;
+}
+
+/**
+ * Renders the assigned accounts in the edit form for a task
+ */
+function renderEditAccounts() {
   assignedContacts = [];
-  addedAccounts = amountAssignedAccounts;
+  addedAccounts = assignedAccountsIds.length;
   let container = document.getElementById("assignedContactsContainer");
   container.innerHTML = ``;
-  for (let i = 0; i < amountAssignedAccounts; i++) {
+  for (let i = 0; i < assignedAccountsIds.length; i++) {
     let account = assignedAccounts[i];
-    let initials = account.initials;
-    let color = account.color;
     assignedContacts.push(account);
     container.innerHTML += `
-        <div class="task_account1 bg_${color}">${initials}</div>
+        <div class="task_account1 bg_${account.color}">${account.initials}</div>
       `;
   }
   renderDropdownContainerContacts();
@@ -68,18 +67,14 @@ function checkAssignedContacts() {
  *
  * @param {string} taskId - The ID of the task
  */
-function renderEditSubtasks(taskId) {
+function renderEditSubtasks(task) {
   addTaskSubtasks = [];
-  task = tasks[taskId];
   subtasks = task.subtasks;
   fetchSubTaskIds();
-  let amountSubtasks = subtasksIds.length;
-
-  for (let i = 0; i < amountSubtasks; i++) {
+  for (let i = 0; i < subtasksIds.length; i++) {
     let subtaskId = subtasksIds[i];
     let subtask = subtasks[subtaskId];
-    let title = subtask.titel;
-    addTaskSubtasks.push(title);
+    addTaskSubtasks.push(subtask.titel);
     renderSubtaskContainer();
     reRenderSubtask();
   }
@@ -108,17 +103,14 @@ async function editTask(taskId) {
  * @param {string} taskId - The ID of the task to be updated
  */
 async function patchTask(taskId) {
-  let titel = document.getElementById("addTaskTitle").value;
-  let description = document.getElementById("addTaskDescription").value;
   let dueDate = document.getElementById("addTaskDate").value;
   let [year, month, day] = dueDate.split("-");
   let formattedDate = `${day}/${month}/${year}`;
-  let taskStep = tasks[taskId].step;
   await patchData("/tasks/" + taskId, {
-    description: description,
-    titel: titel,
+    description: document.getElementById("addTaskDescription").value,
+    titel: document.getElementById("addTaskTitle").value,
     prio: currentPrio,
-    step: taskStep,
+    step: tasks[taskId].step,
     dueDate: formattedDate,
   });
 }
