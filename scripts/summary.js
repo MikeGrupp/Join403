@@ -71,8 +71,7 @@ function goToBoard() {
  * @returns {string} The greeting message
  */
 function createGreeting() {
-  const d = new Date();
-  let hour = d.getHours();
+  let hour = new Date().getHours();
   let greeting = "";
   if (hour >= 12 && hour < 18) {
     greeting = "Good afternoon,";
@@ -206,13 +205,11 @@ function filterTasks() {
 function getNextDeadline() {
   const today = new Date();
   today.setHours(0, 0, 0, 0);
-
   let upcomingTasks = storedTasks
     .filter(task => task.step !== "Done" && task.dueDate)
     .map(task => ({ ...task, parsedDate: new Date(task.dueDate.split('/').reverse().join('-')) }))
     .filter(task => task.parsedDate >= today)
     .sort((a, b) => a.parsedDate - b.parsedDate);
-
   if (!upcomingTasks.length) {
     return "No coming Deadlines!";
   }
