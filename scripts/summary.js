@@ -155,30 +155,36 @@ function renderSummary() {
 }
 
 /**
+ * An array of month names
+ * 
+ * @constant
+ * @type {string[]}
+ */
+const MONTHS = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];
+
+/**
  * Formats a date string into a readable format
  *
  * @param {string} dueDate - The date string in 'DD/MM/YYYY' format
  * @returns {string} The formatted date string in 'DD Month YYYY' format
  */
 function formatDate(dueDate) {
-  const months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
-
   let [day, month, year] = dueDate.split("/");
   month = parseInt(month, 10) - 1;
-  return `${day} ${months[month]} ${year}`;
+  return `${day} ${MONTHS[month]} ${year}`;
 }
 
 /**
