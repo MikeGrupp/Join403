@@ -126,7 +126,7 @@
   }
 
   .contact_manage_dialog_container {
-    height: calc(100vh - (2 * 40px));
+    height: calc(100dvh - (2 * 40px));
     max-height: 480px;
   }
 
@@ -469,7 +469,7 @@
   }
 
   .contact_manage_dialog_container {
-    height: calc(100vh - (2 * 40px));
+    height: calc(100dvh - (2 * 40px));
     max-height: 480px;
   }
 
@@ -1043,7 +1043,7 @@
   .contact_manage_dialog_container {
     flex-direction: column;
     width: 100%;
-    height: calc(100vh - (2 * 40px));
+    height: calc(100dvh - (2 * 40px));
     max-height: 760px;
   }
 
