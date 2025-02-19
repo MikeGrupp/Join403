@@ -12,7 +12,7 @@ let validation = false;
  * @param {string} site - Indicates whether the task is added from the board or the add task page ("board" or "addTask")
  */
 async function addTask(site) {
-  addTaskValidation();
+  let validation = addTaskValidation();
   if (!validation) {
     return;
   }
@@ -78,10 +78,12 @@ function handleAddTaskSiteSuccess() {
 function validateTitle() {
   let title = document.getElementById("addTaskTitle").value;
   if (title === "") {
-    dNone("addTaskRequiredTitle");
+    document.getElementById("addTaskRequiredTitle").classList.remove("d-none");
     document.getElementById("addTaskTitle").classList.add("border_red");
     return false;
   }
+  document.getElementById("addTaskRequiredTitle").classList.add("d-none");
+  document.getElementById("addTaskTitle").classList.remove("border_red");
   return true;
 }
 
@@ -93,10 +95,12 @@ function validateTitle() {
 function validateDueDate() {
   let dueDate = document.getElementById("addTaskDate").value;
   if (dueDate === "") {
-    dNone("addTaskRequiredDueDate");
+    document.getElementById("addTaskRequiredDueDate").classList.remove("d-none");
     document.getElementById("addTaskDate").classList.add("border_red");
     return false;
   }
+  document.getElementById("addTaskRequiredDueDate").classList.add("d-none");
+  document.getElementById("addTaskDate").classList.remove("border_red");
   return true;
 }
 
@@ -107,12 +111,13 @@ function validateDueDate() {
  * @returns {boolean} True if valid, false otherwise
  */
 function validateCategory() {
-  let category = document.getElementById("addTaskCategory").value;
   if (category === "") {
-    dNone("addTaskRequiredCategory");
+    document.getElementById("addTaskRequiredCategory").classList.remove("d-none");
     document.getElementById("addTaskCategory").classList.add("border_red");
     return false;
   }
+  document.getElementById("addTaskRequiredCategory").classList.add("d-none");
+  document.getElementById("addTaskCategory").classList.remove("border_red");
   return true;
 }
 
@@ -125,7 +130,7 @@ function addTaskValidation() {
   let isValidTitle = validateTitle();
   let isValidDueDate = validateDueDate();
   let isValidCategory = validateCategory();
-  return isValidTitle && isValidDueDate && isValidCategory;
+  return isValidTitle && isValidDueDate && isValidCategory === true ? true : false;
 }
 
 /**

@@ -159,7 +159,7 @@ function addTaskAssignedContacts(contactId) {
 function addTaskAssignedContactsAdd(assignedContact,contactId){
   let currentCheckBox = document.getElementById("checkbox" + contactId);
   assignedAccounts.push(assignedContact);
-  assignedAccountsIds.push(assignedContact);
+  assignedAccountsIds.push(assignedContact.id);
   assignedContacts.push(assignedContact);
   currentCheckBox.checked = true;
   addedAccounts++;
