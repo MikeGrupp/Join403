@@ -167,6 +167,7 @@ function openContactManage() {
   addContactManageOutsideClickClosingListener(modal);
   addContactManageEscapeListener(modal);
   addContactFieldsFocusListeners();
+  addContactFieldsBlurTrimListeners();
   modal.showModal();
 }
 
@@ -340,6 +341,16 @@ function addContactFieldsFocusListeners() {
   addFormFocusListener(document.getElementById(CONSTANTS.SELECTORS.CONTACT_NAME));
   addFormFocusListener(document.getElementById(CONSTANTS.SELECTORS.CONTACT_MAIL));
   addFormFocusListener(document.getElementById(CONSTANTS.SELECTORS.CONTACT_PHONE));
+}
+
+/**
+ * Adds focus listeners to the contact name, email, and phone input fields
+ * When these fields loses focus, the content gets trimmed
+ */
+function addContactFieldsBlurTrimListeners() {
+  addFormBlurTrimListener(document.getElementById(CONSTANTS.SELECTORS.CONTACT_NAME));
+  addFormBlurTrimListener(document.getElementById(CONSTANTS.SELECTORS.CONTACT_MAIL));
+  addFormBlurTrimListener(document.getElementById(CONSTANTS.SELECTORS.CONTACT_PHONE));
 }
 
 /**
