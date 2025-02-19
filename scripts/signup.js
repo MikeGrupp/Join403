@@ -44,7 +44,7 @@ async function validateSignupDetails(email) {
         return false;
     }
     if (!validateEmail(email.value)) {
-        postMsg(`Please enter a valid contact email.`);
+        postMsg(`Please enter a valid Email.`);
         return false;
     }
     return true;
