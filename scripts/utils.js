@@ -79,3 +79,15 @@ function previousPage() {
 function dNone(id) {
   document.getElementById(id).classList.toggle("d-none");
 }
+
+/**
+ * Adds a blur listener to the given element
+ * When the element loses focus, the content gets trimmed
+ *
+ * @param {HTMLElement} element - The HTML element to add the blur listener to
+ */
+function addFormBlurTrimListener(element) {
+  element.addEventListener("blur", (e) => {
+    e.target.value = e.target.value.trim();
+  });
+}
