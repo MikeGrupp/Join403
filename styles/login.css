@@ -63,7 +63,7 @@ input[type='checkbox']:hover {
 .check_policy {
     display: flex;
     justify-content: center;
-    gap: 8px
+    gap: 8px;
 }
 
 .login {
@@ -250,12 +250,21 @@ input[type='checkbox']:hover {
     cursor: pointer;
 }
 
-.msg_box {
+.msgBox {
+    padding-top: 4px;
+    height: 16px;
+    position: absolute;
+    left: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
     color: red;
-    font-size: 14px;
+    font-size: 12px;
     width: 100%;
+}
+
+.inputContainer {
+    display: flex;
+    align-items: center;
 }

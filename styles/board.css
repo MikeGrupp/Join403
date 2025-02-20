@@ -28,14 +28,12 @@
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
   gap: 4px;
 }
 
 .search_container {
   display: flex;
   flex-direction: column;
-  width: 100%;
 }
 
 .board_searchbar {
@@ -47,7 +45,6 @@
   justify-content: center;
   height: 22px;
   padding: 5px;
-  width: 100%;
   border-color: rgb(198, 198, 198);
   background-color: #ffffff;
 }

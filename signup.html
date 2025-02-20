@@ -40,25 +40,35 @@
                     <input class="standard_ipt" type="text" id="name" oninput="checkFormInputs()" required
                         placeholder="Name" maxlength="30">
                     <img src="./assets/img/person.svg" class="input_icon" alt="person icon">
+                    <div class="msgBox" id="msgBoxName"></div>
                 </label>
                 <label>
-                    <input class="standard_ipt" type="email" id="email" oninput="checkFormInputs()" required
-                        placeholder="Email" maxlength="30">
-                    <img src="./assets/img/mail.svg" class="input_icon" alt="mail icon">
-
+                    <div class="inputContainer">
+                        <input class="standard_ipt" type="email" id="email" oninput="checkFormInputs()" required
+                            placeholder="Email" maxlength="30">
+                        <img src="./assets/img/mail.svg" class="input_icon" alt="mail icon">
+                    </div>
+                    <div class="msgBox" id="msgBoxEmail"></div>
                 </label>
                 <label>
-                    <input class="standard_ipt" type="password" id="password" oninput="checkFormInputs()" required
-                        placeholder="Password">
-                    <img src="./assets/img/lock.svg" onclick="togglePassword('password', 'toggle_password')" id="toggle_password" class="input_icon" alt="lock icon">
-
+                    <div class="inputContainer">
+                        <input class="standard_ipt" type="password" id="password" oninput="checkFormInputs()" required
+                            placeholder="Password">
+                        <img src="./assets/img/lock.svg" onclick="togglePassword('password', 'toggle_password')"
+                            id="toggle_password" class="input_icon" alt="lock icon">
+                    </div>
+                    <div class="msgBox" id="msgBoxPassword"></div>
                 </label>
                 <label>
-                    <input class="standard_ipt" type="password" id="passwordConfirm" oninput="checkFormInputs()"
-                        required placeholder="Confirm Password">
-                    <img src="./assets/img/lock.svg" onclick="togglePassword('passwordConfirm', 'toggle_confirmPassword')" id="toggle_confirmPassword" class="input_icon" alt="lock icon">
+                    <div class="inputContainer">
+                        <input class="standard_ipt" type="password" id="passwordConfirm" oninput="checkFormInputs()"
+                            required placeholder="Confirm Password">
+                        <img src="./assets/img/lock.svg"
+                            onclick="togglePassword('passwordConfirm', 'toggle_confirmPassword')"
+                            id="toggle_confirmPassword" class="input_icon" alt="lock icon">
+                    </div>
+                    <div class="msgBox" id="msgBoxPasswordConfirm"></div>
                 </label>
-                <div class="msg_box" id="msgBox"></div>
                 <label class="check_policy">
                     <input class="checkbox" type="checkbox" id="privacyPolicy" oninput="checkFormInputs()" required>
                     <span>I accept the <a class="blue_word" href="privacy.html"><span class="blue_word">Privacy

@@ -36,15 +36,19 @@
             </div>
             <form class="login_form" onsubmit="login(); return false;">
                 <label>
-                    <input class="standard_ipt" type="email" id="email" required placeholder="Email" maxlength="30">
-                    <img src="./assets/img/mail.svg" class="input_icon" alt="mail icon">
+                    <div class="inputContainer">
+                        <input class="standard_ipt" type="email" id="email" required placeholder="Email" maxlength="30">
+                        <img src="./assets/img/mail.svg" class="input_icon" alt="mail icon">
+                    </div>
                 </label>
                 <label>
-                    <input class="standard_ipt" type="password" id="password" required placeholder="Password">
-                    <img src="./assets/img/lock.svg" onclick="togglePassword('password', 'toggle_password')"
-                        id="toggle_password" class="input_icon pointer" alt="lock icon">
+                    <div class="inputContainer">
+                        <input class="standard_ipt" type="password" id="password" required placeholder="Password">
+                        <img src="./assets/img/lock.svg" onclick="togglePassword('password', 'toggle_password')"
+                            id="toggle_password" class="input_icon pointer" alt="lock icon">
+                    </div>
+                    <div class="msgBox d-none" id="msgBox"></div>
                 </label>
-                <div class="msg_box d-none" id="msgBox"></div>
                 <label class="remember_login">
                     <input class="checkbox" type="checkbox" id="rememberLogin">
                     <span>Remember me</span>

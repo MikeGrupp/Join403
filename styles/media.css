@@ -1,4 +1,37 @@
-@media (min-width: 1921px) {}
+@media (min-height: 1660px) {
+  .linkbox {
+    bottom: auto;
+    top: 1592px;
+  }
+}
+
+@media (min-width: 1921px) {
+  .center {
+    justify-content: unset;
+    align-items: unset;
+  }
+
+  .login {
+    position: absolute;
+    left: 587px;
+    top: 267px;
+  }
+
+  .signup {
+    position: absolute;
+    left: 613px;
+    top: 177px;
+  }
+
+  .signup_btn {
+    right: auto;
+    left: 1476px;
+  }
+
+  .linkbox {
+    left: 837px;
+  }
+}
 
 @media screen and (max-width: 1440px) {
   *::-webkit-scrollbar {
@@ -757,14 +790,6 @@
     width: 96px;
   }
 
-  .signup_form {
-    gap: 16px;
-  }
-
-  .login_form {
-    gap: 16px;
-  }
-
   .standard_ipt {
     width: 340px;
     height: 32px;
@@ -1379,22 +1404,9 @@
     left: 16px;
   }
 
-  .signup {
-    width: 254px;
-  }
-
   .card_header {
     gap: 24px;
     margin-left: -48px;
-  }
-
-  .back_arrow {
-    width: 24px;
-    height: 24px;
-  }
-
-  .login {
-    width: 254px;
   }
 
   h1 {
@@ -1410,7 +1422,7 @@
   }
 
   .standard_ipt {
-    width: 222px;
+    width: 264px;
     height: 24px;
     font-size: 16px;
   }
