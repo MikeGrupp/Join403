@@ -87,3 +87,17 @@ pre {
 #turn {
   display: none;
 }
+
+*::-webkit-scrollbar {
+  width: 24px;
+}
+*::-webkit-scrollbar-track {
+  border-radius: 3px;
+  background-color: #FFFFFF;
+}
+
+*::-webkit-scrollbar-thumb {
+  border-radius: 20px;
+  background-color: #A8A8A8;
+  border: 8px solid #FFFFFF;
+}

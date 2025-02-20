@@ -1,6 +1,14 @@
 @media (min-width: 1921px) {}
 
 @media screen and (max-width: 1440px) {
+  *::-webkit-scrollbar {
+    width: 20px;
+  }
+  
+  *::-webkit-scrollbar-thumb {
+    border-width: 6px;
+  }
+
   .greeting_box {
     position: absolute;
     width: 100vw;
@@ -206,6 +214,14 @@
 }
 
 @media screen and (max-width: 1024px) {
+  *::-webkit-scrollbar {
+    width: 16px;
+  }
+  
+  *::-webkit-scrollbar-thumb {
+    border-width: 4px;
+  }
+
   .kanban_board {
     flex-direction: column;
     flex: 1;
@@ -549,6 +565,14 @@
 }
 
 @media screen and (max-width: 767px) {
+  *::-webkit-scrollbar {
+    width: 28px;
+  }
+  
+  *::-webkit-scrollbar-thumb {
+    border-width: 12px;
+  }
+
   .main_board {
     max-height: calc(100dvh - (2 * 80px));
   }
