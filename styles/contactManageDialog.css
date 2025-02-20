@@ -147,6 +147,11 @@
   font-size: 20px;
 }
 
+.input_field:focus {
+  border: 1px solid #29ABE2;
+  outline: none;
+}
+
 .input_field.touched:invalid {
   border: 1px solid #ff001f;
 }
