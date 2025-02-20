@@ -12,8 +12,16 @@ const VALIDATION_DETAILS = {
     TEXT: "Please enter a valid contact name.",
     FIELD: "contact_manage_name",
   },
+  EMPTY_CONTACT_NAME: {
+    TEXT: "Contact name is required.",
+    FIELD: "contact_manage_name",
+  },
   INVALID_CONTACT_MAIL: {
     TEXT: "Please enter a valid contact email.",
+    FIELD: "contact_manage_mail",
+  },
+  EMPTY_CONTACT_MAIL: {
+    TEXT: "Contact email is required.",
     FIELD: "contact_manage_mail",
   },
   INVALID_CONTACT_PHONE: {
@@ -92,6 +100,9 @@ function isContactValid(nameField, mailField, phoneField, fieldFocusCheck) {
  */
 function validateName(fieldFocusCheck, nameField) {
   if ((fieldFocusCheck && isFieldTouched(nameField)) || !fieldFocusCheck) {
+    if (nameField.value === "") {
+      currentValidationMessages.push(VALIDATION_DETAILS.EMPTY_CONTACT_NAME.TEXT);
+    }
     if (!nameField.checkValidity()) {
       currentValidationMessages.push(VALIDATION_DETAILS.INVALID_CONTACT_NAME.TEXT);
     }
@@ -107,6 +118,9 @@ function validateName(fieldFocusCheck, nameField) {
 function validateMail(fieldFocusCheck, mailField) {
   removeCustomValidationMessage(mailField);
   if ((fieldFocusCheck && isFieldTouched(mailField)) || !fieldFocusCheck) {
+    if (mailField.value === "") {
+      currentValidationMessages.push(VALIDATION_DETAILS.EMPTY_CONTACT_MAIL.TEXT);
+    }
     if (!(mailField.checkValidity() && isValidEmailFormat(mailField))) {
       currentValidationMessages.push(VALIDATION_DETAILS.INVALID_CONTACT_MAIL.TEXT);
     }
