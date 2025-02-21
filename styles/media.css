@@ -996,8 +996,8 @@
     position: absolute;
     width: 56px;
     height: 56px;
-    top: calc(100vh - 300px);
-    right: 15px;
+    top: calc(100dvh - 248px);
+    left: calc(100dvw - 99px);
     padding: 12px;
     gap: 10px;
     border-radius: 46px;
@@ -1451,6 +1451,10 @@
 
   .sidebar_links {
     gap: 0px;
+  }
+
+  .add_contact {
+    left: calc(100dvw - 85px);
   }
 
   .contact_list {
