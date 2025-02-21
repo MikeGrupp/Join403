@@ -551,3 +551,20 @@ option:hover {
 .addTask_button_content_mobile {
   display: none;
 }
+
+.dropdown_container::-webkit-scrollbar-button {
+  height: 24px;
+  width: 10px;
+  background-repeat: no-repeat;
+}
+
+.dropdown_container::-webkit-scrollbar-button:vertical:decrement {
+  background-position: center bottom;
+  background-image: url("../assets/img/scrollbarArrowUp.svg");
+
+}
+
+.dropdown_container::-webkit-scrollbar-button:vertical:increment {
+  background-position: center top;
+  background-image: url("../assets/img/scrollbarArrowDown.svg");
+}

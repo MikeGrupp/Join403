@@ -146,7 +146,6 @@
 .contact_list_container::-webkit-scrollbar-button:vertical:decrement {
   background-position: center bottom;
   background-image: url("../assets/img/scrollbarArrowUp.svg");
-
 }
 
 .contact_list_container::-webkit-scrollbar-button:vertical:increment {

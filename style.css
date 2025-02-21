@@ -102,3 +102,7 @@ pre {
   border: 8px solid transparent;
   background-clip: content-box;
 }
+
+*::-webkit-scrollbar-thumb {
+  min-height: 31px;
+ }

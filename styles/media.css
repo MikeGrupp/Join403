@@ -598,11 +598,11 @@
 }
 
 @media screen and (max-width: 767px) {
-  *::-webkit-scrollbar {
+  .contact_list_container::-webkit-scrollbar {
     width: 28px;
   }
-  
-  *::-webkit-scrollbar-thumb {
+
+  .contact_list_container::-webkit-scrollbar-thumb {
     border-width: 12px;
   }
 
