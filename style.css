@@ -93,11 +93,12 @@ pre {
 }
 *::-webkit-scrollbar-track {
   border-radius: 3px;
-  background-color: #FFFFFF;
+  background-color: transparent;
 }
 
 *::-webkit-scrollbar-thumb {
   border-radius: 20px;
   background-color: #A8A8A8;
-  border: 8px solid #FFFFFF;
+  border: 8px solid transparent;
+  background-clip: content-box;
 }

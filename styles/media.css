@@ -606,6 +606,10 @@
     border-width: 12px;
   }
 
+  .contact_list_container::-webkit-scrollbar-button {
+    display: none;
+  }
+
   .main_board {
     max-height: calc(100dvh - (2 * 80px));
   }

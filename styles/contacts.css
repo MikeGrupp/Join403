@@ -136,3 +136,20 @@
   border-style: none;
   box-shadow: none;
 }
+
+.contact_list_container::-webkit-scrollbar-button {
+  height: 24px;
+  width: 10px;
+  background-repeat: no-repeat;
+}
+
+.contact_list_container::-webkit-scrollbar-button:vertical:decrement {
+  background-position: center bottom;
+  background-image: url("../assets/img/scrollbarArrowUp.svg");
+
+}
+
+.contact_list_container::-webkit-scrollbar-button:vertical:increment {
+  background-position: center top;
+  background-image: url("../assets/img/scrollbarArrowDown.svg");
+}
