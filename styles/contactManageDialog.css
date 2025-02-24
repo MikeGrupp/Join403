@@ -235,14 +235,6 @@
   font-weight: 700;
 }
 
-.button_create:disabled {
-  color: #2a3647;
-  background-color: #ffffff;
-  border: 1px solid #2a3647;
-  border-radius: 10px;
-  cursor: auto;
-}
-
 .button_create:hover:enabled {
   background-color: #29abe2;
   box-shadow: 0px 4px 4px 0px #00000040;
