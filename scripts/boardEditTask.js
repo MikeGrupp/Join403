@@ -88,6 +88,10 @@ function renderEditSubtasks(task) {
  * @param {string} taskId - The ID of the task to edit
  */
 async function editTask(taskId) {
+  let validation = addTaskValidation();
+  if (!validation) {
+    return;
+  }
   await patchTask(taskId);
   await patchAssignedAccounts2(taskId);
   await patchSubtasks(taskId);
@@ -172,6 +176,10 @@ function loadEditSubtasksArray() {
   }
 }
 
+/**
+ * Fügt Event-Listener zu den Eingabefeldern für Titel und Unteraufgaben hinzu.
+ * Überprüft beim Verlassen des Eingabefelds, ob der eingegebene Text gültig ist.
+ */
 function addTitleInputListener() {
   let titleInput = document.getElementById('addTaskTitle');
   if (titleInput) {
