@@ -3,13 +3,14 @@
  *
  * @param {string} taskId - The ID of the task
  */
-function initRenderEditTask(taskId){
+function initRenderEditTask(taskId) {
   let task = tasks[taskId];
-  renderDetailEditTask(task,taskId)
+  renderDetailEditTask(task, taskId)
   renderEditAccounts();
   renderEditSubtasks(task);
   renderPrio(task.prio);
   loadEditSubtasksArray();
+  addTitleInputListener();
 }
 
 /**
@@ -17,7 +18,7 @@ function initRenderEditTask(taskId){
  *
  * @param {string} taskId - The ID of the task
  */
-function renderDetailEditTask(task,taskId) {
+function renderDetailEditTask(task, taskId) {
   let [day, month, year] = task.dueDate.split("/");
   let formattedDate = `${year}-${month}-${day}`;
   let container = document.getElementById("taskDetail");
@@ -58,7 +59,7 @@ function checkAssignedContacts() {
       let id = "checkbox" + account.id;
       let currentCheckBox = document.getElementById(id);
       currentCheckBox.checked = true;
-    } catch (error) {}
+    } catch (error) { }
   }
 }
 
@@ -168,5 +169,20 @@ function loadEditSubtasksArray() {
     let subtaskId = subtasksIds[i];
     let subtask = subtasks[subtaskId];
     editSubtasks.push(subtask);
+  }
+}
+
+function addTitleInputListener() {
+  let titleInput = document.getElementById('addTaskTitle');
+  if (titleInput) {
+    titleInput.addEventListener('blur', function () {
+      validateTitleCharacters(this.value);
+    });
+  }
+  let SubtaskTitleInput = document.getElementById('addTaskSubtask');
+  if (SubtaskTitleInput) {
+    SubtaskTitleInput.addEventListener('blur', function () {
+      validateSubtaskInput(this.value);
+    });
   }
 }

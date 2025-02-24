@@ -1,325 +1,232 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Join</title>
-    <link rel="icon" type="image/x-icon" href="assets/img/logo1.svg" />
 
-    <script src="./scripts/submenus.js"></script>
-    <script src="./scripts/templates.js"></script>
-    <script src="./scripts/templateTask.js"></script>
-    <script src="./scripts/templateBoard.js"></script>
-    <script src="./scripts/contacts.js"></script>
-    <script src="scripts/databaseController.js"></script>
-    <script src="./scripts/utils.js"></script>
-    <script src="./scripts/task.js" defer></script>
-    <script src="./scripts/postTask.js" defer></script>
-    <script src="./scripts/taskAssignedContacts.js" defer></script>
-    <script src="./scripts/taskSubtasks.js" defer></script>
-    <script src="./scripts/notifications.js"></script>
-    <script src="./scripts/board.js"></script>
-    <script src="./scripts/boardDetailTask.js"></script>
-    <script src="./scripts/boardEditTask.js"></script>
-    <script src="./scripts/boardDragAndDrop.js"></script>
-    <script src="./scripts/boardAnimation.js"></script>
-    <script src="./scripts/boardSearch.js"></script>
-    <script src="./scripts/boardDeleteContact.js"></script>
-    <script src="./script.js"></script>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Join</title>
+  <link rel="icon" type="image/x-icon" href="assets/img/logo1.svg" />
 
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="styles/fonts.css" />
-    <link rel="stylesheet" href="styles/header.css" />
-    <link rel="stylesheet" href="styles/submenus.css" />
-    <link rel="stylesheet" href="styles/sidebar.css" />
-    <link rel="stylesheet" href="styles/userColors.css" />
-    <link rel="stylesheet" href="styles/task.css" />
-    <link rel="stylesheet" href="styles/notifications.css" />
-    <link rel="stylesheet" href="styles/board.css" />
-    <link rel="stylesheet" href="styles/media.css" />
-  </head>
-  <body onload="initAddTask()">
-    <header id="header" class="header"></header>
-    <dialog
-      id="submenu_dialog"
-      class="submenu_dialog"
-      w3-include-html="./templates/submenu.html"
-    ></dialog>
-    <div class="sidebar" id="sidebar"></div>
-    <main>
-      <div class="addTask_container" id="addTaskContainer">
-        <div class="addTask_content">
-          <div class="addTask_headline">
-            <h1>Add Task</h1>
-          </div>
-          <div class="addTask_formular">
-            <div class="addTask_formular_left">
-              <div class="addTask_formular_first">
-                <label class="addTask_formular_headline" for="addTaskTitle">
-                  Title
-                  <span style="color: red">*</span>
-                </label>
-                <input
-                  class="input"
-                  placeholder="Enter a title"
-                  id="addTaskTitle"
-                  name="title"
-                  type="text"
-                />
-                <div class="dropdown_wrapper">
-                  <div
-                    class="addTask_required d-none"
-                    id="addTaskRequiredTitle"
-                  >
-                    This field is required
-                  </div>
-                </div>
-              </div>
-              <div class="addTask_formular_second">
-                <label
-                  class="addTask_formular_headline"
-                  for="addTaskDescription"
-                >
-                  Description
-                </label>
-                <textarea
-                  placeholder="Enter a Description"
-                  id="addTaskDescription"
-                  name="Description"
-                ></textarea>
-              </div>
-              <div class="addTask_formular_second">
-                <label
-                  class="addTask_formular_headline"
-                  for="addTaskAssignedTo"
-                >
-                  Assigned to
-                </label>
-                <div
-                  class="addTask_subtask_container"
-                  id="addTaskContactContainer"
-                >
-                  <input
-                    class="input_with_button"
-                    id="addTaskAssignedTo"
-                    name="AssignedTo"
-                    type="text"
-                    placeholder="Select contacts to assign"
-                    onfocus="inputDropdownMenuFocus()"
-                    oninput="searchContacts()"
-                  />
-                  <div class="delete_button">
-                    <button class="add_button" onclick="arrowDropdownMenu()">
-                      <img
-                        id="dropdownButton"
-                        style="width: 24px; height: 24px"
-                        src="assets/img/arrowDropDown.svg"
-                        alt=""
-                      />
-                    </button>
-                  </div>
-                </div>
-                <div class="dropdown_wrapper">
-                  <div
-                    class="dropdown_container d-none"
-                    id="dropdownContainer"
-                  ></div>
-                </div>
-                <div class="dropdown_wrapper">
-                  <div
-                    class="addTask_assigned_contacts"
-                    id="assignedContactsContainer"
-                  ></div>
-                </div>
-                <div class="dropdown_wrapper">
-                  <div
-                    class="addTask_required d-none"
-                    id="addTaskRequiredContacts"
-                    style="top: 130px"
-                  >
-                    max. 4 User
-                  </div>
+  <script src="./scripts/submenus.js"></script>
+  <script src="./scripts/templates.js"></script>
+  <script src="./scripts/templateTask.js"></script>
+  <script src="./scripts/templateBoard.js"></script>
+  <script src="./scripts/contacts.js"></script>
+  <script src="scripts/databaseController.js"></script>
+  <script src="./scripts/utils.js"></script>
+  <script src="./scripts/task.js" defer></script>
+  <script src="./scripts/postTask.js" defer></script>
+  <script src="./scripts/taskAssignedContacts.js" defer></script>
+  <script src="./scripts/taskSubtasks.js" defer></script>
+  <script src="./scripts/notifications.js"></script>
+  <script src="./scripts/board.js"></script>
+  <script src="./scripts/boardDetailTask.js"></script>
+  <script src="./scripts/boardEditTask.js"></script>
+  <script src="./scripts/boardDragAndDrop.js"></script>
+  <script src="./scripts/boardAnimation.js"></script>
+  <script src="./scripts/boardSearch.js"></script>
+  <script src="./scripts/boardDeleteContact.js"></script>
+  <script src="./script.js"></script>
+
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="styles/fonts.css" />
+  <link rel="stylesheet" href="styles/header.css" />
+  <link rel="stylesheet" href="styles/submenus.css" />
+  <link rel="stylesheet" href="styles/sidebar.css" />
+  <link rel="stylesheet" href="styles/userColors.css" />
+  <link rel="stylesheet" href="styles/task.css" />
+  <link rel="stylesheet" href="styles/notifications.css" />
+  <link rel="stylesheet" href="styles/board.css" />
+  <link rel="stylesheet" href="styles/media.css" />
+</head>
+
+<body onload="initAddTask()">
+  <header id="header" class="header"></header>
+  <dialog id="submenu_dialog" class="submenu_dialog" w3-include-html="./templates/submenu.html"></dialog>
+  <div class="sidebar" id="sidebar"></div>
+  <main>
+    <div class="addTask_container" id="addTaskContainer">
+      <div class="addTask_content">
+        <div class="addTask_headline">
+          <h1>Add Task</h1>
+        </div>
+        <div class="addTask_formular">
+          <div class="addTask_formular_left">
+            <div class="addTask_formular_first">
+              <label class="addTask_formular_headline " for="addTaskTitle">
+                Title
+                <span style="color: red">*</span>
+                <div class="userFeedbackMsg d-none" id="userFeedbackTitle"></div>
+              </label>
+              <input class="input" placeholder="Enter a title" id="addTaskTitle" name="title" type="text" />
+              <div class="dropdown_wrapper">
+                <div class="addTask_required d-none" id="addTaskRequiredTitle">
+                  This field is required
                 </div>
               </div>
             </div>
-            <div class="addTask_border"></div>
-            <div class="addTask_formular_right">
-              <div class="addTask_formular_first">
-                <label class="addTask_formular_headline" for="addTaskDate">
-                  Due Date
-                  <span style="color: red">*</span>
-                </label>
-                <input id="addTaskDate" class="input" name="Date" type="date" />
-                <div class="dropdown_wrapper">
-                  <div
-                    class="addTask_required d-none"
-                    id="addTaskRequiredDueDate"
-                  >
-                    This field is required
-                  </div>
+            <div class="addTask_formular_second">
+              <label class="addTask_formular_headline" for="addTaskDescription">
+                Description
+              </label>
+              <textarea placeholder="Enter a Description" id="addTaskDescription" name="Description"></textarea>
+            </div>
+            <div class="addTask_formular_second">
+              <label class="addTask_formular_headline" for="addTaskAssignedTo">
+                Assigned to
+              </label>
+              <div class="addTask_subtask_container" id="addTaskContactContainer">
+                <input class="input_with_button" id="addTaskAssignedTo" name="AssignedTo" type="text"
+                  placeholder="Select contacts to assign" onfocus="inputDropdownMenuFocus()"
+                  oninput="searchContacts()" />
+                <div class="delete_button">
+                  <button class="add_button" onclick="arrowDropdownMenu()">
+                    <img id="dropdownButton" style="width: 24px; height: 24px" src="assets/img/arrowDropDown.svg"
+                      alt="" />
+                  </button>
                 </div>
               </div>
-              <div class="addTask_formular_second">
-                <div class="addTask_formular_headline">Prio</div>
-                <div class="addTask_prio_container" id="prioContainer">
-                  <div
-                    class="addTask_prio"
-                    id="prioUrgent"
-                    onclick="renderPrio('urgent')"
-                  >
-                    Urgent
-                    <img src="assets/img/prio_urgent.svg" alt="Urgent" />
-                  </div>
-                  <div
-                    class="addTask_prio addTask_prio_focus_medium"
-                    id="prioMedium"
-                    onclick="renderPrio('medium')"
-                  >
-                    Medium
-                    <img src="assets/img/Prio media.svg" alt="Medium" />
-                  </div>
-                  <div
-                    class="addTask_prio"
-                    id="prioLow"
-                    onclick="renderPrio('low')"
-                  >
-                    Low
-                    <img src="assets/img/prio_low.svg" alt="Low" />
-                  </div>
-                </div>
+              <div class="dropdown_wrapper">
+                <div class="dropdown_container d-none" id="dropdownContainer"></div>
               </div>
-              <div class="addTask_formular_second">
-                <label class="addTask_formular_headline" for="addTaskCategory">
-                  Category
-                  <span style="color: red">*</span>
-                </label>
-                <div
-                  id="addTaskCategory"
-                  class="div_with_button"
-                  onclick="dNone('dropdownContainerCategory'), rotate90('dropdownButtonCategory')"
-                >
-                  <div id="addTaskCategoryHeadline">Select Task Category</div>
-                  <div class="delete_button">
-                    <button class="add_button">
-                      <img
-                        id="dropdownButtonCategory"
-                        style="width: 24px; height: 24px"
-                        src="assets/img/arrowDropDown.svg"
-                        alt=""
-                      />
-                    </button>
-                  </div>
-                </div>
-                <div class="dropdown_wrapper">
-                  <div
-                    class="dropdown_container d-none"
-                    id="dropdownContainerCategory"
-                  >
-                    <div
-                      class="dropdown_option"
-                      onclick="renderCategory('Technical Task'), dNone('dropdownContainerCategory'), rotate90('dropdownButtonCategory')"
-                    >
-                      <div class="dropdown_name_category">Technical Task</div>
-                    </div>
-                    <div
-                      class="dropdown_option"
-                      onclick="renderCategory('User Story'), dNone('dropdownContainerCategory'), rotate90('dropdownButtonCategory')"
-                    >
-                      <div class="dropdown_name_category">User Story</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="dropdown_wrapper">
-                  <div
-                    class="addTask_required d-none"
-                    id="addTaskRequiredCategory"
-                  >
-                    This field is required
-                  </div>
-                </div>
+              <div class="dropdown_wrapper">
+                <div class="addTask_assigned_contacts" id="assignedContactsContainer"></div>
               </div>
-              <div class="addTask_formular_second">
-                <label class="addTask_formular_headline" for="addTaskSubtask">
-                  Subtask
-                </label>
-                <div
-                  class="addTask_subtask_container"
-                  id="addTaskSubtaskContainer"
-                >
-                  <input
-                    class="input_with_button"
-                    placeholder="Add new subtask"
-                    id="addTaskSubtask"
-                    name="subtask"
-                    type="text"
-                    oninput="addTaskRenderAddButton();"
-                  />
-                  <div class="delete_button" id="addTaskSubtaskDeleteButton">
-                    <button
-                      class="add_button"
-                      onclick="addTaskRenderAddButtonPlusButton()"
-                    >
-                      <img src="assets/img/Property 1=add.svg" alt="add" />
-                    </button>
-                  </div>
-                </div>
-                <div class="dropdown_wrapper">
-                  <div class="subtask_container" id="subtaskContainer"></div>
+              <div class="dropdown_wrapper">
+                <div class="addTask_required d-none" id="addTaskRequiredContacts" style="top: 130px">
+                  max. 4 User
                 </div>
               </div>
             </div>
           </div>
-          <div class="addTask_button_info_mobile">
+          <div class="addTask_border"></div>
+          <div class="addTask_formular_right">
+            <div class="addTask_formular_first">
+              <label class="addTask_formular_headline" for="addTaskDate">
+                Due Date
+                <span style="color: red">*</span>
+              </label>
+              <input id="addTaskDate" class="input" name="Date" type="date" />
+              <div class="dropdown_wrapper">
+                <div class="addTask_required d-none" id="addTaskRequiredDueDate">
+                  This field is required
+                </div>
+              </div>
+            </div>
+            <div class="addTask_formular_second">
+              <div class="addTask_formular_headline">Prio</div>
+              <div class="addTask_prio_container" id="prioContainer">
+                <div class="addTask_prio" id="prioUrgent" onclick="renderPrio('urgent')">
+                  Urgent
+                  <img src="assets/img/prio_urgent.svg" alt="Urgent" />
+                </div>
+                <div class="addTask_prio addTask_prio_focus_medium" id="prioMedium" onclick="renderPrio('medium')">
+                  Medium
+                  <img src="assets/img/Prio media.svg" alt="Medium" />
+                </div>
+                <div class="addTask_prio" id="prioLow" onclick="renderPrio('low')">
+                  Low
+                  <img src="assets/img/prio_low.svg" alt="Low" />
+                </div>
+              </div>
+            </div>
+            <div class="addTask_formular_second">
+              <label class="addTask_formular_headline" for="addTaskCategory">
+                Category
+                <span style="color: red">*</span>
+              </label>
+              <div id="addTaskCategory" class="div_with_button"
+                onclick="dNone('dropdownContainerCategory'), rotate90('dropdownButtonCategory')">
+                <div id="addTaskCategoryHeadline">Select Task Category</div>
+                <div class="delete_button">
+                  <button class="add_button">
+                    <img id="dropdownButtonCategory" style="width: 24px; height: 24px"
+                      src="assets/img/arrowDropDown.svg" alt="" />
+                  </button>
+                </div>
+              </div>
+              <div class="dropdown_wrapper">
+                <div class="dropdown_container d-none" id="dropdownContainerCategory">
+                  <div class="dropdown_option"
+                    onclick="renderCategory('Technical Task'), dNone('dropdownContainerCategory'), rotate90('dropdownButtonCategory')">
+                    <div class="dropdown_name_category">Technical Task</div>
+                  </div>
+                  <div class="dropdown_option"
+                    onclick="renderCategory('User Story'), dNone('dropdownContainerCategory'), rotate90('dropdownButtonCategory')">
+                    <div class="dropdown_name_category">User Story</div>
+                  </div>
+                </div>
+              </div>
+              <div class="dropdown_wrapper">
+                <div class="addTask_required d-none" id="addTaskRequiredCategory">
+                  This field is required
+                </div>
+              </div>
+            </div>
+            <div class="addTask_formular_second">
+              <label class="addTask_formular_headline" for="addTaskSubtask">
+                Subtask
+                <div class="userFeedbackMsg d-none" id="userFeedbackSubTask"></div>
+              </label>
+              <div class="addTask_subtask_container" id="addTaskSubtaskContainer">
+                <input class="input_with_button" placeholder="Add new subtask" id="addTaskSubtask" name="subtask"
+                  type="text" oninput="addTaskRenderAddButton();" />
+                <div class="delete_button" id="addTaskSubtaskDeleteButton">
+                  <button class="add_button" onclick="addTaskRenderAddButtonPlusButton()">
+                    <img src="assets/img/Property 1=add.svg" alt="add" />
+                  </button>
+                </div>
+              </div>
+              <div class="dropdown_wrapper">
+                <div class="subtask_container" id="subtaskContainer"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="addTask_button_info_mobile">
+          <p style="color: red">*</p>
+          This field is required
+        </div>
+      </div>
+      <div class="wrapper">
+        <div class="addTask_button_container">
+          <div class="addTask_button_info_display">
             <p style="color: red">*</p>
             This field is required
           </div>
-        </div>
-        <div class="wrapper">
-          <div class="addTask_button_container">
-            <div class="addTask_button_info_display">
-              <p style="color: red">*</p>
-              This field is required
-            </div>
-            <div class="addTask_button_content">
-              <button
-                id="addTaskButtonCancel"
-                onmouseover="addTaskRenderCancelButton('addTaskButtonCancel');"
-                class="white_btn pointer"
-                onmouseout="addTaskResetCancelButton('addTaskButtonCancel');"
-                onclick="clearAddTask()"
-              >
-                Clear <img src="assets/img/buttonCancel.svg" alt="cancel" />
-              </button>
-              <button class="standard_btn" onclick="addTask('addTask')">
-                Create Task
-                <img src="assets/img/check.svg" alt="Create Task" />
-              </button>
-            </div>
+          <div class="addTask_button_content">
+            <button id="addTaskButtonCancel" onmouseover="addTaskRenderCancelButton('addTaskButtonCancel');"
+              class="white_btn pointer" onmouseout="addTaskResetCancelButton('addTaskButtonCancel');"
+              onclick="clearAddTask()">
+              Clear <img src="assets/img/buttonCancel.svg" alt="cancel" />
+            </button>
+            <button class="standard_btn" onclick="addTask('addTask')">
+              Create Task
+              <img src="assets/img/check.svg" alt="Create Task" />
+            </button>
           </div>
         </div>
       </div>
-      <div class="addTask_button_content addTask_button_content_mobile">
-        <button
-          id="addTaskButtonCancelMobile"
-          onmouseover="addTaskRenderCancelButton('addTaskButtonCancelMobile');"
-          class="white_btn pointer"
-          onmouseout="addTaskResetCancelButton('addTaskButtonCancelMobile');"
-          onclick="clearAddTask()"
-        >
-          Clear <img src="assets/img/buttonCancel.svg" alt="cancel" />
-        </button>
-        <button class="standard_btn" onclick="addTask('addTask')">
-          Create Task
-          <img src="assets/img/check.svg" alt="Create Task" />
-        </button>
-      </div>
-      <ul id="notifications" class="notifications"></ul>
-    </main>
-    <div id="turn">
-      Please rotate your device! Landscape-Mode is not supported.
     </div>
-  </body>
-  <script>
-    includeHtml();
-  </script>
+    <div class="addTask_button_content addTask_button_content_mobile">
+      <button id="addTaskButtonCancelMobile" onmouseover="addTaskRenderCancelButton('addTaskButtonCancelMobile');"
+        class="white_btn pointer" onmouseout="addTaskResetCancelButton('addTaskButtonCancelMobile');"
+        onclick="clearAddTask()">
+        Clear <img src="assets/img/buttonCancel.svg" alt="cancel" />
+      </button>
+      <button class="standard_btn" onclick="addTask('addTask')">
+        Create Task
+        <img src="assets/img/check.svg" alt="Create Task" />
+      </button>
+    </div>
+    <ul id="notifications" class="notifications"></ul>
+  </main>
+  <div id="turn">
+    Please rotate your device! Landscape-Mode is not supported.
+  </div>
+</body>
+<script>
+  includeHtml();
+</script>
+
 </html>
