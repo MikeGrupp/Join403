@@ -16,7 +16,7 @@
   gap: 32px;
   background-color: #f6f7f8;
   width: calc(100% - 16px);
-  height: calc(100vh - (2 * 80px));
+  height: calc(100dvh - (2 * 80px + 24px));
 }
 
 .title_group {
