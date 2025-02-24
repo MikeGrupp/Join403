@@ -56,25 +56,7 @@ function validateContactFields(nameField, mailField, phoneField, fieldFocusCheck
 }
 
 /**
- * Handles the logic for enabling/disabling the submit button
- * based on the name and email field values
- *
- * @param {HTMLInputElement} nameField - The name input field
- * @param {HTMLInputElement} mailField - The email input field
- * @returns {boolean} True if both name and email have values, false otherwise
- */
-function handleContactValidation(nameField, mailField) {
-  if (nameField.value !== "" && mailField.value !== "") {
-    enableSubmitButton(true);
-    return true;
-  }
-  enableSubmitButton(false);
-  return false;
-}
-
-/**
  * Checks if the contact form is valid, performing all necessary validations
- * and handling the submit button state
  *
  * @param {HTMLInputElement} nameField - The name input field
  * @param {HTMLInputElement} mailField - The email input field
@@ -83,13 +65,11 @@ function handleContactValidation(nameField, mailField) {
  * @returns {boolean} True if the form is valid and ready for submission, false otherwise
  */
 function isContactValid(nameField, mailField, phoneField, fieldFocusCheck) {
-  if (validateContactFields(nameField, mailField, phoneField, fieldFocusCheck)) {
-    return handleContactValidation(nameField, mailField);
-  } else {
+  if (!validateContactFields(nameField, mailField, phoneField, fieldFocusCheck)) {
     displayFirstValidationMessage();
-    enableSubmitButton(false);
     return false;
   }
+  return true;
 }
 
 /**
@@ -99,8 +79,10 @@ function isContactValid(nameField, mailField, phoneField, fieldFocusCheck) {
  * @param {HTMLInputElement} nameField - The input field for the contact name
  */
 function validateName(fieldFocusCheck, nameField) {
+  removeCustomValidationMessage(nameField);
   if ((fieldFocusCheck && isFieldTouched(nameField)) || !fieldFocusCheck) {
     if (nameField.value === "") {
+      nameField.setCustomValidity(" ");
       currentValidationMessages.push(VALIDATION_DETAILS.EMPTY_CONTACT_NAME.TEXT);
     }
     if (!nameField.checkValidity()) {
@@ -119,6 +101,7 @@ function validateMail(fieldFocusCheck, mailField) {
   removeCustomValidationMessage(mailField);
   if ((fieldFocusCheck && isFieldTouched(mailField)) || !fieldFocusCheck) {
     if (mailField.value === "") {
+      mailField.setCustomValidity(" ");
       currentValidationMessages.push(VALIDATION_DETAILS.EMPTY_CONTACT_MAIL.TEXT);
     }
     if (!(mailField.checkValidity() && isValidEmailFormat(mailField))) {
@@ -226,12 +209,3 @@ function removeCustomValidationMessage(field) {
   field.setCustomValidity("");
 }
 
-/**
- * Enables or disables the form submit button
- *
- * @param {boolean} isEnabled - Whether to enable (true) or disable (false) the submit button
- */
-function enableSubmitButton(isEnabled) {
-  const submitButton = document.getElementById("submitButton");
-  submitButton.disabled = !isEnabled;
-}
