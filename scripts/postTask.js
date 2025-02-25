@@ -247,7 +247,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let dateInput = document.getElementById('addTaskDate');
   if (dateInput) {
     dateInput.addEventListener('input', function () {
-      validateFutureDate(this);
+      validateFutureDate(this.value);
     });
   }
 });
