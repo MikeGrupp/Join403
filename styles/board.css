@@ -5,8 +5,10 @@
 
 .wrapper {
   width: 90%;
+  max-height: 770px;
   margin-left: 5%;
   margin-right: 5%;
+  overflow-y: auto;
 }
 
 .board {
@@ -301,6 +303,7 @@
   background-color: white;
   position: fixed;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   padding-top: 20px;
@@ -325,6 +328,9 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  position: sticky;
+  top: 0;
+  background-color: white;
 }
 
 .detail_task_close_button {
@@ -406,6 +412,9 @@
   justify-content: flex-end;
   width: 100%;
   margin-top: 15px;
+  position: sticky;
+  bottom: 0;
+  background-color: white;
 }
 
 .detail_task_edit_delete img {
@@ -495,6 +504,9 @@
   display: flex;
   justify-content: flex-end;
   width: 100%;
+  position: sticky;
+  top: 0;
+  background-color: white;
 }
 
 .addTask_formular_second_subtask {
@@ -526,8 +538,9 @@
 .board_edit {
   display: flex;
   justify-content: flex-end;
-  width: 100%;
+  width: calc(100% - (2 * 5%));
   margin-top: 15px;
+  margin-right: 38px;
 }
 
 .addTask_button_info {
