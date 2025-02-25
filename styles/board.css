@@ -5,8 +5,10 @@
 
 .wrapper {
   width: 90%;
+  max-height: 770px;
   margin-left: 5%;
   margin-right: 5%;
+  overflow-y: auto;
 }
 
 .board {
