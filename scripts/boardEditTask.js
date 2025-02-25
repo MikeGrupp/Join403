@@ -46,7 +46,7 @@ function renderEditAccounts() {
         <div class="task_account1 bg_${account.color}">${account.initials}</div>
       `;
   }
-  assignedAccountsIds.length > 3 ? container.innerHTML += `<div class="task_account1 bg_grey">+${notRendertAmount}</div>`: "";
+  assignedAccountsIds.length > 5 ? container.innerHTML += `<div class="task_account1 bg_grey">+${notRendertAmount}</div>`: "";
   renderDropdownContainerContacts();
 }
 
