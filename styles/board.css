@@ -112,8 +112,7 @@
   background-color: rgb(41, 171, 226);
   border-color: transparent;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.4);
-  zoom: 1.1;
-  transition: 0.5s;
+  transition: 0.125s;
 }
 
 .add_task_button img {
