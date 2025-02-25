@@ -38,6 +38,7 @@
     <link rel="stylesheet" href="styles/board.css" />
     <link rel="stylesheet" href="styles/media.css" />
   </head>
+
   <body onload="initAddTask()">
     <header id="header" class="header"></header>
     <dialog
@@ -58,6 +59,10 @@
                 <label class="addTask_formular_headline" for="addTaskTitle">
                   Title
                   <span style="color: red">*</span>
+                  <div
+                    class="userFeedbackMsg d-none"
+                    id="userFeedbackTitle"
+                  ></div>
                 </label>
                 <input
                   class="input"
@@ -131,7 +136,15 @@
                     id="assignedContactsContainer"
                   ></div>
                 </div>
-                <div class="dropdown_wrapper"></div>
+                <div class="dropdown_wrapper">
+                  <div
+                    class="addTask_required d-none"
+                    id="addTaskRequiredContacts"
+                    style="top: 130px"
+                  >
+                    max. 4 User
+                  </div>
+                </div>
               </div>
             </div>
             <div class="addTask_border"></div>
@@ -233,6 +246,10 @@
               <div class="addTask_formular_second">
                 <label class="addTask_formular_headline" for="addTaskSubtask">
                   Subtask
+                  <div
+                    class="userFeedbackMsg d-none"
+                    id="userFeedbackSubTask"
+                  ></div>
                 </label>
                 <div
                   class="addTask_subtask_container"

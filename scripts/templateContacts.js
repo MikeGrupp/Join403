@@ -169,7 +169,7 @@ function templateRenderContactListLetter(letter) {
         buttonLeftOnClick: `resetForm('contact_form'), closeContactManage()`,
         buttonLeftDesktopClass: "button_close_desktop",
         buttonRightText: "Create contact",
-        buttonRightEnabled: "disabled",
+        buttonRightEnabled: "",
         onSubmit: "addNewContact(event)",
         profileBadge: `<img src="./assets/img/personWhite.svg" alt="person icon">`,
       },
@@ -207,9 +207,9 @@ function templateRenderContactListLetter(letter) {
           <div class="contact_form_profile_container">
             <form class="contact_form_profile" id="contact_form">
               <div class="contact_form_profile_inputs">
-                <input id="contact_manage_name" class="input_field input_icon_person" type="text" required maxlength="30" placeholder="Name" aria-label="Name" oninput="validateContact(true)">
-                <input id="contact_manage_mail" class="input_field input_icon_mail" type="email" required maxlength="30" placeholder="Email" aria-label="Email" oninput="validateContact(true)">
-                <input id="contact_manage_phone" class="input_field input_icon_call" type="tel" maxlength="30" placeholder="Phone" aria-label="Phone" oninput="validateContact(true)">
+                <input id="contact_manage_name" class="input_field input_icon_person" type="text" required maxlength="30" placeholder="Name" aria-label="Name" onblur="this.value = this.value.trim(); validateContact(true)">
+                <input id="contact_manage_mail" class="input_field input_icon_mail" type="email" required maxlength="30" placeholder="Email" aria-label="Email" onblur="this.value = this.value.trim(); validateContact(true)">
+                <input id="contact_manage_phone" class="input_field input_icon_call" type="tel" maxlength="30" placeholder="Phone" aria-label="Phone" onblur="this.value = this.value.trim(); validateContact(true)">
               </div>
               <pre id="log"></pre>
               <div class="contact_form_profile_buttons">
@@ -218,7 +218,7 @@ function templateRenderContactListLetter(letter) {
                     ${modeConfig.buttonLeftText}
                   </button>
                 </div>
-                <button id="submitButton" class="button button_create" type="submit" form="contact_form" onclick="${modeConfig.onSubmit}" ${modeConfig.buttonRightEnabled}>
+                <button id="submitButton" class="button button_create" type="submit" form="contact_form" onclick="touchAllContactFields(); ${modeConfig.onSubmit}" ${modeConfig.buttonRightEnabled}>
                   ${modeConfig.buttonRightText}
                   <img class="button_icon" src="./assets/img/check.svg" alt="">
                 </button>

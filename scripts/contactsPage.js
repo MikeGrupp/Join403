@@ -167,7 +167,6 @@ function openContactManage() {
   addContactManageOutsideClickClosingListener(modal);
   addContactManageEscapeListener(modal);
   addContactFieldsFocusListeners();
-  addContactFieldsBlurTrimListeners();
   modal.showModal();
 }
 
@@ -344,16 +343,6 @@ function addContactFieldsFocusListeners() {
 }
 
 /**
- * Adds focus listeners to the contact name, email, and phone input fields
- * When these fields loses focus, the content gets trimmed
- */
-function addContactFieldsBlurTrimListeners() {
-  addFormBlurTrimListener(document.getElementById(CONSTANTS.SELECTORS.CONTACT_NAME));
-  addFormBlurTrimListener(document.getElementById(CONSTANTS.SELECTORS.CONTACT_MAIL));
-  addFormBlurTrimListener(document.getElementById(CONSTANTS.SELECTORS.CONTACT_PHONE));
-}
-
-/**
  * Adds a focus listener to the given element
  * When the element gains focus, the 'touched' class is added to it
  *
@@ -362,8 +351,16 @@ function addContactFieldsBlurTrimListeners() {
 function addFormFocusListener(element) {
   element.addEventListener('focus', () => {
     element.classList.add('touched');
-    validateContact(true);
   });
+}
+
+/**
+ * Adds the 'touched' class to all contact form fields
+ */
+function touchAllContactFields() {
+  document.getElementById(CONSTANTS.SELECTORS.CONTACT_NAME).classList.add('touched');
+  document.getElementById(CONSTANTS.SELECTORS.CONTACT_MAIL).classList.add('touched');
+  document.getElementById(CONSTANTS.SELECTORS.CONTACT_PHONE).classList.add('touched');
 }
 
 /**
@@ -377,3 +374,4 @@ function validateContact(fieldFocusCheck) {
   let phoneInput = document.getElementById(CONSTANTS.SELECTORS.CONTACT_PHONE);
   isContactValid(nameInput, mailInput, phoneInput, fieldFocusCheck);
 }
+

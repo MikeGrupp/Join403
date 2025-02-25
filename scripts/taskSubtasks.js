@@ -39,18 +39,22 @@ function reRenderSubtask() {
 }
 
 /**
- * Adds a new task or subtask to the respective arrays and updates the UI
+ * Starts validation and adds a new subtask to the respective arrays and updates the UI
  */
 function addTaskAddSubtask() {
-  let input = document.getElementById("addTaskSubtask").value;
-  addTaskSubtasks.push(input);
-  let arrayEditSubtask = {
-    status: "open",
-    titel: input,
-  };
-  editSubtasks.push(arrayEditSubtask);
-  renderSubtaskContainer();
-  reRenderSubtask();
+  let SubtaskTitleInput = document.getElementById('addTaskSubtask');
+  let validation = validateSubtaskInput(SubtaskTitleInput.value);
+  if (validation) {
+    let input = document.getElementById("addTaskSubtask").value;
+    addTaskSubtasks.push(input);
+    let arrayEditSubtask = {
+      status: "open",
+      titel: input,
+    };
+    editSubtasks.push(arrayEditSubtask);
+    renderSubtaskContainer();
+    reRenderSubtask();
+  }
 }
 
 /**
@@ -145,3 +149,36 @@ function addTaskResetCancelButton(id) {
   container.innerHTML =
     'Clear <img src="assets/img/buttonCancel.svg" alt="cancel"/>';
 }
+
+/**
+ * Validates the subtask title input.
+ *
+ * @param {string} title - The subtask title to validate.
+ * @returns {boolean} - Returns true if the title is valid, otherwise false.
+ */
+function validateSubtaskInput(title) {
+  title = title.trim();
+  if (title.replace(/\s/g, "").length < 2) {
+    postUserFeedback(`Min. 2 characters.`, `userFeedbackSubTask`);
+    return false;
+  }
+  const titlePattern = /^[A-Za-zÀ-ÖØ-öø-ÿ0-9' -]+$/;
+  if (!titlePattern.test(title)) {
+    postUserFeedback(`Letters, numbers, spaces, hyphens.`, `userFeedbackSubTask`);
+    return false;
+  }
+  document.getElementById("userFeedbackSubTask").innerHTML = "";
+  return true;
+}
+
+/**
+ * Adds an event listener to the subtask input field for Validation after the DOM has loaded.
+ */
+document.addEventListener('DOMContentLoaded', () => {
+  let SubtaskTitleInput = document.getElementById('addTaskSubtask');
+  if (SubtaskTitleInput) {
+    SubtaskTitleInput.addEventListener('blur', function () {
+      validateSubtaskInput(this.value);
+    });
+  }
+});

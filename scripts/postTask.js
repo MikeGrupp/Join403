@@ -127,10 +127,36 @@ function validateCategory() {
  * @returns {boolean} True if all fields are valid, false otherwise
  */
 function addTaskValidation() {
+  let titleInput = document.getElementById('addTaskTitle');
   let isValidTitle = validateTitle();
+  let validTitleCharacters = validateTitleCharacters(titleInput.value);
   let isValidDueDate = validateDueDate();
   let isValidCategory = validateCategory();
-  return isValidTitle && isValidDueDate && isValidCategory === true ? true : false;
+  return isValidTitle && isValidDueDate && isValidCategory && validTitleCharacters === true ? true : false;
+}
+
+/**
+ * Validates the title input.
+ * - Ensures the title is at least 2 non-space characters long.
+ * - Allows letters, numbers, spaces, apostrophes, and hyphens.
+ * - Posts a user feedback message if the input is invalid.
+ *
+ * @param {string} title - The title to validate.
+ * @returns {boolean} - Returns true if valid, otherwise false.
+ */
+function validateTitleCharacters(title) {
+  title = title.trim();
+  if (title.replace(/\s/g, "").length < 2) {
+    postUserFeedback(`Min. 2 characters.`, `userFeedbackTitle`);
+    return false;
+  }
+  const titlePattern = /^[A-Za-zÀ-ÖØ-öø-ÿ0-9' -]+$/;
+  if (!titlePattern.test(title)) {
+    postUserFeedback(`Letters, numbers, spaces, hyphens.`, `userFeedbackTitle`);
+    return false;
+  }
+  document.getElementById("userFeedbackTitle").innerHTML = "";
+  return true;
 }
 
 /**
@@ -185,3 +211,12 @@ async function postSubtask(taskId) {
     });
   }
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+  let titleInput = document.getElementById('addTaskTitle');
+  if (titleInput) {
+    titleInput.addEventListener('blur', function () {
+      validateTitleCharacters(this.value);
+    });
+  }
+});

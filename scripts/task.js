@@ -233,3 +233,15 @@ document.addEventListener("click", function (event) {
     inputDropdownMenuBlur();
   }
 });
+
+/**
+ * Displays a message in the specified message box.
+ *
+ * @param {string} msg - The message to be displayed.
+ * @param {string} id - The ID of the message box element.
+ */
+function postUserFeedback(msg, id) {
+  let userFeedbackId = document.getElementById(id);
+  userFeedbackId.classList.remove('d-none');
+  userFeedbackId.innerHTML = msg
+}

@@ -214,6 +214,7 @@ function templateRenderDetailEditTask(
           <div class="addTask_formular_first">
             <label class="addTask_formular_headline" for="addTaskTitle">
               Title
+              <div class="userFeedbackMsg d-none" id="userFeedbackTitle"></div>
             </label>
             <input
               class="input"
@@ -314,6 +315,7 @@ function templateRenderDetailEditTask(
             <div class="addTask_formular_second_subtask">
               <label class="addTask_formular_headline" for="addTaskSubtask">
                 Subtask
+                <div class="userFeedbackMsg d-none" id="userFeedbackSubTask"></div>
               </label>
               <div class="addTask_subtask_container" id="addTaskSubtaskContainer">
                 <input
