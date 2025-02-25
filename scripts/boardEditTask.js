@@ -34,16 +34,19 @@ function renderDetailEditTask(task,taskId) {
  */
 function renderEditAccounts() {
   assignedContacts = [];
+  assignedContacts = assignedAccounts;
   addedAccounts = assignedAccountsIds.length;
   let container = document.getElementById("assignedContactsContainer");
+  let length = assignedAccountsIds.length < 6 ? assignedAccountsIds.length : 5;
+  let notRendertAmount = assignedAccountsIds.length - 5;
   container.innerHTML = ``;
-  for (let i = 0; i < assignedAccountsIds.length; i++) {
+  for (let i = 0; i < length; i++) {
     let account = assignedAccounts[i];
-    assignedContacts.push(account);
     container.innerHTML += `
         <div class="task_account1 bg_${account.color}">${account.initials}</div>
       `;
   }
+  assignedAccountsIds.length > 3 ? container.innerHTML += `<div class="task_account1 bg_grey">+${notRendertAmount}</div>`: "";
   renderDropdownContainerContacts();
 }
 

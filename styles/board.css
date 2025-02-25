@@ -537,11 +537,6 @@
   gap: 5px;
 }
 
-#addTaskRequiredContacts {
-  top: -62px !important;
-  left: 100px;
-}
-
 @keyframes wiggleAnimation {
   37% {
     transform: rotate(5deg);

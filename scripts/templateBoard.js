@@ -309,12 +309,6 @@ function templateRenderDetailEditTask(
               ></div>
             </div>
             <div class="dropdown_wrapper">
-              <div
-                class="addTask_required d-none"
-                id="addTaskRequiredContacts"
-                style="top: 130px"
-              >
-                  max. 4 User
               </div>
             </div>
             <div class="addTask_formular_second_subtask">

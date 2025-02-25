@@ -1306,11 +1306,6 @@
     gap: 15px;
   }
 
-  #addTaskRequiredContacts {
-    top: -102px !important;
-    left: 100px;
-  }
-
   .taskdetail {
     width: 100vw;
   }

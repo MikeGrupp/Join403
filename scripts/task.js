@@ -200,7 +200,6 @@ function hideRequiredFieldErrors() {
   document.getElementById("addTaskRequiredTitle").classList.add("d-none");
   document.getElementById("addTaskRequiredDueDate").classList.add("d-none");
   document.getElementById("addTaskRequiredCategory").classList.add("d-none");
-  document.getElementById("addTaskRequiredContacts").classList.add("d-none");
 }
 
 /**

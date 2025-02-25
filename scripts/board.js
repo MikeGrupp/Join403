@@ -102,7 +102,7 @@ async function renderBoard() {
     fetchSubTaskFinished();
     renderTasks(task, taskId);
     renderSubtasks(taskId);
-    renderAssignedAccounts(taskId);
+    renderZeroAssignedAccounts(taskId);
   }
 }
 
@@ -175,16 +175,35 @@ function renderSubtasks(taskId) {
  *
  * @param {string} taskId - The ID of the task
  */
-function renderAssignedAccounts(taskId) {
+function renderZeroAssignedAccounts(taskId) {
   let container = document.getElementById("accounts" + taskId);
-  if (assignedAccountsIds.length === 0) {
-    container.innerHTML = ``;
-  } else {
-    for (let i = 0; i < assignedAccountsIds.length; i++) {
+  assignedAccountsIds.length === 0 ? container.innerHTML = ``: renderAssignedAccounts(container);
+}
+
+/**
+ * Renders the assigned accounts for a given task
+ *
+ * @param {string} container - The current div
+ */
+function renderAssignedAccounts(container) {
+  let length = assignedAccountsIds.length < 3 ? assignedAccountsIds.length : 2;
+    for (let i = 0; i < length; i++) {
       let account = assignedAccounts[assignedAccountsIds[i]];
       container.innerHTML += `${getAssignedAccountsParams(account, i)}`;
     }
-  }
+    assignedAccountsIds.length > 3 ? notRenderContacts(container): "";
+}
+
+/**
+ * Renders the assigned accounts for a given task
+ *
+ * @param {string} container - The current div
+ */
+function notRenderContacts(container) {
+  let notRendertAmount = assignedAccountsIds.length - 2;
+    container.innerHTML += `
+    <div style="--position: -16px" class="task_account2 bg_grey">+${notRendertAmount}</div>
+  `;
 }
 
 /**

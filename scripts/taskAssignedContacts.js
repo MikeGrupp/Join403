@@ -53,6 +53,13 @@ function renderDropdownContainerContacts() {
  * Renders the assigned contacts
  */
 function renderAddTaskAssignedContacts() {
+  assignedContacts.length > 5 ? renderContactsPlusFour(): renderContactsMinusFour();
+}
+
+/**
+ * Renders under 4 the assigned contacts 
+ */
+function renderContactsMinusFour(){
   let container = document.getElementById("assignedContactsContainer");
   container.innerHTML = ``;
   for (let i = 0; i < assignedContacts.length; i++) {
@@ -63,6 +70,26 @@ function renderAddTaskAssignedContacts() {
         <div class="task_account1 bg_${color}">${initials}</div>
       `;
   }
+}
+
+/**
+ * Renders over 4 the assigned contacts 
+ */
+function renderContactsPlusFour() {
+  let container = document.getElementById("assignedContactsContainer");
+  let notRendertAmount = addedAccounts - 5;
+  container.innerHTML = ``;
+  for (let i = 0; i < 5; i++) {
+    let assignedContact = assignedContacts[i];
+    let initials = assignedContact.initials;
+    let color = assignedContact.color;
+    container.innerHTML += `
+        <div class="task_account1 bg_${color}">${initials}</div>
+      `;
+  }
+  container.innerHTML += `
+  <div class="task_account1 bg_grey">+${notRendertAmount}</div>
+`;
 }
 
 /**
@@ -139,15 +166,7 @@ function filterContacts(filter) {
 function addTaskAssignedContacts(contactId) {
   let currentCheckBox = document.getElementById("checkbox" + contactId);
   let assignedContact = storedContacts[contactId];
-  if (addedAccounts < 4) {
-    currentCheckBox.checked == false ? 
-    addTaskAssignedContactsAdd(assignedContact,contactId): addTaskAssignedContactsRemove(assignedContact,contactId);
-    document.getElementById("addTaskRequiredContacts").classList.add("d-none");
-  } else {
-    currentCheckBox.checked == true ? addTaskAssignedContactsRemove(assignedContact,contactId):"";
-    currentCheckBox.checked == true ? 
-    document.getElementById("addTaskRequiredContacts").classList.add("d-none"): document.getElementById("addTaskRequiredContacts").classList.remove("d-none");
-  }
+  currentCheckBox.checked == false ? addTaskAssignedContactsAdd(assignedContact,contactId): addTaskAssignedContactsRemove(assignedContact,contactId);
   renderAddTaskAssignedContacts();
 }
 
@@ -158,7 +177,6 @@ function addTaskAssignedContacts(contactId) {
  */
 function addTaskAssignedContactsAdd(assignedContact,contactId){
   let currentCheckBox = document.getElementById("checkbox" + contactId);
-  assignedAccounts.push(assignedContact);
   assignedAccountsIds.push(assignedContact.id);
   assignedContacts.push(assignedContact);
   currentCheckBox.checked = true;
@@ -174,7 +192,6 @@ function addTaskAssignedContactsAdd(assignedContact,contactId){
 function addTaskAssignedContactsRemove(assignedContact,contactId){
   let currentCheckBox = document.getElementById("checkbox" + contactId);
   let index = assignedContacts.findIndex((item) => item.id === contactId);
-  assignedAccounts.splice(assignedContact);
   assignedAccountsIds.splice(assignedContact);
   assignedContacts.splice(index, 1);
   currentCheckBox.checked = false;
