@@ -90,7 +90,7 @@ function renderEditSubtasks(task) {
  * @param {string} taskId - The ID of the task to edit
  */
 async function editTask(taskId) {
-  let validation = addTaskValidation();
+  let validation = editTaskValidation();
   if (!validation) {
     return;
   }
@@ -195,4 +195,17 @@ function addTitleInputListener() {
       validateSubtaskInput(this.value);
     });
   }
+}
+
+/**
+ * Validates all input fields for editing a task
+ * 
+ * @returns {boolean} True if all fields are valid, false otherwise
+ */
+function editTaskValidation() {
+  let titleInput = document.getElementById('addTaskTitle');
+  let isValidTitle = validateTitle();
+  let validTitleCharacters = validateTitleCharacters(titleInput.value);
+  let isValidDueDate = validateDueDate();
+  return isValidTitle && isValidDueDate && validTitleCharacters === true ? true : false;
 }

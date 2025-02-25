@@ -46,9 +46,9 @@ async function createTaskWithSubtasks() {
 async function handlePostTaskSuccess(site, taskId) {
   clearAddTask();
   if (site === "board") {
-      handleBoardSiteSuccess();
+    handleBoardSiteSuccess();
   } else if (site === "addTask") {
-      handleAddTaskSiteSuccess();
+    handleAddTaskSiteSuccess();
   }
   createToast("successNewTask");
 }
@@ -128,11 +128,33 @@ function validateCategory() {
  */
 function addTaskValidation() {
   let titleInput = document.getElementById('addTaskTitle');
+  let dueDateInput = document.getElementById('addTaskDate');
   let isValidTitle = validateTitle();
   let validTitleCharacters = validateTitleCharacters(titleInput.value);
+  let isvalidFutureDate = validateFutureDate(dueDateInput.value);
   let isValidDueDate = validateDueDate();
   let isValidCategory = validateCategory();
-  return isValidTitle && isValidDueDate && isValidCategory && validTitleCharacters === true ? true : false;
+  return isValidTitle && isValidDueDate && isvalidFutureDate && isValidCategory && validTitleCharacters === true ? true : false;
+}
+
+/**
+ * Validates the dueDate input.
+ * - Ensures the date is in the future.
+ *
+ * @param {string} inputDate - The title to validate.
+ * @returns {boolean} - Returns true if valid, otherwise false.
+ */
+function validateFutureDate(dueDate) {
+  let inputDate = new Date(dueDate);
+  let today = new Date();
+  today.setHours(0, 0, 0, 0);
+  inputDate.setHours(0, 0, 0, 0);
+  if (inputDate < today) {
+    postUserFeedback(`Date must not be in the past`, `userFeedbackDate`);
+    return false;
+  }
+  document.getElementById("userFeedbackDate").innerHTML = "";
+  return true;
 }
 
 /**
@@ -217,6 +239,15 @@ document.addEventListener('DOMContentLoaded', () => {
   if (titleInput) {
     titleInput.addEventListener('blur', function () {
       validateTitleCharacters(this.value);
+    });
+  }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  let dateInput = document.getElementById('addTaskDate');
+  if (dateInput) {
+    dateInput.addEventListener('input', function () {
+      validateFutureDate(this);
     });
   }
 });
