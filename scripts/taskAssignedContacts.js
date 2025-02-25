@@ -83,13 +83,9 @@ function renderContactsPlusFour() {
     let assignedContact = assignedContacts[i];
     let initials = assignedContact.initials;
     let color = assignedContact.color;
-    container.innerHTML += `
-        <div class="task_account1 bg_${color}">${initials}</div>
-      `;
+    container.innerHTML += `<div class="task_account1 bg_${color}">${initials}</div>`;
   }
-  container.innerHTML += `
-  <div class="task_account1 bg_grey">+${notRendertAmount}</div>
-`;
+  container.innerHTML += `<div class="task_account1 bg_grey">+${notRendertAmount}</div>`;
 }
 
 /**

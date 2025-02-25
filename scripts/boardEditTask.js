@@ -6,6 +6,8 @@
 function initRenderEditTask(taskId){
   let task = tasks[taskId];
   renderDetailEditTask(task,taskId)
+  assignedContacts = assignedAccounts;
+  addedAccounts = assignedAccountsIds.length;
   renderEditAccounts();
   renderEditSubtasks(task);
   renderPrio(task.prio);
@@ -33,9 +35,6 @@ function renderDetailEditTask(task,taskId) {
  * Renders the assigned accounts in the edit form for a task
  */
 function renderEditAccounts() {
-  assignedContacts = [];
-  assignedContacts = assignedAccounts;
-  addedAccounts = assignedAccountsIds.length;
   let container = document.getElementById("assignedContactsContainer");
   let length = assignedAccountsIds.length < 6 ? assignedAccountsIds.length : 5;
   let notRendertAmount = assignedAccountsIds.length - 5;
