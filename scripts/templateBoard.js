@@ -29,9 +29,7 @@ function templateRenderTask(
           <div
             class="board_category"
             style="--backgroundCategory: ${backgroundColorCategory}"
-          >
-            ${category}
-          </div>
+          >${category}</div>
           <div class="task_headline">${title}</div>
           <div class="task_description">${description}</div>
           <div class="task_subtasks" id="subtasks${taskId}"></div>
@@ -64,9 +62,7 @@ function templateRenderSubtasks(
         class="task_progress_bar"
         style="--backgroundProgressbar: ${subtasksInPercent}%;"
       ></div>
-      <div class="task_subtask_number">
-        ${amountSubtasksFinished}/${amountSubtasks} Subtasks
-      </div>
+      <div class="task_subtask_number">${amountSubtasksFinished}/${amountSubtasks} Subtasks</div>
     `;
 }
 
@@ -97,9 +93,7 @@ function templateRenderDetailTask(
         <div
           class="board_category"
           style="--backgroundCategory: ${backgroundColorCategory}"
-        >
-          ${category}
-        </div>
+        >${category}</div>
         <div class="detail_task_close_button">
           <img
             src="assets/img/close.svg"
@@ -233,9 +227,7 @@ function templateRenderDetailEditTask(
               placeholder="Enter a Description"
               id="addTaskDescription"
               name="Description"
-            >
-  ${description}</textarea
-            >
+            >${description}</textarea>
           </div>
           <div class="addTask_formular_second">
             <label class="addTask_formular_headline" for="addTaskDate">
