@@ -1433,7 +1433,7 @@
   }
 
   h1 {
-    font-size: 32px;
+    font-size: 26px;
   }
 
   .headline {
@@ -1444,9 +1444,34 @@
     width: 75px;
   }
 
+  .login_form {
+    gap: 10px;
+  }
+
+  .signup_form {
+    gap: 10px;
+  }
+
+  .login_buttons {
+    gap: 8px;
+  }
+
   .standard_ipt {
     width: 264px;
     height: 24px;
+    font-size: 16px;
+  }
+
+  .standard_btn:enabled {
+    padding: 8px 8px;
+  }
+
+  .standard_btn:disabled {
+    padding: 8px 8px;
+  }
+
+  .white_btn {
+    padding: 8px 10px;
     font-size: 16px;
   }
 
