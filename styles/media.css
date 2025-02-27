@@ -1344,7 +1344,7 @@
   }
 
   .editTask_container {
-    height: calc(100dvh - (5px * 2 + 2 * 20px - 56px + 15px + 26px));
+    max-height: calc(100dvh - (5px * 2 + 2 * 20px + 56px + 15px + 26px));
   }
 
   .addtask_board {
