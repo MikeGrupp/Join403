@@ -313,6 +313,10 @@
   padding-bottom: 20px;
 }
 
+.taskdetail .wrapper {
+  overflow-y: auto;
+}
+
 .addtask_board {
   width: 768px;
   border-radius: 25px;
@@ -416,7 +420,7 @@
   width: 100%;
   margin-top: 15px;
   position: sticky;
-  bottom: 7px;
+  bottom: 0;
   background-color: white;
 }
 
