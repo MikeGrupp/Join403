@@ -258,6 +258,8 @@
   .kanban_board {
     flex-direction: column;
     flex: 1;
+    margin-top: 50px;
+    margin-bottom: 50px;
   }
 
   .board_todo {
@@ -611,6 +613,20 @@
   }
 
   .main_board {
+    height: calc(100dvh - (2 * 80px));
+    max-height: calc(100dvh - (2 * 80px));
+    overflow-y: auto;
+  }
+
+  .board {
+    max-height: calc(100dvh - (2 * 80px));
+  }
+
+  .kanban_board {
+    overflow-x: hidden;
+    margin-top: 25px;
+    margin-bottom: 5px;
+    height: calc(100dvh - (2 * 80px));
     max-height: calc(100dvh - (2 * 80px));
   }
 
@@ -634,6 +650,7 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 0;
+    margin-top: 25px;
   }
 
   .fadeout-box {
@@ -696,7 +713,7 @@
     padding: 16px;
     gap: 24px;
     justify-content: center;
-    margin-bottom: 80px;
+    max-height: calc(100dvh - (2 * 80px + 2 * 8px));
   }
 
   .sum_title {
@@ -1317,14 +1334,17 @@
   .taskdetail {
     width: calc(100dvw - (5px * 2));
     height: calc(100dvh - (5px * 2 + 2 * 20px));
-    max-width: 100dvw;
-    max-height: 100dvh;
+    max-width: calc(100dvw - (5px * 2));
+    max-height: calc(100dvh - (5px * 2 + 2 * 20px));
   }
 
   .taskdetail .wrapper {
-    overflow-y: auto;
     max-width: 100%;
     max-height: 100%;
+  }
+
+  .editTask_container {
+    max-height: calc(100dvh - (5px * 2 + 2 * 20px + 56px + 15px + 26px));
   }
 
   .addtask_board {
@@ -1352,14 +1372,20 @@
 
   .small_card {
     max-width: 121px;
+    padding: 8px;
+    height: 48px;
   }
 
   .card {
     max-width: 181px;
+    height: 48px;
   }
 
   .big_card {
     max-width: 363px;
+    height: 48px;
+    padding: 8px;
+    gap: 8px;
   }
 
   .find_add_task {
@@ -1378,20 +1404,30 @@
     margin-left: 0;
   }
 
-  .vcenter {
-    gap: 24px;
+  .number {
+    font-size: 24px;
   }
+
+  .vcenter {
+    gap: 16px;
+    padding: 8px;
+  }
+
+  .card {
+    padding: 8px;
+    gap: 8px;
+}
 
   .sum_title {
     width: 288px;
   }
 
   .progress_cards {
-    gap: 16px;
+    gap: 8px;
   }
 
   .row {
-    gap: 16px;
+    gap: 8px;
   }
 
   .icon-pen {
@@ -1433,7 +1469,7 @@
   }
 
   h1 {
-    font-size: 32px;
+    font-size: 26px;
   }
 
   .headline {
@@ -1444,9 +1480,34 @@
     width: 75px;
   }
 
+  .login_form {
+    gap: 10px;
+  }
+
+  .signup_form {
+    gap: 10px;
+  }
+
+  .login_buttons {
+    gap: 8px;
+  }
+
   .standard_ipt {
     width: 264px;
     height: 24px;
+    font-size: 16px;
+  }
+
+  .standard_btn:enabled {
+    padding: 8px 8px;
+  }
+
+  .standard_btn:disabled {
+    padding: 8px 8px;
+  }
+
+  .white_btn {
+    padding: 8px 10px;
     font-size: 16px;
   }
 
@@ -1608,5 +1669,11 @@
     font-size: 16px;
     width: 250px;
     height: 50px;
+  }
+
+  .addTask_container {
+    overflow-x: hidden;
+    overflow-y: auto;
+    max-height: calc(100dvh - (5px * 2 + 20px* 2));
   }
 }

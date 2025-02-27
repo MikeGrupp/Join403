@@ -1,20 +1,25 @@
 .main_board {
   flex: auto;
-  margin-bottom: 50px;
+  overflow-y: hidden;
 }
+
 
 .wrapper {
   width: 90%;
-  max-height: 770px;
   margin-left: 5%;
   margin-right: 5%;
-  overflow-y: auto;
+}
+
+.main_board .wrapper {
+  overflow-y: hidden;
 }
 
 .board {
   display: flex;
   flex-direction: column;
   max-width: 1500px;
+  height: 770px;
+  max-height: 100dvh;
 }
 
 .taskbar {
@@ -125,9 +130,9 @@
 
 .kanban_board {
   display: flex;
-  margin-top: 50px;
-  margin-bottom: 50px;
   gap: 16px;
+  overflow-y: auto;
+  max-height: 770px;
 }
 
 .board_todo {
@@ -306,6 +311,10 @@
   justify-content: center;
   padding-top: 20px;
   padding-bottom: 20px;
+}
+
+.taskdetail .wrapper {
+  overflow-y: auto;
 }
 
 .addtask_board {
