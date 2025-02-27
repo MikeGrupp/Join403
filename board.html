@@ -373,81 +373,83 @@
               </div>
             </div>
           </div>
-          <div class="kanban_board">
-            <div class="board_todo">
-              <div class="board_subline">
-                To do
-                <img
-                  class="board_subline_img"
-                  src="assets/img/plusButton.svg"
-                  alt="add Task"
-                  onclick="dNone('addTaskBoardBg'),taskMoveForward('addTaskBoard'), selectStep('Todo')"
-                />
+          <div class="overflow_board">
+            <div class="kanban_board">
+              <div class="board_todo">
+                <div class="board_subline">
+                  To do
+                  <img
+                    class="board_subline_img"
+                    src="assets/img/plusButton.svg"
+                    alt="add Task"
+                    onclick="dNone('addTaskBoardBg'),taskMoveForward('addTaskBoard'), selectStep('Todo')"
+                  />
+                </div>
+                <div
+                  class="board_tasks"
+                  ondrop="moveTo('Todo')"
+                  ondragover="allowDrop(event); highlight('boardTodo')"
+                  ondragleave="removeHighlight('boardTodo')"
+                  ondragstart="highlightBorder()"
+                  id="boardTodo"
+                >
+                  <div class="board_no_task">No tasks To do</div>
+                </div>
               </div>
-              <div
-                class="board_tasks"
-                ondrop="moveTo('Todo')"
-                ondragover="allowDrop(event); highlight('boardTodo')"
-                ondragleave="removeHighlight('boardTodo')"
-                ondragstart="highlightBorder()"
-                id="boardTodo"
-              >
-                <div class="board_no_task">No tasks To do</div>
+              <div class="board_todo">
+                <div class="board_subline">
+                  In progress
+                  <img
+                    class="board_subline_img"
+                    src="assets/img/plusButton.svg"
+                    alt="add Task"
+                    onclick="dNone('addTaskBoardBg'),taskMoveForward('addTaskBoard'), selectStep('InProgress')"
+                  />
+                </div>
+                <div
+                  class="board_tasks"
+                  ondrop="moveTo('InProgress')"
+                  ondragover="allowDrop(event); highlight('boardInProgress')"
+                  ondragleave="removeHighlight('boardInProgress')"
+                  ondragstart="highlightBorder()"
+                  id="boardInProgress"
+                >
+                  <div class="board_no_task">No tasks In progress</div>
+                </div>
               </div>
-            </div>
-            <div class="board_todo">
-              <div class="board_subline">
-                In progress
-                <img
-                  class="board_subline_img"
-                  src="assets/img/plusButton.svg"
-                  alt="add Task"
-                  onclick="dNone('addTaskBoardBg'),taskMoveForward('addTaskBoard'), selectStep('InProgress')"
-                />
+              <div class="board_todo">
+                <div class="board_subline">
+                  Await feedback
+                  <img
+                    class="board_subline_img"
+                    src="assets/img/plusButton.svg"
+                    alt="add Task"
+                    onclick="dNone('addTaskBoardBg'),taskMoveForward('addTaskBoard'), selectStep('AwaitFeedback')"
+                  />
+                </div>
+                <div
+                  class="board_tasks"
+                  ondrop="moveTo('AwaitFeedback')"
+                  ondragover="allowDrop(event); highlight('boardAwaitFeedback')"
+                  ondragleave="removeHighlight('boardAwaitFeedback')"
+                  ondragstart="highlightBorder()"
+                  id="boardAwaitFeedback"
+                >
+                  <div class="board_no_task">No tasks Await feedback</div>
+                </div>
               </div>
-              <div
-                class="board_tasks"
-                ondrop="moveTo('InProgress')"
-                ondragover="allowDrop(event); highlight('boardInProgress')"
-                ondragleave="removeHighlight('boardInProgress')"
-                ondragstart="highlightBorder()"
-                id="boardInProgress"
-              >
-                <div class="board_no_task">No tasks In progress</div>
-              </div>
-            </div>
-            <div class="board_todo">
-              <div class="board_subline">
-                Await feedback
-                <img
-                  class="board_subline_img"
-                  src="assets/img/plusButton.svg"
-                  alt="add Task"
-                  onclick="dNone('addTaskBoardBg'),taskMoveForward('addTaskBoard'), selectStep('AwaitFeedback')"
-                />
-              </div>
-              <div
-                class="board_tasks"
-                ondrop="moveTo('AwaitFeedback')"
-                ondragover="allowDrop(event); highlight('boardAwaitFeedback')"
-                ondragleave="removeHighlight('boardAwaitFeedback')"
-                ondragstart="highlightBorder()"
-                id="boardAwaitFeedback"
-              >
-                <div class="board_no_task">No tasks Await feedback</div>
-              </div>
-            </div>
-            <div class="board_todo">
-              <div class="board_subline">Done</div>
-              <div
-                class="board_tasks"
-                ondrop="moveTo('Done')"
-                ondragover="allowDrop(event); highlight('boardDone')"
-                ondragleave="removeHighlight('boardDone')"
-                ondragstart="highlightBorder()"
-                id="boardDone"
-              >
-                <div class="board_no_task">No tasks Done</div>
+              <div class="board_todo">
+                <div class="board_subline">Done</div>
+                <div
+                  class="board_tasks"
+                  ondrop="moveTo('Done')"
+                  ondragover="allowDrop(event); highlight('boardDone')"
+                  ondragleave="removeHighlight('boardDone')"
+                  ondragstart="highlightBorder()"
+                  id="boardDone"
+                >
+                  <div class="board_no_task">No tasks Done</div>
+                </div>
               </div>
             </div>
           </div>

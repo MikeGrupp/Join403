@@ -37,7 +37,7 @@
   *::-webkit-scrollbar {
     width: 20px;
   }
-  
+
   *::-webkit-scrollbar-thumb {
     border-width: 6px;
   }
@@ -250,7 +250,7 @@
   *::-webkit-scrollbar {
     width: 16px;
   }
-  
+
   *::-webkit-scrollbar-thumb {
     border-width: 4px;
   }
@@ -626,8 +626,6 @@
     overflow-x: hidden;
     margin-top: 25px;
     margin-bottom: 5px;
-    height: calc(100dvh - (2 * 80px));
-    max-height: calc(100dvh - (2 * 80px));
   }
 
   .registered_user_28 {
@@ -1357,7 +1355,7 @@
 
 @media screen and (max-width: 427px) {
   @media (orientation: landscape) {
-    body>*:not(#turn) {
+    body > *:not(#turn) {
       display: none;
     }
 
@@ -1416,7 +1414,7 @@
   .card {
     padding: 8px;
     gap: 8px;
-}
+  }
 
   .sum_title {
     width: 288px;
@@ -1674,6 +1672,6 @@
   .addTask_container {
     overflow-x: hidden;
     overflow-y: auto;
-    max-height: calc(100dvh - (5px * 2 + 20px* 2));
+    max-height: calc(100dvh - (5px * 2 + 20px * 2));
   }
 }
