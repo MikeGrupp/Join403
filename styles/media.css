@@ -696,7 +696,7 @@
     padding: 16px;
     gap: 24px;
     justify-content: center;
-    margin-bottom: 80px;
+    max-height: calc(100dvh - (2 * 80px + 2 * 8px));
   }
 
   .sum_title {
@@ -1352,14 +1352,20 @@
 
   .small_card {
     max-width: 121px;
+    padding: 8px;
+    height: 48px;
   }
 
   .card {
     max-width: 181px;
+    height: 48px;
   }
 
   .big_card {
     max-width: 363px;
+    height: 48px;
+    padding: 8px;
+    gap: 8px;
   }
 
   .find_add_task {
@@ -1378,20 +1384,30 @@
     margin-left: 0;
   }
 
-  .vcenter {
-    gap: 24px;
+  .number {
+    font-size: 24px;
   }
+
+  .vcenter {
+    gap: 16px;
+    padding: 8px;
+  }
+
+  .card {
+    padding: 8px;
+    gap: 8px;
+}
 
   .sum_title {
     width: 288px;
   }
 
   .progress_cards {
-    gap: 16px;
+    gap: 8px;
   }
 
   .row {
-    gap: 16px;
+    gap: 8px;
   }
 
   .icon-pen {

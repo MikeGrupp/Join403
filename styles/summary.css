@@ -3,6 +3,7 @@
     flex-direction: column;
     padding: 64px;
     gap: 64px;
+    max-height: calc(100dvh - 80px);
 }
 
 .split {
