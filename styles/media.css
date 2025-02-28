@@ -3,6 +3,10 @@
     bottom: auto;
     top: 1592px;
   }
+
+  .overflow_board {
+    overflow-y: hidden;
+  }
 }
 
 @media (min-width: 1921px) {
@@ -1289,6 +1293,12 @@
     max-height: calc(100dvh - 237px);
   }
 
+  .addTask_container_board {
+    overflow-x: hidden;
+    overflow-y: auto;
+    max-height: calc(100dvh - 237px);
+  }
+
   .addTask_formular_left {
     width: 100%;
   }
@@ -1670,6 +1680,12 @@
   }
 
   .addTask_container {
+    overflow-x: hidden;
+    overflow-y: auto;
+    max-height: calc(100dvh - (5px * 2 + 20px * 2));
+  }
+
+  .addTask_container_board {
     overflow-x: hidden;
     overflow-y: auto;
     max-height: calc(100dvh - (5px * 2 + 20px * 2));

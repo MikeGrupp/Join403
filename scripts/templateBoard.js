@@ -22,6 +22,7 @@ function templateRenderTask(
         class="board_task"
         draggable="true"
         ondragstart="startDragging('${taskId}')"
+        ondragend="deleteHighligth()"
         id="${taskId}"
         onclick="dNone('taskDetailBg'), initRenderDetailTask('${taskId}')"
       >
