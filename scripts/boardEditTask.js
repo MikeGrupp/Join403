@@ -12,7 +12,6 @@ function initRenderEditTask(taskId) {
   renderEditSubtasks(task);
   renderPrio(task.prio);
   loadEditSubtasksArray();
-  addTitleInputListener();
 }
 
 /**
@@ -175,25 +174,6 @@ function loadEditSubtasksArray() {
     let subtaskId = subtasksIds[i];
     let subtask = subtasks[subtaskId];
     editSubtasks.push(subtask);
-  }
-}
-
-/**
- * Fügt Event-Listener zu den Eingabefeldern für Titel und Unteraufgaben hinzu.
- * Überprüft beim Verlassen des Eingabefelds, ob der eingegebene Text gültig ist.
- */
-function addTitleInputListener() {
-  let titleInput = document.getElementById('addTaskTitle');
-  if (titleInput) {
-    titleInput.addEventListener('blur', function () {
-      validateTitleCharacters(this.value);
-    });
-  }
-  let SubtaskTitleInput = document.getElementById('addTaskSubtask');
-  if (SubtaskTitleInput) {
-    SubtaskTitleInput.addEventListener('blur', function () {
-      validateSubtaskInput(this.value);
-    });
   }
 }
 
