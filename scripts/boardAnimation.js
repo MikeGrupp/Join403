@@ -11,6 +11,9 @@ function taskMoveForward(div) {
     window.close();
     return;
   }
+  if (div === "taskDetail" && window.innerWidth < 768) {
+    container.style.right =  0 + "vw" ;
+  }
   frameMoveForward(container, position, div);
 }
 
@@ -46,7 +49,7 @@ function calculatePosition(div) {
   if (div === "addTaskBoard") {
     return 50;
   }
-  return 0; // Default fallback if the div is not recognized
+  return 0;
 }
 
 /**

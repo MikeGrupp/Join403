@@ -279,7 +279,7 @@
   .board_tasks {
     min-height: auto;
     flex-direction: row;
-    width: 100%;
+    width: 98%;
     gap: 16px;
     padding-bottom: 16px;
     padding-left: 4px;
@@ -601,6 +601,10 @@
   .button_create {
     font-size: 18px;
   }
+
+  .editTask_container {
+    max-height: 520px;
+}
 }
 
 @media screen and (max-width: 767px) {
@@ -1342,7 +1346,6 @@
   .taskdetail {
     width: calc(100dvw - (5px * 2));
     height: calc(100dvh - (5px * 2 + 2 * 20px));
-    max-width: calc(100dvw - (5px * 2));
     max-height: calc(100dvh - (5px * 2 + 2 * 20px));
   }
 
