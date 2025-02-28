@@ -309,6 +309,7 @@
   justify-content: center;
   padding-top: 20px;
   padding-bottom: 20px;
+  max-height: 80dvh;
 }
 
 .addtask_board {
@@ -332,11 +333,12 @@
   position: sticky;
   top: 0;
   background-color: white;
+  padding-bottom: 2px;
 }
 
 .detail_task_close_button {
   cursor: pointer;
-  width: 32px;
+  height: 14px;
 }
 
 .task_detail_headline {
@@ -549,6 +551,10 @@
   align-items: center;
   justify-content: center;
   gap: 5px;
+}
+
+.max_heigth_detail {
+  overflow-y: auto;
 }
 
 @keyframes wiggleAnimation {

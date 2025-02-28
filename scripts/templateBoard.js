@@ -88,6 +88,7 @@ function templateRenderDetailTask(
   dueDate
 ) {
   return ` 
+  <div class="max_heigth_detail">
     <div class="wrapper">
       <div class="task_detail_category">
         <div
@@ -135,7 +136,8 @@ function templateRenderDetailTask(
           Edit
         </div>
       </div>
-    </div>`;
+    </div>
+  </div>`;
 }
 
 /**
