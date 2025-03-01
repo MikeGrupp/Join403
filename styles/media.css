@@ -9,32 +9,43 @@
   }
 }
 
+@media (min-height: 1080px) {
+  .login {
+    position: absolute;
+    top: 267px;
+    left: calc(50% - 374px);
+  }
+}
+
 @media (min-width: 1921px) {
   .center {
     justify-content: unset;
     align-items: unset;
   }
 
-  .login {
-    position: absolute;
-    left: 587px;
-    top: 267px;
-  }
-
   .signup {
     position: absolute;
-    left: 613px;
-    top: 177px;
+    top: 267px;
+    left: calc(50% - 347px);
   }
 
   .signup_btn {
-    right: auto;
-    left: 1476px;
+    left: calc(50% + 516px);
   }
 
   .linkbox {
-    left: 837px;
+    left: calc(50% - 123px);
   }
+
+  .login {
+    position: absolute;
+    top: 267px;
+    left: calc(50% - 374px);
+  }
+
+  .textpage {
+    max-width: 1472px;
+}
 }
 
 @media screen and (max-width: 1440px) {
@@ -604,7 +615,7 @@
 
   .editTask_container {
     max-height: 520px;
-}
+  }
 }
 
 @media screen and (max-width: 767px) {
@@ -1368,7 +1379,7 @@
 
 @media screen and (max-width: 427px) {
   @media (orientation: landscape) {
-    body > *:not(#turn) {
+    body>*:not(#turn) {
       display: none;
     }
 
