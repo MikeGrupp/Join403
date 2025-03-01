@@ -15,14 +15,15 @@
     top: 267px;
     left: calc(50% - 374px);
   }
+
+  .signup {
+    position: absolute;
+    top: 267px;
+    left: calc(50% - 347px);
+  }
 }
 
 @media (min-width: 1921px) {
-  .center {
-    justify-content: unset;
-    align-items: unset;
-  }
-
   .signup {
     position: absolute;
     top: 267px;
